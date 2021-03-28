@@ -1,6 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// Controllers
+use App\Http\Controllers\AdminsController;
+use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentariesController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\SubscribersController;
 
 /*
 |--------------------------------------------------------------------------
