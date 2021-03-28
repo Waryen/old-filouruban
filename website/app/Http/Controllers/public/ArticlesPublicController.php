@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\public;
 
+use App\Http\Controllers\Controller;
 use App\Models\Articles;
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class ArticlesPublicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        return view('public');
     }
 
     /**

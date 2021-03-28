@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\public;
 
-use App\Models\Articles;
+use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class CategoriesPublicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        //
     }
 
     /**
@@ -41,10 +42,10 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show(Articles $articles)
+    public function show(Categories $categories)
     {
         //
     }
@@ -52,10 +53,10 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articles $articles)
+    public function edit(Categories $categories)
     {
         //
     }
@@ -64,10 +65,10 @@ class ArticlesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articles $articles)
+    public function update(Request $request, Categories $categories)
     {
         //
     }
@@ -75,10 +76,10 @@ class ArticlesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articles $articles)
+    public function destroy(Categories $categories)
     {
         //
     }
