@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Messages extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'content'
+    ];
+
+    /*
+    *   Relation avec la table Admins
+    */
+
+    public function admins() {
+        return $this->hasOne(Admins::class);
+    }
 }
