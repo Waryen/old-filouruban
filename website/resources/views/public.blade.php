@@ -6,4 +6,5 @@
 
 @section('body')
     <h1>Public</h1>
+    <div id="react"></div>
 @endsection

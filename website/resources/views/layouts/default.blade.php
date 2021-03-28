@@ -7,6 +7,7 @@
     <meta name="robots" content="noindex">
     <meta name="token" id="token" content="{{ csrf_token() }}">
     <meta name="url" id="url" content="{{ env('APP_URL') }}">
+    <script src="{{ asset('js/app.js') }}" async></script>
     @yield('title')
 </head>
 <body>
