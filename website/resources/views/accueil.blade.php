@@ -5,6 +5,7 @@
 @endsection
 
 @section('body')
-    <h1>Public</h1>
-    <div id="react"></div>
+    <h1>Accueil</h1>
+    <div id="react-admin-list"></div>
+    <div id="react-admin-create"></div>
 @endsection
