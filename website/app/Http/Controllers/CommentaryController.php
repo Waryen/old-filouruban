@@ -14,7 +14,7 @@ class CommentaryController extends Controller
      */
     public function index()
     {
-        Commentary::all();
+        return Commentary::all();
     }
 
     /**
