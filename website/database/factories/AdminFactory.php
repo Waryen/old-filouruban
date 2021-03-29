@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Admins;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class AdminsFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Admins::class;
+    protected $model = Admin::class;
 
     /**
      * Define the model's default state.
