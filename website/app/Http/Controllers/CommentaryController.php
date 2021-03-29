@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Commentary;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CommentaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        Commentary::all();
     }
 
     /**
@@ -25,40 +25,40 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Commentary::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Commentary  $commentary
      * @return \Illuminate\Http\Response
      */
-    public function show(Categories $categories)
+    public function show(Commentary $commentary)
     {
-        //
+        return $commentary;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Commentary  $commentary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, Commentary $commentary)
     {
-        //
+        $commentary->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Commentary  $commentary
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categories)
+    public function destroy(Commentary $commentary)
     {
-        //
+        $commentary->delete();
     }
 }

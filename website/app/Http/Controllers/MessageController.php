@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articles;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        return Message::all();
     }
 
     /**
@@ -25,40 +25,40 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Message::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Articles $articles)
+    public function show(Message $message)
     {
-        //
+        return $message;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articles $articles)
+    public function update(Request $request, Message $message)
     {
-        //
+        $message->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Articles  $articles
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articles $articles)
+    public function destroy(Message $message)
     {
-        //
+        $message->delete();
     }
 }

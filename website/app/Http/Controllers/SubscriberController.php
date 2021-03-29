@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commentaries;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
-class CommentariesController extends Controller
+class SubscriberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CommentariesController extends Controller
      */
     public function index()
     {
-        //
+        return Subscriber::all();
     }
 
     /**
@@ -25,40 +25,40 @@ class CommentariesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Subscriber::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Commentaries  $commentaries
+     * @param  \App\Models\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function show(Commentaries $commentaries)
+    public function show(Subscriber $subscriber)
     {
-        //
+        return $subscriber;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Commentaries  $commentaries
+     * @param  \App\Models\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commentaries $commentaries)
+    public function update(Request $request, Subscriber $subscriber)
     {
-        //
+        $subscriber->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Commentaries  $commentaries
+     * @param  \App\Models\Subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Commentaries $commentaries)
+    public function destroy(Subscriber $subscriber)
     {
-        //
+        $subscriber->delete();
     }
 }

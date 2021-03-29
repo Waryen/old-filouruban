@@ -3,7 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AdminsController;
+// Controllers
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentaryController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +27,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Admins
+// Routes des Controllers
 Route::middleware(['auth:api'])->group(function () {
-    Route::apiResource('admins', AdminsController::class);
+    Route::apiResource('admin', AdminController::class);
+    Route::apiResource('article', ArticleController::class);
+    Route::apiResource('category', CategoryController::class);
+    Route::apiResource('commentary', CommentaryController::class);
+    Route::apiResource('contact', ContactController::class);
+    Route::apiResource('message', MessageController::class);
+    Route::apiResource('subscriber', SubscriberController::class);
 });

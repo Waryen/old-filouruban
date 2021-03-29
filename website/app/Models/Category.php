@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Messages extends Model
+class Category extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'content'
+        'name',
+        'description'
     ];
 
     /*
-    *   Relation avec la table Admins
+    *   Relation avec la table Articles
     */
 
-    public function admins() {
-        return $this->hasOne(Admins::class);
+    public function article() {
+        return $this->hasMany(Article::class);
     }
 }

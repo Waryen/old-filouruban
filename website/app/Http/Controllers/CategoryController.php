@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Messages;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class MessagesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        //
+        return Category::all();
     }
 
     /**
@@ -25,40 +25,40 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Messages  $messages
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Messages $messages)
+    public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Messages  $messages
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Messages $messages)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Messages  $messages
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Messages $messages)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
     }
 }
