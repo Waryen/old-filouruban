@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.public')
 
 @section('title')
 <title>Accueil</title>
