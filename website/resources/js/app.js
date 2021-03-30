@@ -5,10 +5,11 @@ import ReactDOM from 'react-dom'
 // Importation descomposants
 import AdminList from './components/adminList'
 import AdminCreate from './components/adminCreate'
+import AdminLogin from './components/adminLogin'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}:8000`
-const api = 'E2Vm97Q5MSV9AJgxugS4I2Ibo6iBZJNxuu7Z6Lpc4XBTz73kqYXgNUOlH65xLLZJKMSx4tgdNeYTPRg0gzNXuaEDeG6XbXSJxk9W'
+const api = '8jgVaApBctjy3LgOnlxrG8Yjlnk6yvKPA4on5VkW8gyzzjdjmaedIN3hOHha5UMRqwo7NvdXr1TpFKsLXyEkVPLk5ylZfv4ZyvUE'
 
 
 
@@ -26,5 +27,12 @@ if(document.getElementById('react-admin-create')) {
     ReactDOM.render(
         <AdminCreate url={url} api={api}></AdminCreate>,
         document.getElementById('react-admin-create')
+    )
+}
+
+if(document.getElementById('react-login')) {
+    ReactDOM.render(
+        <AdminLogin url={url}></AdminLogin>,
+        document.getElementById('react-login')
     )
 }

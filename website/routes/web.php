@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,10 @@ Route::get('/', function() {
 Route::get('admin', function() {
     return view('admin');
 });
+
+Route::get('login', function() {
+    return view('login');
+});
+
+// Connexion à l'administration
+Route::post('login-check', [LoginController::class, 'authenticate']);
