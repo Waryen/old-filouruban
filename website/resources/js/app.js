@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Importation descomposants
-import AdminList from './components/adminList'
-import AdminCreate from './components/adminCreate'
+import AdminList from './components/article-list'
+import AdminCreate from './components/article-create'
 import AdminLogin from './components/adminLogin'
 import AdminLogout from './components/adminLogout'
 

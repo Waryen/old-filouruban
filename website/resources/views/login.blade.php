@@ -20,7 +20,4 @@
             mdp: password
         </p>
     </div>
-    @php
-        var_dump(Auth::user());
-    @endphp
 @endsection
