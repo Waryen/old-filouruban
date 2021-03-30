@@ -1860,7 +1860,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  // CONST
 
 
-var url = "".concat(document.querySelector('#url').getAttribute('content'), ":8000");
+var url = "".concat(document.querySelector('#url').getAttribute('content'));
 var api = '8jgVaApBctjy3LgOnlxrG8Yjlnk6yvKPA4on5VkW8gyzzjdjmaedIN3hOHha5UMRqwo7NvdXr1TpFKsLXyEkVPLk5ylZfv4ZyvUE';
 var auth;
 

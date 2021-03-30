@@ -9,7 +9,7 @@ import AdminLogin from './components/adminLogin'
 import AdminLogout from './components/adminLogout'
 
 // CONST
-const url = `${document.querySelector('#url').getAttribute('content')}:8000`
+const url = `${document.querySelector('#url').getAttribute('content')}`
 const api = '8jgVaApBctjy3LgOnlxrG8Yjlnk6yvKPA4on5VkW8gyzzjdjmaedIN3hOHha5UMRqwo7NvdXr1TpFKsLXyEkVPLk5ylZfv4ZyvUE'
 let auth
 if(document.querySelector('#auth')) {
