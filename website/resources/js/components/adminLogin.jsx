@@ -47,6 +47,8 @@ class AdminLogin extends React.Component {
             .then(response => {
                 if(response.data === 'error') {
                     this.setState({error: true})
+                } else if(response.data === 'ok') {
+                    window.location.replace(`${this.props.url}/admin`)
                 }
             })
     }

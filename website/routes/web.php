@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +17,16 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function() {
     return view('accueil');
-});
+})->name('accueil');
 
 Route::get('admin', function() {
     return view('admin');
-});
+})->middleware(['auth']);
 
 Route::get('login', function() {
     return view('login');
-});
+})->name('login');
 
-// Connexion à l'administration
+// Administration
 Route::post('login-check', [LoginController::class, 'authenticate']);
+Route::post('logout', [LogoutController::class, 'logout']);

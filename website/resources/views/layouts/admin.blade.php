@@ -7,6 +7,7 @@
     <meta name="robots" content="noindex"> <!-- Empêche l'indexation par les moteurs de recherche -->
     <meta name="token" id="token" content="{{ csrf_token() }}">
     <meta name="url" id="url" content="{{ env('APP_URL') }}">
+    <meta name="auth" id="auth" content="{{ Auth::user() }}">
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">

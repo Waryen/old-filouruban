@@ -6,10 +6,18 @@ import ReactDOM from 'react-dom'
 import AdminList from './components/adminList'
 import AdminCreate from './components/adminCreate'
 import AdminLogin from './components/adminLogin'
+import AdminLogout from './components/adminLogout'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}:8000`
 const api = '8jgVaApBctjy3LgOnlxrG8Yjlnk6yvKPA4on5VkW8gyzzjdjmaedIN3hOHha5UMRqwo7NvdXr1TpFKsLXyEkVPLk5ylZfv4ZyvUE'
+let auth
+if(document.querySelector('#auth')) {
+    const prepareAuth = document.querySelector('#auth').getAttribute('content')
+    if(prepareAuth) {
+        auth = prepareAuth
+    }
+}
 
 
 
@@ -35,4 +43,13 @@ if(document.getElementById('react-login')) {
         <AdminLogin url={url}></AdminLogin>,
         document.getElementById('react-login')
     )
+}
+
+if(auth) {
+    if(document.getElementById('react-logout')) {
+        ReactDOM.render(
+            <AdminLogout auth={auth}></AdminLogout>,
+            document.getElementById('react-logout')
+        )
+    }
 }

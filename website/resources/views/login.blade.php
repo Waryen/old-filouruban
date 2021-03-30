@@ -7,6 +7,11 @@
 @section('body')
     <h1>Connexion à l'administration</h1>
     <div id="react-login"></div>
+    @php
+        if(Auth::user()) {
+            echo '<div id="react-logout"></div>';
+        }
+    @endphp
     <div>
         <h2>Identifiants</h2>
         <p>
@@ -16,8 +21,6 @@
         </p>
     </div>
     @php
-        if(Auth::user()) {
-            var_dump(Auth::user());
-        }
+        var_dump(Auth::user());
     @endphp
 @endsection

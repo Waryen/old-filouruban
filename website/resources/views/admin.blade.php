@@ -6,4 +6,5 @@
 
 @section('body')
     <h1>Admin</h1>
+    <div id="react-logout"></div>
 @endsection

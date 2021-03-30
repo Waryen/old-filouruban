@@ -21,7 +21,7 @@ class LoginController extends Controller
         
         if(Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
             $request->session()->regenerate();
-            return redirect('/admin');
+            return 'ok';
         } else {
             return 'error';
         }
