@@ -46,13 +46,11 @@ if(document.getElementById('react-login')) {
     )
 }
 
-if(auth) {
-    if(document.getElementById('react-logout')) {
-        ReactDOM.render(
-            <AdminLogout auth={auth}></AdminLogout>,
-            document.getElementById('react-logout')
-        )
-    }
+if(document.getElementById('react-logout')) {
+    ReactDOM.render(
+        <AdminLogout auth={auth}></AdminLogout>,
+        document.getElementById('react-logout')
+    )
 }
 
 if(document.getElementById('react-admin-create')) {

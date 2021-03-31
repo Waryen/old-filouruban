@@ -28,6 +28,14 @@
     @yield('body')
     </main>
     @include('layouts.footer')
+    <!-- SCRIPT -->
+    <!-- Affichage de la navigation -->
+    <script async>
+        const menu = document.querySelector('.menu-collapsed')
+        menu.addEventListener('click', function() {
+            menu.classList.toggle('menu-expanded')
+        })
+    </script>
 </div>
 </body>
 </html>

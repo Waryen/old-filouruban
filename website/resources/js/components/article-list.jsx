@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 
-class AdminList extends React.Component {
+class ArticleList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -45,4 +45,4 @@ class AdminList extends React.Component {
     }
 }
 
-export default AdminList
+export default ArticleList

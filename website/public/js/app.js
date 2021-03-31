@@ -1895,12 +1895,10 @@ if (document.getElementById('react-login')) {
   }), document.getElementById('react-login'));
 }
 
-if (auth) {
-  if (document.getElementById('react-logout')) {
-    react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_adminLogout__WEBPACK_IMPORTED_MODULE_5__.default, {
-      auth: auth
-    }), document.getElementById('react-logout'));
-  }
+if (document.getElementById('react-logout')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_adminLogout__WEBPACK_IMPORTED_MODULE_5__.default, {
+    auth: auth
+  }), document.getElementById('react-logout'));
 }
 
 if (document.getElementById('react-admin-create')) {
@@ -2481,15 +2479,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var AdminCreate = /*#__PURE__*/function (_React$Component) {
-  _inherits(AdminCreate, _React$Component);
+var ArticleCreate = /*#__PURE__*/function (_React$Component) {
+  _inherits(ArticleCreate, _React$Component);
 
-  var _super = _createSuper(AdminCreate);
+  var _super = _createSuper(ArticleCreate);
 
-  function AdminCreate(props) {
+  function ArticleCreate(props) {
     var _this;
 
-    _classCallCheck(this, AdminCreate);
+    _classCallCheck(this, ArticleCreate);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -2503,7 +2501,7 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
 
-  _createClass(AdminCreate, [{
+  _createClass(ArticleCreate, [{
     key: "handleChange",
     value: function handleChange(event) {
       var target = event.target;
@@ -2561,10 +2559,10 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return AdminCreate;
+  return ArticleCreate;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdminCreate);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ArticleCreate);
 
 /***/ }),
 
@@ -2610,15 +2608,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var AdminList = /*#__PURE__*/function (_React$Component) {
-  _inherits(AdminList, _React$Component);
+var ArticleList = /*#__PURE__*/function (_React$Component) {
+  _inherits(ArticleList, _React$Component);
 
-  var _super = _createSuper(AdminList);
+  var _super = _createSuper(ArticleList);
 
-  function AdminList(props) {
+  function ArticleList(props) {
     var _this;
 
-    _classCallCheck(this, AdminList);
+    _classCallCheck(this, ArticleList);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -2629,7 +2627,7 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
 
-  _createClass(AdminList, [{
+  _createClass(ArticleList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -2669,10 +2667,10 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return AdminList;
+  return ArticleList;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdminList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ArticleList);
 
 /***/ }),
 

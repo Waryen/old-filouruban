@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 
-class AdminCreate extends React.Component {
+class ArticleCreate extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -60,4 +60,4 @@ class AdminCreate extends React.Component {
     }
 }
 
-export default AdminCreate
+export default ArticleCreate
