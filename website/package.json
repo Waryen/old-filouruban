@@ -25,6 +25,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "minireset.css": "^0.0.7",
         "moment": "^2.29.1"
     }
 }
