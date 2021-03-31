@@ -3,10 +3,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Importation descomposants
-import AdminList from './components/article-list'
-import AdminCreate from './components/article-create'
+import ArticleList from './components/article-list'
+import ArticleCreate from './components/article-create'
 import AdminLogin from './components/adminLogin'
 import AdminLogout from './components/adminLogout'
+import AdminCreate from './components/admin-create'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -24,17 +25,17 @@ if(document.querySelector('#auth')) {
 
 // Rendu des composants
 
-if(document.getElementById('react-admin-list')) {
+if(document.getElementById('react-article-list')) {
     ReactDOM.render(
-        <AdminList url={url} api={api}></AdminList>,
-        document.getElementById('react-admin-list')
+        <ArticleList url={url} api={api}></ArticleList>,
+        document.getElementById('react-article-list')
     )
 }
 
-if(document.getElementById('react-admin-create')) {
+if(document.getElementById('react-article-create')) {
     ReactDOM.render(
-        <AdminCreate url={url} api={api}></AdminCreate>,
-        document.getElementById('react-admin-create')
+        <ArticleCreate url={url} api={api}></ArticleCreate>,
+        document.getElementById('react-article-create')
     )
 }
 
@@ -52,4 +53,11 @@ if(auth) {
             document.getElementById('react-logout')
         )
     }
+}
+
+if(document.getElementById('react-admin-create')) {
+    ReactDOM.render(
+        <AdminCreate url={url} api={api}></AdminCreate>,
+        document.getElementById('react-admin-create')
+    )
 }

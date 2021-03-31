@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class Admin extends Authenticatable
 {
@@ -24,9 +25,21 @@ class Admin extends Authenticatable
 
     protected $hidden = [
         //'password',
-        'api_token',
+        //'api_token',
         'remember_token',
     ];
+
+    /*
+    *   Crypte les mots de passe
+    */
+
+    public function setPasswordAttribute($password) {
+        if(trim($password) === '') {
+            return;
+        }
+
+        $this->attributes['password'] = Hash::make($password);
+    }
 
     /*
     *   Relations avec les tables Articles et Messages

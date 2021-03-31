@@ -6,6 +6,6 @@
 
 @section('body')
     <h1>Accueil</h1>
-    <div id="react-admin-list"></div>
-    <div id="react-admin-create"></div>
+    <div id="react-article-list"></div>
+    <div id="react-article-create"></div>
 @endsection

@@ -36,7 +36,6 @@ class AdminCreate extends React.Component {
                 admins_id: this.state.admin,
             }
         )
-        .then(response => console.log(response))
     }
 
     render() {
