@@ -21,9 +21,12 @@ Route::get('/', function() {
 
 Route::get('admin', function() {
     return view('admin');
-})->middleware(['auth']);
+})->middleware(['auth'])->name('admin');
 
 Route::get('login', function() {
+    if(Auth::check()) {
+        return redirect()->route('admin');
+    }
     return view('login');
 })->name('login');
 
