@@ -7,5 +7,4 @@
 @section('body')
     <h1>Accueil</h1>
     <div id="react-article-list"></div>
-    <div id="react-article-create"></div>
 @endsection

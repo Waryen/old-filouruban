@@ -6,4 +6,9 @@
             <li><a href="admin">Administration</a></li>
         </ul>
     </nav>
+    @php
+        if(Auth::user()) {
+            echo '<div id="react-logout"></div>';
+        }
+    @endphp
 </header>

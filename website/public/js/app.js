@@ -2016,14 +2016,16 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
       lastname: '',
       email: '',
       password: '',
-      su: 1,
+      su: 0,
       api: _this.generateRandomString(100)
     };
     _this.generateRandomString = _this.generateRandomString.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleCheckBox = _this.handleCheckBox.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // Génère une chaîne de caractères aléatoire pour l'API token
+
 
   _createClass(AdminCreate, [{
     key: "generateRandomString",
@@ -2046,6 +2048,21 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
       this.setState(_defineProperty({}, name, value));
     }
   }, {
+    key: "handleCheckBox",
+    value: function handleCheckBox() {
+      var checkBox = document.querySelector('#admin-create-su');
+
+      if (checkBox.checked === true) {
+        this.setState({
+          su: 1
+        });
+      } else {
+        this.setState({
+          su: 0
+        });
+      }
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -2059,6 +2076,15 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
       }).then(function (Response) {
         return console.log(Response);
       });
+      this.setState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        su: 0,
+        api: this.generateRandomString(100)
+      });
+      document.querySelector('#admin-create-su').checked = false;
     }
   }, {
     key: "render",
@@ -2076,7 +2102,9 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "text",
               name: "firstname",
-              onChange: this.handleChange
+              value: this.state.firstname,
+              onChange: this.handleChange,
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -2085,7 +2113,9 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "text",
               name: "lastname",
-              onChange: this.handleChange
+              value: this.state.lastname,
+              onChange: this.handleChange,
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -2094,7 +2124,9 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "email",
               name: "email",
-              onChange: this.handleChange
+              value: this.state.email,
+              onChange: this.handleChange,
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -2103,12 +2135,21 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "password",
               name: "password",
-              onChange: this.handleChange
+              value: this.state.password,
+              onChange: this.handleChange,
+              required: true
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "hidden",
-            name: "su",
-            value: this.state.su
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "admin-create-su",
+              children: "Super Administrateur: "
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "checkbox",
+              name: "su",
+              id: "admin-create-su",
+              value: this.state.su,
+              onClick: this.handleCheckBox
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
             type: "hidden",
             name: "api",
@@ -2608,8 +2649,6 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       var list = [];
       this.state.articles.forEach(function (el) {
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
@@ -2617,10 +2656,6 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
             children: el.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: el.description
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            value: el.id,
-            onClick: _this3.deleteArticle,
-            children: "Supprimer"
           })]
         }, el.id));
       });

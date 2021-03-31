@@ -29,7 +29,7 @@ class AdminList extends React.Component {
                 <li key={el.id}>
                     <h2>{el.name}</h2>
                     <p>{el.description}</p>
-                    <button value={el.id} onClick={this.deleteArticle}>Supprimer</button>
+                    {/*<button value={el.id} onClick={this.deleteArticle}>Supprimer</button>*/}
                 </li>
             )
         })

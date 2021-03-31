@@ -12,12 +12,4 @@
             echo '<div id="react-logout"></div>';
         }
     @endphp
-    <div>
-        <h2>Identifiants</h2>
-        <p>
-            email: wmonahan@example.com
-            <br>
-            mdp: password
-        </p>
-    </div>
 @endsection
