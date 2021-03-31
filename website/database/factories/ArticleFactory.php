@@ -25,7 +25,7 @@ class ArticleFactory extends Factory
             'name' => $this->faker->word,
             'description' => $this->faker->sentences(3, true),
             'categories_id' => $this->faker->numberBetween(1, 10),
-            'admins_id' => $this->faker->numberBetween(1, 10),
+            'admins_id' => 1,
         ];
     }
 }

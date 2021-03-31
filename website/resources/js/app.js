@@ -11,7 +11,7 @@ import AdminCreate from './components/admin-create'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
-const api = '8jgVaApBctjy3LgOnlxrG8Yjlnk6yvKPA4on5VkW8gyzzjdjmaedIN3hOHha5UMRqwo7NvdXr1TpFKsLXyEkVPLk5ylZfv4ZyvUE'
+const api = 'UJKhBNU2kN5qsdopJKVcm4ZFCurkRRWX7uPFlgehdGd0H8alzdoy6yVf2DUh9sPiYrHztFSUx6oijfWhXw0G4nk40RtKUBrDPOmk'
 let auth
 if(document.querySelector('#auth')) {
     const prepareAuth = document.querySelector('#auth').getAttribute('content')

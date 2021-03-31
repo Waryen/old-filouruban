@@ -26,7 +26,7 @@ class MessageFactory extends Factory
             'content' => $this->faker->sentences(3, true),
             'start_date' => $this->faker->dateTimeBetween('2000-01-01', '2010-01-01', 'Europe/Paris'),
             'end_date' => $this->faker->dateTimeBetween('2010-12-31', 'now', 'Europe/Paris'),
-            'admins_id' => $this->faker->numberBetween(1, 10),
+            'admins_id' => 1,
         ];
     }
 }
