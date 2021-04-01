@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 31, 2021 at 07:44 PM
+-- Generation Time: Apr 01, 2021 at 04:34 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -39,10 +39,8 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `firstname`, `lastname`, `email`, `password`, `su`, `created_at`, `updated_at`, `api_token`, `remember_token`) VALUES
 (1, 'Jean', 'Admin', 'admin@filouruban.be', '$2y$10$cbP4Xf/dVGE8UEF3OfunIeffcR804amAzbw0OWJDL2ENXNtd5u2oe', 1, '2021-03-31 14:49:06', '2021-03-31 14:49:06', 'UJKhBNU2kN5qsdopJKVcm4ZFCurkRRWX7uPFlgehdGd0H8alzdoy6yVf2DUh9sPiYrHztFSUx6oijfWhXw0G4nk40RtKUBrDPOmk', NULL),
-(2, 'jean', 'test', 'test@mail.com', '$2y$10$QAAXXCSTFx0CZMqYFCLJRu07AgcYiBdxcH2Oj1mIVPS8rZYv2dYQm', 0, '2021-03-31 13:09:03', '2021-03-31 13:09:03', 'sCOGFuFlpD95pTiMo79UZBUtlrH8VdO5QAbdUftUY6C7y73bvF2zkcVNIoHJkZOrzXDMoVd3R44ckDzkyWmWf7GixGCV3ADnwRrl', NULL),
-(3, 'Bob', 'Test', 'bob@mail.com', '$2y$10$0mbboq5dImMJgFALORV8se7a3U5HGCISZyRoF/bzjSAn4/gpRXc5O', 1, '2021-03-31 13:11:38', '2021-03-31 13:11:38', 'yDhBme7dKt78pyUxjkNXWyVrfl9oasEnCYJHxyeXzltJhYN3QG63yAQZjNttNZ4qWSUBLUztpfkuWvjKCeO2hBcdE07wEZKy8fr2', NULL),
-(4, 'Millie', 'Brown', 'brown@mail.com', '$2y$10$L17aBogfAtHkfn20uBKz7.rMu.UNPVHaUShLM6odO/1Kda7lLsfDS', 0, '2021-03-31 13:16:48', '2021-03-31 13:16:48', 'q5TDGNl3nOn8Em4BArCwmWau4fUmYdFh21Wyagc04n4LmOsj7LmwaCdh6gK1GZ3yjYi5m2lf8tBs3NPuiGG9NjlhfBhZWUOWv4f0', NULL),
-(5, 'Paul', 'Wagner', 'wagner@mail.com', '$2y$10$n/mD8kg4hT9asyuQoizbXOeX1htGSlrTdKlWRUYAitxoe1w1LVzjW', 1, '2021-03-31 13:17:18', '2021-03-31 13:17:18', 'IrKsvKlMtaifMBq0p0N9R00j9Qllv4NpbecznGbeLLQ5c696Ed4M6wQMykFgUhvJRti6uwD8lXac4bbjpDVj9aucpzj1Cjro6sbe', NULL);
+(6, 'Jonathan', 'Gomand', 'jonathan@mail.com', '$2y$10$B/67T7ASVbzMykFoTIHs1ujZF9CqHbOA3AW557TA9z3obKfAY3wpm', 1, '2021-04-01 14:32:48', '2021-04-01 14:32:48', '2HKNSNGd7xcx9iGeiivzZy9ijS4APjdkLWGBKvJgixIoZc6aXDt1t2r5NHzU3X3yEHdnW8Flk78hDC3oOkIGfGMoYnK1snYIrCRn', NULL),
+(7, 'Sophie', 'Gomand', 'sophie@mail.com', '$2y$10$ieuEjpWeA1FsSVq3am8ZUeDBJHdr7xZWQ80xoOTrqppyETcMngE6y', 1, '2021-04-01 14:33:07', '2021-04-01 14:33:07', 'SsntZrIvgf2pBKrBwCbtMfzLY1cFTC1QEpylaNBKQbDL80gYmkKWDqsNFqE0ZA77PVYG6FeTD2C6LqzASZ6V6cjAn00S3FZMZbrJ', NULL);
 
 -- --------------------------------------------------------
 
@@ -392,7 +390,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `articles`
