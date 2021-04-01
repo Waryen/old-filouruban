@@ -1,10 +1,10 @@
 @import 'menu';
 
 .header {
-    position: fixed;
     background: rgba($light-teal, 0.8);
     backdrop-filter: blur(5px);
     width: 100%;
+    height: 15vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
@@ -28,5 +28,7 @@
         grid-column: 3;
         justify-self: flex-end;
         align-self: flex-start;
+        padding-top: 10px;
+        padding-right: 10px;
     }
 }

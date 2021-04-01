@@ -3,10 +3,14 @@
     content: "";
     position: absolute;
     left: 0;
-    height: 6px;
+    height: 3px;
     width: 30px;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: $silver;
+
+    &:hover {
+        background-color: darken($silver, 10%);
+    }
 }
 
 .menu-collapsed {
@@ -22,7 +26,9 @@
     ul {
         transition: all 0s;
         position: fixed;
+        top: 36px;
         left: -9000px;
+        padding-left: 0;
     }
 }
 
@@ -51,7 +57,6 @@
 .menu-expanded {
     transition: all .25s;
     text-align: center;
-    //line-height: 200px;
     height: 100vh;
     width: 100vw;
     border-radius: 0px;
@@ -69,17 +74,17 @@
     a {
         transition: all .15s;
         text-decoration: none;
+        font-family: $lato;
+        font-weight: 700;
         font-size: 2em;
         padding: 5px;
-        color: #fff;
+        color: $light-peach;
         display:block;
 
         &:hover {
-            background-color:rgba(255, 255, 255, 0.8);
             transition: all .15s;
             letter-spacing: 2px;
-            color:#333;
-            border: 1px solid rgba(255, 255, 255, .15);
+            color: $peach;
         }
     }
 

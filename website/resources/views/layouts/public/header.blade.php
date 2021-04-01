@@ -12,6 +12,7 @@
     </div>
     <a href="/" class="header-logo"><img src="{{ asset('media/logo/logo-filouruban-bigger.svg') }}" alt="Logo"></a>
     <div class="header-search">
-        <p>Rechercher</p>
+        <i class="fas fa-search"></i>
+        <input type="text" name="search" placeholder="Rechercher un article" class="form-search">
     </div>
 </header>

@@ -17,18 +17,22 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app-admin.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <!-- SCRIPT -->
     <script src="{{ asset('js/app.js') }}" async></script>
     @yield('title')
 </head>
 <body>
 <div id="wrapper">
-    @include('layouts.header')
+    @include('layouts.admin.header')
+    <aside>
+
+    </aside>
     <main>
     @yield('body')
     </main>
-    @include('layouts.footer')
+    @include('layouts.admin.footer')
 </div>
 </body>
 </html>

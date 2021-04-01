@@ -1,5 +1,5 @@
 // Minireset
-@import '~minireset.css/minireset.sass';
+//@import '~minireset.css/minireset.sass';
 
 // Fonts
 //@import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -8,10 +8,10 @@
 //@import 'variables';
 
 // Bootstrap
-//@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
 // *** Imports ***
 @import 'colors';
 @import 'fonts';
 @import 'variables';
-@import 'public/public';
+@import 'admin/admin';
