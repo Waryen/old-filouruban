@@ -3,11 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Importation descomposants
-import ArticleList from './components/article-list'
-import ArticleCreate from './components/article-create'
-import AdminLogin from './components/adminLogin'
-import AdminLogout from './components/adminLogout'
-import AdminCreate from './components/admin-create'
+import ArticleList from './components/public/article-list'
+import Newsletter from './components/public/newsletter'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -32,30 +29,9 @@ if(document.getElementById('react-article-list')) {
     )
 }
 
-if(document.getElementById('react-article-create')) {
+if(document.getElementById('react-newsletter')) {
     ReactDOM.render(
-        <ArticleCreate url={url} api={api}></ArticleCreate>,
-        document.getElementById('react-article-create')
-    )
-}
-
-if(document.getElementById('react-login')) {
-    ReactDOM.render(
-        <AdminLogin url={url}></AdminLogin>,
-        document.getElementById('react-login')
-    )
-}
-
-if(document.getElementById('react-logout')) {
-    ReactDOM.render(
-        <AdminLogout auth={auth}></AdminLogout>,
-        document.getElementById('react-logout')
-    )
-}
-
-if(document.getElementById('react-admin-create')) {
-    ReactDOM.render(
-        <AdminCreate url={url} api={api}></AdminCreate>,
-        document.getElementById('react-admin-create')
+        <Newsletter url={url} api={api}></Newsletter>,
+        document.getElementById('react-newsletter')
     )
 }

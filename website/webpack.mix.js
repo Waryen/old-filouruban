@@ -16,3 +16,4 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.sass('resources/sass/app-admin.scss', 'public/css');
+mix.js('resources/js/app-admin.js', 'public/js').react()

@@ -8,17 +8,7 @@
         </nav>
     </div>
     <div class="footer-center">
-        <div class="footer-newsletter">
-            <form method="post" class="newsletter-form">
-                <div>
-                    <label for="newsletter-email">S'abonner à notre newsletter</label>
-                    <input type="email" name="email" id="newsletter-email" required>
-                </div>
-                <div>
-                    <button type="submit">S'abonner</button>
-                </div>
-            </form>
-        </div>
+        <div class="footer-newsletter" id="react-newsletter"></div>
         <div class="copyrights">
             <p><strong>© 2021 | filouruban.be</strong></p>
         </div>
