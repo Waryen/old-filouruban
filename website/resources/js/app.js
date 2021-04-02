@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 // Importation des composants
 import ArticleList from './components/public/article-list'
 import Newsletter from './components/public/newsletter'
+import Search from './components/public/search'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -34,5 +35,12 @@ if(document.getElementById('react-newsletter')) {
     ReactDOM.render(
         <Newsletter url={url} api={api}></Newsletter>,
         document.getElementById('react-newsletter')
+    )
+}
+
+if(document.getElementById('react-search')) {
+    ReactDOM.render(
+        <Search url={url}></Search>,
+        document.getElementById('react-search')
     )
 }

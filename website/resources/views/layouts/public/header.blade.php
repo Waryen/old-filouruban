@@ -12,8 +12,5 @@
         </nav>
     </div>
     <a href="/" class="header-logo"><img src="{{ asset('media/logo/logo-filouruban-bigger.svg') }}" alt="Logo"></a>
-    <div class="header-search">
-        <i class="fas fa-search"></i>
-        <input type="text" name="search" placeholder="Rechercher un article" class="form-search">
-    </div>
+    <div class="header-search" id="react-search"></div>
 </header>
