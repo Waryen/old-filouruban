@@ -2,7 +2,7 @@ require('./bootstrap');
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// Importation descomposants
+// Importation des composants
 import ArticleCreate from './components/admin/article-create'
 import AdminLogin from './components/admin/admin-login'
 import AdminLogout from './components/admin/admin-logout'

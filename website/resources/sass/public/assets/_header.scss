@@ -1,16 +1,17 @@
 @import 'menu';
 
 .header {
-    background: rgba($light-teal, 0.8);
-    backdrop-filter: blur(5px);
+    background-color: $light-teal;
     width: 100%;
     height: 15vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
 
-    .menu-collapsed {
+    .header-menu {
         grid-column: 1;
+        margin-top: 10px;
+        margin-left: 10px;
     }
 
     .header-logo {
@@ -28,7 +29,7 @@
         grid-column: 3;
         justify-self: flex-end;
         align-self: flex-start;
-        padding-top: 10px;
-        padding-right: 10px;
+        margin-top: 10px;
+        margin-right: 10px;
     }
 }

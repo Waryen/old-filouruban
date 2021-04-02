@@ -14,6 +14,7 @@ class Newsletter extends React.Component {
     }
 
     componentDidMount() {
+        // Récupère la liste des subscribers
         axios.get(`${this.props.url}/api/subscriber?api_token=${this.props.api}`)
             .then(res => {
                 const list = res.data.map(el => el.email)
@@ -36,6 +37,7 @@ class Newsletter extends React.Component {
         const newSub = this.state.newSubscriber
         let check = true
 
+        // Vérifie si le nouveau subscriber existe déjà dans la DB
         for(let i = 0; i < list.length; i++) {
             if(list[i] === newSub) {
                 check = false
@@ -43,25 +45,19 @@ class Newsletter extends React.Component {
             }
         }
 
+        // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
         if(check === true) {
             axios.post(`${this.props.url}/api/subscriber?api_token=${this.props.api}`, {
                 email: newSub
             }).then(res => {
                 if(res.data === 'ok') {
                     alert('Vous avez été inscrit(e) à la newsletter !')
+                    this.setState({ listSubscribers: [...this.state.listSubscribers, newSub] })
                 }
             })
         } else {
             alert('Vous êtes déja inscrit(e) à la newsletter !')
         }
-
-        axios.get(`${this.props.url}/api/subscriber?api_token=${this.props.api}`)
-        .then(res => {
-            const list = res.data.map(el => el.email)
-            if(list) {
-                this.setState({ listSubscribers: list })
-            }
-        })
 
         this.setState({ newSubscriber: '' })
     }

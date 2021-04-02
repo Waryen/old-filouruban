@@ -1849,8 +1849,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./menu */ "./resources/js/menu.js");
 
- // Importation descomposants
+
+ // Importation des composants
 
 
  // CONST
@@ -2054,6 +2056,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2104,6 +2118,7 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      // Récupère la liste des subscribers
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api)).then(function (res) {
         var list = res.data.map(function (el) {
           return el.email;
@@ -2132,14 +2147,15 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var list = this.state.listSubscribers;
       var newSub = this.state.newSubscriber;
-      var check = true;
+      var check = true; // Vérifie si le nouveau subscriber existe déjà dans la DB
 
       for (var i = 0; i < list.length; i++) {
         if (list[i] === newSub) {
           check = false;
           break;
         }
-      }
+      } // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
+
 
       if (check === true) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), {
@@ -2147,23 +2163,16 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
         }).then(function (res) {
           if (res.data === 'ok') {
             alert('Vous avez été inscrit(e) à la newsletter !');
+
+            _this3.setState({
+              listSubscribers: [].concat(_toConsumableArray(_this3.state.listSubscribers), [newSub])
+            });
           }
         });
       } else {
         alert('Vous êtes déja inscrit(e) à la newsletter !');
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api)).then(function (res) {
-        var list = res.data.map(function (el) {
-          return el.email;
-        });
-
-        if (list) {
-          _this3.setState({
-            listSubscribers: list
-          });
-        }
-      });
       this.setState({
         newSubscriber: ''
       });
@@ -2201,6 +2210,84 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Newsletter);
+
+/***/ }),
+
+/***/ "./resources/js/menu.js":
+/*!******************************!*\
+  !*** ./resources/js/menu.js ***!
+  \******************************/
+/***/ (() => {
+
+var open = document.querySelector('.open-menu');
+var close = document.querySelector('.close-menu');
+var nav = document.querySelector('.navigation');
+var navList = document.querySelector('.navigation-list');
+var focusableEl = nav.querySelectorAll('a[href]');
+var maxFocusableEl = focusableEl.length - 1; // Ouvre le menu de navigation
+
+open.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (nav.style.visibility != 'visible') {
+    nav.setAttribute('aria-hidden', 'false');
+    nav.style.visibility = 'visible';
+    open.style.visibility = 'hidden';
+    focusableEl[0].focus();
+  }
+}); // Ferme le menu en cliquant sur la croix
+
+close.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (nav.style.visibility == 'visible') {
+    nav.setAttribute('aria-hidden', 'true');
+    nav.style.visibility = 'hidden';
+    open.style.visibility = 'visible';
+    open.focus();
+  }
+}); // Ferme le menu en appuyant sur Escape
+
+window.addEventListener('keydown', function (e) {
+  if (e.key == 'Escape' && nav.style.visibility == 'visible') {
+    nav.setAttribute('aria-hidden', 'true');
+    nav.style.visibility = 'hidden';
+    open.style.visibility = 'visible';
+    open.focus();
+  }
+}); // Gestion des tabulations dans le menu
+
+nav.addEventListener('keydown', function (e) {
+  if (e.key == 'Tab' && nav.style.visibility == 'visible') {
+    var back = function back() {
+      if (document.activeElement == focusableEl[0]) {
+        e.preventDefault();
+        focusableEl[maxFocusableEl].focus();
+      }
+    };
+
+    var forward = function forward() {
+      if (document.activeElement == focusableEl[maxFocusableEl]) {
+        e.preventDefault();
+        focusableEl[0].focus();
+      }
+    };
+
+    switch (e.key) {
+      case 'Tab':
+        if (e.shiftKey) {
+          back();
+        } else {
+          forward();
+        }
+
+        break;
+
+      default:
+        break;
+    }
+  }
+});
 
 /***/ }),
 

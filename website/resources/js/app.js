@@ -1,8 +1,9 @@
 require('./bootstrap');
+require('./menu')
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// Importation descomposants
+// Importation des composants
 import ArticleList from './components/public/article-list'
 import Newsletter from './components/public/newsletter'
 

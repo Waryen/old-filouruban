@@ -1,8 +1,9 @@
 <header class="header">
-    <div class="menu-collapsed">
-        <div class="bar"></div>
-        <nav>
-            <ul>
+    <div class="header-menu">
+        <a href="#" class="open-menu"><i class="fa fa-bars"></i></a>
+        <nav class="navigation" aria-hidden="true">
+            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <ul class="navigation-list">
                 <li><a href="/">Accueil</a></li>
                 <li><a href="#">Articles</a></li>
                 <li><a href="#">A propos</a></li>

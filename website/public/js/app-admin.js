@@ -67412,7 +67412,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
- // Importation descomposants
+ // Importation des composants
 
 
 
