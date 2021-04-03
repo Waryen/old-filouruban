@@ -38,7 +38,7 @@ export default function App() {
                 <Navigation></Navigation>
 
                 <Route path="/" exact render={props => <Dashboard url={url} api={api} />} />
-                <Route path="/admin" exact render={props => <Admin url={url} api={api} />} />
+                <Route path="/admin" exact render={props => <Admin url={url} api={api} auth={auth} />} />
                 <Route path="/article" exact render={props => <Article url={url} api={api} />} />
                 <Route path="/categorie" exact render={props => <Categorie url={url} api={api} />} />
                 <Route path="/commentaire" exact render={props => <Commentaire url={url} api={api} />} />
