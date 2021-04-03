@@ -33,17 +33,17 @@ if(document.querySelector('#auth')) {
 
 export default function App() {
     return(
-        <div className="App">
+        <div className="react-app">
             <Router>
                 <Navigation></Navigation>
 
-                <Route path="/" exact component={Dashboard} />
-                <Route path="/admin" exact component={Admin} />
-                <Route path="/article" exact component={Article} />
-                <Route path="/categorie" exact component={Categorie} />
-                <Route path="/commentaire" exact component={Commentaire} />
-                <Route path="/message" exact component={Message} />
-                <Route path="/contact" exact component={Contact} />
+                <Route path="/" exact render={props => <Dashboard url={url} api={api} />} />
+                <Route path="/admin" exact render={props => <Admin url={url} api={api} />} />
+                <Route path="/article" exact render={props => <Article url={url} api={api} />} />
+                <Route path="/categorie" exact render={props => <Categorie url={url} api={api} />} />
+                <Route path="/commentaire" exact render={props => <Commentaire url={url} api={api} />} />
+                <Route path="/message" exact render={props => <Message url={url} api={api} />} />
+                <Route path="/contact" exact render={props => <Contact url={url} api={api} />} />
             </Router>
         </div>
     )

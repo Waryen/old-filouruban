@@ -1,7 +1,11 @@
 import React from 'react'
+import ArticleCreate from './article-create'
 
-export default function Article() {
+export default function Article(props) {
     return(
-        <h1>Article</h1>
+        <div>
+            <h1>Articles</h1>
+            <ArticleCreate url={props.url} api={props.api} />
+        </div>
     )
 }

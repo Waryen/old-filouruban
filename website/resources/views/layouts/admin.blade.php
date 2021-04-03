@@ -26,9 +26,6 @@
 <body>
 <div id="wrapper">
     @include('layouts.admin.header')
-    <aside>
-
-    </aside>
     <main>
     @yield('body')
     </main>

@@ -1,7 +1,11 @@
 import React from 'react'
+import AdminCreate from './admin-create'
 
-export default function Admin() {
+export default function Admin(props) {
     return(
-        <h1>Admin</h1>
+        <div>
+            <h2>Administrateurs</h2>
+            <AdminCreate url={props.url} api={props.api} />
+        </div>
     )
 }
