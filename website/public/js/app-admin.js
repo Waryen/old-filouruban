@@ -2758,8 +2758,9 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       name: '',
       description: '',
-      category: 1,
-      admin: 1
+      category: undefined,
+      admin: undefined,
+      categories: []
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -2767,6 +2768,25 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(ArticleCreate, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var parsedAuth = JSON.parse(this.props.auth);
+      this.setState({
+        admin: parsedAuth.id
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (res) {
+        _this2.setState({
+          categories: res.data
+        });
+
+        _this2.setState({
+          category: res.data[0].id
+        });
+      });
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(event) {
       var target = event.target;
@@ -2788,6 +2808,14 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var list = [];
+      var catList = this.state.categories;
+      catList.forEach(function (el) {
+        list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+          value: el.id,
+          children: el.name
+        }, el.id));
+      });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
           children: "Cr\xE9er un article"
@@ -2812,6 +2840,17 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               name: "description",
               value: this.state.description,
               onChange: this.handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "categories_id",
+              children: "Cat\xE9gorie: "
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
+              name: "category",
+              id: "categories_id",
+              value: this.state.category,
+              onChange: this.handleChange,
+              children: list
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
@@ -3163,7 +3202,8 @@ function Article(props) {
       children: "Articles"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_article_create__WEBPACK_IMPORTED_MODULE_1__.default, {
       url: props.url,
-      api: props.api
+      api: props.api,
+      auth: props.auth
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_article_list__WEBPACK_IMPORTED_MODULE_2__.default, {
       url: props.url,
       api: props.api
@@ -72197,7 +72237,8 @@ function App() {
         render: function render(props) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_article__WEBPACK_IMPORTED_MODULE_5__.default, {
             url: url,
-            api: api
+            api: api,
+            auth: auth
           });
         }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {

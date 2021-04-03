@@ -7,12 +7,24 @@ class ArticleCreate extends React.Component {
         this.state = {
             name: '',
             description: '',
-            category: 1,
-            admin: 1,
+            category: undefined,
+            admin: undefined,
+            categories: [],
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentDidMount() {
+        const parsedAuth = JSON.parse(this.props.auth)
+        this.setState({ admin: parsedAuth.id })
+
+        axios.get(`${this.props.url}/api/category?api_token=${this.props.api}`)
+            .then(res => {
+                this.setState({ categories: res.data })
+                this.setState({ category: res.data[0].id })
+            })
     }
 
     handleChange(event) {
@@ -39,6 +51,15 @@ class ArticleCreate extends React.Component {
     }
 
     render() {
+        let list = []
+        const catList = this.state.categories
+
+        catList.forEach(el => {
+            list.push(
+                <option key={el.id} value={el.id}>{el.name}</option>
+            )
+        })
+
         return(
             <div>
                 <h2>Créer un article</h2>
@@ -50,6 +71,12 @@ class ArticleCreate extends React.Component {
                 <div>
                     <label htmlFor="description">Description: </label>
                     <input type="text" name='description' value={this.state.description} onChange={this.handleChange} />
+                </div>
+                <div>
+                    <label htmlFor="categories_id">Catégorie: </label>
+                    <select name="category" id="categories_id" value={this.state.category} onChange={this.handleChange}>
+                        {list}
+                    </select>
                 </div>
                 <div>
                     <button type="submit">Envoyer</button>
