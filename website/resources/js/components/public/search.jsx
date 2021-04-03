@@ -20,8 +20,10 @@ class Search extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         const value = this.state.search
-        localStorage.setItem('search', value)
-        this.setState({ search: '' })
+        if(value.length) {
+            localStorage.setItem('search', value)
+            this.setState({ search: '' })
+        }
     }
 
     render() {

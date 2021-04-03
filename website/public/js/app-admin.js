@@ -71339,7 +71339,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 var url = "".concat(document.querySelector('#url').getAttribute('content'));
-var api = 'UJKhBNU2kN5qsdopJKVcm4ZFCurkRRWX7uPFlgehdGd0H8alzdoy6yVf2DUh9sPiYrHztFSUx6oijfWhXw0G4nk40RtKUBrDPOmk';
+var api;
 var auth;
 
 if (document.querySelector('#auth')) {
@@ -71347,6 +71347,8 @@ if (document.querySelector('#auth')) {
 
   if (prepareAuth) {
     auth = prepareAuth;
+    var parsedAuth = JSON.parse(prepareAuth);
+    api = parsedAuth.api_token;
   }
 }
 

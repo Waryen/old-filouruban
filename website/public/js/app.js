@@ -2293,10 +2293,13 @@ var Search = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var value = this.state.search;
-      localStorage.setItem('search', value);
-      this.setState({
-        search: ''
-      });
+
+      if (value.length) {
+        localStorage.setItem('search', value);
+        this.setState({
+          search: ''
+        });
+      }
     }
   }, {
     key: "render",
