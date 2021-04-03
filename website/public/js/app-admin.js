@@ -2888,9 +2888,13 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       articles: [],
+      categories: [],
       id: undefined,
       name: '',
-      description: ''
+      description: '',
+      prevCatId: undefined,
+      prevCatName: '',
+      categories_id: undefined
     };
     _this.deleteArticle = _this.deleteArticle.bind(_assertThisInitialized(_this));
     _this.modifyArticle = _this.modifyArticle.bind(_assertThisInitialized(_this));
@@ -2898,7 +2902,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
     _this.handleModify = _this.handleModify.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     return _this;
-  } // Récupère la liste des articles
+  } // Récupère la liste des articles et des catégories
 
 
   _createClass(ArticleList, [{
@@ -2912,6 +2916,11 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
           articles: response.data
         });
       });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (response) {
+        return _this2.setState({
+          categories: response.data
+        });
+      });
     } // Récupère les données d'un article pour le formulaire de modification
 
   }, {
@@ -2920,6 +2929,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var id = e.target.value;
+      var categories = this.state.categories;
+      var catName;
       document.querySelector('.article-list').style.display = 'none';
       document.querySelector('.article-modify').style.display = 'block';
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api)).then(function (res) {
@@ -2934,6 +2945,27 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
         _this3.setState({
           id: id
         });
+
+        _this3.setState({
+          prevCatId: res.data.categories_id
+        });
+
+        _this3.setState({
+          categories_id: res.data.categories_id
+        });
+
+        var catId = res.data.categories_id;
+        console.log(catId);
+
+        for (var i = 0; i < categories.length; i++) {
+          if (categories[i].id === catId) {
+            catName = categories[i].name;
+
+            _this3.setState({
+              prevCatName: catName
+            });
+          }
+        }
       });
     } // Annule les modifications du formulaire de modification
 
@@ -2949,6 +2981,15 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       });
       this.setState({
         id: undefined
+      });
+      this.setState({
+        categories_id: undefined
+      });
+      this.setState({
+        prevCatId: undefined
+      });
+      this.setState({
+        prevCatName: ''
       });
       document.querySelector('.article-list').style.display = 'block';
       document.querySelector('.article-modify').style.display = 'none';
@@ -2968,7 +3009,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/article/").concat(this.state.id, "?api_token=").concat(this.props.api), {
         name: this.state.name,
-        description: this.state.description
+        description: this.state.description,
+        categories_id: this.state.categories_id
       });
       document.querySelector('.article-list').style.display = 'block';
       document.querySelector('.article-modify').style.display = 'none';
@@ -2986,12 +3028,25 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       var list = [];
+      var cat = []; // Rendu des éléments de la liste des articles
+
       this.state.articles.forEach(function (el) {
+        var catList = _this4.state.categories;
+        var catName;
+
+        for (var i = 0; i < catList.length; i++) {
+          if (el.categories_id === catList[i].id) {
+            catName = catList[i].name;
+          }
+        }
+
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
             children: el.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: el.description
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            children: catName
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             value: el.id,
             onClick: _this4.modifyArticle,
@@ -3001,6 +3056,13 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
             onClick: _this4.deleteArticle,
             children: "Supprimer"
           })]
+        }, el.id));
+      }); // Rendu des options pour le choix de la catégorie du formulaire de modification
+
+      this.state.categories.forEach(function (el) {
+        cat.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+          value: el.id,
+          children: el.name
         }, el.id));
       });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -3013,8 +3075,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "article-modify",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
-            children: ["Modifier l'article: ", this.state.name]
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            children: "Modifier un article"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
             method: "post",
             onSubmit: this.handleModify,
@@ -3039,6 +3101,19 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 id: "article-desc",
                 value: this.state.description,
                 onChange: this.handleChange
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "article-cat",
+                children: "Cat\xE9gorie: "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+                name: "categories_id",
+                id: "article-cat",
+                onChange: this.handleChange,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                  value: this.state.prevCatId,
+                  children: this.state.prevCatName
+                }), cat]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
