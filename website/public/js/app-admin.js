@@ -2974,27 +2974,14 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       document.querySelector('.article-modify').style.display = 'block';
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api)).then(function (res) {
         _this3.setState({
-          name: res.data.name
-        });
-
-        _this3.setState({
-          description: res.data.description
-        });
-
-        _this3.setState({
-          id: id
-        });
-
-        _this3.setState({
-          prevCatId: res.data.categories_id
-        });
-
-        _this3.setState({
+          name: res.data.name,
+          description: res.data.description,
+          id: id,
+          prevCatId: res.data.categories_id,
           categories_id: res.data.categories_id
         });
 
         var catId = res.data.categories_id;
-        console.log(catId);
 
         for (var i = 0; i < categories.length; i++) {
           if (categories[i].id === catId) {
@@ -3013,21 +3000,11 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
     value: function handleCancel(e) {
       e.preventDefault();
       this.setState({
-        name: ''
-      });
-      this.setState({
-        description: ''
-      });
-      this.setState({
-        id: undefined
-      });
-      this.setState({
-        categories_id: undefined
-      });
-      this.setState({
-        prevCatId: undefined
-      });
-      this.setState({
+        name: '',
+        description: '',
+        id: undefined,
+        categories_id: undefined,
+        prevCatId: undefined,
         prevCatName: ''
       });
       document.querySelector('.article-list').style.display = 'block';

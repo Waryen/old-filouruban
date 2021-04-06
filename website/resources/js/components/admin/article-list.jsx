@@ -25,6 +25,7 @@ class ArticleList extends React.Component {
     // Récupère la liste des articles et des catégories
     componentDidMount() {
         document.querySelector('.article-modify').style.display = 'none'
+
         axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
             .then(response => this.setState({articles: response.data}))
         axios.get(`${this.props.url}/api/category?api_token=${this.props.api}`)
@@ -42,14 +43,16 @@ class ArticleList extends React.Component {
 
         axios.get(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
             .then(res => {
-                this.setState({ name: res.data.name })
-                this.setState({ description: res.data.description })
-                this.setState({ id: id })
-                this.setState({ prevCatId: res.data.categories_id })
-                this.setState({ categories_id: res.data.categories_id })
+                this.setState({
+                    name: res.data.name,
+                    description: res.data.description,
+                    id: id,
+                    prevCatId: res.data.categories_id,
+                    categories_id: res.data.categories_id,
+                })
 
                 const catId = res.data.categories_id
-                console.log(catId)
+
                 for(let i = 0; i < categories.length; i++) {
                     if(categories[i].id === catId) {
                         catName = categories[i].name
@@ -63,12 +66,14 @@ class ArticleList extends React.Component {
     handleCancel(e) {
         e.preventDefault()
 
-        this.setState({ name: '' })
-        this.setState({ description: '' })
-        this.setState({ id: undefined })
-        this.setState({ categories_id: undefined })
-        this.setState({ prevCatId: undefined })
-        this.setState({ prevCatName: '' })
+        this.setState({
+            name: '',
+            description: '',
+            id: undefined,
+            categories_id: undefined,
+            prevCatId: undefined,
+            prevCatName: '',
+        })
 
         document.querySelector('.article-list').style.display = 'block'
         document.querySelector('.article-modify').style.display = 'none'
