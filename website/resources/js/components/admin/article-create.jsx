@@ -63,7 +63,7 @@ class ArticleCreate extends React.Component {
         return(
             <div>
                 <h2>Créer un article</h2>
-                <form onSubmit={this.handleSubmit}>
+                <form method="post" onSubmit={this.handleSubmit}>
                 <div>
                     <label htmlFor="name">Nom: </label>
                     <input type="text" name='name' value={this.state.name} onChange={this.handleChange} />
