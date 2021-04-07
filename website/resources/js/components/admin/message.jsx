@@ -7,7 +7,7 @@ export default function Message(props) {
         <div>
             <h1>Messages</h1>
             <MessageCreate url={props.url} api={props.api} auth={props.auth} />
-            <MessageList url={props.url} api={props.api} />
+            <MessageList url={props.url} api={props.api} auth={props.auth} />
         </div>
     )
 }

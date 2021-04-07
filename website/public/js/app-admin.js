@@ -4072,9 +4072,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4099,6 +4103,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var MessageList = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageList, _React$Component);
 
@@ -4110,23 +4116,265 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageList);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      messages: [],
+      admins: [],
+      newTitle: '',
+      newContent: '',
+      newStartDate: '',
+      newEndDate: '',
+      messageId: undefined
+    };
+    _this.deleteMessage = _this.deleteMessage.bind(_assertThisInitialized(_this));
+    _this.modifyMessage = _this.modifyMessage.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleModify = _this.handleModify.bind(_assertThisInitialized(_this));
+    _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // Récupère la liste des messages et des admins
+
 
   _createClass(MessageList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      document.querySelector('.message-modify').style.display = 'none';
+      document.querySelector('.message-list').style.display = 'block';
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api)).then(function (res) {
+        return _this2.setState({
+          messages: res.data
+        });
+      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api)).then(function (res) {
+        return _this2.setState({
+          admins: res.data
+        });
+      });
+    } // Récupère les données du formulaire de modification
+
+  }, {
+    key: "modifyMessage",
+    value: function modifyMessage(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      document.querySelector('.message-modify').style.display = 'block';
+      document.querySelector('.message-list').style.display = 'none';
+      var id = e.target.value;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api)).then(function (res) {
+        _this3.setState({
+          newTitle: res.data.title,
+          newContent: res.data.content,
+          newStartDate: res.data.start_date,
+          newEndDate: res.data.end_date,
+          messageId: id
+        });
+      });
+    } // Gère les changements du formulaire de modification
+
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      e.preventDefault();
+      var name = e.target.name;
+      var value = e.target.value;
+      this.setState(_defineProperty({}, name, value));
+    } // Annule les changements du formulaire de modification
+
+  }, {
+    key: "handleCancel",
+    value: function handleCancel(e) {
+      e.preventDefault();
+      this.setState({
+        newTitle: '',
+        newContent: '',
+        newStartDate: '',
+        newEndDate: '',
+        messageId: undefined
+      });
+    } // Envoi les données du formulaire de modification
+
+  }, {
+    key: "handleModify",
+    value: function handleModify(e) {
+      e.preventDefault();
+      var id = this.state.messageId;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api), {
+        title: this.state.newTitle,
+        content: this.state.newContent,
+        start_date: this.state.newStartDate,
+        end_date: this.state.newEndDate
+      });
+      this.handleCancel(e);
+      document.querySelector('.message-modify').style.display = 'none';
+      document.querySelector('.message-list').style.display = 'block';
+    } // Supprime le message
+
+  }, {
+    key: "deleteMessage",
+    value: function deleteMessage(e) {
+      e.preventDefault();
+      var id = e.target.value;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api));
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+      var _this4 = this;
+
+      // Rendu de la liste des messages
+      var messages = this.state.messages;
+      var admins = this.state.admins;
+      var auth = JSON.parse(this.props.auth);
+      var adminId = auth.id;
+      var adminSu = auth.su;
+      var adminName;
+      var list = [];
+      messages.forEach(function (el) {
+        for (var i = 0; i < admins.length; i++) {
+          if (el.admins_id === admins[i].id) {
+            adminName = admins[i].firstname + ' ';
+            adminName += admins[i].lastname;
+          }
+        }
+
+        if (el.admins_id === adminId && adminSu === 0) {
+          list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+              children: el.title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: el.content
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Date de d\xE9but: ", el.start_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Date de fin: ", el.end_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Cr\xE9\xE9 par: ", adminName]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              value: el.id,
+              onClick: _this4.modifyMessage,
+              children: "Modifer"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              value: el.id,
+              onClick: _this4.deleteMessage,
+              children: "Supprimer"
+            })]
+          }, el.id));
+        } else if (adminSu === 1) {
+          list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+              children: el.title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: el.content
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Date de d\xE9but: ", el.start_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Date de fin: ", el.end_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Cr\xE9\xE9 par: ", adminName]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              value: el.id,
+              onClick: _this4.modifyMessage,
+              children: "Modifer"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              value: el.id,
+              onClick: _this4.deleteMessage,
+              children: "Supprimer"
+            })]
+          }, el.id));
+        } else {
+          list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+              children: el.title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: el.content
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Date de d\xE9but: ", el.start_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Date de fin: ", el.end_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              children: ["Cr\xE9\xE9 par: ", adminName]
+            })]
+          }, el.id));
+        }
+      });
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
           children: "Liste des messages"
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "message-list",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            children: list
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "message-modify",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            children: "Modifer un message"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+            method: "post",
+            onSubmit: this.handleModify,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "title",
+                children: "Titre: "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                name: "newTitle",
+                id: "title",
+                value: this.state.newTitle,
+                onChange: this.handleChange
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "content",
+                children: "Contenu: "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "text",
+                name: "newContent",
+                id: "content",
+                value: this.state.newContent,
+                onChange: this.handleChange
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "newStartDate",
+                children: "Date de d\xE9but: "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "date",
+                name: "newStartDate",
+                id: "newStartDate",
+                value: this.state.newStartDate,
+                onChange: this.handleChange
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "newEndDate",
+                children: "Date de fin: "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "date",
+                name: "newEndDate",
+                id: "newEndDate",
+                value: this.state.newEndDate,
+                onChange: this.handleChange
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                onClick: this.handleCancel,
+                children: "Annuler"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                type: "submit",
+                children: "Modifier"
+              })]
+            })]
+          })]
+        })]
       });
     }
   }]);
 
   return MessageList;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessageList);
 
@@ -4162,7 +4410,8 @@ function Message(props) {
       auth: props.auth
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_message_list__WEBPACK_IMPORTED_MODULE_2__.default, {
       url: props.url,
-      api: props.api
+      api: props.api,
+      auth: props.auth
     })]
   });
 }
