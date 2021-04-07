@@ -42,7 +42,7 @@ export default function App() {
                 <Route path="/article" exact render={props => <Article url={url} api={api} auth={auth} />} />
                 <Route path="/categorie" exact render={props => <Categorie url={url} api={api} />} />
                 <Route path="/commentaire" exact render={props => <Commentaire url={url} api={api} />} />
-                <Route path="/message" exact render={props => <Message url={url} api={api} />} />
+                <Route path="/message" exact render={props => <Message url={url} api={api} auth={auth} />} />
                 <Route path="/contact" exact render={props => <Contact url={url} api={api} />} />
             </Router>
         </div>

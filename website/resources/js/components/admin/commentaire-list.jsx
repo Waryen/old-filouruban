@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class CommentaryList extends React.Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class CommentaryList extends React.Component {
                     <h3>{el.firstname} {el.lastname}</h3>
                     <p>Contenu du commentaire:<br></br>{el.content}</p>
                     <p>Date du commentaire: {el.date}</p>
-                    <p>Article concerné: {articleName}</p>
+                    <p>Article concerné: <Link to="/article">{articleName}</Link></p>
                     <button value={el.id} onClick={this.deleteCommentary} >Supprimer le commentaire</button>
                 </li>
             )
