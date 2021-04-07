@@ -6,7 +6,7 @@
             <ul class="navigation-list">
                 <li><a href="/">Accueil</a></li>
                 <li><a href="#">Articles</a></li>
-                <li><a href="#">A propos</a></li>
+                <li><a href="about">A propos</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>

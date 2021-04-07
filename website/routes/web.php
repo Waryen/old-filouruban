@@ -19,6 +19,10 @@ Route::get('/', function() {
     return view('accueil');
 })->name('accueil');
 
+Route::get('about', function() {
+    return view('about');
+})->name('about');
+
 Route::get('admin', function() {
     return view('admin');
 })->middleware(['auth'])->name('admin');
