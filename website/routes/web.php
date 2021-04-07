@@ -23,6 +23,10 @@ Route::get('about', function() {
     return view('about');
 })->name('about');
 
+Route::get('contact', function() {
+    return view('contact');
+})->name('contact');
+
 Route::get('admin', function() {
     return view('admin');
 })->middleware(['auth'])->name('admin');
