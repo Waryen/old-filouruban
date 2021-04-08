@@ -103,8 +103,21 @@ class ArticleList extends React.Component {
 
     // Supprime un article
     deleteArticle(e) {
+        const articles = this.state.articles
         const id = e.target.value
+        let name
+        
+        articles.forEach(el => {
+            if(el.id == id) {
+                name = el.image_id
+            }
+        })
+
+        const fd = new FormData()
+        fd.append('name', name)
+
         axios.delete(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
+        axios.post('deleteArticleImage', fd)
     }
 
     render() {
@@ -126,6 +139,7 @@ class ArticleList extends React.Component {
                     <h2>{el.name}</h2>
                     <p>{el.description}</p>
                     <p>{catName}</p>
+                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.png`} alt={`Image de l'article: ${el.name}`} />
                     <button value={el.id} onClick={this.modifyArticle} >Modifier</button>
                     <button value={el.id} onClick={this.deleteArticle} >Supprimer</button>
                 </li>

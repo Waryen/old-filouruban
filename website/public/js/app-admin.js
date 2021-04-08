@@ -2863,7 +2863,8 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
         name: this.state.name,
         description: this.state.description,
         categories_id: this.state.category,
-        admins_id: this.state.admin
+        admins_id: this.state.admin,
+        image_id: this.state.imageName
       });
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
       this.handleCancel(e);
@@ -2914,7 +2915,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               type: "file",
               name: "image",
               id: "image",
-              accept: "image/png, image/jpeg",
+              accept: "image/jpeg",
               onChange: this.handleImageChange
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -3114,8 +3115,18 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteArticle",
     value: function deleteArticle(e) {
+      var articles = this.state.articles;
       var id = e.target.value;
+      var name;
+      articles.forEach(function (el) {
+        if (el.id == id) {
+          name = el.image_id;
+        }
+      });
+      var fd = new FormData();
+      fd.append('name', name);
       axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api));
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteArticleImage', fd);
     }
   }, {
     key: "render",
@@ -3142,6 +3153,9 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
             children: el.description
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: catName
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+            src: "".concat(_this4.props.url, "/media/images/articles/article-").concat(el.image_id, ".png"),
+            alt: "Image de l'article: ".concat(el.name)
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             value: el.id,
             onClick: _this4.modifyArticle,

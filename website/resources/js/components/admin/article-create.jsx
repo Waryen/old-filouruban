@@ -99,6 +99,7 @@ class ArticleCreate extends React.Component {
                 description: this.state.description,
                 categories_id: this.state.category,
                 admins_id: this.state.admin,
+                image_id: this.state.imageName,
             }
         )
 
@@ -132,7 +133,7 @@ class ArticleCreate extends React.Component {
                 </div>
                 <div>
                     <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 100 Ko): </label>
-                    <input type="file" name="image" id="image" accept="image/png, image/jpeg" onChange={this.handleImageChange} />
+                    <input type="file" name="image" id="image" accept="image/jpeg" onChange={this.handleImageChange} />
                 </div>
                 <div>
                     <label htmlFor="categories_id">Catégorie: </label>
