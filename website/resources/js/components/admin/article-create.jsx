@@ -64,16 +64,14 @@ class ArticleCreate extends React.Component {
     handleImageChange(e) {
         e.preventDefault()
         const file = e.target.files[0]
-        if(file.size > 100000) {
+        if(file.size > 200000) {
             document.querySelector('#image').value = ''
             alert('Fichier trop volumineux !')
         } else {
             const ext = file.name.split('.').pop(1)
             const newFile = new File([file], `article-${this.state.imageName}.${ext}`)
             this.setState({ image: newFile })
-        }
 
-        if(file) {
             const reader = new FileReader()
             reader.onloadend = () => {
                 this.setState({ imagePreview: reader.result })
@@ -131,7 +129,7 @@ class ArticleCreate extends React.Component {
         })
 
         if(this.state.imagePreview) {
-            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" />
+            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" width="200px" height="200px" />
         }
 
         return(
@@ -147,7 +145,7 @@ class ArticleCreate extends React.Component {
                     <input type="text" name='description' value={this.state.description} onChange={this.handleChange} required />
                 </div>
                 <div>
-                    <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 100 Ko): </label>
+                    <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 200 Ko): </label>
                     <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
                     {imgPrev}
                 </div>

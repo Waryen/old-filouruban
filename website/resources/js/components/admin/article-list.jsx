@@ -10,6 +10,8 @@ class ArticleList extends React.Component {
             id: undefined,
             name: '',
             description: '',
+            image: undefined,
+            imagePreview: undefined,
             prevCatId: undefined,
             prevCatName: '',
             categories_id: undefined,
@@ -18,6 +20,7 @@ class ArticleList extends React.Component {
         this.deleteArticle = this.deleteArticle.bind(this)
         this.modifyArticle = this.modifyArticle.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleImageChange = this.handleImageChange.bind(this)
         this.handleModify = this.handleModify.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
     }
@@ -36,7 +39,7 @@ class ArticleList extends React.Component {
     modifyArticle(e) {
         const id = e.target.value
         const categories = this.state.categories
-        let catName        
+        let catName
 
         document.querySelector('.article-list').style.display = 'none'
         document.querySelector('.article-modify').style.display = 'block'
@@ -46,6 +49,7 @@ class ArticleList extends React.Component {
                 this.setState({
                     name: res.data.name,
                     description: res.data.description,
+                    imagePreview: `${this.props.url}/media/images/articles/article-${res.data.image_id}.jpg`,
                     id: id,
                     prevCatId: res.data.categories_id,
                     categories_id: res.data.categories_id,
@@ -69,6 +73,8 @@ class ArticleList extends React.Component {
         this.setState({
             name: '',
             description: '',
+            image: undefined,
+            imagePreview: undefined,
             id: undefined,
             categories_id: undefined,
             prevCatId: undefined,
@@ -87,15 +93,45 @@ class ArticleList extends React.Component {
         this.setState({ [name]: value })
     }
 
+    // Gère la sélection de l'image et la prévisualisation
+    handleImageChange(e) {
+        e.preventDefault()
+
+        const name = this.state.imagePreview
+        const url = name.split('-').pop(1)
+        const newName = url.split('.').shift(1)
+
+        const file = e.target.files[0]
+        if(file.size > 200000) {
+            document.querySelector('#article-img').value = ''
+            alert('Fichier trop volumineux !')
+        } else {
+            const ext = file.name.split('.').pop(1)
+            const newFile = new File([file], `article-${newName}.${ext}`)
+            this.setState({ image: newFile })
+
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                this.setState({ imagePreview: reader.result })
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
     // Envoi les modifications du formulaire de modification au serveur
     handleModify(e) {
         e.preventDefault()
+        const fd = new FormData()
+        fd.append('image', this.state.image)
+        const config = { headers: { 'content-type': 'multipart/form-data' } }
 
         axios.patch(`${this.props.url}/api/article/${this.state.id}?api_token=${this.props.api}`, {
             name: this.state.name,
             description: this.state.description,
             categories_id: this.state.categories_id,
         })
+
+        axios.post('uploadArticleImage', fd, config)
 
         document.querySelector('.article-list').style.display = 'block'
         document.querySelector('.article-modify').style.display = 'none'
@@ -123,6 +159,11 @@ class ArticleList extends React.Component {
     render() {
         const list = []
         const cat = []
+        let imgPrev
+
+        if(this.state.imagePreview) {
+            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" width="200px" height="200px" />
+        }
 
         // Rendu des éléments de la liste des articles
         this.state.articles.forEach(el => {
@@ -139,7 +180,7 @@ class ArticleList extends React.Component {
                     <h2>{el.name}</h2>
                     <p>{el.description}</p>
                     <p>{catName}</p>
-                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article: ${el.name}`} />
+                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article: ${el.name}`} width="200px" height="200px" />
                     <button value={el.id} onClick={this.modifyArticle} >Modifier</button>
                     <button value={el.id} onClick={this.deleteArticle} >Supprimer</button>
                 </li>
@@ -166,15 +207,20 @@ class ArticleList extends React.Component {
                     <form method="post" onSubmit={this.handleModify}>
                         <div>
                             <label htmlFor="article-name">Nom: </label>
-                            <input type="text" name="name" id="article-name" value={this.state.name} onChange={this.handleChange} />
+                            <input type="text" name="name" id="article-name" value={this.state.name} onChange={this.handleChange} required />
                         </div>
                         <div>
                             <label htmlFor="article-desc">Description: </label>
-                            <input type="text" name="description" id="article-desc" value={this.state.description} onChange={this.handleChange} />
+                            <input type="text" name="description" id="article-desc" value={this.state.description} onChange={this.handleChange} required />
+                        </div>
+                        <div>
+                            <label htmlFor="article-img">Image (taille maximale autoirsée 200 Ko): </label>
+                            <input type="file" name="image" id="article-img" accept="image/jpg" onChange={this.handleImageChange} />
+                            {imgPrev}
                         </div>
                         <div>
                             <label htmlFor="article-cat">Catégorie: </label>
-                            <select name="categories_id" id="article-cat" onChange={this.handleChange}>
+                            <select name="categories_id" id="article-cat" onChange={this.handleChange} required >
                                 <option value={this.state.prevCatId} >{this.state.prevCatName}</option>
                                 {cat}
                             </select>

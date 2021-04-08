@@ -2826,7 +2826,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var file = e.target.files[0];
 
-      if (file.size > 100000) {
+      if (file.size > 200000) {
         document.querySelector('#image').value = '';
         alert('Fichier trop volumineux !');
       } else {
@@ -2835,9 +2835,6 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
         this.setState({
           image: newFile
         });
-      }
-
-      if (file) {
         var reader = new FileReader();
 
         reader.onloadend = function () {
@@ -2903,7 +2900,9 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
         imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: this.state.imagePreview,
           alt: "Image de l'article",
-          className: "img-preview"
+          className: "img-preview",
+          width: "200px",
+          height: "200px"
         });
       }
 
@@ -2938,7 +2937,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "image",
-              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 100 Ko): "
+              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 200 Ko): "
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "file",
               name: "image",
@@ -3041,6 +3040,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       id: undefined,
       name: '',
       description: '',
+      image: undefined,
+      imagePreview: undefined,
       prevCatId: undefined,
       prevCatName: '',
       categories_id: undefined
@@ -3048,6 +3049,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
     _this.deleteArticle = _this.deleteArticle.bind(_assertThisInitialized(_this));
     _this.modifyArticle = _this.modifyArticle.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleImageChange = _this.handleImageChange.bind(_assertThisInitialized(_this));
     _this.handleModify = _this.handleModify.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     return _this;
@@ -3086,6 +3088,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
         _this3.setState({
           name: res.data.name,
           description: res.data.description,
+          imagePreview: "".concat(_this3.props.url, "/media/images/articles/article-").concat(res.data.image_id, ".jpg"),
           id: id,
           prevCatId: res.data.categories_id,
           categories_id: res.data.categories_id
@@ -3112,6 +3115,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       this.setState({
         name: '',
         description: '',
+        image: undefined,
+        imagePreview: undefined,
         id: undefined,
         categories_id: undefined,
         prevCatId: undefined,
@@ -3127,17 +3132,57 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       var name = e.target.name;
       var value = e.target.value;
       this.setState(_defineProperty({}, name, value));
+    } // Gère la sélection de l'image et la prévisualisation
+
+  }, {
+    key: "handleImageChange",
+    value: function handleImageChange(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      var name = this.state.imagePreview;
+      var url = name.split('-').pop(1);
+      var newName = url.split('.').shift(1);
+      var file = e.target.files[0];
+
+      if (file.size > 200000) {
+        document.querySelector('#article-img').value = '';
+        alert('Fichier trop volumineux !');
+      } else {
+        var ext = file.name.split('.').pop(1);
+        var newFile = new File([file], "article-".concat(newName, ".").concat(ext));
+        this.setState({
+          image: newFile
+        });
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          _this4.setState({
+            imagePreview: reader.result
+          });
+        };
+
+        reader.readAsDataURL(file);
+      }
     } // Envoi les modifications du formulaire de modification au serveur
 
   }, {
     key: "handleModify",
     value: function handleModify(e) {
       e.preventDefault();
+      var fd = new FormData();
+      fd.append('image', this.state.image);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/article/").concat(this.state.id, "?api_token=").concat(this.props.api), {
         name: this.state.name,
         description: this.state.description,
         categories_id: this.state.categories_id
       });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
       document.querySelector('.article-list').style.display = 'block';
       document.querySelector('.article-modify').style.display = 'none';
     } // Supprime un article
@@ -3161,13 +3206,25 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var list = [];
-      var cat = []; // Rendu des éléments de la liste des articles
+      var cat = [];
+      var imgPrev;
+
+      if (this.state.imagePreview) {
+        imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          src: this.state.imagePreview,
+          alt: "Image de l'article",
+          className: "img-preview",
+          width: "200px",
+          height: "200px"
+        });
+      } // Rendu des éléments de la liste des articles
+
 
       this.state.articles.forEach(function (el) {
-        var catList = _this4.state.categories;
+        var catList = _this5.state.categories;
         var catName;
 
         for (var i = 0; i < catList.length; i++) {
@@ -3184,15 +3241,17 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: catName
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-            src: "".concat(_this4.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-            alt: "Image de l'article: ".concat(el.name)
+            src: "".concat(_this5.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+            alt: "Image de l'article: ".concat(el.name),
+            width: "200px",
+            height: "200px"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             value: el.id,
-            onClick: _this4.modifyArticle,
+            onClick: _this5.modifyArticle,
             children: "Modifier"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             value: el.id,
-            onClick: _this4.deleteArticle,
+            onClick: _this5.deleteArticle,
             children: "Supprimer"
           })]
         }, el.id));
@@ -3228,7 +3287,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 name: "name",
                 id: "article-name",
                 value: this.state.name,
-                onChange: this.handleChange
+                onChange: this.handleChange,
+                required: true
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3239,8 +3299,20 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 name: "description",
                 id: "article-desc",
                 value: this.state.description,
-                onChange: this.handleChange
+                onChange: this.handleChange,
+                required: true
               })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "article-img",
+                children: "Image (taille maximale autoirs\xE9e 200 Ko): "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "file",
+                name: "image",
+                id: "article-img",
+                accept: "image/jpg",
+                onChange: this.handleImageChange
+              }), imgPrev]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "article-cat",
@@ -3249,6 +3321,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 name: "categories_id",
                 id: "article-cat",
                 onChange: this.handleChange,
+                required: true,
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
                   value: this.state.prevCatId,
                   children: this.state.prevCatName
