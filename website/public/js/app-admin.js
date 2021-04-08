@@ -2760,6 +2760,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
       description: '',
       image: undefined,
       imageName: '',
+      imagePreview: undefined,
       category: undefined,
       admin: undefined,
       categories: []
@@ -2815,11 +2816,13 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
       var value = target.value;
       var name = target.name;
       this.setState(_defineProperty({}, name, value));
-    } // Gère la sélection de l'image
+    } // Gère la sélection de l'image et la prévisualisation
 
   }, {
     key: "handleImageChange",
     value: function handleImageChange(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var file = e.target.files[0];
 
@@ -2833,6 +2836,18 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
           image: newFile
         });
       }
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          _this3.setState({
+            imagePreview: reader.result
+          });
+        };
+
+        reader.readAsDataURL(file);
+      }
     } // Annule les changements du formulaire et de la sélection de l'image
 
   }, {
@@ -2844,7 +2859,8 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
         name: '',
         description: '',
         image: undefined,
-        imageName: this.generateRandomString(10)
+        imageName: this.generateRandomString(10),
+        imagePreview: undefined
       });
     } // Envoi le formulaire et l'image
 
@@ -2872,8 +2888,9 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // Rendu de la liste des catégories
+      // Rendu de la liste des catégories et de la prévisualisation de l'image
       var list = [];
+      var imgPrev;
       var catList = this.state.categories;
       catList.forEach(function (el) {
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
@@ -2881,6 +2898,15 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
           children: el.name
         }, el.id));
       });
+
+      if (this.state.imagePreview) {
+        imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          src: this.state.imagePreview,
+          alt: "Image de l'article",
+          className: "img-preview"
+        });
+      }
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
           children: "Cr\xE9er un article"
@@ -2895,7 +2921,8 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               type: "text",
               name: "name",
               value: this.state.name,
-              onChange: this.handleChange
+              onChange: this.handleChange,
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -2905,7 +2932,8 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               type: "text",
               name: "description",
               value: this.state.description,
-              onChange: this.handleChange
+              onChange: this.handleChange,
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -2915,9 +2943,10 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               type: "file",
               name: "image",
               id: "image",
-              accept: "image/jpeg",
-              onChange: this.handleImageChange
-            })]
+              accept: "image/jpg",
+              onChange: this.handleImageChange,
+              required: true
+            }), imgPrev]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "categories_id",
@@ -2927,6 +2956,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               id: "categories_id",
               value: this.state.category,
               onChange: this.handleChange,
+              required: true,
               children: list
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -3154,7 +3184,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
             children: catName
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-            src: "".concat(_this4.props.url, "/media/images/articles/article-").concat(el.image_id, ".png"),
+            src: "".concat(_this4.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
             alt: "Image de l'article: ".concat(el.name)
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             value: el.id,

@@ -139,7 +139,7 @@ class ArticleList extends React.Component {
                     <h2>{el.name}</h2>
                     <p>{el.description}</p>
                     <p>{catName}</p>
-                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.png`} alt={`Image de l'article: ${el.name}`} />
+                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article: ${el.name}`} />
                     <button value={el.id} onClick={this.modifyArticle} >Modifier</button>
                     <button value={el.id} onClick={this.deleteArticle} >Supprimer</button>
                 </li>

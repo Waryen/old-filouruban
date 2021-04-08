@@ -9,6 +9,7 @@ class ArticleCreate extends React.Component {
             description: '',
             image: undefined,
             imageName: '',
+            imagePreview: undefined,
             category: undefined,
             admin: undefined,
             categories: [],
@@ -59,7 +60,7 @@ class ArticleCreate extends React.Component {
         });
     }
 
-    // Gère la sélection de l'image
+    // Gère la sélection de l'image et la prévisualisation
     handleImageChange(e) {
         e.preventDefault()
         const file = e.target.files[0]
@@ -70,6 +71,14 @@ class ArticleCreate extends React.Component {
             const ext = file.name.split('.').pop(1)
             const newFile = new File([file], `article-${this.state.imageName}.${ext}`)
             this.setState({ image: newFile })
+        }
+
+        if(file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                this.setState({ imagePreview: reader.result })
+            }
+            reader.readAsDataURL(file)
         }
     }
 
@@ -82,6 +91,7 @@ class ArticleCreate extends React.Component {
             description: '',
             image: undefined,
             imageName: this.generateRandomString(10),
+            imagePreview: undefined,
 
         })
     }
@@ -109,8 +119,9 @@ class ArticleCreate extends React.Component {
     }
 
     render() {
-        // Rendu de la liste des catégories
+        // Rendu de la liste des catégories et de la prévisualisation de l'image
         let list = []
+        let imgPrev
         const catList = this.state.categories
 
         catList.forEach(el => {
@@ -119,25 +130,30 @@ class ArticleCreate extends React.Component {
             )
         })
 
+        if(this.state.imagePreview) {
+            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" />
+        }
+
         return(
             <div>
                 <h2>Créer un article</h2>
                 <form method="post" onSubmit={this.handleSubmit}>
                 <div>
                     <label htmlFor="name">Nom: </label>
-                    <input type="text" name='name' value={this.state.name} onChange={this.handleChange} />
+                    <input type="text" name='name' value={this.state.name} onChange={this.handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="description">Description: </label>
-                    <input type="text" name='description' value={this.state.description} onChange={this.handleChange} />
+                    <input type="text" name='description' value={this.state.description} onChange={this.handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 100 Ko): </label>
-                    <input type="file" name="image" id="image" accept="image/jpeg" onChange={this.handleImageChange} />
+                    <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
+                    {imgPrev}
                 </div>
                 <div>
                     <label htmlFor="categories_id">Catégorie: </label>
-                    <select name="category" id="categories_id" value={this.state.category} onChange={this.handleChange}>
+                    <select name="category" id="categories_id" value={this.state.category} onChange={this.handleChange} required >
                         {list}
                     </select>
                 </div>
