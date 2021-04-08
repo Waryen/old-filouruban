@@ -474,6 +474,11 @@ main #react-contact .form-contact .form-firstname {
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 768px) {
+  main #react-contact .form-contact .form-firstname {
+    grid-column: 1/4;
+  }
+}
 main #react-contact .form-contact .form-lastname {
   grid-column: 2;
   grid-row: 1;
@@ -482,6 +487,12 @@ main #react-contact .form-contact .form-lastname {
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 768px) {
+  main #react-contact .form-contact .form-lastname {
+    grid-column: 1/4;
+    grid-row: 2;
+  }
+}
 main #react-contact .form-contact .form-email {
   grid-column: 3;
   grid-row: 1;
@@ -489,6 +500,12 @@ main #react-contact .form-contact .form-email {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+@media screen and (max-width: 768px) {
+  main #react-contact .form-contact .form-email {
+    grid-column: 1/4;
+    grid-row: 3;
+  }
 }
 main #react-contact .form-contact .form-content {
   grid-column: 1/4;
@@ -509,6 +526,16 @@ main #react-contact .form-contact .form-content #form-content {
   resize: none;
   border: 1px solid #006d77;
   border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+  main #react-contact .form-contact .form-content #form-content {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  main #react-contact .form-contact .form-content {
+    grid-row: 4;
+  }
 }
 main #react-contact .form-contact .form-btn {
   grid-column: 2;
@@ -533,6 +560,18 @@ main #react-contact .form-contact .form-btn button {
 main #react-contact .form-contact .form-btn button:hover, main #react-contact .form-contact .form-btn button:focus {
   background: #e29578;
   color: #ffffff;
+}
+@media screen and (max-width: 768px) {
+  main #react-contact .form-contact .form-btn {
+    grid-column: 2/3;
+    grid-row: 5;
+  }
+}
+@media screen and (max-width: 768px) {
+  main #react-contact {
+    grid-column: 2/12;
+    width: 100%;
+  }
 }
 
 .open-menu {

@@ -93,6 +93,10 @@ main {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
+                @media screen and ($responsive) {
+                    grid-column: 1 / 4;
+                }
             }
 
             .form-lastname {
@@ -102,6 +106,11 @@ main {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
+                @media screen and ($responsive) {
+                    grid-column: 1 / 4;
+                    grid-row: 2;
+                }
             }
 
             .form-email {
@@ -111,6 +120,11 @@ main {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+
+                @media screen and ($responsive) {
+                    grid-column: 1 / 4;
+                    grid-row: 3;
+                }
             }
 
             .form-content {
@@ -132,6 +146,14 @@ main {
                     resize: none;
                     border: 1px solid $teal;
                     border-radius: 10px;
+
+                    @media screen and ($responsive) {
+                        width: 100%;
+                    }
+                }
+
+                @media screen and ($responsive) {
+                    grid-row: 4;
                 }
             }
 
@@ -160,7 +182,17 @@ main {
                         color: $white;
                     }
                 }
+
+                @media screen and ($responsive) {
+                    grid-column: 2 / 3;
+                    grid-row: 5;
+                }
             }
+        }
+
+        @media screen and ($responsive) {
+            grid-column: 2 / 12;
+            width: 100%;
         }
     }
 }
