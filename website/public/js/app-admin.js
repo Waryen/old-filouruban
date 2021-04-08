@@ -2758,14 +2758,20 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       name: '',
       description: '',
+      image: undefined,
+      imageName: '',
       category: undefined,
       admin: undefined,
       categories: []
     };
+    _this.generateRandomString = _this.generateRandomString.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleImageChange = _this.handleImageChange.bind(_assertThisInitialized(_this));
+    _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // Récupère la liste des catégories
+
 
   _createClass(ArticleCreate, [{
     key: "componentDidMount",
@@ -2774,7 +2780,8 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
 
       var parsedAuth = JSON.parse(this.props.auth);
       this.setState({
-        admin: parsedAuth.id
+        admin: parsedAuth.id,
+        imageName: this.generateRandomString(10)
       });
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (res) {
         _this2.setState({
@@ -2785,29 +2792,86 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
           category: res.data[0].id
         });
       });
-    }
+    } // Génère une chaîne de caractères aléatoire pour le nom de l'image
+
+  }, {
+    key: "generateRandomString",
+    value: function generateRandomString(num) {
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      var result = '';
+
+      for (var i = 0; i < num; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      return result;
+    } // Gère les changements du formulaire
+
   }, {
     key: "handleChange",
-    value: function handleChange(event) {
-      var target = event.target;
+    value: function handleChange(e) {
+      var target = e.target;
       var value = target.value;
       var name = target.name;
       this.setState(_defineProperty({}, name, value));
-    }
+    } // Gère la sélection de l'image
+
+  }, {
+    key: "handleImageChange",
+    value: function handleImageChange(e) {
+      e.preventDefault();
+      var file = e.target.files[0];
+
+      if (file.size > 100000) {
+        document.querySelector('#image').value = '';
+        alert('Fichier trop volumineux !');
+      } else {
+        var ext = file.name.split('.').pop(1);
+        var newFile = new File([file], "article-".concat(this.state.imageName, ".").concat(ext));
+        this.setState({
+          image: newFile
+        });
+      }
+    } // Annule les changements du formulaire et de la sélection de l'image
+
+  }, {
+    key: "handleCancel",
+    value: function handleCancel(e) {
+      e.preventDefault();
+      document.querySelector('#image').value = '';
+      this.setState({
+        name: '',
+        description: '',
+        image: undefined,
+        imageName: this.generateRandomString(10)
+      });
+    } // Envoi le formulaire et l'image
+
   }, {
     key: "handleSubmit",
-    value: function handleSubmit(event) {
-      event.preventDefault();
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var fd = new FormData();
+      fd.append('image', this.state.image);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api), {
         name: this.state.name,
         description: this.state.description,
         categories_id: this.state.category,
         admins_id: this.state.admin
       });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
+      this.handleCancel(e);
     }
   }, {
     key: "render",
     value: function render() {
+      // Rendu de la liste des catégories
       var list = [];
       var catList = this.state.categories;
       catList.forEach(function (el) {
@@ -2844,6 +2908,17 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "image",
+              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 100 Ko): "
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "file",
+              name: "image",
+              id: "image",
+              accept: "image/png, image/jpeg",
+              onChange: this.handleImageChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "categories_id",
               children: "Cat\xE9gorie: "
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
@@ -2853,11 +2928,14 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               onChange: this.handleChange,
               children: list
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: this.handleCancel,
+              children: "Annuler"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               type: "submit",
               children: "Envoyer"
-            })
+            })]
           })]
         })]
       });

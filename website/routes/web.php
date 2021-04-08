@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,7 @@ use App\Http\Controllers\LogoutController;
 |
 */
 
+// Public
 Route::get('/', function() {
     return view('accueil');
 })->name('accueil');
@@ -27,6 +29,10 @@ Route::get('contact', function() {
     return view('contact');
 })->name('contact');
 
+// Images
+Route::post('uploadArticleImage', [ImageController::class, 'uploadArticle']);
+
+// Admin
 Route::get('admin', function() {
     return view('admin');
 })->middleware(['auth'])->name('admin');
