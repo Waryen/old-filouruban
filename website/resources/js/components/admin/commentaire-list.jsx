@@ -40,9 +40,11 @@ class CommentaryList extends React.Component {
         // Rendu de la liste des commentaires
         commentaries.forEach(el => {
             let articleName
+            let articleId
             for(let i = 0; i < articles.length; i++) {
                 if(el.articles_id === articles[i].id) {
                     articleName = articles[i].name
+                    articleId = articles[i].id
                 }
             }
             list.push(
@@ -50,7 +52,7 @@ class CommentaryList extends React.Component {
                     <h3>{el.firstname} {el.lastname}</h3>
                     <p>Contenu du commentaire:<br></br>{el.content}</p>
                     <p>Date du commentaire: {el.date}</p>
-                    <p>Article concerné: <Link to="/article">{articleName}</Link></p>
+                    <p>Article concerné: <Link to={`article#article-${articleId}`}>{articleName}</Link></p>
                     <button value={el.id} onClick={this.deleteCommentary} >Supprimer le commentaire</button>
                 </li>
             )

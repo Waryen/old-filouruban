@@ -3234,6 +3234,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
         }
 
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+          id: "article-".concat(el.id),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
             children: el.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -3443,48 +3444,130 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       catName: '',
-      catDesc: ''
+      catDesc: '',
+      image: undefined,
+      imageName: '',
+      imagePreview: undefined
     };
+    _this.generateRandomString = _this.generateRandomString.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleImageChange = _this.handleImageChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
-  }
+  } // Génère un nom pour l'image au montage du composant
+
 
   _createClass(CategoryCreate, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        imageName: this.generateRandomString(10)
+      });
+    } // Génère une chaîne de caractères aléatoire pour le nom de l'image
+
+  }, {
+    key: "generateRandomString",
+    value: function generateRandomString(num) {
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      var result = '';
+
+      for (var i = 0; i < num; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      return result;
+    } // Gère les changements du formulaire
+
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
       var name = e.target.name;
       var value = e.target.value;
       this.setState(_defineProperty({}, name, value));
-    }
+    } // Gère la sélection de l'image et la prévisualisation
+
+  }, {
+    key: "handleImageChange",
+    value: function handleImageChange(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var file = e.target.files[0];
+
+      if (file.size > 200000) {
+        document.querySelector('#image').value = '';
+        alert('Fichier trop volumineux !');
+      } else {
+        var ext = file.name.split('.').pop(1);
+        var newFile = new File([file], "category-".concat(this.state.imageName, ".").concat(ext));
+        this.setState({
+          image: newFile
+        });
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          _this2.setState({
+            imagePreview: reader.result
+          });
+        };
+
+        reader.readAsDataURL(file);
+      }
+    } // Annule les changements du formulaire
+
   }, {
     key: "handleCancel",
     value: function handleCancel(e) {
       e.preventDefault();
+      document.querySelector('#image').value = '';
       this.setState({
         catName: '',
-        catDesc: ''
+        catDesc: '',
+        image: undefined,
+        imageName: this.generateRandomString(10),
+        imagePreview: undefined
       });
-    }
+    } // Envoi le formulaire
+
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
       var name = this.state.catName;
       var description = this.state.catDesc;
+      var fd = new FormData();
+      fd.append('image', this.state.image);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api), {
         name: name,
-        description: description
+        description: description,
+        image_id: this.state.imageName
       });
-      this.setState({
-        catName: '',
-        catDesc: ''
-      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
+      this.handleCancel(e);
     }
   }, {
     key: "render",
     value: function render() {
+      // Rendu de la prévisualisation de l'image
+      var imgPrev;
+
+      if (this.state.imagePreview) {
+        imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          src: this.state.imagePreview,
+          alt: "Image de l'article",
+          className: "img-preview",
+          width: "200px",
+          height: "200px"
+        });
+      }
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
           children: "Cr\xE9er une cat\xE9gorie"
@@ -3500,7 +3583,8 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
               name: "catName",
               id: "cat-name",
               value: this.state.catName,
-              onChange: this.handleChange
+              onChange: this.handleChange,
+              required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3511,8 +3595,21 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
               name: "catDesc",
               id: "cat-desc",
               value: this.state.catDesc,
-              onChange: this.handleChange
+              onChange: this.handleChange,
+              required: true
             })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "image",
+              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 200 Ko): "
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "file",
+              name: "image",
+              id: "image",
+              accept: "image/jpg",
+              onChange: this.handleImageChange,
+              required: true
+            }), imgPrev]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               onClick: this.handleCancel,
@@ -3938,10 +4035,12 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
 
       commentaries.forEach(function (el) {
         var articleName;
+        var articleId;
 
         for (var i = 0; i < articles.length; i++) {
           if (el.articles_id === articles[i].id) {
             articleName = articles[i].name;
+            articleId = articles[i].id;
           }
         }
 
@@ -3954,7 +4053,7 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
             children: ["Date du commentaire: ", el.date]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
             children: ["Article concern\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-              to: "/article",
+              to: "article#article-".concat(articleId),
               children: articleName
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {

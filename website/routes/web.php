@@ -31,7 +31,9 @@ Route::get('contact', function() {
 
 // Images
 Route::post('uploadArticleImage', [ImageController::class, 'uploadArticle']);
+Route::post('uploadCategoryImage', [ImageController::class, 'uploadCategory']);
 Route::post('deleteArticleImage', [ImageController::class, 'deleteArticle']);
+Route::post('deleteCategoryImage', [ImageController::class, 'deleteCategory']);
 
 // Admin
 Route::get('admin', function() {

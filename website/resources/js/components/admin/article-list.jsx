@@ -176,7 +176,7 @@ class ArticleList extends React.Component {
             }
 
             list.push(
-                <li key={el.id}>
+                <li key={el.id} id={`article-${el.id}`}>
                     <h2>{el.name}</h2>
                     <p>{el.description}</p>
                     <p>{catName}</p>
