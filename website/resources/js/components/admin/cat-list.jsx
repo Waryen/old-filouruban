@@ -119,6 +119,8 @@ class CategoryList extends React.Component {
             description: this.state.newCatDesc,
         })
 
+        this.componentDidMount()
+
         document.querySelector('.category-list').style.display = 'block'
         document.querySelector('.category-modify').style.display = 'none'
     }
@@ -127,11 +129,21 @@ class CategoryList extends React.Component {
     deleteCategory(e) {
         e.preventDefault()
         const id = e.target.value
+        const categories = this.state.categories
+        let name
+        
+        categories.forEach(el => {
+            if(el.id == id) {
+                name = el.image_id
+            }
+        })
+
         const fd = new FormData()
         fd.append('name', name)
 
-        axios.delete(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
         axios.post('deleteCategoryImage', fd)
+        axios.delete(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
+        this.componentDidMount()
     }
 
     render() {

@@ -2274,6 +2274,7 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
     value: function deleteAdmin(e) {
       var id = e.target.value;
       axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api));
+      this.componentDidMount();
     }
   }, {
     key: "render",
@@ -3187,6 +3188,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
         description: this.state.description,
         categories_id: this.state.categories_id
       });
+      this.componentDidMount();
       document.querySelector('.article-list').style.display = 'block';
       document.querySelector('.article-modify').style.display = 'none';
     } // Supprime un article
@@ -3204,8 +3206,9 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       });
       var fd = new FormData();
       fd.append('name', name);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api));
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteArticleImage', fd);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api));
+      this.componentDidMount();
     }
   }, {
     key: "render",
@@ -3835,6 +3838,7 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
         name: this.state.newCatName,
         description: this.state.newCatDesc
       });
+      this.componentDidMount();
       document.querySelector('.category-list').style.display = 'block';
       document.querySelector('.category-modify').style.display = 'none';
     } // Supprime une catégorie
@@ -3844,10 +3848,18 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
     value: function deleteCategory(e) {
       e.preventDefault();
       var id = e.target.value;
+      var categories = this.state.categories;
+      var name;
+      categories.forEach(function (el) {
+        if (el.id == id) {
+          name = el.image_id;
+        }
+      });
       var fd = new FormData();
       fd.append('name', name);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api));
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteCategoryImage', fd);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api));
+      this.componentDidMount();
     }
   }, {
     key: "render",
@@ -4115,6 +4127,7 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var id = e.target.value;
       axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/commentary/").concat(id, "?api_token=").concat(this.props.api));
+      this.componentDidMount();
     }
   }, {
     key: "render",
@@ -4281,6 +4294,7 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var id = e.target.value;
       axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/contact/").concat(id, "?api_token=").concat(this.props.api));
+      this.componentDidMount();
     }
   }, {
     key: "render",
@@ -4725,6 +4739,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         end_date: this.state.newEndDate
       });
       this.handleCancel(e);
+      this.componentDidMount();
       document.querySelector('.message-modify').style.display = 'none';
       document.querySelector('.message-list').style.display = 'block';
     } // Supprime le message
@@ -4735,6 +4750,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var id = e.target.value;
       axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api));
+      this.componentDidMount();
     }
   }, {
     key: "render",

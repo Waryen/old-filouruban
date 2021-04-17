@@ -22,7 +22,7 @@ class ImageController extends Controller
     public function deleteArticle(Request $request) {
         $name = $request->name;
         $root = $_SERVER['DOCUMENT_ROOT'];
-        $file = $root.'/media/images/articles/article-'.$name.'.png';
+        $file = $root.'/media/images/articles/article-'.$name.'.jpg';
 
         if(file_exists($file)) {
             unlink($file);
@@ -33,7 +33,7 @@ class ImageController extends Controller
     public function deleteCategory(Request $request) {
         $name = $request->name;
         $root = $_SERVER['DOCUMENT_ROOT'];
-        $file = $root.'/media/images/categories/category-'.$name.'.png';
+        $file = $root.'/media/images/categories/category-'.$name.'.jpg';
 
         if(file_exists($file)) {
             unlink($file);

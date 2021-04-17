@@ -23,6 +23,7 @@ class AdminList extends React.Component {
     deleteAdmin(e) {
         const id = e.target.value
         axios.delete(`${this.props.url}/api/admin/${id}?api_token=${this.props.api}`)
+        this.componentDidMount()
     }
 
     render() {

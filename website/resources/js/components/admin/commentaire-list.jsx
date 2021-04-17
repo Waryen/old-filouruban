@@ -30,6 +30,7 @@ class CommentaryList extends React.Component {
         e.preventDefault()
         const id = e.target.value
         axios.delete(`${this.props.url}/api/commentary/${id}?api_token=${this.props.api}`)
+        this.componentDidMount()
     }
 
     render() {

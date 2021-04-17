@@ -85,6 +85,7 @@ class MessageList extends React.Component {
             end_date: this.state.newEndDate,
         })
         this.handleCancel(e)
+        this.componentDidMount()
 
         document.querySelector('.message-modify').style.display = 'none'
         document.querySelector('.message-list').style.display = 'block'
@@ -95,6 +96,7 @@ class MessageList extends React.Component {
         e.preventDefault()
         const id = e.target.value
         axios.delete(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`)
+        this.componentDidMount()
     }
 
     render() {

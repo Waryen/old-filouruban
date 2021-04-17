@@ -136,6 +136,8 @@ class ArticleList extends React.Component {
             categories_id: this.state.categories_id,
         })
 
+        this.componentDidMount()
+
         document.querySelector('.article-list').style.display = 'block'
         document.querySelector('.article-modify').style.display = 'none'
     }
@@ -155,8 +157,9 @@ class ArticleList extends React.Component {
         const fd = new FormData()
         fd.append('name', name)
 
-        axios.delete(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
         axios.post('deleteArticleImage', fd)
+        axios.delete(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
+        this.componentDidMount()
     }
 
     render() {
