@@ -4709,6 +4709,8 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         newEndDate: '',
         messageId: undefined
       });
+      document.querySelector('.message-modify').style.display = 'none';
+      document.querySelector('.message-list').style.display = 'block';
     } // Envoi les données du formulaire de modification
 
   }, {
