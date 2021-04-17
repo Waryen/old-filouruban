@@ -3170,19 +3170,23 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
     key: "handleModify",
     value: function handleModify(e) {
       e.preventDefault();
-      var fd = new FormData();
-      fd.append('image', this.state.image);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      };
+
+      if (this.state.image) {
+        var fd = new FormData();
+        fd.append('image', this.state.image);
+        var config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/article/").concat(this.state.id, "?api_token=").concat(this.props.api), {
         name: this.state.name,
         description: this.state.description,
         categories_id: this.state.categories_id
       });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
       document.querySelector('.article-list').style.display = 'block';
       document.querySelector('.article-modify').style.display = 'none';
     } // Supprime un article
@@ -3561,7 +3565,7 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
       if (this.state.imagePreview) {
         imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: this.state.imagePreview,
-          alt: "Image de l'article",
+          alt: "Image de la cat\xE9gorie",
           className: "img-preview",
           width: "200px",
           height: "200px"
@@ -3703,11 +3707,14 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
       articles: [],
       catId: undefined,
       newCatName: '',
-      newCatDesc: ''
+      newCatDesc: '',
+      image: undefined,
+      imagePreview: undefined
     };
     _this.modifyCategory = _this.modifyCategory.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleImageChange = _this.handleImageChange.bind(_assertThisInitialized(_this));
     _this.handleModify = _this.handleModify.bind(_assertThisInitialized(_this));
     _this.deleteCategory = _this.deleteCategory.bind(_assertThisInitialized(_this));
     return _this;
@@ -3748,7 +3755,8 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
         _this3.setState({
           catId: id,
           newCatName: res.data.name,
-          newCatDesc: res.data.description
+          newCatDesc: res.data.description,
+          imagePreview: "".concat(_this3.props.url, "/media/images/categories/category-").concat(res.data.image_id, ".jpg")
         });
       });
     } // Annule les modifications du formulaire
@@ -3759,7 +3767,9 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       this.setState({
         newCatName: '',
-        newCatDesc: ''
+        newCatDesc: '',
+        image: undefined,
+        imagePreview: undefined
       });
       document.querySelector('.category-list').style.display = 'block';
       document.querySelector('.category-modify').style.display = 'none';
@@ -3771,12 +3781,56 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
       var name = e.target.name;
       var value = e.target.value;
       this.setState(_defineProperty({}, name, value));
+    } // Gère la sélection de l'image et la prévisualisation
+
+  }, {
+    key: "handleImageChange",
+    value: function handleImageChange(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      var name = this.state.imagePreview;
+      var url = name.split('-').pop(1);
+      var newName = url.split('.').shift(1);
+      var file = e.target.files[0];
+
+      if (file.size > 200000) {
+        document.querySelector('#category-img').value = '';
+        alert('Fichier trop volumineux !');
+      } else {
+        var ext = file.name.split('.').pop(1);
+        var newFile = new File([file], "category-".concat(newName, ".").concat(ext));
+        this.setState({
+          image: newFile
+        });
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          _this4.setState({
+            imagePreview: reader.result
+          });
+        };
+
+        reader.readAsDataURL(file);
+      }
     } // Envoi les modifications du formulaire
 
   }, {
     key: "handleModify",
     value: function handleModify(e) {
       e.preventDefault();
+
+      if (this.state.image) {
+        var fd = new FormData();
+        fd.append('image', this.state.image);
+        var config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/category/").concat(this.state.catId, "?api_token=").concat(this.props.api), {
         name: this.state.newCatName,
         description: this.state.newCatDesc
@@ -3790,16 +3844,31 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
     value: function deleteCategory(e) {
       e.preventDefault();
       var id = e.target.value;
+      var fd = new FormData();
+      fd.append('name', name);
       axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api));
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteCategoryImage', fd);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var list = [];
       var articles = this.state.articles;
-      var categories = this.state.categories; // Rendu de la liste des catégories
+      var categories = this.state.categories;
+      var imgPrev;
+
+      if (this.state.imagePreview) {
+        imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          src: this.state.imagePreview,
+          alt: "Image de l'article",
+          className: "img-preview",
+          width: "200px",
+          height: "200px"
+        });
+      } // Rendu de la liste des catégories
+
 
       categories.forEach(function (el) {
         var check = null;
@@ -3816,9 +3885,14 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
               children: el.name
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               children: el.description
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "".concat(_this5.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
+              alt: "Image de la cat\xE9gorie: ".concat(el.name),
+              width: "200px",
+              height: "200px"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               value: el.id,
-              onClick: _this4.modifyCategory,
+              onClick: _this5.modifyCategory,
               children: "Modifier"
             })]
           }, el.id));
@@ -3828,13 +3902,18 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
               children: el.name
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               children: el.description
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "".concat(_this5.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
+              alt: "Image de la cat\xE9gorie: ".concat(el.name),
+              width: "200px",
+              height: "200px"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               value: el.id,
-              onClick: _this4.modifyCategory,
+              onClick: _this5.modifyCategory,
               children: "Modifier"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               value: el.id,
-              onClick: _this4.deleteCategory,
+              onClick: _this5.deleteCategory,
               children: "Supprimer"
             })]
           }, el.id));
@@ -3864,7 +3943,8 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
                 name: "newCatName",
                 id: "cat-name",
                 value: this.state.newCatName,
-                onChange: this.handleChange
+                onChange: this.handleChange,
+                required: true
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3875,8 +3955,20 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
                 name: "newCatDesc",
                 id: "cat-desc",
                 value: this.state.newCatDesc,
-                onChange: this.handleChange
+                onChange: this.handleChange,
+                required: true
               })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+                htmlFor: "category-img",
+                children: "Image (taille maximale autoirs\xE9e 200 Ko): "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                type: "file",
+                name: "image",
+                id: "category-img",
+                accept: "image/jpg",
+                onChange: this.handleImageChange
+              }), imgPrev]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 onClick: this.handleCancel,

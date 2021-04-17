@@ -102,7 +102,7 @@ class CategoryCreate extends React.Component {
         // Rendu de la prévisualisation de l'image
         let imgPrev
         if(this.state.imagePreview) {
-            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" width="200px" height="200px" />
+            imgPrev = <img src={this.state.imagePreview} alt="Image de la catégorie" className="img-preview" width="200px" height="200px" />
         }
 
         return(

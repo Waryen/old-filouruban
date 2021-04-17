@@ -10,11 +10,14 @@ class CategoryList extends React.Component {
             catId: undefined,
             newCatName: '',
             newCatDesc: '',
+            image: undefined,
+            imagePreview: undefined,
         }
 
         this.modifyCategory = this.modifyCategory.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleImageChange = this.handleImageChange.bind(this)
         this.handleModify = this.handleModify.bind(this)
         this.deleteCategory = this.deleteCategory.bind(this)
     }
@@ -49,6 +52,7 @@ class CategoryList extends React.Component {
                     catId: id,
                     newCatName: res.data.name,
                     newCatDesc: res.data.description,
+                    imagePreview: `${this.props.url}/media/images/categories/category-${res.data.image_id}.jpg`,
                 })
             })
     }
@@ -59,6 +63,8 @@ class CategoryList extends React.Component {
         this.setState({
             newCatName: '',
             newCatDesc: '',
+            image: undefined,
+            imagePreview: undefined,
         })
         document.querySelector('.category-list').style.display = 'block'
         document.querySelector('.category-modify').style.display = 'none'
@@ -71,13 +77,48 @@ class CategoryList extends React.Component {
         this.setState({ [name]: value })
     }
 
+    // Gère la sélection de l'image et la prévisualisation
+    handleImageChange(e) {
+        e.preventDefault()
+
+        const name = this.state.imagePreview
+        const url = name.split('-').pop(1)
+        const newName = url.split('.').shift(1)
+
+        const file = e.target.files[0]
+        if(file.size > 200000) {
+            document.querySelector('#category-img').value = ''
+            alert('Fichier trop volumineux !')
+        } else {
+            const ext = file.name.split('.').pop(1)
+            const newFile = new File([file], `category-${newName}.${ext}`)
+            this.setState({ image: newFile })
+
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                this.setState({ imagePreview: reader.result })
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
     // Envoi les modifications du formulaire
     handleModify(e) {
         e.preventDefault()
+
+        if(this.state.image) {
+            const fd = new FormData()
+            fd.append('image', this.state.image)
+            const config = { headers: { 'content-type': 'multipart/form-data' } }
+
+            axios.post('uploadCategoryImage', fd, config)
+        }
+
         axios.patch(`${this.props.url}/api/category/${this.state.catId}?api_token=${this.props.api}`, {
             name: this.state.newCatName,
             description: this.state.newCatDesc,
         })
+
         document.querySelector('.category-list').style.display = 'block'
         document.querySelector('.category-modify').style.display = 'none'
     }
@@ -86,13 +127,22 @@ class CategoryList extends React.Component {
     deleteCategory(e) {
         e.preventDefault()
         const id = e.target.value
+        const fd = new FormData()
+        fd.append('name', name)
+
         axios.delete(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
+        axios.post('deleteCategoryImage', fd)
     }
 
     render() {
         const list = []
         const articles = this.state.articles
         const categories = this.state.categories
+        let imgPrev
+
+        if(this.state.imagePreview) {
+            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" width="200px" height="200px" />
+        }
 
         // Rendu de la liste des catégories
         categories.forEach(el => {
@@ -107,6 +157,7 @@ class CategoryList extends React.Component {
                     <li key={el.id}>
                         <h3>{el.name}</h3>
                         <p>{el.description}</p>
+                        <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} width="200px" height="200px" />
                         <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
                     </li>
                 )
@@ -115,6 +166,7 @@ class CategoryList extends React.Component {
                     <li key={el.id}>
                         <h3>{el.name}</h3>
                         <p>{el.description}</p>
+                        <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} width="200px" height="200px" />
                         <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
                         <button value={el.id} onClick={this.deleteCategory} >Supprimer</button>
                     </li>
@@ -135,11 +187,16 @@ class CategoryList extends React.Component {
                     <form method="post" onSubmit={this.handleModify}>
                         <div>
                             <label htmlFor="cat-name">Nom: </label>
-                            <input type="text" name="newCatName" id="cat-name" value={this.state.newCatName} onChange={this.handleChange} />
+                            <input type="text" name="newCatName" id="cat-name" value={this.state.newCatName} onChange={this.handleChange} required />
                         </div>
                         <div>
                             <label htmlFor="cat-desc">Description: </label>
-                            <input type="text" name="newCatDesc" id="cat-desc" value={this.state.newCatDesc} onChange={this.handleChange} />
+                            <input type="text" name="newCatDesc" id="cat-desc" value={this.state.newCatDesc} onChange={this.handleChange} required />
+                        </div>
+                        <div>
+                            <label htmlFor="category-img">Image (taille maximale autoirsée 200 Ko): </label>
+                            <input type="file" name="image" id="category-img" accept="image/jpg" onChange={this.handleImageChange} />
+                            {imgPrev}
                         </div>
                         <div>
                             <button onClick={this.handleCancel}>Annuler</button>

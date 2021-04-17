@@ -121,17 +121,20 @@ class ArticleList extends React.Component {
     // Envoi les modifications du formulaire de modification au serveur
     handleModify(e) {
         e.preventDefault()
-        const fd = new FormData()
-        fd.append('image', this.state.image)
-        const config = { headers: { 'content-type': 'multipart/form-data' } }
+
+        if(this.state.image) {
+            const fd = new FormData()
+            fd.append('image', this.state.image)
+            const config = { headers: { 'content-type': 'multipart/form-data' } }
+
+            axios.post('uploadArticleImage', fd, config)
+        }
 
         axios.patch(`${this.props.url}/api/article/${this.state.id}?api_token=${this.props.api}`, {
             name: this.state.name,
             description: this.state.description,
             categories_id: this.state.categories_id,
         })
-
-        axios.post('uploadArticleImage', fd, config)
 
         document.querySelector('.article-list').style.display = 'block'
         document.querySelector('.article-modify').style.display = 'none'
