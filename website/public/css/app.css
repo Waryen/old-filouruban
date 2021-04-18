@@ -573,6 +573,72 @@ main #react-contact .form-contact .form-btn button:hover, main #react-contact .f
     width: 100%;
   }
 }
+main #react-categories {
+  grid-row: 2;
+  grid-column: 2/12;
+}
+main #react-categories ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+@media screen and (max-width: 768px) {
+  main #react-categories ul {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+main #react-categories ul li {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #ffddd2;
+  display: flex;
+  flex-direction: column;
+}
+main #react-categories ul li h3 {
+  text-decoration: none;
+  text-align: center;
+  color: #e29578;
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+main #react-categories ul li p {
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  color: #000000;
+}
+main #react-categories ul li .cat-img {
+  margin: 10px;
+  overflow: hidden;
+}
+main #react-categories ul li .cat-img img {
+  border-radius: 10px;
+  transition: transform 0.15s;
+}
+main #react-categories ul li .cat-img img:hover {
+  transform: scale(1.1);
+}
+main #react-categories ul li .link-to-art {
+  text-decoration: none;
+  align-self: center;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #006d77;
+  padding: 5px;
+  transition: all 0.15s;
+}
+main #react-categories ul li .link-to-art:hover, main #react-categories ul li .link-to-art:focus {
+  background: #edf6f9;
+  border-radius: 5px;
+}
 
 .open-menu {
   font-size: 2em;
