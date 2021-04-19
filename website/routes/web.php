@@ -28,7 +28,7 @@ Route::get('articles', function() {
 
 Route::get('articles/{category}', function(Category $category) {
     return view('category');
-});
+})->name('category');
 
 Route::get('about', function() {
     return view('about');

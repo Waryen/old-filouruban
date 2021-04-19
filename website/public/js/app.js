@@ -2233,6 +2233,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Category = /*#__PURE__*/function (_React$Component) {
   _inherits(Category, _React$Component);
 
@@ -2244,17 +2245,82 @@ var Category = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Category);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      catId: undefined,
+      articles: [],
+      categoryName: '',
+      categoryDesc: ''
+    };
     return _this;
-  }
+  } // Récupère l'Id de la catégorie et la liste des articles
+
 
   _createClass(Category, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var url = window.location.pathname.split('/');
+      this.setState({
+        catId: url[2]
+      });
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            articles: response.data
+          });
+        }
+      });
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/category/").concat(url[2], "?api_token=").concat(this.props.api)).then(function (response) {
+        return _this2.setState({
+          categoryName: response.data.name,
+          categoryDesc: response.data.description
+        });
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.setState({
+        catId: undefined,
+        articles: []
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-          children: "Hello World !"
-        })
+      var _this3 = this;
+
+      // Rendu de la liste des articles de la catégorie spécifique
+      var articles = this.state.articles;
+      var catId = this.state.catId;
+      var catName = this.state.categoryName;
+      var catDesc = this.state.categoryDesc;
+      var articlesList = [];
+      articles.forEach(function (el) {
+        if (el.categories_id == catId) {
+          articlesList.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+              children: el.name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: el.description
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+              alt: "Image de l'article ".concat(el.name)
+            })]
+          }, el.id));
+        }
+      });
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
+          children: ["Liste des articles de la cat\xE9gorie: ", catName]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: catDesc
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            children: articlesList
+          })
+        })]
       });
     }
   }]);

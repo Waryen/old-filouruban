@@ -5,9 +5,9 @@
             <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
             <ul class="navigation-list">
                 <li><a href="/">Accueil</a></li>
-                <li><a href="articles">Articles</a></li>
-                <li><a href="about">A propos</a></li>
-                <li><a href="contact">Contact</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">A propos</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
     </div>
