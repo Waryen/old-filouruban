@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-<title>Catégorie</title>
+<title>Filouruban - Articles de la catégorie: {{$category->name}}</title>
 @endsection
 
 @section('body')
