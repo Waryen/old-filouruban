@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ImageController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,10 @@ Route::get('/', function() {
 Route::get('articles', function() {
     return view('articles');
 })->name('articles');
+
+Route::get('articles/{category}', function(Category $category) {
+    return view('category');
+});
 
 Route::get('about', function() {
     return view('about');

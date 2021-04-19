@@ -9,6 +9,7 @@ import Newsletter from './components/public/newsletter'
 import Search from './components/public/search'
 import Contact from './components/public/contact'
 import CategoriesList from './components/public/cat-list'
+import Category from './components/public/category'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -58,5 +59,12 @@ if(document.getElementById('react-categories')) {
     ReactDOM.render(
         <CategoriesList url={url} api={api} />,
         document.getElementById('react-categories')
+    )
+}
+
+if(document.getElementById('react-category')) {
+    ReactDOM.render(
+        <Category url={url} api={api} />,
+        document.getElementById('react-category')
     )
 }
