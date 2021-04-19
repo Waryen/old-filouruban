@@ -2166,9 +2166,7 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
             className: "cat-img",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
               src: "".concat(_this3.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
-              alt: "Image de la cat\xE9gorie: ".concat(el.name),
-              width: "200px",
-              height: "200px"
+              alt: "Image de la cat\xE9gorie: ".concat(el.name)
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
             href: "articles/".concat(el.id),
@@ -2304,23 +2302,24 @@ var Category = /*#__PURE__*/function (_React$Component) {
               children: el.name
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               children: el.description
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-              alt: "Image de l'article ".concat(el.name)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+              href: "#",
+              className: "art-img",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+                alt: "Image de l'article ".concat(el.name)
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+              href: "#",
+              children: "Voir l'article"
             })]
           }, el.id));
         }
       });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
-          children: ["Liste des articles de la cat\xE9gorie: ", catName]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-          children: catDesc
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-            children: articlesList
-          })
-        })]
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          children: articlesList
+        })
       });
     }
   }]);

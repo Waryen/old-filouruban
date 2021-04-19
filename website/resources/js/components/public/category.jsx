@@ -53,7 +53,8 @@ class Category extends React.Component {
                     <li key={el.id}>
                         <h3>{el.name}</h3>
                         <p>{el.description}</p>
-                        <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} />
+                        <a href="#" className="art-img"><img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} /></a>
+                        <a href="#">Voir l'article</a>
                     </li>
                 )
             }
@@ -61,13 +62,9 @@ class Category extends React.Component {
 
         return(
             <div>
-                <h1>Liste des articles de la catégorie: {catName}</h1>
-                <p>{catDesc}</p>
-                <div>
-                    <ul>
-                        {articlesList}
-                    </ul>
-                </div>
+                <ul>
+                    {articlesList}
+                </ul>
             </div>
         )
     }

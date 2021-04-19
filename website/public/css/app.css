@@ -407,6 +407,14 @@ main .main-title {
     font-size: 1.5em;
   }
 }
+main .el-desc {
+  grid-column: 3/11;
+  grid-row: 2;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  font-weight: 400;
+  color: #000000;
+}
 main .about-content {
   grid-column: 3/11;
   grid-row: 2;
@@ -618,10 +626,12 @@ main #react-categories ul li p {
 main #react-categories ul li .cat-img {
   margin: 10px;
   overflow: hidden;
+  border-radius: 10px;
 }
 main #react-categories ul li .cat-img img {
-  border-radius: 10px;
   transition: transform 0.15s;
+  max-width: 200px;
+  height: auto;
 }
 main #react-categories ul li .cat-img img:hover {
   transform: scale(1.1);
@@ -636,6 +646,66 @@ main #react-categories ul li .link-to-art {
   transition: all 0.15s;
 }
 main #react-categories ul li .link-to-art:hover, main #react-categories ul li .link-to-art:focus {
+  background: #edf6f9;
+  border-radius: 5px;
+}
+main #react-category {
+  grid-column: 2/12;
+  grid-row: 3;
+  margin: 20px;
+}
+main #react-category ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+main #react-category li {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #ffddd2;
+  display: flex;
+  flex-direction: column;
+}
+main #react-category li h3 {
+  text-decoration: none;
+  text-align: center;
+  color: #e29578;
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+main #react-category li p {
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  color: #000000;
+}
+main #react-category li .art-img {
+  overflow: hidden;
+  margin: 10px;
+  border-radius: 10px;
+}
+main #react-category li .art-img img {
+  max-width: 200px;
+  height: auto;
+  transition: all 0.15s;
+}
+main #react-category li .art-img img:hover, main #react-category li .art-img img:focus {
+  transform: scale(1.1);
+}
+main #react-category li a:last-child {
+  text-decoration: none;
+  align-self: center;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #006d77;
+  padding: 5px;
+  transition: all 0.15s;
+}
+main #react-category li a:last-child:hover, main #react-category li a:last-child:focus {
   background: #edf6f9;
   border-radius: 5px;
 }

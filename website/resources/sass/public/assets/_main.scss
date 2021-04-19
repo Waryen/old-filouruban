@@ -21,6 +21,16 @@ main {
         }
     }
 
+    // Description
+    .el-desc {
+        grid-column: 3 / 11;
+        grid-row: 2;
+        font-family: $roboto;
+        font-size: 1.5em;
+        font-weight: 400;
+        color: $black;
+    }
+
     // Contenu de la page About
     .about-content {
         grid-column: 3 / 11;
@@ -243,10 +253,12 @@ main {
                 .cat-img {
                     margin: 10px;
                     overflow: hidden;
+                    border-radius: 10px;
 
                     img {
-                        border-radius: 10px;
                         transition: transform .15s;
+                        max-width: 200px;
+                        height: auto;
 
                         &:hover {
                             transform: scale(1.1);
@@ -267,6 +279,77 @@ main {
                         background: $silver;
                         border-radius: 5px;
                     }
+                }
+            }
+        }
+    }
+
+    // Contenu de la page Category
+    #react-category {
+        grid-column: 2 / 12;
+        grid-row: 3;
+        margin: 20px;
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        li {
+            margin: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            background: $light-peach;
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                text-decoration: none;
+                text-align: center;
+                color: $peach;
+                font-family: $lato;
+                font-size: 1.5em;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            p {
+                text-align: left;
+                font-family: $roboto;
+                font-size: 0.9em;
+                font-weight: 400;
+                color: $black;
+            }
+
+            .art-img {
+                overflow: hidden;
+                margin: 10px;
+                border-radius: 10px;
+
+                    img {
+                    max-width: 200px;
+                    height: auto;
+                    transition: all .15s;
+    
+                    &:hover, &:focus {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            a:last-child {
+                text-decoration: none;
+                align-self: center;
+                font-family: $lato;
+                font-size: 1.2em;
+                color: $teal;
+                padding: 5px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    background: $silver;
+                    border-radius: 5px;
                 }
             }
         }
