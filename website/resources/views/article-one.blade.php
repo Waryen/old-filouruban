@@ -1,9 +1,9 @@
 @extends('layouts.public')
 
-@section('tile')
+@section('title')
 <title>Filouruban - {{$article->name}}</title>
 @endsection
 
 @section('body')
-    <h2>Hello World ! {{$article->name}}</h2>
+    <div id="react-article"></div>
 @endsection

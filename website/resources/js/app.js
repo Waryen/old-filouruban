@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 
 // Importation des composants
 import ArticleList from './components/public/article-list'
+import Article from './components/public/article'
 import Newsletter from './components/public/newsletter'
 import Search from './components/public/search'
 import Contact from './components/public/contact'
@@ -66,5 +67,12 @@ if(document.getElementById('react-category')) {
     ReactDOM.render(
         <Category url={url} api={api} />,
         document.getElementById('react-category')
+    )
+}
+
+if(document.getElementById('react-article')) {
+    ReactDOM.render(
+        <Article url={url} api={api} />,
+        document.getElementById('react-article')
     )
 }

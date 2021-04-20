@@ -709,6 +709,41 @@ main #react-category li a:last-child:hover, main #react-category li a:last-child
   background: #edf6f9;
   border-radius: 5px;
 }
+main #react-article {
+  grid-row: 1;
+  grid-column: 3/11;
+  margin: 20px;
+}
+main #react-article .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #edf6f9;
+  padding: 20px;
+  border-radius: 20px;
+}
+main #react-article .card figure {
+  overflow: hidden;
+}
+main #react-article .card figure img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+main #react-article .card figure img:hover, main #react-article .card figure img:focus {
+  cursor: pointer;
+}
+main #react-article .card p {
+  align-self: flex-start;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  font-weight: 400;
+  color: #000000;
+  margin-top: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
 
 .open-menu {
   font-size: 2em;

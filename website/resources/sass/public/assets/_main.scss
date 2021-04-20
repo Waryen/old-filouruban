@@ -354,4 +354,46 @@ main {
             }
         }
     }
+
+    // Contenu de la page d'un article
+    #react-article {
+        grid-row: 1;
+        grid-column: 3 / 11;
+        margin: 20px;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: $silver;
+            padding: 20px;
+            border-radius: 20px;
+
+            figure {
+                overflow: hidden;
+
+                img {
+                    max-width: 300px;
+                    height: auto;
+                    border-radius: 10px;
+
+                    &:hover, &:focus {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            p {
+                align-self: flex-start;
+                font-family: $roboto;
+                font-size: 1.1em;
+                font-weight: 400;
+                color: $black;
+                margin-top: 20px;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+        }
+    }
 }
