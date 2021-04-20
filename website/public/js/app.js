@@ -2130,6 +2130,7 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       categories: []
     };
+    _this.saveId = _this.saveId.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupère la liste des catégories
 
@@ -2146,6 +2147,18 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
+
+      if (sessionStorage.getItem('catId')) {
+        sessionStorage.removeItem('catId');
+      }
+    }
+  }, {
+    key: "saveId",
+    value: function saveId(value) {
+      return function () {
+        var id = value;
+        sessionStorage.setItem('catId', id);
+      };
     }
   }, {
     key: "render",
@@ -2164,6 +2177,7 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
             href: "articles/".concat(el.id),
             className: "cat-img",
+            onClick: _this3.saveId(el.id),
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
               src: "".concat(_this3.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
               alt: "Image de la cat\xE9gorie: ".concat(el.name)
@@ -2171,6 +2185,7 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
             href: "articles/".concat(el.id),
             className: "link-to-art",
+            onClick: _this3.saveId(el.id),
             children: "Voir les articles"
           })]
         }, el.id));
@@ -2247,7 +2262,8 @@ var Category = /*#__PURE__*/function (_React$Component) {
       catId: undefined,
       articles: [],
       categoryName: '',
-      categoryDesc: ''
+      categoryDesc: '',
+      url: window.location.href
     };
     return _this;
   } // Récupère l'Id de la catégorie et la liste des articles
@@ -2258,9 +2274,9 @@ var Category = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var url = window.location.pathname.split('/');
+      var id = JSON.parse(sessionStorage.getItem('catId'));
       this.setState({
-        catId: url[2]
+        catId: id
       });
       axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
         if (response.status == 200) {
@@ -2269,7 +2285,7 @@ var Category = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/category/").concat(url[2], "?api_token=").concat(this.props.api)).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
         return _this2.setState({
           categoryName: response.data.name,
           categoryDesc: response.data.description
@@ -2283,6 +2299,7 @@ var Category = /*#__PURE__*/function (_React$Component) {
         catId: undefined,
         articles: []
       });
+      sessionStorage.removeItem('catId');
     }
   }, {
     key: "render",
@@ -2292,25 +2309,21 @@ var Category = /*#__PURE__*/function (_React$Component) {
       // Rendu de la liste des articles de la catégorie spécifique
       var articles = this.state.articles;
       var catId = this.state.catId;
-      var catName = this.state.categoryName;
-      var catDesc = this.state.categoryDesc;
       var articlesList = [];
       articles.forEach(function (el) {
         if (el.categories_id == catId) {
           articlesList.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
               children: el.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-              children: el.description
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-              href: "#",
+              href: "".concat(_this3.state.url, "/").concat(el.id),
               className: "art-img",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                 src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
                 alt: "Image de l'article ".concat(el.name)
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-              href: "#",
+              href: "".concat(_this3.state.url, "/").concat(el.id),
               children: "Voir l'article"
             })]
           }, el.id));

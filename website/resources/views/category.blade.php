@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-<h1 class="main-title">Liste des articles de la catégoire: {{$category->name}}</h1>
-<p class="el-desc">{{$category->description}}</p>
-<div id="react-category"></div>
+    <h1 class="main-title">Liste des articles de la catégoire: {{$category->name}}</h1>
+    <p class="main-desc">{{$category->description}}</p>
+    <div id="react-category"></div>
 @endsection

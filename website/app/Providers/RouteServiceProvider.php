@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
+use App\Models\Article;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::model('category', Category::class);
+        Route::model('article', Article::class);
         
         $this->configureRateLimiting();
 

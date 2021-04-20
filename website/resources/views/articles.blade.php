@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-<title>Articles</title>
+<title>Filouruban - Liste des catégories</title>
 @endsection
 
 @section('body')

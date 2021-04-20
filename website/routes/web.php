@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ImageController;
 use App\Models\Category;
+use App\Models\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,10 @@ Route::get('articles', function() {
 Route::get('articles/{category}', function(Category $category) {
     return view('category', ['category' => $category]);
 })->name('category');
+
+Route::get('articles/{category}/{article}', function(Category $category, Article $article) {
+    return view('article-one', ['article' => $article]);
+})->name('article');
 
 Route::get('about', function() {
     return view('about');

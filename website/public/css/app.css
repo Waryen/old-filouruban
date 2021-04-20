@@ -407,7 +407,7 @@ main .main-title {
     font-size: 1.5em;
   }
 }
-main .el-desc {
+main .main-desc {
   grid-column: 3/11;
   grid-row: 2;
   font-family: "Roboto", sans-serif;
@@ -762,5 +762,11 @@ main #react-category li a:last-child:hover, main #react-category li a:last-child
 }
 
 #wrapper {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }

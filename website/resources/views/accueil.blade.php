@@ -5,6 +5,5 @@
 @endsection
 
 @section('body')
-    <h1>Accueil</h1>
-    <div id="react-article-list"></div>
+    <h1 class="main-title">Accueil</h1>
 @endsection
