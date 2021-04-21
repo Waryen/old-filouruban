@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Commentary from './commentary'
 
 class Article extends React.Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class Article extends React.Component {
                     <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} />
                 </figure>
                 <p>{desc}</p>
+                <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
             </div>
         )
     }
