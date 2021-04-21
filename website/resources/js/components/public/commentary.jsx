@@ -91,8 +91,8 @@ class Commentary extends React.Component {
                 renderList.push(
                     <li key={el.id}>
                         <h3>{el.firstname} {el.lastname}</h3>
-                        <p>{el.content}</p>
-                        <p>Envoyé le: {el.date}</p>
+                        <p className="com-content">{el.content}</p>
+                        <p className="com-date">Envoyé le: {el.date}</p>
                     </li>
                 )
             })
@@ -111,21 +111,21 @@ class Commentary extends React.Component {
                 <div className="com-create">
                     <h2>Donner votre avis</h2>
                     <form onSubmit={this.handleSubmit}>
-                        <div>
+                        <div className="com-firstname">
                             <label htmlFor="com-firstname">Votre prénom: </label>
                             <input type="text" name="firstname" id="com-firstname" value={this.state.firstname} onChange={this.handleChange} required />
                         </div>
-                        <div>
+                        <div className="com-lastname">
                             <label htmlFor="com-lastname">Votre nom: </label>
                             <input type="text" name="lastname" id="com-lastname" value={this.state.lastname} onChange={this.handleChange} required />
                         </div>
-                        <div>
+                        <div className="com-content">
                             <label htmlFor="com-content">Votre commentaire: </label>
-                            <input type="text" name="content" maxLength="300" id="com-content" value={this.state.content} onChange={this.handleChange} required />
+                            <textarea type="text" name="content" maxLength="300" id="com-content" value={this.state.content} onChange={this.handleChange} required />
                         </div>
-                        <div>
-                            <button onClick={this.hanldeCancel}>Annuler</button>
-                            <button type="submit">Envoyer</button>
+                        <div className="com-btn">
+                            <button id="btn-cancel" onClick={this.hanldeCancel}>Annuler</button>
+                            <button id="btn-submit" type="submit">Envoyer</button>
                         </div>
                     </form>
                 </div>

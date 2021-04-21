@@ -206,10 +206,14 @@ main {
         }
     }
 
-    // Contenu de la page Articles
+    // Contenu de la page des catégories
     #react-categories{
         grid-row: 2;
         grid-column: 2 / 12;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 13;
+        }
 
         ul {
             display: flex;
@@ -257,8 +261,12 @@ main {
 
                     img {
                         transition: transform .15s;
-                        max-width: 200px;
+                        max-width: 300px;
                         height: auto;
+
+                        @media screen and ($responsive) {
+                            max-width: 250px;
+                        }
 
                         &:hover {
                             transform: scale(1.1);
@@ -284,11 +292,15 @@ main {
         }
     }
 
-    // Contenu de la page Category
+    // Contenu de la page des articles
     #react-category {
         grid-column: 2 / 12;
         grid-row: 3;
         margin: 20px;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 13;
+        }
 
         ul {
             display: flex;
@@ -328,7 +340,7 @@ main {
                 border-radius: 10px;
 
                     img {
-                    max-width: 200px;
+                    max-width: 250px;
                     height: auto;
                     transition: all .15s;
     
@@ -358,15 +370,19 @@ main {
     // Contenu de la page d'un article
     #react-article {
         grid-row: 1;
-        grid-column: 3 / 11;
+        grid-column: 2 / 12;
         margin: 20px;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 13;
+        }
 
         .card {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: $silver;
+            background: $light-peach;
             padding: 20px;
             border-radius: 20px;
 
@@ -378,13 +394,17 @@ main {
                     height: auto;
                     border-radius: 10px;
 
+                    @media screen and ($responsive) {
+                        max-width: 250px;
+                    }
+
                     &:hover, &:focus {
                         cursor: pointer;
                     }
                 }
             }
 
-            p {
+            .art-desc {
                 align-self: flex-start;
                 font-family: $roboto;
                 font-size: 1.1em;
@@ -393,6 +413,187 @@ main {
                 margin-top: 20px;
                 margin-left: 10%;
                 margin-right: 10%;
+            }
+        }
+
+        .com-card {
+            padding: 10px;
+            margin-top: 20px;
+            background: $silver;
+            border-radius: 10px;
+            width: 80%;
+
+            @media screen and ($responsive) {
+                width: 100%;
+            }
+
+            h2 {
+                font-family: $lato;
+                font-size: 1.4em;
+                font-weight: 400;
+                color: $peach;
+                text-align: center;
+            }
+
+            .com-list {
+    
+                li {
+                    background: $white;
+                    padding: 10px;
+                    margin: 10px;
+                    border-radius: 5px;
+    
+                    h3 {
+                        font-family: $lato;
+                        font-size: 1.1em;
+                        font-weight: 700;
+                        color: $black;
+                        margin-bottom: 5px;
+                    }
+    
+                    .com-content {
+                        font-family: $roboto;
+                        font-size: 0.9em;
+                        color: $black;
+                        margin-bottom: 10px;
+                    }
+    
+                    .com-date {
+                        font-family: $roboto;
+                        font-size: 0.8em;
+                        color: $black;
+                    }
+                }
+            }
+
+            .com-create {
+                form {
+                    display: grid;
+                    grid-template-columns: repeat(12, auto);
+                    grid-template-rows: auto;
+                    row-gap: 10px;
+
+                    label {
+                        font-family: $lato;
+                        font-size: 1.1em;
+                        color: $teal;
+                    }
+
+                    .com-firstname {
+                        grid-column: 1 / 7;
+                        grid-row: 1;
+                        justify-self: center;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        @media screen and ($responsive) {
+                            grid-column: 1 / 13;
+                        }
+
+                        #com-firstname {
+                            padding: 5px;
+                            font-family: $roboto;
+                            font-size: 1em;
+                            color: $black;
+                            border: 1px solid $teal;
+                            border-radius: 5px;
+                            width: 200px;
+                        }
+                    }
+
+                    .com-lastname {
+                        grid-column: 7 / 13;
+                        grid-row: 1;
+                        justify-self: center;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        @media screen and ($responsive) {
+                            grid-column: 1 / 13;
+                            grid-row: 2;
+                        }
+
+                        #com-lastname {
+                            padding: 5px;
+                            font-family: $roboto;
+                            font-size: 1em;
+                            color: $black;
+                            border: 1px solid $teal;
+                            border-radius: 5px;
+                            width: 200px;
+                        }
+                    }
+
+                    .com-content {
+                        grid-column: 1 / 13;
+                        grid-row: 2;
+                        justify-self: center;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+
+                        @media screen and ($responsive) {
+                            grid-row: 3;
+                        }
+
+                        #com-content {
+                            resize: none;
+                            width: 500px;
+                            height: 100px;
+                            padding: 5px;
+                            font-family: $roboto;
+                            font-size: 1em;
+                            color: $black;
+                            border: 1px solid $teal;
+                            border-radius: 10px;
+
+                            @media screen and ($responsive) {
+                                width: 270px;
+                                height: 50px;
+                            }
+                        }
+                    }
+
+                    .com-btn {
+                        grid-column: 1 / 13;
+                        grid-row: 3;
+                        justify-self: center;
+
+                        @media screen and ($responsive) {
+                            grid-row: 4;
+                        }
+
+                        button {
+                            font-family: $lato;
+                            font-size: 1.2em;
+                            color: $teal;
+                            padding: 10px 15px;
+                            background: $light-teal;
+                            border: none;
+                            border-radius: 5px;
+                            transition: all .15s;
+
+                            &:hover, &:focus {
+                                background: $teal;
+                                color: $silver;
+                                cursor: pointer;
+                            }
+                        }
+
+                        #btn-cancel {
+                            margin-right: 5px;
+                        }
+
+                        #btn-submit {
+                            margin-left: 5px;
+                        }
+                    }
+                }
             }
         }
     }

@@ -34,7 +34,7 @@ class Article extends React.Component {
                 <figure>
                     <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} />
                 </figure>
-                <p>{desc}</p>
+                <p className="art-desc">{desc}</p>
                 <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
             </div>
         )

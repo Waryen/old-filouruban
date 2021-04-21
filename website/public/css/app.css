@@ -585,6 +585,11 @@ main #react-categories {
   grid-row: 2;
   grid-column: 2/12;
 }
+@media screen and (max-width: 768px) {
+  main #react-categories {
+    grid-column: 1/13;
+  }
+}
 main #react-categories ul {
   display: flex;
   flex-wrap: wrap;
@@ -630,8 +635,13 @@ main #react-categories ul li .cat-img {
 }
 main #react-categories ul li .cat-img img {
   transition: transform 0.15s;
-  max-width: 200px;
+  max-width: 300px;
   height: auto;
+}
+@media screen and (max-width: 768px) {
+  main #react-categories ul li .cat-img img {
+    max-width: 250px;
+  }
 }
 main #react-categories ul li .cat-img img:hover {
   transform: scale(1.1);
@@ -653,6 +663,11 @@ main #react-category {
   grid-column: 2/12;
   grid-row: 3;
   margin: 20px;
+}
+@media screen and (max-width: 768px) {
+  main #react-category {
+    grid-column: 1/13;
+  }
 }
 main #react-category ul {
   display: flex;
@@ -689,7 +704,7 @@ main #react-category li .art-img {
   border-radius: 10px;
 }
 main #react-category li .art-img img {
-  max-width: 200px;
+  max-width: 250px;
   height: auto;
   transition: all 0.15s;
 }
@@ -711,15 +726,20 @@ main #react-category li a:last-child:hover, main #react-category li a:last-child
 }
 main #react-article {
   grid-row: 1;
-  grid-column: 3/11;
+  grid-column: 2/12;
   margin: 20px;
+}
+@media screen and (max-width: 768px) {
+  main #react-article {
+    grid-column: 1/13;
+  }
 }
 main #react-article .card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #edf6f9;
+  background: #ffddd2;
   padding: 20px;
   border-radius: 20px;
 }
@@ -731,10 +751,15 @@ main #react-article .card figure img {
   height: auto;
   border-radius: 10px;
 }
+@media screen and (max-width: 768px) {
+  main #react-article .card figure img {
+    max-width: 250px;
+  }
+}
 main #react-article .card figure img:hover, main #react-article .card figure img:focus {
   cursor: pointer;
 }
-main #react-article .card p {
+main #react-article .card .art-desc {
   align-self: flex-start;
   font-family: "Roboto", sans-serif;
   font-size: 1.1em;
@@ -743,6 +768,169 @@ main #react-article .card p {
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
+}
+main #react-article .com-card {
+  padding: 10px;
+  margin-top: 20px;
+  background: #edf6f9;
+  border-radius: 10px;
+  width: 80%;
+}
+@media screen and (max-width: 768px) {
+  main #react-article .com-card {
+    width: 100%;
+  }
+}
+main #react-article .com-card h2 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.4em;
+  font-weight: 400;
+  color: #e29578;
+  text-align: center;
+}
+main #react-article .com-card .com-list li {
+  background: #ffffff;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+main #react-article .com-card .com-list li h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 5px;
+}
+main #react-article .com-card .com-list li .com-content {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  margin-bottom: 10px;
+}
+main #react-article .com-card .com-list li .com-date {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8em;
+  color: #000000;
+}
+main #react-article .com-card .com-create form {
+  display: grid;
+  grid-template-columns: repeat(12, auto);
+  grid-template-rows: auto;
+  row-gap: 10px;
+}
+main #react-article .com-card .com-create form label {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  color: #006d77;
+}
+main #react-article .com-card .com-create form .com-firstname {
+  grid-column: 1/7;
+  grid-row: 1;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  main #react-article .com-card .com-create form .com-firstname {
+    grid-column: 1/13;
+  }
+}
+main #react-article .com-card .com-create form .com-firstname #com-firstname {
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  border: 1px solid #006d77;
+  border-radius: 5px;
+  width: 200px;
+}
+main #react-article .com-card .com-create form .com-lastname {
+  grid-column: 7/13;
+  grid-row: 1;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  main #react-article .com-card .com-create form .com-lastname {
+    grid-column: 1/13;
+    grid-row: 2;
+  }
+}
+main #react-article .com-card .com-create form .com-lastname #com-lastname {
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  border: 1px solid #006d77;
+  border-radius: 5px;
+  width: 200px;
+}
+main #react-article .com-card .com-create form .com-content {
+  grid-column: 1/13;
+  grid-row: 2;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 768px) {
+  main #react-article .com-card .com-create form .com-content {
+    grid-row: 3;
+  }
+}
+main #react-article .com-card .com-create form .com-content #com-content {
+  resize: none;
+  width: 500px;
+  height: 100px;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  border: 1px solid #006d77;
+  border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+  main #react-article .com-card .com-create form .com-content #com-content {
+    width: 270px;
+    height: 50px;
+  }
+}
+main #react-article .com-card .com-create form .com-btn {
+  grid-column: 1/13;
+  grid-row: 3;
+  justify-self: center;
+}
+@media screen and (max-width: 768px) {
+  main #react-article .com-card .com-create form .com-btn {
+    grid-row: 4;
+  }
+}
+main #react-article .com-card .com-create form .com-btn button {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #006d77;
+  padding: 10px 15px;
+  background: #83c5be;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.15s;
+}
+main #react-article .com-card .com-create form .com-btn button:hover, main #react-article .com-card .com-create form .com-btn button:focus {
+  background: #006d77;
+  color: #edf6f9;
+  cursor: pointer;
+}
+main #react-article .com-card .com-create form .com-btn #btn-cancel {
+  margin-right: 5px;
+}
+main #react-article .com-card .com-create form .com-btn #btn-submit {
+  margin-left: 5px;
 }
 
 .open-menu {

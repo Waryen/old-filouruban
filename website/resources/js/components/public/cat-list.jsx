@@ -21,9 +21,9 @@ class CategoriesList extends React.Component {
                 }
             })
 
-        if(sessionStorage.getItem('catId')) {
+        /*if(sessionStorage.getItem('catId')) {
             sessionStorage.removeItem('catId')
-        }
+        }*/
     }
 
     saveId (value) {

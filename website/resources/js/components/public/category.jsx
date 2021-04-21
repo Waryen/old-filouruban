@@ -35,9 +35,9 @@ class Category extends React.Component {
                 categoryDesc: response.data.description,
             }))
 
-        if(sessionStorage.getItem('artId')) {
+        /*if(sessionStorage.getItem('artId')) {
             sessionStorage.removeItem('artId')
-        }
+        }*/
     }
 
     componentWillUnmount() {
@@ -46,7 +46,7 @@ class Category extends React.Component {
             articles: [],
         })
 
-        sessionStorage.removeItem('catId')
+        /*sessionStorage.removeItem('catId')*/
     }
 
     saveId(value) {

@@ -4,7 +4,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // Importation des composants
-import ArticleList from './components/public/article-list'
 import Article from './components/public/article'
 import Newsletter from './components/public/newsletter'
 import Search from './components/public/search'
@@ -27,13 +26,6 @@ if(document.querySelector('#auth')) {
 
 
 // Rendu des composants
-
-if(document.getElementById('react-article-list')) {
-    ReactDOM.render(
-        <ArticleList url={url} api={api}></ArticleList>,
-        document.getElementById('react-article-list')
-    )
-}
 
 if(document.getElementById('react-newsletter')) {
     ReactDOM.render(
