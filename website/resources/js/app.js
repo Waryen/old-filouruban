@@ -10,6 +10,7 @@ import Search from './components/public/search'
 import Contact from './components/public/contact'
 import CategoriesList from './components/public/cat-list'
 import Category from './components/public/category'
+import Carousel from './components/public/carousel'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -66,5 +67,12 @@ if(document.getElementById('react-article')) {
     ReactDOM.render(
         <Article url={url} api={api} />,
         document.getElementById('react-article')
+    )
+}
+
+if(document.getElementById('react-carousel')) {
+    ReactDOM.render(
+        <Carousel url={url} api={api} />,
+        document.getElementById('react-carousel')
     )
 }
