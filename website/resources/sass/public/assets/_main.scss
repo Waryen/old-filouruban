@@ -31,6 +31,59 @@ main {
         color: $black;
     }
 
+    // Contenu de la page d'accueil
+    #react-carousel {
+        grid-column: 2 / 12;
+        grid-row: 1;
+
+
+        .carousel-container {
+            display: flex;
+        }
+    }
+
+    .home-about {
+        grid-column: 3 / 11;
+        grid-row: 2;
+        background: $silver;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and ($responsive) {
+            grid-column: 2 / 12;
+        }
+
+        p {
+            font-family: $roboto;
+            font-size: 1em;
+            color: $black;
+        }
+
+        .link-to-about {
+            margin-top: 20px;
+
+            a {
+                text-decoration: none;
+                font-family: $lato;
+                font-size: 1.1em;
+                font-style: italic;
+                color: $black;
+                background: $light-peach;
+                padding: 10px;
+                border-radius: 10px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    background: $peach;
+                }
+            }
+        }
+    }
+
     // Contenu de la page About
     .about-content {
         grid-column: 3 / 11;

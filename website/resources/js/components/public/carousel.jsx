@@ -62,7 +62,6 @@ class Carousel extends React.Component {
 
     render() {
         const articles = this.state.articles
-        console.log(articles)
         let cards = []
         articles.forEach(el => {
             cards.push(
@@ -70,6 +69,7 @@ class Carousel extends React.Component {
                     <a href={`articles/${el.categories_id}/${el.id}`} onClick={this.setId(el.categories_id, el.id)}>
                         <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} />
                     </a>
+                    <h3>{el.name}</h3>
                 </div>
             )
         })

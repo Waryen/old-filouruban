@@ -2127,6 +2127,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Carousel = /*#__PURE__*/function (_React$Component) {
   _inherits(Carousel, _React$Component);
 
@@ -2210,19 +2211,20 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var articles = this.state.articles;
-      console.log(articles);
       var cards = [];
       articles.forEach(function (el) {
-        cards.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        cards.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "carousel-card",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
             href: "articles/".concat(el.categories_id, "/").concat(el.id),
             onClick: _this3.setId(el.categories_id, el.id),
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
               src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
               alt: "Photo de l'article: ".concat(el.name)
             })
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+            children: el.name
+          })]
         }, el.id));
       });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {

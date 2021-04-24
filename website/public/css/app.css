@@ -415,6 +415,51 @@ main .main-desc {
   font-weight: 400;
   color: #000000;
 }
+main #react-carousel {
+  grid-column: 2/12;
+  grid-row: 1;
+}
+main #react-carousel .carousel-container {
+  display: flex;
+}
+main .home-about {
+  grid-column: 3/11;
+  grid-row: 2;
+  background: #edf6f9;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  main .home-about {
+    grid-column: 2/12;
+  }
+}
+main .home-about p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+}
+main .home-about .link-to-about {
+  margin-top: 20px;
+}
+main .home-about .link-to-about a {
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  font-style: italic;
+  color: #000000;
+  background: #ffddd2;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+main .home-about .link-to-about a:hover, main .home-about .link-to-about a:focus {
+  background: #e29578;
+}
 main .about-content {
   grid-column: 3/11;
   grid-row: 2;

@@ -7,7 +7,7 @@
     </nav>
     <div class="footer-newsletter" id="react-newsletter"></div>
     <div class="copyrights">
-        <p><strong>Copyrights © 2021 | filouruban.be</strong></p>
+        <p>Copyrights © 2021 | filouruban.be</p>
     </div>
     <div class="social-media">
         <p>Suivez-moi</p>
