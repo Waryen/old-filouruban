@@ -543,7 +543,7 @@ main {
 
                         #com-content {
                             resize: none;
-                            width: 500px;
+                            width: 400px;
                             height: 100px;
                             padding: 5px;
                             font-family: $roboto;
@@ -596,5 +596,12 @@ main {
                 }
             }
         }
+    }
+
+    // Contenu de la page des mentions légales
+    #legals {
+        grid-column: 2 / 12;
+        grid-row: 1;
+        margin: 20px auto;
     }
 }

@@ -886,7 +886,7 @@ main #react-article .com-card .com-create form .com-content {
 }
 main #react-article .com-card .com-create form .com-content #com-content {
   resize: none;
-  width: 500px;
+  width: 400px;
   height: 100px;
   padding: 5px;
   font-family: "Roboto", sans-serif;
@@ -931,6 +931,11 @@ main #react-article .com-card .com-create form .com-btn #btn-cancel {
 }
 main #react-article .com-card .com-create form .com-btn #btn-submit {
   margin-left: 5px;
+}
+main #legals {
+  grid-column: 2/12;
+  grid-row: 1;
+  margin: 20px auto;
 }
 
 .open-menu {

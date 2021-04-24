@@ -43,6 +43,10 @@ Route::get('contact', function() {
     return view('contact');
 })->name('contact');
 
+Route::get('legal', function() {
+    return view('legal');
+})->name('legal');
+
 // Images
 Route::post('uploadArticleImage', [ImageController::class, 'uploadArticle']);
 Route::post('uploadCategoryImage', [ImageController::class, 'uploadCategory']);
