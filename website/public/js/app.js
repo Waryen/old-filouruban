@@ -2140,12 +2140,15 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      articles: []
+      articles: [],
+      current: 0
     };
     _this.getRandomInt = _this.getRandomInt.bind(_assertThisInitialized(_this));
     _this.getArticles = _this.getArticles.bind(_assertThisInitialized(_this));
     _this.randomArticles = _this.randomArticles.bind(_assertThisInitialized(_this));
     _this.setId = _this.setId.bind(_assertThisInitialized(_this));
+    _this.prevCard = _this.prevCard.bind(_assertThisInitialized(_this));
+    _this.nextCard = _this.nextCard.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2206,32 +2209,108 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "prevCard",
+    value: function prevCard() {
+      var prev = this.state.current;
+
+      if (prev != 0) {
+        prev--;
+        this.setState({
+          current: prev
+        });
+      } else {
+        this.setState({
+          current: 2
+        });
+      }
+    }
+  }, {
+    key: "nextCard",
+    value: function nextCard() {
+      var next = this.state.current;
+
+      if (next != 2) {
+        next++;
+        this.setState({
+          current: next
+        });
+      } else {
+        this.setState({
+          current: 0
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
       var articles = this.state.articles;
-      var cards = [];
-      articles.forEach(function (el) {
-        cards.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "carousel-card",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-            href: "articles/".concat(el.categories_id, "/").concat(el.id),
-            onClick: _this3.setId(el.categories_id, el.id),
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-              alt: "Photo de l'article: ".concat(el.name)
+      var current = this.state.current;
+      var card;
+      articles.map(function (el) {
+        if (current == 0) {
+          card = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "carousel-card",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+              href: "articles/".concat(el.categories_id, "/").concat(el.id),
+              onClick: _this3.setId(el.categories_id, el.id),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+                alt: "Photo de l'article: ".concat(el.name)
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                children: el.name
+              })]
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-            children: el.name
-          })]
-        }, el.id));
+          });
+        } else if (current == 1) {
+          card = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "carousel-card",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+              href: "articles/".concat(el.categories_id, "/").concat(el.id),
+              onClick: _this3.setId(el.categories_id, el.id),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+                alt: "Photo de l'article: ".concat(el.name)
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                children: el.name
+              })]
+            })
+          });
+        } else if (current == 2) {
+          card = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "carousel-card",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+              href: "articles/".concat(el.categories_id, "/").concat(el.id),
+              onClick: _this3.setId(el.categories_id, el.id),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+                alt: "Photo de l'article: ".concat(el.name)
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+                children: el.name
+              })]
+            })
+          });
+        }
       });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "carousel-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "carousel-container",
-          children: cards
+          children: [card, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "carousel-arrows",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                _this3.prevCard();
+              },
+              children: "Pr\xE9c\xE9dent"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: function onClick() {
+                _this3.nextCard();
+              },
+              children: "Suivant"
+            })]
+          })]
         })
       });
     }

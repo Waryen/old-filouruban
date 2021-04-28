@@ -6,12 +6,15 @@ class Carousel extends React.Component {
         super(props)
         this.state = {
             articles: [],
+            current: 0,
         }
 
         this.getRandomInt = this.getRandomInt.bind(this)
         this.getArticles = this.getArticles.bind(this)
         this.randomArticles = this.randomArticles.bind(this)
         this.setId = this.setId.bind(this)
+        this.prevCard = this.prevCard.bind(this)
+        this.nextCard = this.nextCard.bind(this)
     }
 
     componentDidMount() {
@@ -60,24 +63,68 @@ class Carousel extends React.Component {
         }
     }
 
+    prevCard() {
+        let prev = this.state.current
+
+        if(prev != 0) {
+            prev--
+            this.setState({ current: prev })
+        } else {
+            this.setState({ current: 2 })
+        }
+    }
+
+    nextCard() {
+        let next = this.state.current
+
+        if(next != 2) {
+            next++
+            this.setState({ current: next })
+        } else {
+            this.setState({ current: 0 })
+        }
+    }
+
     render() {
         const articles = this.state.articles
-        let cards = []
-        articles.forEach(el => {
-            cards.push(
-                <div className="carousel-card" key={el.id}>
-                    <a href={`articles/${el.categories_id}/${el.id}`} onClick={this.setId(el.categories_id, el.id)}>
-                        <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} />
-                    </a>
-                    <h3>{el.name}</h3>
-                </div>
-            )
+        const current = this.state.current
+        let card
+        articles.map(el => {
+            if(current == 0) {
+                card =
+                    <div className="carousel-card">
+                        <a href={`articles/${el.categories_id}/${el.id}`} onClick={this.setId(el.categories_id, el.id)}>
+                            <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} />
+                            <h3>{el.name}</h3>
+                        </a>
+                    </div>
+            } else if(current == 1) {
+                card =
+                    <div className="carousel-card">
+                        <a href={`articles/${el.categories_id}/${el.id}`} onClick={this.setId(el.categories_id, el.id)}>
+                            <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} />
+                            <h3>{el.name}</h3>
+                        </a>
+                    </div>
+            } else if(current == 2) {
+                card =
+                    <div className="carousel-card">
+                        <a href={`articles/${el.categories_id}/${el.id}`} onClick={this.setId(el.categories_id, el.id)}>
+                            <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} />
+                            <h3>{el.name}</h3>
+                        </a>
+                    </div>
+            }
         })
 
         return(
             <div className="carousel-wrapper">
                 <div className="carousel-container">
-                    {cards}
+                    {card}
+                    <div className="carousel-arrows">
+                        <button onClick={ () => { this.prevCard() } }>Précédent</button>
+                        <button onClick={ () => { this.nextCard() } }>Suivant</button>
+                    </div>
                 </div>
             </div>
         )

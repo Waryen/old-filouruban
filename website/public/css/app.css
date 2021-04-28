@@ -418,6 +418,7 @@ main .main-desc {
 main #react-carousel {
   grid-column: 2/12;
   grid-row: 1;
+  margin: 20px auto;
 }
 main #react-carousel .carousel-container {
   display: flex;

@@ -1,8 +1,8 @@
 <footer class="footer">
     <nav class="footer-nav">
         <ul>
-            <li><a href="about">A propos de Fil ou ruban</a></li>
-            <li><a href="legal">Mentions légales</a></li>
+            <li><a href="/about">A propos de Fil ou ruban</a></li>
+            <li><a href="/legal">Mentions légales</a></li>
         </ul>
     </nav>
     <div class="footer-newsletter" id="react-newsletter"></div>
