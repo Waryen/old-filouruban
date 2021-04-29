@@ -44,7 +44,10 @@ class Contact extends React.Component {
             email: this.state.email,
             content: this.state.content,
         }
-        axios.post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
+        axios
+            .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
+            .then(response => console.log(response))
+
         this.handleCancel(e)
     }
 

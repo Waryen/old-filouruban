@@ -5,6 +5,6 @@
 @endsection
 
 @section('body')
-    <h2 class="main-title">Contacter Fil ou ruban</h2>
+    <h2 class="main-title">Contacter Filouruban</h2>
     <div id="react-contact"></div>
 @endsection

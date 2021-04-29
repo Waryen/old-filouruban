@@ -6,6 +6,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ImageController;
 use App\Models\Category;
 use App\Models\Article;
+use App\Mail\ContactMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ use App\Models\Article;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('email', function() {
+    return new ContactMail();
+});
 
 // Public
 Route::get('/', function() {
