@@ -2955,9 +2955,7 @@ var Contact = /*#__PURE__*/function (_React$Component) {
         email: this.state.email,
         content: this.state.content
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api), data).then(function (response) {
-        return console.log(response);
-      });
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api), data);
       this.handleCancel(e);
     }
   }, {

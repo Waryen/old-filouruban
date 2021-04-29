@@ -46,7 +46,6 @@ class Contact extends React.Component {
         }
         axios
             .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
-            .then(response => console.log(response))
 
         this.handleCancel(e)
     }
