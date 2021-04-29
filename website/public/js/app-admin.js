@@ -2873,12 +2873,15 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
           'content-type': 'multipart/form-data'
         }
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api), {
+      var data = {
         name: this.state.name,
         description: this.state.description,
         categories_id: this.state.category,
         admins_id: this.state.admin,
         image_id: this.state.imageName
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api), data).then(function (response) {
+        return console.log(response);
       });
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
       this.handleCancel(e);

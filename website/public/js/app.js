@@ -2043,6 +2043,17 @@ var Article = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       var artId = JSON.parse(sessionStorage.getItem('artId'));
+
+      if (artId == undefined) {
+        var tmp = window.location.href;
+        var array = tmp.split('/');
+        var max = array.length;
+        artId = array[max - 1];
+        var catId = array[max - 2];
+        sessionStorage.setItem('artId', artId);
+        sessionStorage.setItem('catId', catId);
+      }
+
       axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article/").concat(artId, "?api_token=").concat(this.props.api)).then(function (response) {
         if (response.status == 200) {
           _this2.setState({

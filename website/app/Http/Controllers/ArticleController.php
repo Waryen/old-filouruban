@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SubscribersMail;
 
 class ArticleController extends Controller
 {
@@ -25,7 +28,22 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        Article::create($request->all());
+        $input = $request->all();
+        $id = Article::create($input)->id;
+
+        $subs = Subscriber::all();
+
+        $data = [
+            'name' => $request->name,
+            'imageSlug' => $request->image_id,
+            'categoryId' => $request->categories_id,
+            'articleId' => $id
+        ];
+
+        foreach ($subs as $val) {
+            Mail::to($val->email)->send(new SubscribersMail($data));
+            sleep(1); // Envoi 1 mail par seconde sinon erreur pour la phase de dev
+        }
     }
 
     /**

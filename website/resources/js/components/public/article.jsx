@@ -12,7 +12,17 @@ class Article extends React.Component {
 
     // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
     componentDidMount() {
-        const artId = JSON.parse(sessionStorage.getItem('artId'))
+        let artId = JSON.parse(sessionStorage.getItem('artId'))
+        
+        if(artId == undefined) {
+            let tmp = window.location.href
+            let array = tmp.split('/')
+            let max = array.length
+            artId = array[max - 1]
+            let catId = array[max - 2]
+            sessionStorage.setItem('artId', artId)
+            sessionStorage.setItem('catId', catId)
+        }
 
         axios
             .get(`${this.props.url}/api/article/${artId}?api_token=${this.props.api}`)

@@ -100,18 +100,20 @@ class ArticleCreate extends React.Component {
         const fd = new FormData()
         fd.append('image', this.state.image)
         const config = { headers: { 'content-type': 'multipart/form-data' } }
+        const data = {
+            name: this.state.name,
+            description: this.state.description,
+            categories_id: this.state.category,
+            admins_id: this.state.admin,
+            image_id: this.state.imageName,
+        }
 
-        axios.post(`${this.props.url}/api/article?api_token=${this.props.api}`,
-            {
-                name: this.state.name,
-                description: this.state.description,
-                categories_id: this.state.category,
-                admins_id: this.state.admin,
-                image_id: this.state.imageName,
-            }
-        )
+        axios
+            .post(`${this.props.url}/api/article?api_token=${this.props.api}`, data)
+            .then(response => console.log(response))
 
-        axios.post('uploadArticleImage', fd, config)
+        axios
+            .post('uploadArticleImage', fd, config)
 
         this.handleCancel(e)
     }
