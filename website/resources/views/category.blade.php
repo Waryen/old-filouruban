@@ -1,11 +1,11 @@
 @extends('layouts.public')
 
 @section('title')
-<title>Filouruban - Articles de la catégorie: {{$category->name}}</title>
+<title>Filouruban - {{$category->name}}</title>
 @endsection
 
 @section('body')
-    <h1 class="main-title">Liste des articles de la catégoire: {{$category->name}}</h1>
+    <h1 class="main-title">{{$category->name}}</h1>
     <p class="main-desc">{{$category->description}}</p>
     <div id="react-category"></div>
 @endsection
