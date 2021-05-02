@@ -5,6 +5,10 @@
 @endsection
 
 @section('body')
-    <h1>Connexion à l'administration</h1>
-    <div id="react-login"></div>
+    <div class="login-wrapper">
+        <div class="admin-login">
+            <h1>Connexion à l'administration</h1>
+            <div id="react-login"></div>
+        </div>
+    </div>
 @endsection

@@ -1,3 +1,3 @@
 <footer class="footer">
-    <p><strong>© 2021 | filouruban.be</strong></p>
+    <p>© 2021 | filouruban.be</p>
 </footer>

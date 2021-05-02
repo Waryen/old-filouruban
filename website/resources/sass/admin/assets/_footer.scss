@@ -1,0 +1,15 @@
+.footer {
+    background: $light-teal;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-family: $lato;
+        color: $black;
+        font-size: 0.8em;
+        font-weight: 400;
+        font-style: italic;
+    }
+}

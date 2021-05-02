@@ -1,0 +1,67 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.admin-login {
+    margin-top: 20%;
+    background: $light-peach;
+    padding: 20px;
+    border-radius: 10px;
+
+    h1 {
+        font-family: $lato;
+        color: $peach;
+        font-size: 1.5em;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #react-login > div > form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        div:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        div:last-child {
+            margin-top: 20px;
+        }
+
+        label {
+            font-family: $lato;
+            color: $black;
+            font-size: 1em;
+            margin-right: 5px;
+        }
+
+        input {
+            font-family: $roboto;
+            font-size: 1em;
+            color: $black;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid $peach;
+        }
+
+        button {
+            font-family: $lato;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            background: $teal;
+            color: $silver;
+            border: none;
+            border-radius: 5px;
+            transition: all .15s;
+
+            &:hover, &:focus {
+                background: lighten($teal, 10%);
+                cursor: pointer;
+            }
+        }
+    }
+}
