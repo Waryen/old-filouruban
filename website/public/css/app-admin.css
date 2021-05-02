@@ -219,6 +219,129 @@ th {
   cursor: pointer;
 }
 
+.react-app nav {
+  background: #edf6f9;
+}
+.react-app nav ul {
+  width: 100%;
+}
+.react-app nav li {
+  padding: 20px;
+  width: 100%;
+}
+.react-app nav li:hover, .react-app nav li:focus {
+  background: #c7e3ec;
+}
+.react-app nav a {
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  color: #000000;
+  width: 100%;
+}
+
+.admin-dashboard {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: auto;
+}
+.admin-dashboard .dash-title {
+  grid-column: 1/4;
+  grid-row: 1;
+  justify-self: center;
+  align-self: center;
+  font-family: "Roboto", sans-serif;
+  color: #e29578;
+  font-size: 2em;
+}
+.admin-dashboard p {
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  font-style: italic;
+  background: #ffddd2;
+  padding: 15px;
+  border-radius: 5px;
+}
+.admin-dashboard p span {
+  color: #e29578;
+  font-style: normal;
+  font-size: 2em;
+}
+.admin-dashboard .dash-admin {
+  grid-column: 1;
+  grid-row: 2;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-admin {
+    grid-column: 1/4;
+  }
+}
+.admin-dashboard .dash-art {
+  grid-column: 2;
+  grid-row: 2;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-art {
+    grid-column: 1/4;
+    grid-row: 3;
+  }
+}
+.admin-dashboard .dash-cat {
+  grid-column: 3;
+  grid-row: 2;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-cat {
+    grid-column: 1/4;
+    grid-row: 4;
+  }
+}
+.admin-dashboard .dash-com {
+  grid-column: 1;
+  grid-row: 3;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-com {
+    grid-column: 1/4;
+    grid-row: 5;
+  }
+}
+.admin-dashboard .dash-mes {
+  grid-column: 2;
+  grid-row: 3;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-mes {
+    grid-column: 1/4;
+    grid-row: 6;
+  }
+}
+.admin-dashboard .dash-con {
+  grid-column: 3;
+  grid-row: 3;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-con {
+    grid-column: 1/4;
+    grid-row: 7;
+  }
+}
+.admin-dashboard .dash-sub {
+  grid-column: 2;
+  grid-row: 4;
+}
+@media screen and (max-width: 768px) {
+  .admin-dashboard .dash-sub {
+    grid-column: 1/4;
+    grid-row: 8;
+  }
+}
+
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -227,4 +350,31 @@ th {
 
 main {
   flex: 1;
+}
+
+.react-app {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  height: 100%;
+}
+.react-app nav {
+  grid-column: 1/4;
+  grid-row: 1;
+}
+@media screen and (max-width: 768px) {
+  .react-app nav {
+    grid-column: 1/13;
+    grid-row: 1;
+  }
+}
+.react-app div {
+  grid-column: 4/13;
+  grid-row: 1;
+}
+@media screen and (max-width: 768px) {
+  .react-app div {
+    grid-column: 1/13;
+    grid-row: 2;
+  }
 }

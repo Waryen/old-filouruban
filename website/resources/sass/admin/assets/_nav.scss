@@ -1,0 +1,24 @@
+.react-app nav {
+    background: $silver;
+
+    ul {
+        width: 100%;
+    }
+
+    li {
+        padding: 20px;
+        width: 100%;
+
+        &:hover, &:focus {
+            background: darken($silver, 10%);
+        }
+    }
+
+    a {
+        text-decoration: none;
+        font-family: $lato;
+        font-size: 1.1em;
+        color: $black;
+        width: 100%;
+    }
+}

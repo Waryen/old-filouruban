@@ -2,6 +2,8 @@
 @import 'assets/header';
 @import 'assets/footer';
 @import 'assets/login';
+@import 'assets/nav';
+@import 'assets/dashboard';
 
 
 
@@ -13,4 +15,31 @@
 
 main {
     flex: 1;
+}
+
+.react-app {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    height: 100%;
+
+    nav {
+        grid-column: 1 / 4;
+        grid-row: 1;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 13;
+            grid-row: 1;
+        }
+    }
+
+    div {
+        grid-column: 4 / 13;
+        grid-row: 1;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 13;
+            grid-row: 2;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 require('./bootstrap');
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM, { render } from 'react-dom'
 import {HashRouter as Router, Route} from 'react-router-dom'
 
 // Importation des composants

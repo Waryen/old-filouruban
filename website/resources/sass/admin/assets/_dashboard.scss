@@ -1,0 +1,104 @@
+.admin-dashboard {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: auto;
+
+    .dash-title {
+        grid-column: 1 / 4;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+        font-family: $roboto;
+        color: $peach;
+        font-size: 2em;
+    }
+
+    p {
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+        font-family: $roboto;
+        font-size: 1em;
+        color: $black;
+        font-style: italic;
+        background: $light-peach;
+        padding: 15px;
+        border-radius: 5px;
+
+        span {
+            color: $peach;
+            font-style: normal;
+            font-size: 2em;
+        }
+    }
+
+    .dash-admin {
+        grid-column: 1;
+        grid-row: 2;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+        }
+    }
+
+    .dash-art {
+        grid-column: 2;
+        grid-row: 2;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+            grid-row: 3;
+        }
+    }
+
+    .dash-cat {
+        grid-column: 3;
+        grid-row: 2;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+            grid-row: 4;
+        }
+    }
+
+    .dash-com {
+        grid-column: 1;
+        grid-row: 3;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+            grid-row: 5;
+        }
+    }
+
+    .dash-mes {
+        grid-column: 2;
+        grid-row: 3;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+            grid-row: 6;
+        }
+    }
+
+    .dash-con {
+        grid-column: 3;
+        grid-row: 3;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+            grid-row: 7;
+        }
+    }
+
+    .dash-sub {
+        grid-column: 2;
+        grid-row: 4;
+
+        @media screen and ($responsive) {
+            grid-column: 1 / 4;
+            grid-row: 8;
+        }
+    }
+}

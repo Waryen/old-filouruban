@@ -80,15 +80,15 @@ class Dashboard extends React.Component {
         }
 
         return(
-            <div>
-                <h1>Tableau de bord</h1>
-                <p>Nombre d'admins : {adminsNum}</p>
-                <p>Nombre d'articles : {articlesNum}</p>
-                <p>Nombre de catégories : {categoriesNum}</p>
-                <p>Nombre de commentaires : {commentariesNum}</p>
-                <p>Nombre de messages : {messagesNum}</p>
-                <p>Nombre de contacts : {contactsNum}</p>
-                <p>Nombre d'abonnés à la newsletter : {subscribersNum}</p>
+            <div className="admin-dashboard">
+                <h2 className="dash-title">Tableau de bord</h2>
+                <p className="dash-admin">Nombre d'admins <br/> <span>{adminsNum}</span></p>
+                <p className="dash-art">Nombre d'articles <br/> <span>{articlesNum}</span></p>
+                <p className="dash-cat">Nombre de catégories <br/> <span>{categoriesNum}</span></p>
+                <p className="dash-com">Nombre de commentaires <br/> <span>{commentariesNum}</span></p>
+                <p className="dash-mes">Nombre de messages <br/> <span>{messagesNum}</span></p>
+                <p className="dash-con">Nombre de contacts <br/> <span>{contactsNum}</span></p>
+                <p className="dash-sub">Nombre d'abonnés à la newsletter <br/> <span>{subscribersNum}</span></p>
             </div>
         )
     }
