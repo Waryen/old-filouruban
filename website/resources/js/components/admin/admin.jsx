@@ -6,7 +6,7 @@ export default function Admin(props) {
     return(
         <div className="admin-admins">
             <h2>Administrateurs</h2>
-            <AdminCreate url={props.url} api={props.api} />
+            <AdminCreate url={props.url} api={props.api} auth={props.auth} />
             <AdminList url={props.url} api={props.api} auth={props.auth} />
         </div>
     )

@@ -66,39 +66,73 @@ class AdminCreate extends React.Component {
             su: 0,
             api: this.generateRandomString(100),
         })
-        document.querySelector('#admin-create-su').checked = false
+
+        if(document.querySelector('#admin-create-su')) {
+            document.querySelector('#admin-create-su').checked = false
+        }
     }
 
     render() {
+        let form
+        let auth = JSON.parse(this.props.auth)
+        
+        if(auth.su == 0) {
+            form = <form method="post" onSubmit={this.handleSubmit}>
+                <div>
+                    <label htmlFor="firstname">Prénom: </label>
+                    <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="lastname">Nom: </label>
+                    <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="email">Adresse email: </label>
+                    <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="password">Mot de passe: </label>
+                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+                </div>
+                <input type="hidden" name="api" value={this.state.api} />
+                <input type="hidden" name="su" value="0" />
+                <div>
+                    <button type="submit">Créer</button>
+                </div>
+            </form>
+        } else if (auth.su == 1) {
+            form = <form method="post" onSubmit={this.handleSubmit}>
+                <div>
+                    <label htmlFor="firstname">Prénom: </label>
+                    <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="lastname">Nom: </label>
+                    <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="email">Adresse email: </label>
+                    <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="password">Mot de passe: </label>
+                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="admin-create-su">Super Administrateur: </label>
+                    <input type="checkbox" name="su" id="admin-create-su" value={this.state.su} onClick={this.handleCheckBox} />
+                </div>
+                <input type="hidden" name="api" value={this.state.api} />
+                <div>
+                    <button type="submit">Créer</button>
+                </div>
+            </form>
+        }
+
         return(
             <div className="admins-create">
                 <h3>Créer un administrateur</h3>
-                <form method="post" onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="firstname">Prénom: </label>
-                        <input type="text" name="firstname" value={this.state.firstname} onChange={this.handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor="lastname">Nom: </label>
-                        <input type="text" name="lastname" value={this.state.lastname} onChange={this.handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Adresse email: </label>
-                        <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Mot de passe: </label>
-                        <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-                    </div>
-                    <div>
-                        <label htmlFor="admin-create-su">Super Administrateur: </label>
-                        <input type="checkbox" name="su" id="admin-create-su" value={this.state.su} onClick={this.handleCheckBox} />
-                    </div>
-                    <input type="hidden" name="api" value={this.state.api} />
-                    <div>
-                        <button type="submit">Créer</button>
-                    </div>
-                </form>
+                {form}
             </div>
         )
     }

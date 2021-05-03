@@ -34,22 +34,43 @@ class AdminList extends React.Component {
 
         this.state.list.forEach(el => {
             if(el.id !== authId && el.su !== 1 && authSu === 1) {
-                list.push(
-                    <li key={el.id}>
-                        <p className="admin-name">{el.firstname} {el.lastname}</p>
-                        <p className="admin-email">{el.email}</p>
-                        <p className="admin-su">Administrateur</p>
-                        <button className="admin-delete" value={el.id} onClick={this.deleteAdmin}>Supprimer</button>
-                    </li>
-                )
+                if(el.su == 0) {
+                    list.push(
+                        <li key={el.id}>
+                            <p className="admin-name">{el.firstname} {el.lastname}</p>
+                            <p className="admin-email">{el.email}</p>
+                            <p className="admin-su">Administrateur</p>
+                            <button className="admin-delete" value={el.id} onClick={this.deleteAdmin}>Supprimer</button>
+                        </li>
+                    )
+                } else {
+                    list.push(
+                        <li key={el.id}>
+                            <p className="admin-name">{el.firstname} {el.lastname}</p>
+                            <p className="admin-email">{el.email}</p>
+                            <p className="admin-su">Super Administrateur</p>
+                            <button className="admin-delete" value={el.id} onClick={this.deleteAdmin}>Supprimer</button>
+                        </li>
+                    )
+                }
             } else {
-                list.push(
-                    <li key={el.id}>
-                        <p  className="admin-name">{el.firstname} {el.lastname}</p>
-                        <p  className="admin-email">{el.email}</p>
-                        <p  className="admin-su">Super Administrateur</p>
-                    </li>
-                )
+                if(el.su == 0) {
+                    list.push(
+                        <li key={el.id}>
+                            <p  className="admin-name">{el.firstname} {el.lastname}</p>
+                            <p  className="admin-email">{el.email}</p>
+                            <p className="admin-su">Administrateur</p>
+                        </li>
+                    )
+                } else {
+                    list.push(
+                        <li key={el.id}>
+                            <p  className="admin-name">{el.firstname} {el.lastname}</p>
+                            <p  className="admin-email">{el.email}</p>
+                            <p className="admin-su">Super Administrateur</p>
+                        </li>
+                    )
+                }
             }
         })
 
