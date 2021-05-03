@@ -493,6 +493,311 @@ th {
   background: #d9744e;
 }
 
+.admin-articles {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-articles h2 {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.admin-articles .article-create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-articles .article-create h3 {
+  font-family: "Lato", sans-serif;
+  color: black;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+.admin-articles .article-create form {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .admin-articles .article-create form {
+    width: 300px;
+  }
+}
+.admin-articles .article-create form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px auto;
+}
+.admin-articles .article-create form div:last-child {
+  flex-direction: row;
+}
+.admin-articles .article-create form label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  color: #000000;
+  text-align: center;
+}
+.admin-articles .article-create form .article-img input {
+  background: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.admin-articles .article-create form .article-img img {
+  width: 250px;
+  height: auto;
+}
+.admin-articles .article-create form .article-name input {
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+  width: 200px;
+}
+.admin-articles .article-create form .article-desc textarea {
+  resize: none;
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+  width: 400px;
+  height: 100px;
+}
+@media screen and (max-width: 768px) {
+  .admin-articles .article-create form .article-desc textarea {
+    width: 250px;
+    height: 300px;
+  }
+}
+.admin-articles .article-create form .article-cat select {
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+}
+.admin-articles .article-create form .article-btns {
+  margin-top: 30px;
+}
+.admin-articles .article-create form .article-btns button {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  background: #e29578;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.admin-articles .article-create form .article-btns button:hover, .admin-articles .article-create form .article-btns button:focus {
+  cursor: pointer;
+  background: #d9744e;
+}
+.admin-articles .article-create form .article-btns button.btn-cancel {
+  margin-right: 10px;
+}
+.admin-articles .article-modify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.admin-articles .article-modify h3 {
+  font-family: "Lato", sans-serif;
+  color: black;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+.admin-articles .article-modify form {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .admin-articles .article-modify form {
+    width: 300px;
+  }
+}
+.admin-articles .article-modify form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px auto;
+}
+.admin-articles .article-modify form div:last-child {
+  flex-direction: row;
+}
+.admin-articles .article-modify form label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  color: #000000;
+  text-align: center;
+}
+.admin-articles .article-modify form .article-img input {
+  background: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.admin-articles .article-modify form .article-img img {
+  width: 250px;
+  height: auto;
+}
+.admin-articles .article-modify form .article-name input {
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+  width: 200px;
+}
+.admin-articles .article-modify form .article-desc textarea {
+  resize: none;
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+  width: 400px;
+  height: 100px;
+}
+@media screen and (max-width: 768px) {
+  .admin-articles .article-modify form .article-desc textarea {
+    width: 250px;
+    height: 300px;
+  }
+}
+.admin-articles .article-modify form .article-cat select {
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+}
+.admin-articles .article-modify form .article-btns {
+  margin-top: 30px;
+}
+.admin-articles .article-modify form .article-btns button {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  background: #e29578;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.admin-articles .article-modify form .article-btns button:hover, .admin-articles .article-modify form .article-btns button:focus {
+  cursor: pointer;
+  background: #d9744e;
+}
+.admin-articles .article-modify form .article-btns button.btn-cancel {
+  margin-right: 10px;
+}
+.admin-articles .article-modify h3 {
+  text-align: center;
+}
+.admin-articles .article-list {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-articles .article-list h3 {
+  font-family: "Lato", sans-serif;
+  color: black;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+.admin-articles .article-list ul {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: #ffddd2;
+  padding: 20px;
+  border-radius: 10px;
+}
+.admin-articles .article-list li {
+  margin: 10px;
+  background: #edf6f9;
+  padding: 20px;
+  border-radius: 10px;
+}
+.admin-articles .article-list li h4 {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.admin-articles .article-list li .article-desc {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  margin-bottom: 5px;
+}
+.admin-articles .article-list li .article-cat {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.admin-articles .article-list li img {
+  width: 250px;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.admin-articles .article-list li button {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  background: #e29578;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.admin-articles .article-list li button:hover, .admin-articles .article-list li button:focus {
+  cursor: pointer;
+  background: #d9744e;
+}
+.admin-articles .article-list li button:first-child {
+  margin-right: 10px;
+}
+
 #wrapper {
   display: flex;
   flex-direction: column;

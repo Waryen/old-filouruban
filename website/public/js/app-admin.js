@@ -3019,19 +3019,19 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
         imgPrev = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
           src: this.state.imagePreview,
           alt: "Image de l'article",
-          className: "img-preview",
-          width: "200px",
-          height: "200px"
+          className: "img-preview"
         });
       }
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+        className: "article-create",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
           children: "Cr\xE9er un article"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
           method: "post",
           onSubmit: this.handleSubmit,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "article-name",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "name",
               children: "Nom: "
@@ -3043,20 +3043,23 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "article-desc",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "description",
               children: "Description: "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
               type: "text",
               name: "description",
+              maxLength: "255",
               value: this.state.description,
               onChange: this.handleChange,
               required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "article-img",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "image",
-              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 200 Ko): "
+              children: "S\xE9lectionner une image (taille maximale autoris\xE9e: 200 Ko): "
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "file",
               name: "image",
@@ -3066,6 +3069,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               required: true
             }), imgPrev]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "article-cat",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "categories_id",
               children: "Cat\xE9gorie: "
@@ -3078,12 +3082,15 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
               children: list
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "article-btns",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "btn-cancel",
               onClick: this.handleCancel,
               children: "Annuler"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "btn-submit",
               type: "submit",
-              children: "Envoyer"
+              children: "Cr\xE9er"
             })]
           })]
         })]
@@ -3360,25 +3367,28 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
 
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
           id: "article-".concat(el.id),
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
             children: el.name
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "article-desc",
             children: el.description
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "article-cat",
             children: catName
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
             src: "".concat(_this5.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-            alt: "Image de l'article: ".concat(el.name),
-            width: "200px",
-            height: "200px"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            value: el.id,
-            onClick: _this5.modifyArticle,
-            children: "Modifier"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            value: el.id,
-            onClick: _this5.deleteArticle,
-            children: "Supprimer"
+            alt: "Image de l'article: ".concat(el.name)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "article-btns",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              value: el.id,
+              onClick: _this5.modifyArticle,
+              children: "Modifier"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              value: el.id,
+              onClick: _this5.deleteArticle,
+              children: "Supprimer"
+            })]
           })]
         }, el.id));
       }); // Rendu des options pour le choix de la catégorie du formulaire de modification
@@ -3392,19 +3402,20 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "article-list",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
             children: "Liste des articles"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
             children: list
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "article-modify",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
             children: "Modifier un article"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
             method: "post",
             onSubmit: this.handleModify,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "article-name",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "article-name",
                 children: "Nom: "
@@ -3417,18 +3428,21 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 required: true
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "article-desc",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "article-desc",
                 children: "Description: "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
                 type: "text",
                 name: "description",
                 id: "article-desc",
+                maxLength: "255",
                 value: this.state.description,
                 onChange: this.handleChange,
                 required: true
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "article-img",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "article-img",
                 children: "Image (taille maximale autoirs\xE9e 200 Ko): "
@@ -3440,6 +3454,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 onChange: this.handleImageChange
               }), imgPrev]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "article-cat",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "article-cat",
                 children: "Cat\xE9gorie: "
@@ -3454,10 +3469,13 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 }), cat]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "article-btns",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                className: "btn-cancel",
                 onClick: this.handleCancel,
                 children: "Annuler"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                className: "btn-submit",
                 type: "submit",
                 children: "Modifier"
               })]
@@ -3497,7 +3515,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function Article(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+    className: "admin-articles",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
       children: "Articles"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_article_create__WEBPACK_IMPORTED_MODULE_1__.default, {
       url: props.url,

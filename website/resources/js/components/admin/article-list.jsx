@@ -183,12 +183,14 @@ class ArticleList extends React.Component {
 
             list.push(
                 <li key={el.id} id={`article-${el.id}`}>
-                    <h2>{el.name}</h2>
-                    <p>{el.description}</p>
-                    <p>{catName}</p>
-                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article: ${el.name}`} width="200px" height="200px" />
-                    <button value={el.id} onClick={this.modifyArticle} >Modifier</button>
-                    <button value={el.id} onClick={this.deleteArticle} >Supprimer</button>
+                    <h4>{el.name}</h4>
+                    <p className="article-desc">{el.description}</p>
+                    <p className="article-cat">{catName}</p>
+                    <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article: ${el.name}`} />
+                    <div className="article-btns">
+                        <button value={el.id} onClick={this.modifyArticle} >Modifier</button>
+                        <button value={el.id} onClick={this.deleteArticle} >Supprimer</button>
+                    </div>
                 </li>
             )
         })
@@ -203,37 +205,37 @@ class ArticleList extends React.Component {
         return (
             <div>
                 <div className="article-list">
-                    <h2>Liste des articles</h2>
+                    <h3>Liste des articles</h3>
                     <ul>
                         {list}
                     </ul>
                 </div>
                 <div className="article-modify">
-                    <h2>Modifier un article</h2>
+                    <h3>Modifier un article</h3>
                     <form method="post" onSubmit={this.handleModify}>
-                        <div>
+                        <div className="article-name">
                             <label htmlFor="article-name">Nom: </label>
                             <input type="text" name="name" id="article-name" value={this.state.name} onChange={this.handleChange} required />
                         </div>
-                        <div>
+                        <div className="article-desc">
                             <label htmlFor="article-desc">Description: </label>
-                            <input type="text" name="description" id="article-desc" value={this.state.description} onChange={this.handleChange} required />
+                            <textarea type="text" name="description" id="article-desc" maxLength="255" value={this.state.description} onChange={this.handleChange} required />
                         </div>
-                        <div>
+                        <div className="article-img">
                             <label htmlFor="article-img">Image (taille maximale autoirsée 200 Ko): </label>
                             <input type="file" name="image" id="article-img" accept="image/jpg" onChange={this.handleImageChange} />
                             {imgPrev}
                         </div>
-                        <div>
+                        <div className="article-cat">
                             <label htmlFor="article-cat">Catégorie: </label>
                             <select name="categories_id" id="article-cat" onChange={this.handleChange} required >
                                 <option value={this.state.prevCatId} >{this.state.prevCatName}</option>
                                 {cat}
                             </select>
                         </div>
-                        <div>
-                            <button onClick={this.handleCancel}>Annuler</button>
-                            <button type="submit">Modifier</button>
+                        <div className="article-btns">
+                            <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
+                            <button className="btn-submit" type="submit">Modifier</button>
                         </div>
                     </form>
                 </div>

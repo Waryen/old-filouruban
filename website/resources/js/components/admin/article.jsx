@@ -4,8 +4,8 @@ import ArticleList from './article-list'
 
 export default function Article(props) {
     return(
-        <div>
-            <h1>Articles</h1>
+        <div className="admin-articles">
+            <h2>Articles</h2>
             <ArticleCreate url={props.url} api={props.api} auth={props.auth} />
             <ArticleList url={props.url} api={props.api} />
         </div>

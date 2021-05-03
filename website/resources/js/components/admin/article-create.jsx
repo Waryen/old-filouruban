@@ -131,37 +131,37 @@ class ArticleCreate extends React.Component {
         })
 
         if(this.state.imagePreview) {
-            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" width="200px" height="200px" />
+            imgPrev = <img src={this.state.imagePreview} alt="Image de l'article" className="img-preview" />
         }
 
         return(
-            <div>
-                <h2>Créer un article</h2>
+            <div className="article-create">
+                <h3>Créer un article</h3>
                 <form method="post" onSubmit={this.handleSubmit}>
-                <div>
-                    <label htmlFor="name">Nom: </label>
-                    <input type="text" name='name' value={this.state.name} onChange={this.handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="description">Description: </label>
-                    <input type="text" name='description' value={this.state.description} onChange={this.handleChange} required />
-                </div>
-                <div>
-                    <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 200 Ko): </label>
-                    <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
-                    {imgPrev}
-                </div>
-                <div>
-                    <label htmlFor="categories_id">Catégorie: </label>
-                    <select name="category" id="categories_id" value={this.state.category} onChange={this.handleChange} required >
-                        {list}
-                    </select>
-                </div>
-                <div>
-                    <button onClick={this.handleCancel} >Annuler</button>
-                    <button type="submit">Envoyer</button>
-                </div>
-            </form>
+                    <div className="article-name">
+                        <label htmlFor="name">Nom: </label>
+                        <input type="text" name='name' value={this.state.name} onChange={this.handleChange} required />
+                    </div>
+                    <div className="article-desc">
+                        <label htmlFor="description">Description: </label>
+                        <textarea type="text" name='description' maxLength="255" value={this.state.description} onChange={this.handleChange} required />
+                    </div>
+                    <div className="article-img">
+                        <label htmlFor="image">Sélectionner une image (taille maximale autorisée: 200 Ko): </label>
+                        <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
+                        {imgPrev}
+                    </div>
+                    <div className="article-cat">
+                        <label htmlFor="categories_id">Catégorie: </label>
+                        <select name="category" id="categories_id" value={this.state.category} onChange={this.handleChange} required >
+                            {list}
+                        </select>
+                    </div>
+                    <div className="article-btns">
+                        <button className="btn-cancel" onClick={this.handleCancel} >Annuler</button>
+                        <button className="btn-submit" type="submit">Créer</button>
+                    </div>
+                </form>
             </div>
         )
     }
