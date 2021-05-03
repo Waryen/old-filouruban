@@ -1,0 +1,168 @@
+.admin-admins {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        font-family: $lato;
+        color: $peach;
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .admins-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+
+        h3 {
+            font-family: $lato;
+            color: black;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            align-self: flex-start;
+            background: $light-peach;
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px;
+
+            @media screen and ($responsive) {
+                width: 300px;
+            }
+        }
+
+        li {
+            background: $silver;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            p {
+                font-family: $roboto;
+                font-size: 1em;
+                color: $black;
+                text-align: center;
+
+                &:not(:last-child) {
+                    margin-bottom: 5px;
+                }
+            }
+
+            .admin-name {
+                font-size: 1.1em;
+                font-weight: 600;
+            }
+
+            .admin-email {
+                font-style: italic;
+            }
+
+            .admin-su {
+                font-size: 0.8em;
+            }
+
+            .admin-delete {
+                margin: 0 auto;
+                margin-top: 10px;
+                width: 100px;
+                font-family: $roboto;
+                font-size: 1.1em;
+                background: $peach;
+                color: $white;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    background: darken($peach, 10%);
+                }
+            }
+        }
+    }
+
+    .admins-create {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            font-family: $lato;
+            color: black;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        form {
+            background: $light-peach;
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px;
+
+            @media screen and ($responsive) {
+                width: 300px;
+            }
+
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                @media screen and ($responsive) {
+                    flex-direction: column;
+                }
+            }
+
+            div:last-child {
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            div:not(:last-child) {
+                margin-bottom: 10px;
+            }
+
+            label {
+                font-family: $roboto;
+                font-size: 1.1em;
+                color: $black;
+            }
+
+            input {
+                font-family: $roboto;
+                font-size: 0.9em;
+                color: $black;
+                border: 1px solid $peach;
+                border-radius: 5px;
+                padding: 5px;
+                width: 200px;
+            }
+
+            button {
+                font-family: $roboto;
+                font-size: 1.1em;
+                background: $peach;
+                color: $white;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    background: darken($peach, 10%);
+                }
+            }
+        }
+    }
+}

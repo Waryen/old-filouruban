@@ -36,27 +36,25 @@ class AdminList extends React.Component {
             if(el.id !== authId && el.su !== 1 && authSu === 1) {
                 list.push(
                     <li key={el.id}>
-                        <p>{el.firstname}</p>
-                        <p>{el.lastname}</p>
-                        <p>{el.email}</p>
-                        <p>{el.su}</p>
-                        <button value={el.id} onClick={this.deleteAdmin}>Supprimer</button>
+                        <p className="admin-name">{el.firstname} {el.lastname}</p>
+                        <p className="admin-email">{el.email}</p>
+                        <p className="admin-su">Administrateur</p>
+                        <button className="admin-delete" value={el.id} onClick={this.deleteAdmin}>Supprimer</button>
                     </li>
                 )
             } else {
                 list.push(
                     <li key={el.id}>
-                        <p>{el.firstname}</p>
-                        <p>{el.lastname}</p>
-                        <p>{el.email}</p>
-                        <p>{el.su}</p>
+                        <p  className="admin-name">{el.firstname} {el.lastname}</p>
+                        <p  className="admin-email">{el.email}</p>
+                        <p  className="admin-su">Super Administrateur</p>
                     </li>
                 )
             }
         })
 
         return(
-            <div>
+            <div className="admins-list">
                 <h3>Liste des administrateurs</h3>
                 <ul>
                     {list}

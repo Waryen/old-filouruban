@@ -265,6 +265,7 @@ th {
   font-style: italic;
   background: #ffddd2;
   padding: 15px;
+  margin: 10px;
   border-radius: 5px;
 }
 .admin-dashboard p span {
@@ -340,6 +341,156 @@ th {
     grid-column: 1/4;
     grid-row: 8;
   }
+}
+
+.admin-admins {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-admins h2 {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.admin-admins .admins-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.admin-admins .admins-list h3 {
+  font-family: "Lato", sans-serif;
+  color: black;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+.admin-admins .admins-list ul {
+  align-self: flex-start;
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+}
+@media screen and (max-width: 768px) {
+  .admin-admins .admins-list ul {
+    width: 300px;
+  }
+}
+.admin-admins .admins-list li {
+  background: #edf6f9;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-admins .admins-list li p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  text-align: center;
+}
+.admin-admins .admins-list li p:not(:last-child) {
+  margin-bottom: 5px;
+}
+.admin-admins .admins-list li .admin-name {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.admin-admins .admins-list li .admin-email {
+  font-style: italic;
+}
+.admin-admins .admins-list li .admin-su {
+  font-size: 0.8em;
+}
+.admin-admins .admins-list li .admin-delete {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 100px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  background: #e29578;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.admin-admins .admins-list li .admin-delete:hover, .admin-admins .admins-list li .admin-delete:focus {
+  cursor: pointer;
+  background: #d9744e;
+}
+.admin-admins .admins-create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-admins .admins-create h3 {
+  font-family: "Lato", sans-serif;
+  color: black;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+.admin-admins .admins-create form {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+}
+@media screen and (max-width: 768px) {
+  .admin-admins .admins-create form {
+    width: 300px;
+  }
+}
+.admin-admins .admins-create form div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .admin-admins .admins-create form div {
+    flex-direction: column;
+  }
+}
+.admin-admins .admins-create form div:last-child {
+  justify-content: center;
+  margin-top: 20px;
+}
+.admin-admins .admins-create form div:not(:last-child) {
+  margin-bottom: 10px;
+}
+.admin-admins .admins-create form label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  color: #000000;
+}
+.admin-admins .admins-create form input {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  border: 1px solid #e29578;
+  border-radius: 5px;
+  padding: 5px;
+  width: 200px;
+}
+.admin-admins .admins-create form button {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  background: #e29578;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.admin-admins .admins-create form button:hover, .admin-admins .admins-create form button:focus {
+  cursor: pointer;
+  background: #d9744e;
 }
 
 #wrapper {

@@ -71,8 +71,8 @@ class AdminCreate extends React.Component {
 
     render() {
         return(
-            <div>
-                <h2>Créer un administrateur</h2>
+            <div className="admins-create">
+                <h3>Créer un administrateur</h3>
                 <form method="post" onSubmit={this.handleSubmit}>
                     <div>
                         <label htmlFor="firstname">Prénom: </label>
