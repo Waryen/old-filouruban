@@ -106,25 +106,25 @@ class CategoryCreate extends React.Component {
         }
 
         return(
-            <div>
-                <h2>Créer une catégorie</h2>
+            <div className="category-create">
+                <h3>Créer une catégorie</h3>
                 <form method="post" onSubmit={this.handleSubmit}>
-                    <div>
+                    <div className="category-name">
                         <label htmlFor="cat-name">Nom: </label>
                         <input type="text" name="catName" id="cat-name" value={this.state.catName} onChange={this.handleChange} required />
                     </div>
-                    <div>
+                    <div className="category-desc">
                         <label htmlFor="cat-desc">Description: </label>
-                        <input type="text" name="catDesc" id="cat-desc" value={this.state.catDesc} onChange={this.handleChange} required />
+                        <textarea type="text" name="catDesc" id="cat-desc" maxLength="255" value={this.state.catDesc} onChange={this.handleChange} required />
                     </div>
-                    <div>
+                    <div className="category-img">
                         <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 200 Ko): </label>
                         <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
                         {imgPrev}
                     </div>
-                    <div>
-                        <button onClick={this.handleCancel}>Annuler</button>
-                        <button type="submit">Créer</button>
+                    <div className="category-btns">
+                        <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
+                        <button className="btn-submit" type="submit">Créer</button>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-// Formulaire de création et de modification d'un article
+// Formulaire de création et de modification d'une catégorie
 @mixin form {
     display: flex;
     flex-direction: column;
@@ -44,19 +44,19 @@
             text-align: center;
         }
 
-        .article-img input {
+        .category-img input {
             background: $white;
             padding: 5px;
             border-radius: 5px;
             margin-top: 5px;
         }
 
-        .article-img img {
+        .category-img img {
             width: 250px;
             height: auto;
         }
 
-        .article-name input {
+        .category-name input {
             margin-top: 5px;
             font-family: $roboto;
             font-size: 0.9em;
@@ -67,7 +67,7 @@
             width: 200px;
         }
 
-        .article-desc textarea {
+        .category-desc textarea {
             resize: none;
             margin-top: 5px;
             font-family: $roboto;
@@ -85,17 +85,7 @@
             }
         }
 
-        .article-cat select {
-            margin-top: 5px;
-            font-family: $roboto;
-            font-size: 0.9em;
-            color: $black;
-            border: 1px solid $peach;
-            border-radius: 5px;
-            padding: 5px;
-        }
-
-        .article-btns {
+        .category-btns {
             margin-top: 30px;
 
             button {
@@ -126,8 +116,7 @@
 
 
 
-
-.admin-articles {
+.admin-category {
     margin: 20px;
     display: flex;
     flex-direction: column;
@@ -141,20 +130,15 @@
         margin-bottom: 20px;
     }
 
-    .article-create {
+    .category-create {
         @include form;
     }
 
-    .article-modify {
+    .category-modify {
         @include form;
-        margin-top: 30px;
-
-        h3 {
-            text-align: center;
-        }
     }
 
-    .article-list {
+    .category-list {
         margin-top: 30px;
         display: flex;
         flex-direction: column;
@@ -191,19 +175,11 @@
                 margin-bottom: 10px;
             }
 
-            .article-desc {
+            .category-desc {
                 font-family: $roboto;
                 font-size: 1em;
                 color: $black;
                 margin-bottom: 5px;
-            }
-
-            .article-cat {
-                font-family: $roboto;
-                font-size: 0.9em;
-                color: $black;
-                font-style: italic;
-                margin-bottom: 10px;
             }
 
             img {

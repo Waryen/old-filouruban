@@ -167,8 +167,8 @@ class CategoryList extends React.Component {
             if(check) {
                 list.push(
                     <li key={el.id}>
-                        <h3>{el.name}</h3>
-                        <p>{el.description}</p>
+                        <h4>{el.name}</h4>
+                        <p className="category-desc">{el.description}</p>
                         <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} width="200px" height="200px" />
                         <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
                     </li>
@@ -176,11 +176,13 @@ class CategoryList extends React.Component {
             } else {
                 list.push(
                     <li key={el.id}>
-                        <h3>{el.name}</h3>
-                        <p>{el.description}</p>
+                        <h4>{el.name}</h4>
+                        <p className="category-desc">{el.description}</p>
                         <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} width="200px" height="200px" />
-                        <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
-                        <button value={el.id} onClick={this.deleteCategory} >Supprimer</button>
+                        <div>
+                            <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
+                            <button value={el.id} onClick={this.deleteCategory} >Supprimer</button>
+                        </div>
                     </li>
                 )
             }
@@ -189,30 +191,30 @@ class CategoryList extends React.Component {
         return(
             <div>
                 <div className="category-list">
-                    <h2>Liste des catégories</h2>
+                    <h3>Liste des catégories</h3>
                     <ul>
                         {list}
                     </ul>
                 </div>
                 <div className="category-modify">
-                    <h2>Modifier une catégorie</h2>
+                    <h3>Modifier une catégorie</h3>
                     <form method="post" onSubmit={this.handleModify}>
-                        <div>
+                        <div className="category-name">
                             <label htmlFor="cat-name">Nom: </label>
                             <input type="text" name="newCatName" id="cat-name" value={this.state.newCatName} onChange={this.handleChange} required />
                         </div>
-                        <div>
+                        <div className="category-desc">
                             <label htmlFor="cat-desc">Description: </label>
-                            <input type="text" name="newCatDesc" id="cat-desc" value={this.state.newCatDesc} onChange={this.handleChange} required />
+                            <textarea type="text" name="newCatDesc" id="cat-desc" maxLength="255" value={this.state.newCatDesc} onChange={this.handleChange} required />
                         </div>
-                        <div>
+                        <div className="category-img">
                             <label htmlFor="category-img">Image (taille maximale autoirsée 200 Ko): </label>
                             <input type="file" name="image" id="category-img" accept="image/jpg" onChange={this.handleImageChange} />
                             {imgPrev}
                         </div>
-                        <div>
-                            <button onClick={this.handleCancel}>Annuler</button>
-                            <button type="submit">Modifier</button>
+                        <div className="category-btns">
+                            <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
+                            <button className="btn-submit" type="submit">Modifier</button>
                         </div>
                     </form>
                 </div>
