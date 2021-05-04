@@ -50,18 +50,18 @@ class CommentaryList extends React.Component {
             }
             list.push(
                 <li key={el.id}>
-                    <h3>{el.firstname} {el.lastname}</h3>
-                    <p>Contenu du commentaire:<br></br>{el.content}</p>
-                    <p>Date du commentaire: {el.date}</p>
-                    <p>Article concerné: <Link to={`article#article-${articleId}`}>{articleName}</Link></p>
-                    <button value={el.id} onClick={this.deleteCommentary} >Supprimer le commentaire</button>
+                    <h4>{el.firstname} {el.lastname}</h4>
+                    <p className="com-content"><span>Contenu du commentaire:</span><br></br>{el.content}</p>
+                    <p className="com-date"><span>Date du commentaire:</span> {el.date}</p>
+                    <p className="com-art"><span>Article concerné:</span> <Link to={`article#article-${articleId}`}>{articleName}</Link></p>
+                    <button value={el.id} onClick={this.deleteCommentary} >Supprimer</button>
                 </li>
             )
         })
 
         return(
-            <div>
-                <h2>Liste des commentaires</h2>
+            <div className="com-list">
+                <h3>Liste des commentaires</h3>
                 <ul>
                     {list}
                 </ul>

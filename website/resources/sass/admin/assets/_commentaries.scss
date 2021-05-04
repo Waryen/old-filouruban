@@ -1,0 +1,95 @@
+.admin-commentary {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        font-family: $lato;
+        color: $peach;
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .com-list {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            font-family: $lato;
+            color: black;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            background: $light-peach;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        li {
+            background: $silver;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px auto;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            h4 {
+                font-family: $lato;
+                color: $peach;
+                font-size: 1.3em;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            span {
+                font-size: 0.9em;
+            }
+
+            .com-content, .com-date, .com-art {
+                font-family: $roboto;
+                color: $black;
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .com-art a {
+                text-decoration: none;
+                font-style: italic;
+                color: $teal;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    color: lighten($teal, 10%);
+                }
+            }
+
+            button {
+                align-self: center;
+                font-family: $roboto;
+                font-size: 1.1em;
+                background: $peach;
+                color: $white;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+                margin-top: 10px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    background: darken($peach, 10%);
+                }
+            }
+        }
+    }
+}
