@@ -49,7 +49,7 @@ class CategoryCreate extends React.Component {
     handleImageChange(e) {
         e.preventDefault()
         const file = e.target.files[0]
-        if(file.size > 200000) {
+        if(file.size > 500000) {
             document.querySelector('#image').value = ''
             alert('Fichier trop volumineux !')
         } else {
@@ -118,7 +118,7 @@ class CategoryCreate extends React.Component {
                         <textarea type="text" name="catDesc" id="cat-desc" maxLength="255" value={this.state.catDesc} onChange={this.handleChange} required />
                     </div>
                     <div className="category-img">
-                        <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 200 Ko): </label>
+                        <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 500 Ko): </label>
                         <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
                         {imgPrev}
                     </div>

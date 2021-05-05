@@ -102,7 +102,7 @@ class ArticleList extends React.Component {
         const newName = url.split('.').shift(1)
 
         const file = e.target.files[0]
-        if(file.size > 200000) {
+        if(file.size > 500000) {
             document.querySelector('#article-img').value = ''
             alert('Fichier trop volumineux !')
         } else {
@@ -222,7 +222,7 @@ class ArticleList extends React.Component {
                             <textarea type="text" name="description" id="article-desc" maxLength="255" value={this.state.description} onChange={this.handleChange} required />
                         </div>
                         <div className="article-img">
-                            <label htmlFor="article-img">Image (taille maximale autoirsée 200 Ko): </label>
+                            <label htmlFor="article-img">Image (taille maximale autoirsée 500 Ko): </label>
                             <input type="file" name="image" id="article-img" accept="image/jpg" onChange={this.handleImageChange} />
                             {imgPrev}
                         </div>

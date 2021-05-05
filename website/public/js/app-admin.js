@@ -2942,7 +2942,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var file = e.target.files[0];
 
-      if (file.size > 200000) {
+      if (file.size > 500000) {
         document.querySelector('#image').value = '';
         alert('Fichier trop volumineux !');
       } else {
@@ -3059,7 +3059,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
             className: "article-img",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "image",
-              children: "S\xE9lectionner une image (taille maximale autoris\xE9e: 200 Ko): "
+              children: "S\xE9lectionner une image (taille maximale autoris\xE9e: 500 Ko): "
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "file",
               name: "image",
@@ -3271,7 +3271,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       var newName = url.split('.').shift(1);
       var file = e.target.files[0];
 
-      if (file.size > 200000) {
+      if (file.size > 500000) {
         document.querySelector('#article-img').value = '';
         alert('Fichier trop volumineux !');
       } else {
@@ -3445,7 +3445,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
               className: "article-img",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "article-img",
-                children: "Image (taille maximale autoirs\xE9e 200 Ko): "
+                children: "Image (taille maximale autoirs\xE9e 500 Ko): "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                 type: "file",
                 name: "image",
@@ -3640,7 +3640,7 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
       e.preventDefault();
       var file = e.target.files[0];
 
-      if (file.size > 200000) {
+      if (file.size > 500000) {
         document.querySelector('#image').value = '';
         alert('Fichier trop volumineux !');
       } else {
@@ -3750,7 +3750,7 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
             className: "category-img",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
               htmlFor: "image",
-              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 200 Ko): "
+              children: "S\xE9lectionner une image (taille maximale autoirs\xE9e: 500 Ko): "
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "file",
               name: "image",
@@ -3876,17 +3876,21 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
 
       document.querySelector('.category-modify').style.display = 'none';
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (res) {
-        _this2.setState({
-          categories: res.data
-        });
+        if (res.status == 200) {
+          _this2.setState({
+            categories: res.data
+          });
+        }
       });
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (res) {
-        var list = res.data;
-        list.forEach(function (el) {
-          _this2.setState({
-            articles: [].concat(_toConsumableArray(_this2.state.articles), [el.categories_id])
+        if (res.status == 200) {
+          var list = res.data;
+          list.forEach(function (el) {
+            _this2.setState({
+              articles: [].concat(_toConsumableArray(_this2.state.articles), [el.categories_id])
+            });
           });
-        });
+        }
       });
     } // Récupère les données d'une catégorie pour le formulaire de modification
 
@@ -3900,12 +3904,14 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
       document.querySelector('.category-list').style.display = 'none';
       document.querySelector('.category-modify').style.display = 'block';
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api)).then(function (res) {
-        _this3.setState({
-          catId: id,
-          newCatName: res.data.name,
-          newCatDesc: res.data.description,
-          imagePreview: "".concat(_this3.props.url, "/media/images/categories/category-").concat(res.data.image_id, ".jpg")
-        });
+        if (res.status == 200) {
+          _this3.setState({
+            catId: id,
+            newCatName: res.data.name,
+            newCatDesc: res.data.description,
+            imagePreview: "".concat(_this3.props.url, "/media/images/categories/category-").concat(res.data.image_id, ".jpg")
+          });
+        }
       });
     } // Annule les modifications du formulaire
 
@@ -3942,7 +3948,7 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
       var newName = url.split('.').shift(1);
       var file = e.target.files[0];
 
-      if (file.size > 200000) {
+      if (file.size > 500000) {
         document.querySelector('#category-img').value = '';
         alert('Fichier trop volumineux !');
       } else {
@@ -4126,7 +4132,7 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
               className: "category-img",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                 htmlFor: "category-img",
-                children: "Image (taille maximale autoirs\xE9e 200 Ko): "
+                children: "Image (taille maximale autoirs\xE9e 500 Ko): "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                 type: "file",
                 name: "image",

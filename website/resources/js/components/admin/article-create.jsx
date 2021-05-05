@@ -64,7 +64,7 @@ class ArticleCreate extends React.Component {
     handleImageChange(e) {
         e.preventDefault()
         const file = e.target.files[0]
-        if(file.size > 200000) {
+        if(file.size > 500000) {
             document.querySelector('#image').value = ''
             alert('Fichier trop volumineux !')
         } else {
@@ -147,7 +147,7 @@ class ArticleCreate extends React.Component {
                         <textarea type="text" name='description' maxLength="255" value={this.state.description} onChange={this.handleChange} required />
                     </div>
                     <div className="article-img">
-                        <label htmlFor="image">Sélectionner une image (taille maximale autorisée: 200 Ko): </label>
+                        <label htmlFor="image">Sélectionner une image (taille maximale autorisée: 500 Ko): </label>
                         <input type="file" name="image" id="image" accept="image/jpg" onChange={this.handleImageChange} required />
                         {imgPrev}
                     </div>

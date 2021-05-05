@@ -25,16 +25,24 @@ class CategoryList extends React.Component {
     // Récupère la liste des catégories et des articles
     componentDidMount() {
         document.querySelector('.category-modify').style.display = 'none'
-        axios.get(`${this.props.url}/api/category?api_token=${this.props.api}`)
+
+        axios
+            .get(`${this.props.url}/api/category?api_token=${this.props.api}`)
             .then(res => {
-                this.setState({ categories: res.data })
+                if(res.status == 200) {
+                    this.setState({ categories: res.data })
+                }
             })
-        axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
+        
+        axios
+            .get(`${this.props.url}/api/article?api_token=${this.props.api}`)
             .then(res => {
-                const list = res.data
-                list.forEach(el => {
-                    this.setState({ articles: [...this.state.articles, el.categories_id] })
-                })
+                if(res.status == 200) {
+                    const list = res.data
+                    list.forEach(el => {
+                        this.setState({ articles: [...this.state.articles, el.categories_id] })
+                    })
+                }
             })
     }
 
@@ -46,14 +54,17 @@ class CategoryList extends React.Component {
         document.querySelector('.category-list').style.display = 'none'
         document.querySelector('.category-modify').style.display = 'block'
 
-        axios.get(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
+        axios
+            .get(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
             .then(res => {
-                this.setState({
-                    catId: id,
-                    newCatName: res.data.name,
-                    newCatDesc: res.data.description,
-                    imagePreview: `${this.props.url}/media/images/categories/category-${res.data.image_id}.jpg`,
-                })
+                if(res.status == 200) {
+                    this.setState({
+                        catId: id,
+                        newCatName: res.data.name,
+                        newCatDesc: res.data.description,
+                        imagePreview: `${this.props.url}/media/images/categories/category-${res.data.image_id}.jpg`,
+                    })
+                }
             })
     }
 
@@ -86,7 +97,7 @@ class CategoryList extends React.Component {
         const newName = url.split('.').shift(1)
 
         const file = e.target.files[0]
-        if(file.size > 200000) {
+        if(file.size > 500000) {
             document.querySelector('#category-img').value = ''
             alert('Fichier trop volumineux !')
         } else {
@@ -208,7 +219,7 @@ class CategoryList extends React.Component {
                             <textarea type="text" name="newCatDesc" id="cat-desc" maxLength="255" value={this.state.newCatDesc} onChange={this.handleChange} required />
                         </div>
                         <div className="category-img">
-                            <label htmlFor="category-img">Image (taille maximale autoirsée 200 Ko): </label>
+                            <label htmlFor="category-img">Image (taille maximale autoirsée 500 Ko): </label>
                             <input type="file" name="image" id="category-img" accept="image/jpg" onChange={this.handleImageChange} />
                             {imgPrev}
                         </div>
