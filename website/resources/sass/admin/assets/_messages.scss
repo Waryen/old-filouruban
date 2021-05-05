@@ -1,0 +1,224 @@
+// Formulaire de création et de modification d'un message
+@mixin form {
+    h3 {
+        font-family: $lato;
+        color: black;
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    form {
+        background: $light-peach;
+        border-radius: 10px;
+        padding: 20px;
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        @media screen and ($responsive) {
+            width: 300px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 5px auto;
+
+            &:last-child {
+                flex-direction: row;
+            }
+        }
+
+        label {
+            font-family: $roboto;
+            font-size: 1.1em;
+            color: $black;
+            text-align: center;
+        }
+
+        .msg-title input {
+            margin-top: 5px;
+            font-family: $roboto;
+            font-size: 0.9em;
+            color: $black;
+            border: 1px solid $peach;
+            border-radius: 5px;
+            padding: 5px;
+            width: 200px;
+        }
+
+        .msg-content textarea {
+            resize: none;
+            margin-top: 5px;
+            font-family: $roboto;
+            font-size: 0.9em;
+            color: $black;
+            border: 1px solid $peach;
+            border-radius: 5px;
+            padding: 5px;
+            width: 400px;
+            height: 100px;
+
+            @media screen and ($responsive) {
+                width: 250px;
+                height: 300px;
+            }
+        }
+
+        .msg-start-date input, .msg-end-date input {
+            margin-top: 5px;
+            font-family: $roboto;
+            font-size: 0.9em;
+            color: $black;
+            border: 1px solid $peach;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .msg-btns {
+            margin-top: 30px;
+
+            button {
+                font-family: $roboto;
+                font-size: 1.1em;
+                background: $peach;
+                color: $white;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 10px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    background: darken($peach, 10%);
+                }
+
+                &.btn-cancel {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+.admin-message {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        font-family: $lato;
+        color: $peach;
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .message-create {
+        @include form;
+    }
+
+    .message-modify {
+        @include form;
+        margin-top: 30px;
+
+        h3 {
+            text-align: center;
+        }
+    }
+
+    .message-list {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h3 {
+            font-family: $lato;
+            color: black;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: $light-peach;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        li {
+            margin: 10px;
+            background: $silver;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+
+            .title {
+                font-family: $lato;
+                color: $peach;
+                font-size: 1.3em;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            .content {
+                font-family: $roboto;
+                color: $black;
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+
+            .date {
+                font-family: $roboto;
+                color: $black;
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+
+            .admin {
+                font-family: $roboto;
+                color: $black;
+                font-size: 0.9em;
+                font-style: italic;
+                margin-bottom: 10px;
+            }
+
+            .btns {
+                margin-top: 20px;
+
+                button {
+                    font-family: $roboto;
+                    font-size: 1.1em;
+                    background: $peach;
+                    color: $white;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    transition: all .15s;
+    
+                    &:hover, &:focus {
+                        cursor: pointer;
+                        background: darken($peach, 10%);
+                    }
+    
+                    &:first-child {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

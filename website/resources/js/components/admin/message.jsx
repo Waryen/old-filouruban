@@ -4,8 +4,8 @@ import MessageList from './message-list'
 
 export default function Message(props) {
     return(
-        <div>
-            <h1>Messages</h1>
+        <div className="admin-message">
+            <h2>Messages</h2>
             <MessageCreate url={props.url} api={props.api} auth={props.auth} />
             <MessageList url={props.url} api={props.api} auth={props.auth} />
         </div>

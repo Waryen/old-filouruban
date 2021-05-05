@@ -120,35 +120,45 @@ class MessageList extends React.Component {
             if(el.admins_id === adminId && adminSu === 0) {
                 list.push(
                     <li key={el.id}>
-                        <h3>{el.title}</h3>
-                        <p>{el.content}</p>
-                        <p>Date de début: {el.start_date}</p>
-                        <p>Date de fin: {el.end_date}</p>
-                        <p>Créé par: {adminName}</p>
-                        <button value={el.id} onClick={this.modifyMessage}>Modifer</button>
-                        <button value={el.id} onClick={this.deleteMessage}>Supprimer</button>
+                        <h4 className="title">{el.title}</h4>
+                        <p className="content">{el.content}</p>
+                        <div className="date">
+                            <p>Date de début: {el.start_date}</p>
+                            <p>Date de fin: {el.end_date}</p>
+                        </div>
+                        <p className="admin">Créé par: {adminName}</p>
+                        <div className="btns">
+                            <button className="modify" value={el.id} onClick={this.modifyMessage}>Modifer</button>
+                            <button className="delete" value={el.id} onClick={this.deleteMessage}>Supprimer</button>
+                        </div>
                     </li>
                 )
             } else if(adminSu === 1) {
                 list.push(
                     <li key={el.id}>
-                        <h3>{el.title}</h3>
-                        <p>{el.content}</p>
-                        <p>Date de début: {el.start_date}</p>
-                        <p>Date de fin: {el.end_date}</p>
-                        <p>Créé par: {adminName}</p>
-                        <button value={el.id} onClick={this.modifyMessage}>Modifer</button>
-                        <button value={el.id} onClick={this.deleteMessage}>Supprimer</button>
+                        <h4 className="title">{el.title}</h4>
+                        <p className="content">{el.content}</p>
+                        <div className="date">
+                            <p>Date de début: {el.start_date}</p>
+                            <p>Date de fin: {el.end_date}</p>
+                        </div>
+                        <p className="admin">Créé par: {adminName}</p>
+                        <div className="btns">
+                            <button className="modify" value={el.id} onClick={this.modifyMessage}>Modifer</button>
+                            <button className="delete" value={el.id} onClick={this.deleteMessage}>Supprimer</button>
+                        </div>
                     </li>
                 )
             } else {
                 list.push(
                     <li key={el.id}>
-                        <h3>{el.title}</h3>
-                        <p>{el.content}</p>
-                        <p>Date de début: {el.start_date}</p>
-                        <p>Date de fin: {el.end_date}</p>
-                        <p>Créé par: {adminName}</p>
+                        <h4 className="title">{el.title}</h4>
+                        <p className="content">{el.content}</p>
+                        <div className="date">
+                            <p>Date de début: {el.start_date}</p>
+                            <p>Date de fin: {el.end_date}</p>
+                        </div>
+                        <p className="admin">Créé par: {adminName}</p>
                     </li>
                 )
             }
@@ -156,34 +166,34 @@ class MessageList extends React.Component {
 
         return(
             <div>
-                <h2>Liste des messages</h2>
                 <div className="message-list">
+                    <h3>Liste des messages</h3>
                     <ul>
                         {list}
                     </ul>
                 </div>
                 <div className="message-modify">
-                    <h2>Modifer un message</h2>
+                    <h3>Modifer un message</h3>
                     <form method="post" onSubmit={this.handleModify}>
-                        <div>
+                        <div className="msg-title">
                             <label htmlFor="title">Titre: </label>
                             <input type="text" name="newTitle" id="title" value={this.state.newTitle} onChange={this.handleChange} />
                         </div>
-                        <div>
+                        <div className="msg-content">
                             <label htmlFor="content">Contenu: </label>
-                            <input type="text" name="newContent" id="content" value={this.state.newContent} onChange={this.handleChange} />
+                            <textarea type="text" name="newContent" id="content" maxLength="1000" value={this.state.newContent} onChange={this.handleChange} />
                         </div>
-                        <div>
+                        <div className="msg-start-date">
                             <label htmlFor="newStartDate">Date de début: </label>
                             <input type="date" name="newStartDate" id="newStartDate" value={this.state.newStartDate} onChange={this.handleChange} />
                         </div>
-                        <div>
+                        <div className="msg-end-date">
                             <label htmlFor="newEndDate">Date de fin: </label>
                             <input type="date" name="newEndDate" id="newEndDate" value={this.state.newEndDate} onChange={this.handleChange} />
                         </div>
-                        <div>
-                            <button onClick={this.handleCancel}>Annuler</button>
-                            <button type="submit">Modifier</button>
+                        <div className="msg-btns">
+                            <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
+                            <button className="btn-submit" type="submit">Modifier</button>
                         </div>
                     </form>
                 </div>

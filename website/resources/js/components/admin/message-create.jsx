@@ -68,28 +68,28 @@ class MessageCreate extends React.Component {
 
     render() {
         return(
-            <div>
-                <h2>Créer un message</h2>
+            <div className="message-create">
+                <h3>Créer un message</h3>
                 <form method="post" onSubmit={this.handleSubmit}>
-                    <div>
+                    <div className="msg-title">
                         <label htmlFor="title">Titre: </label>
                         <input type="text" name="title" id="title" value={this.state.title} onChange={this.handleChange} />
                     </div>
-                    <div>
+                    <div className="msg-content">
                         <label htmlFor="content">Contenu: </label>
-                        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange} />
+                        <textarea type="text" name="content" id="content" maxLength="1000" value={this.state.content} onChange={this.handleChange} />
                     </div>
-                    <div>
+                    <div className="msg-start-date">
                         <label htmlFor="startDate">Date de début: </label>
                         <input type="date" name="startDate" id="startDate" value={this.state.startDate} onChange={this.handleChange} />
                     </div>
-                    <div>
+                    <div className="msg-end-date">
                         <label htmlFor="endDate">Date de fin: </label>
                         <input type="date" name="endDate" id="endDate" value={this.state.endDate} onChange={this.handleChange} />
                     </div>
-                    <div>
-                        <button onClick={this.handleCancel} >Annuler</button>
-                        <button type="submit">Envoyer</button>
+                    <div className="msg-btns">
+                        <button className="btn-cancel" onClick={this.handleCancel} >Annuler</button>
+                        <button className="btn-submit" type="submit">Envoyer</button>
                     </div>
                 </form>
             </div>
