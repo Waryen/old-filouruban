@@ -11,6 +11,7 @@ import Contact from './components/public/contact'
 import CategoriesList from './components/public/cat-list'
 import Category from './components/public/category'
 import Carousel from './components/public/carousel'
+import HomeArticles from './components/public/home-articles'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -74,5 +75,12 @@ if(document.getElementById('react-carousel')) {
     ReactDOM.render(
         <Carousel url={url} api={api} />,
         document.getElementById('react-carousel')
+    )
+}
+
+if(document.getElementById('react-home-articles')) {
+    ReactDOM.render(
+        <HomeArticles url={url} api={api} />,
+        document.getElementById('react-home-articles')
     )
 }

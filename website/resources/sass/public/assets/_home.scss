@@ -1,0 +1,121 @@
+.home {
+    display: flex;
+    flex-direction: column;
+
+    .home-about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+
+        .about-title {
+            font-family: $lato;
+            font-size: 2em;
+            font-weight: 600;
+            color: $peach;
+            margin-bottom: 20px;
+        }
+
+        .about-content {
+            background: $light-peach;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+
+            p {
+                font-family: $lato;
+                font-size: 1em;
+                color: $black;
+                margin-bottom: 20px;
+            }
+
+            a {
+                align-self: center;
+                text-decoration: none;
+                font-family: $lato;
+                font-size: 1.2em;
+                font-style: italic;
+                color: $silver;
+                background: $teal;
+                border-radius: 5px;
+                padding: 5px 10px;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    background: lighten($teal, 10%);
+                }
+            }
+        }
+    }
+
+    #react-home-articles .home-articles {
+        margin: 0 auto;
+        max-width: fit-content;
+        background: $light-peach;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+
+        ul {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+            @media screen and ($responsive) {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+            }
+        }
+
+        li {
+            margin: 10px;
+            background: $silver;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &:hover img, &:focus img {
+                transform: scale(1.1);
+            }
+
+            &:hover h3, &:focus h3 {
+                background: lighten($teal, 10%);
+            }
+        }
+
+        h3 {
+            background: $teal;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-family: $lato;
+            font-size: 1.2em;
+            color: $silver;
+            margin-top: 10px;
+            transition: all .15s;
+        }
+
+        figure {
+            overflow: hidden;
+            border-radius: 10px;
+
+            img {
+                max-width: 250px;
+                height: auto;
+                border-radius: 10px;
+                transition: all .15s;
+            }
+        }
+    }
+}

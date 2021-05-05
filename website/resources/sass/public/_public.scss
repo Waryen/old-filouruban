@@ -1,8 +1,13 @@
 // Imports
 @import 'assets/footer';
 @import 'assets/header';
-@import 'assets/main';
 @import 'assets/menu';
+@import 'assets/about';
+@import 'assets/articles';
+@import 'assets/categories';
+@import 'assets/contact';
+@import 'assets/home';
+@import 'assets/onearticle';
 
 
 
@@ -15,4 +20,5 @@
 
 main {
     flex: 1;
+    padding: 20px;
 }

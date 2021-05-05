@@ -385,605 +385,6 @@ th {
   }
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-}
-main .main-title {
-  grid-column: 3/11;
-  grid-row: 1;
-  font-family: "Lato", sans-serif;
-  font-size: 2em;
-  font-weight: 700;
-  font-style: italic;
-  color: #e29578;
-  text-align: center;
-  margin: 20px 0;
-}
-@media screen and (max-width: 768px) {
-  main .main-title {
-    grid-column: 2/12;
-    font-size: 1.5em;
-  }
-}
-main .main-desc {
-  grid-column: 3/11;
-  grid-row: 2;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5em;
-  font-weight: 400;
-  color: #000000;
-}
-main #react-carousel {
-  grid-column: 2/12;
-  grid-row: 1;
-  margin: 20px auto;
-}
-main #react-carousel .carousel-container {
-  display: flex;
-}
-main .home-about {
-  grid-column: 3/11;
-  grid-row: 2;
-  background: #edf6f9;
-  padding: 20px;
-  border-radius: 20px;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-@media screen and (max-width: 768px) {
-  main .home-about {
-    grid-column: 2/12;
-  }
-}
-main .home-about p {
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  color: #000000;
-}
-main .home-about .link-to-about {
-  margin-top: 20px;
-}
-main .home-about .link-to-about a {
-  text-decoration: none;
-  font-family: "Lato", sans-serif;
-  font-size: 1.1em;
-  font-style: italic;
-  color: #000000;
-  background: #ffddd2;
-  padding: 10px;
-  border-radius: 10px;
-  transition: all 0.15s;
-}
-main .home-about .link-to-about a:hover, main .home-about .link-to-about a:focus {
-  background: #e29578;
-}
-main .about-content {
-  grid-column: 3/11;
-  grid-row: 2;
-  background: #edf6f9;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-main .about-content p {
-  font-family: "Lato", sans-serif;
-  font-size: 1.2em;
-  font-weight: 400;
-}
-main .about-content p:not(:first-child) {
-  margin-top: 10px;
-}
-@media screen and (max-width: 768px) {
-  main .about-content {
-    grid-column: 2/12;
-  }
-  main .about-content p {
-    font-size: 1em;
-  }
-}
-main #react-contact {
-  grid-column: 3/11;
-  grid-row: 2;
-  justify-self: center;
-  background: #edf6f9;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  width: 700px;
-}
-main #react-contact .form-contact {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: auto;
-  row-gap: 20px;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
-}
-main #react-contact .form-contact label {
-  font-family: "Lato", sans-serif;
-  font-size: 1.2em;
-  font-weight: 600;
-  color: #e29578;
-  margin-bottom: 5px;
-}
-main #react-contact .form-contact input {
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  font-weight: 400;
-  color: #000000;
-  width: 200px;
-  height: 30px;
-  border: 1px solid #006d77;
-  border-radius: 5px;
-}
-main #react-contact .form-contact .form-firstname {
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-contact .form-contact .form-firstname {
-    grid-column: 1/4;
-  }
-}
-main #react-contact .form-contact .form-lastname {
-  grid-column: 2;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-contact .form-contact .form-lastname {
-    grid-column: 1/4;
-    grid-row: 2;
-  }
-}
-main #react-contact .form-contact .form-email {
-  grid-column: 3;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-contact .form-contact .form-email {
-    grid-column: 1/4;
-    grid-row: 3;
-  }
-}
-main #react-contact .form-contact .form-content {
-  grid-column: 1/4;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-main #react-contact .form-contact .form-content #form-content {
-  width: 600px;
-  height: 200px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.1em;
-  font-weight: 400;
-  color: #000000;
-  padding: 10px;
-  resize: none;
-  border: 1px solid #006d77;
-  border-radius: 10px;
-}
-@media screen and (max-width: 768px) {
-  main #react-contact .form-contact .form-content #form-content {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 768px) {
-  main #react-contact .form-contact .form-content {
-    grid-row: 4;
-  }
-}
-main #react-contact .form-contact .form-btn {
-  grid-column: 2;
-  grid-row: 3;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-main #react-contact .form-contact .form-btn button {
-  font-family: "Lato", sans-serif;
-  font-size: 1.2em;
-  font-weight: 700;
-  color: #000000;
-  background: #ffddd2;
-  border: 1px solid #e29578;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-main #react-contact .form-contact .form-btn button:hover, main #react-contact .form-contact .form-btn button:focus {
-  background: #e29578;
-  color: #ffffff;
-}
-@media screen and (max-width: 768px) {
-  main #react-contact .form-contact .form-btn {
-    grid-column: 2/3;
-    grid-row: 5;
-  }
-}
-@media screen and (max-width: 768px) {
-  main #react-contact {
-    grid-column: 2/12;
-    width: 100%;
-  }
-}
-main #react-categories {
-  grid-row: 2;
-  grid-column: 2/12;
-}
-@media screen and (max-width: 768px) {
-  main #react-categories {
-    grid-column: 1/13;
-  }
-}
-main #react-categories ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 10px;
-}
-@media screen and (max-width: 768px) {
-  main #react-categories ul {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-  }
-}
-main #react-categories ul li {
-  margin: 5px;
-  padding: 10px;
-  border-radius: 10px;
-  background: #ffddd2;
-  display: flex;
-  flex-direction: column;
-}
-main #react-categories ul li h3 {
-  text-decoration: none;
-  text-align: center;
-  color: #e29578;
-  font-family: "Lato", sans-serif;
-  font-size: 1.5em;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-main #react-categories ul li p {
-  text-align: left;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9em;
-  font-weight: 400;
-  color: #000000;
-}
-main #react-categories ul li .cat-img {
-  margin: 10px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-main #react-categories ul li .cat-img img {
-  transition: transform 0.15s;
-  max-width: 300px;
-  height: auto;
-}
-@media screen and (max-width: 768px) {
-  main #react-categories ul li .cat-img img {
-    max-width: 250px;
-  }
-}
-main #react-categories ul li .cat-img img:hover {
-  transform: scale(1.1);
-}
-main #react-categories ul li .link-to-art {
-  text-decoration: none;
-  align-self: center;
-  font-family: "Lato", sans-serif;
-  font-size: 1.2em;
-  color: #006d77;
-  padding: 5px;
-  transition: all 0.15s;
-}
-main #react-categories ul li .link-to-art:hover, main #react-categories ul li .link-to-art:focus {
-  background: #edf6f9;
-  border-radius: 5px;
-}
-main #react-category {
-  grid-column: 2/12;
-  grid-row: 3;
-  margin: 20px;
-}
-@media screen and (max-width: 768px) {
-  main #react-category {
-    grid-column: 1/13;
-  }
-}
-main #react-category ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-main #react-category li {
-  margin: 5px;
-  padding: 10px;
-  border-radius: 10px;
-  background: #ffddd2;
-  display: flex;
-  flex-direction: column;
-}
-main #react-category li h3 {
-  text-decoration: none;
-  text-align: center;
-  color: #e29578;
-  font-family: "Lato", sans-serif;
-  font-size: 1.5em;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-main #react-category li p {
-  text-align: left;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9em;
-  font-weight: 400;
-  color: #000000;
-}
-main #react-category li .art-img {
-  overflow: hidden;
-  margin: 10px;
-  border-radius: 10px;
-}
-main #react-category li .art-img img {
-  max-width: 250px;
-  height: auto;
-  transition: all 0.15s;
-}
-main #react-category li .art-img img:hover, main #react-category li .art-img img:focus {
-  transform: scale(1.1);
-}
-main #react-category li a:last-child {
-  text-decoration: none;
-  align-self: center;
-  font-family: "Lato", sans-serif;
-  font-size: 1.2em;
-  color: #006d77;
-  padding: 5px;
-  transition: all 0.15s;
-}
-main #react-category li a:last-child:hover, main #react-category li a:last-child:focus {
-  background: #edf6f9;
-  border-radius: 5px;
-}
-main #react-article {
-  grid-row: 1;
-  grid-column: 2/12;
-  margin: 20px;
-}
-@media screen and (max-width: 768px) {
-  main #react-article {
-    grid-column: 1/13;
-  }
-}
-main #react-article .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #ffddd2;
-  padding: 20px;
-  border-radius: 20px;
-}
-main #react-article .card figure {
-  overflow: hidden;
-}
-main #react-article .card figure img {
-  max-width: 300px;
-  height: auto;
-  border-radius: 10px;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .card figure img {
-    max-width: 250px;
-  }
-}
-main #react-article .card figure img:hover, main #react-article .card figure img:focus {
-  cursor: pointer;
-}
-main #react-article .card .art-desc {
-  align-self: flex-start;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.1em;
-  font-weight: 400;
-  color: #000000;
-  margin-top: 20px;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-main #react-article .com-card {
-  padding: 10px;
-  margin-top: 20px;
-  background: #edf6f9;
-  border-radius: 10px;
-  width: 80%;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .com-card {
-    width: 100%;
-  }
-}
-main #react-article .com-card h2 {
-  font-family: "Lato", sans-serif;
-  font-size: 1.4em;
-  font-weight: 400;
-  color: #e29578;
-  text-align: center;
-}
-main #react-article .com-card .com-list li {
-  background: #ffffff;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-}
-main #react-article .com-card .com-list li h3 {
-  font-family: "Lato", sans-serif;
-  font-size: 1.1em;
-  font-weight: 700;
-  color: #000000;
-  margin-bottom: 5px;
-}
-main #react-article .com-card .com-list li .com-content {
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9em;
-  color: #000000;
-  margin-bottom: 10px;
-}
-main #react-article .com-card .com-list li .com-date {
-  font-family: "Roboto", sans-serif;
-  font-size: 0.8em;
-  color: #000000;
-}
-main #react-article .com-card .com-create form {
-  display: grid;
-  grid-template-columns: repeat(12, auto);
-  grid-template-rows: auto;
-  row-gap: 10px;
-}
-main #react-article .com-card .com-create form label {
-  font-family: "Lato", sans-serif;
-  font-size: 1.1em;
-  color: #006d77;
-}
-main #react-article .com-card .com-create form .com-firstname {
-  grid-column: 1/7;
-  grid-row: 1;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .com-card .com-create form .com-firstname {
-    grid-column: 1/13;
-  }
-}
-main #react-article .com-card .com-create form .com-firstname #com-firstname {
-  padding: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  color: #000000;
-  border: 1px solid #006d77;
-  border-radius: 5px;
-  width: 200px;
-}
-main #react-article .com-card .com-create form .com-lastname {
-  grid-column: 7/13;
-  grid-row: 1;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .com-card .com-create form .com-lastname {
-    grid-column: 1/13;
-    grid-row: 2;
-  }
-}
-main #react-article .com-card .com-create form .com-lastname #com-lastname {
-  padding: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  color: #000000;
-  border: 1px solid #006d77;
-  border-radius: 5px;
-  width: 200px;
-}
-main #react-article .com-card .com-create form .com-content {
-  grid-column: 1/13;
-  grid-row: 2;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .com-card .com-create form .com-content {
-    grid-row: 3;
-  }
-}
-main #react-article .com-card .com-create form .com-content #com-content {
-  resize: none;
-  width: 400px;
-  height: 100px;
-  padding: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  color: #000000;
-  border: 1px solid #006d77;
-  border-radius: 10px;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .com-card .com-create form .com-content #com-content {
-    width: 270px;
-    height: 50px;
-  }
-}
-main #react-article .com-card .com-create form .com-btn {
-  grid-column: 1/13;
-  grid-row: 3;
-  justify-self: center;
-}
-@media screen and (max-width: 768px) {
-  main #react-article .com-card .com-create form .com-btn {
-    grid-row: 4;
-  }
-}
-main #react-article .com-card .com-create form .com-btn button {
-  font-family: "Lato", sans-serif;
-  font-size: 1.2em;
-  color: #006d77;
-  padding: 10px 15px;
-  background: #83c5be;
-  border: none;
-  border-radius: 5px;
-  transition: all 0.15s;
-}
-main #react-article .com-card .com-create form .com-btn button:hover, main #react-article .com-card .com-create form .com-btn button:focus {
-  background: #006d77;
-  color: #edf6f9;
-  cursor: pointer;
-}
-main #react-article .com-card .com-create form .com-btn #btn-cancel {
-  margin-right: 5px;
-}
-main #react-article .com-card .com-create form .com-btn #btn-submit {
-  margin-left: 5px;
-}
-main #legals {
-  grid-column: 2/12;
-  grid-row: 1;
-  margin: 20px auto;
-}
-
 .open-menu {
   font-size: 2em;
   color: #edf6f9;
@@ -1035,6 +436,116 @@ main #legals {
   letter-spacing: 0.1em;
 }
 
+.home {
+  display: flex;
+  flex-direction: column;
+}
+.home .home-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.home .home-about .about-title {
+  font-family: "Lato", sans-serif;
+  font-size: 2em;
+  font-weight: 600;
+  color: #e29578;
+  margin-bottom: 20px;
+}
+.home .home-about .about-content {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+.home .home-about .about-content p {
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  margin-bottom: 20px;
+}
+.home .home-about .about-content a {
+  align-self: center;
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #edf6f9;
+  background: #006d77;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.home .home-about .about-content a:hover, .home .home-about .about-content a:focus {
+  background: #009caa;
+}
+.home #react-home-articles .home-articles {
+  margin: 0 auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+.home #react-home-articles .home-articles ul {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 768px) {
+  .home #react-home-articles .home-articles ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+}
+.home #react-home-articles .home-articles li {
+  margin: 10px;
+  background: #edf6f9;
+  padding: 10px;
+  border-radius: 10px;
+}
+.home #react-home-articles .home-articles a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home #react-home-articles .home-articles a:hover img, .home #react-home-articles .home-articles a:focus img {
+  transform: scale(1.1);
+}
+.home #react-home-articles .home-articles a:hover h3, .home #react-home-articles .home-articles a:focus h3 {
+  background: #009caa;
+}
+.home #react-home-articles .home-articles h3 {
+  background: #006d77;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #edf6f9;
+  margin-top: 10px;
+  transition: all 0.15s;
+}
+.home #react-home-articles .home-articles figure {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.home #react-home-articles .home-articles figure img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+
 #wrapper {
   display: flex;
   flex-direction: column;
@@ -1043,4 +554,5 @@ main #legals {
 
 main {
   flex: 1;
+  padding: 20px;
 }
