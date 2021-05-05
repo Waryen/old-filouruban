@@ -34,18 +34,18 @@ class ContactList extends React.Component {
         messages.forEach(el => {
             list.push(
                 <li key={el.id}>
-                    <h3>{el.firstname} {el.lastname}</h3>
-                    <p><a href={`mailto:${el.email}`}>{el.email}</a></p>
-                    <p>{el.content}</p>
-                    <button value={el.id} onClick={this.deleteContact}>Supprimer</button>
+                    <h4 className="name">{el.firstname} {el.lastname}</h4>
+                    <p className="email"><a href={`mailto:${el.email}`}>{el.email}</a></p>
+                    <p className="content">{el.content}</p>
+                    <button className="delete" value={el.id} onClick={this.deleteContact}>Supprimer</button>
                 </li>
             )
         })
 
 
         return(
-            <div>
-                <h2>Liste des contacts</h2>
+            <div className="contact-list">
+                <h3>Liste des contacts</h3>
                 <ul>
                     {list}
                 </ul>

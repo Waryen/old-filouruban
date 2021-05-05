@@ -3,8 +3,8 @@ import ContactList from './contact-list'
 
 export default function Contact(props) {
     return(
-        <div>
-            <h1>Contact</h1>
+        <div className="admin-contact">
+            <h2>Contact</h2>
             <ContactList url={props.url} api={props.api} />
         </div>
     )
