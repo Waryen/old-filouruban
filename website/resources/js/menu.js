@@ -40,6 +40,16 @@ window.addEventListener('keydown', function(e) {
     }
 })
 
+// Ferme le menu en cliquant en-dehors des liens
+nav.addEventListener('click', () => {
+    if(nav.style.visibility == 'visible') {
+        nav.setAttribute('aria-hidden', 'true')
+        nav.style.visibility = 'hidden'
+        open.style.visibility = 'visible'
+        open.focus()
+    }
+})
+
 // Gestion des tabulations dans le menu
 nav.addEventListener('keydown', function(e) {
     if(e.key == 'Tab' && nav.style.visibility == 'visible') {

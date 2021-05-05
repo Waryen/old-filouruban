@@ -3385,6 +3385,15 @@ window.addEventListener('keydown', function (e) {
     open.style.visibility = 'visible';
     open.focus();
   }
+}); // Ferme le menu en cliquant en-dehors des liens
+
+nav.addEventListener('click', function () {
+  if (nav.style.visibility == 'visible') {
+    nav.setAttribute('aria-hidden', 'true');
+    nav.style.visibility = 'hidden';
+    open.style.visibility = 'visible';
+    open.focus();
+  }
 }); // Gestion des tabulations dans le menu
 
 nav.addEventListener('keydown', function (e) {
