@@ -917,6 +917,216 @@ th {
   transition: all 0.15s;
 }
 
+#react-article .article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#react-article .article .article-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+#react-article .article .article-card .article-title {
+  font-family: "Lato", sans-serif;
+  font-size: 2em;
+  color: #e29578;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+#react-article .article .article-card figure {
+  overflow: hidden;
+  border-radius: 10px;
+}
+#react-article .article .article-card figure img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+#react-article .article .article-card .article-desc {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+#react-article .article .com-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+}
+#react-article .article .com-card .com-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+#react-article .article .com-card .com-list h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  color: #e29578;
+  text-align: center;
+  margin-bottom: 10px;
+}
+#react-article .article .com-card .com-list ul {
+  display: flex;
+  flex-direction: column;
+}
+#react-article .article .com-card .com-list ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #edf6f9;
+  border-radius: 10px;
+  padding: 20px;
+}
+#react-article .article .com-card .com-list ul li:not(:last-child) {
+  margin-bottom: 5px;
+}
+#react-article .article .com-card .com-list ul li h4 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2em;
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+#react-article .article .com-card .com-list ul li .com-content {
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+  color: #000000;
+  font-size: 1em;
+}
+#react-article .article .com-card .com-list ul li .com-date {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8em;
+  font-style: italic;
+  color: #000000;
+}
+#react-article .article .com-card .com-create {
+  display: flex;
+  flex-direction: column;
+}
+#react-article .article .com-card .com-create h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  color: #e29578;
+  text-align: center;
+  margin-bottom: 10px;
+}
+#react-article .article .com-card .com-create form {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: auto;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  row-gap: 5px;
+}
+#react-article .article .com-card .com-create form .com-firstname {
+  grid-column: 1;
+  grid-row: 1;
+}
+@media screen and (max-width: 768px) {
+  #react-article .article .com-card .com-create form .com-firstname {
+    grid-column: 1/3;
+  }
+}
+#react-article .article .com-card .com-create form .com-lastname {
+  grid-column: 2;
+  grid-row: 1;
+}
+@media screen and (max-width: 768px) {
+  #react-article .article .com-card .com-create form .com-lastname {
+    grid-column: 1/3;
+    grid-row: 2;
+  }
+}
+#react-article .article .com-card .com-create form .com-content {
+  grid-column: 1/3;
+  grid-row: 2;
+}
+@media screen and (max-width: 768px) {
+  #react-article .article .com-card .com-create form .com-content {
+    grid-row: 3;
+  }
+}
+#react-article .article .com-card .com-create form .com-btn {
+  grid-column: 1/3;
+  grid-row: 3;
+  justify-self: center;
+  display: inline-block;
+  margin-top: 20px;
+}
+@media screen and (max-width: 768px) {
+  #react-article .article .com-card .com-create form .com-btn {
+    grid-row: 4;
+  }
+}
+#react-article .article .com-card .com-create form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#react-article .article .com-card .com-create form label {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 5px;
+}
+#react-article .article .com-card .com-create form input {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  border: 1px solid #006d77;
+  border-radius: 5px;
+  padding: 5px;
+}
+#react-article .article .com-card .com-create form textarea {
+  resize: none;
+  width: 500px;
+  height: 200px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  border: 1px solid #006d77;
+  border-radius: 5px;
+  padding: 5px;
+}
+@media screen and (max-width: 768px) {
+  #react-article .article .com-card .com-create form textarea {
+    width: 300px;
+    height: 400px;
+  }
+}
+#react-article .article .com-card .com-create form button {
+  background: #006d77;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #edf6f9;
+  transition: all 0.15s;
+}
+#react-article .article .com-card .com-create form button:hover, #react-article .article .com-card .com-create form button:focus {
+  cursor: pointer;
+  background: #009caa;
+}
+#react-article .article .com-card .com-create form button.btn-cancel {
+  margin-right: 5px;
+}
+#react-article .article .com-card .com-create form button.btn-submit {
+  margin-left: 5px;
+}
+
 .legals {
   display: flex;
   flex-direction: column;

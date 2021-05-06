@@ -90,7 +90,7 @@ class Commentary extends React.Component {
             comList.forEach(el => {
                 renderList.push(
                     <li key={el.id}>
-                        <h3>{el.firstname} {el.lastname}</h3>
+                        <h4>{el.firstname} {el.lastname}</h4>
                         <p className="com-content">{el.content}</p>
                         <p className="com-date">Envoyé le: {el.date}</p>
                     </li>
@@ -103,13 +103,13 @@ class Commentary extends React.Component {
         return(
             <div className="com-card">
                 <div className="com-list">
-                    <h2>Avis des internautes</h2>
+                    <h3>Avis des internautes</h3>
                     <ul>
                         {renderList}
                     </ul>
                 </div>
                 <div className="com-create">
-                    <h2>Donner votre avis</h2>
+                    <h3>Donner votre avis</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="com-firstname">
                             <label htmlFor="com-firstname">Votre prénom: </label>
@@ -124,8 +124,8 @@ class Commentary extends React.Component {
                             <textarea type="text" name="content" maxLength="300" id="com-content" value={this.state.content} onChange={this.handleChange} required />
                         </div>
                         <div className="com-btn">
-                            <button id="btn-cancel" onClick={this.hanldeCancel}>Annuler</button>
-                            <button id="btn-submit" type="submit">Envoyer</button>
+                            <button className="btn-cancel" onClick={this.hanldeCancel}>Annuler</button>
+                            <button className="btn-submit" type="submit">Envoyer</button>
                         </div>
                     </form>
                 </div>

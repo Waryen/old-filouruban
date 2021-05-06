@@ -1,0 +1,232 @@
+#react-article .article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .article-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: $light-peach;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+
+        .article-title {
+            font-family: $lato;
+            font-size: 2em;
+            color: $peach;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        figure {
+            overflow: hidden;
+            border-radius: 10px;
+
+            img {
+                max-width: 300px;
+                height: auto;
+                border-radius: 10px;
+            }
+        }
+
+        .article-desc {
+            font-family: $roboto;
+            font-size: 1em;
+            color: $black;
+            margin-top: 10px;
+            align-self: flex-start;
+        }
+    }
+
+    .com-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: $light-peach;
+        border-radius: 10px;
+        padding: 20px;
+
+        .com-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+
+            h3 {
+                font-family: $lato;
+                font-size: 1.5em;
+                color: $peach;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            ul {
+                display: flex;
+                flex-direction: column;
+
+                li {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    background: $silver;
+                    border-radius: 10px;
+                    padding: 20px;
+
+                    &:not(:last-child) {
+                        margin-bottom: 5px;
+                    }
+
+                    h4 {
+                        font-family: $roboto;
+                        font-size: 1.2em;
+                        color: $black;
+                        font-weight: 700;
+                        margin-bottom: 10px;
+                    }
+
+                    .com-content {
+                        margin-bottom: 5px;
+                        font-family: $roboto;
+                        color: $black;
+                        font-size: 1em;
+                    }
+
+                    .com-date {
+                        font-family: $roboto;
+                        font-size: 0.8em;
+                        font-style: italic;
+                        color: $black;
+                    }
+                }
+            }
+        }
+
+        .com-create {
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+                font-family: $lato;
+                font-size: 1.5em;
+                color: $peach;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            form {
+                display: grid;
+                grid-template-columns: repeat(2, auto);
+                grid-template-rows: auto;
+                column-gap: 5px;
+                row-gap: 5px;
+
+                .com-firstname {
+                    grid-column: 1;
+                    grid-row: 1;
+
+                    @media screen and ($responsive) {
+                        grid-column: 1 / 3;
+                    }
+                }
+
+                .com-lastname {
+                    grid-column: 2;
+                    grid-row: 1;
+
+                    @media screen and ($responsive) {
+                        grid-column: 1 / 3;
+                        grid-row: 2;
+                    }
+                }
+
+                .com-content {
+                    grid-column: 1 / 3;
+                    grid-row: 2;
+
+                    @media screen and ($responsive) {
+                        grid-row: 3;
+                    }
+                }
+
+                .com-btn {
+                    grid-column: 1 / 3;
+                    grid-row: 3;
+                    justify-self: center;
+                    display: inline-block;
+                    margin-top: 20px;
+
+                    @media screen and ($responsive) {
+                        grid-row: 4;
+                    }
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                label {
+                    font-family: $lato;
+                    font-size: 1.1em;
+                    color: $black;
+                    text-align: center;
+                    margin-bottom: 5px;
+                }
+
+                input {
+                    font-family: $roboto;
+                    font-size: 1em;
+                    color: $black;
+                    border: 1px solid $teal;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+
+                textarea {
+                    resize: none;
+                    width: 500px;
+                    height: 200px;
+                    font-family: $roboto;
+                    font-size: 1em;
+                    color: $black;
+                    border: 1px solid $teal;
+                    border-radius: 5px;
+                    padding: 5px;
+
+                    @media screen and ($responsive) {
+                        width: 300px;
+                        height: 400px;
+                    }
+                }
+
+                button {
+                    background: $teal;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 5px 10px;
+                    font-family: $lato;
+                    font-size: 1.2em;
+                    color: $silver;
+                    transition: all .15s;
+
+                    &:hover, &:focus {
+                        cursor: pointer;
+                        background: lighten($teal, 10%);
+                    }
+
+                    &.btn-cancel {
+                        margin-right: 5px;
+                    }
+
+                    &.btn-submit {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

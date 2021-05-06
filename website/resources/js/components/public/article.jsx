@@ -39,12 +39,14 @@ class Article extends React.Component {
         const image = this.state.article.image_id
 
         return(
-            <div className="card">
-                <h2 className="main-title">{name}</h2>
-                <figure>
-                    <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} />
-                </figure>
-                <p className="art-desc">{desc}</p>
+            <div className="article">
+                <div className="article-card">
+                    <h2 className="article-title">{name}</h2>
+                    <figure>
+                        <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} />
+                    </figure>
+                    <p className="article-desc">{desc}</p>
+                </div>
                 <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
             </div>
         )
