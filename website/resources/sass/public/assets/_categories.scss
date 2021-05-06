@@ -1,0 +1,83 @@
+.categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .categories-title {
+        font-family: $lato;
+        font-size: 2em;
+        color: $peach;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #react-categories div ul {
+        background: $light-peach;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+            background: $silver;
+            border-radius: 10px;
+            padding: 20px;
+
+            h3 {
+                font-family: $lato;
+                font-size: 1.5em;
+                color: $black;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-family: $roboto;
+                font-size: 0.9em;
+                color: $black;
+                font-style: italic;
+                margin-bottom: 5px;
+            }
+
+            figure {
+                overflow: hidden;
+                border-radius: 10px;
+
+                img {
+                    max-width: 250px;
+                    height: auto;
+                    border-radius: 10px;
+                    transition: all .15s;
+
+                    &:hover, &:focus {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+
+            .link-to-cat {
+                margin-top: 10px;
+                background: $teal;
+                border-radius: 5px;
+                padding: 5px 10px;
+                font-family: $lato;
+                font-size: 1.2em;
+                color: $silver;
+                text-decoration: none;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    background: lighten($teal, 10%);
+                }
+            }
+        }
+    }
+}

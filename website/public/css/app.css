@@ -464,6 +464,80 @@ th {
   margin-bottom: 0;
 }
 
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.categories .categories-title {
+  font-family: "Lato", sans-serif;
+  font-size: 2em;
+  color: #e29578;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.categories #react-categories div ul {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.categories #react-categories div ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  background: #edf6f9;
+  border-radius: 10px;
+  padding: 20px;
+}
+.categories #react-categories div ul li h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.categories #react-categories div ul li p {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+.categories #react-categories div ul li figure {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.categories #react-categories div ul li figure img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+.categories #react-categories div ul li figure img:hover, .categories #react-categories div ul li figure img:focus {
+  transform: scale(1.1);
+}
+.categories #react-categories div ul li .link-to-cat {
+  margin-top: 10px;
+  background: #006d77;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #edf6f9;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.categories #react-categories div ul li .link-to-cat:hover, .categories #react-categories div ul li .link-to-cat:focus {
+  background: #009caa;
+}
+
 .contact {
   display: flex;
   flex-direction: column;

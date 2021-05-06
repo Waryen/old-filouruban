@@ -2284,13 +2284,15 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
             href: "articles/".concat(el.id),
             className: "cat-img",
             onClick: _this3.saveId(el.id),
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(_this3.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
-              alt: "Image de la cat\xE9gorie: ".concat(el.name)
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("figure", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                src: "".concat(_this3.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
+                alt: "Image de la cat\xE9gorie: ".concat(el.name)
+              })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
             href: "articles/".concat(el.id),
-            className: "link-to-art",
+            className: "link-to-cat",
             onClick: _this3.saveId(el.id),
             children: "Voir les articles"
           })]

@@ -42,8 +42,12 @@ class CategoriesList extends React.Component {
                 <li key={el.id}>
                     <h3>{el.name}</h3>
                     <p>{el.description}</p>
-                    <a href={`articles/${el.id}`} className="cat-img" onClick={this.saveId(el.id)}><img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} /></a>
-                    <a href={`articles/${el.id}`} className="link-to-art" onClick={this.saveId(el.id)}>Voir les articles</a>
+                    <a href={`articles/${el.id}`} className="cat-img" onClick={this.saveId(el.id)}>
+                        <figure>
+                            <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} />
+                        </figure>
+                    </a>
+                    <a href={`articles/${el.id}`} className="link-to-cat" onClick={this.saveId(el.id)}>Voir les articles</a>
                 </li>
             )
         })
