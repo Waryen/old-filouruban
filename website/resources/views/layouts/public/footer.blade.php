@@ -10,7 +10,7 @@
         <p>Copyrights © 2021 | filouruban.be</p>
     </div>
     <div class="social-media">
-        <p>Suivez-moi</p>
+        <p>Suivez-nous</p>
         <nav>
             <ul>
                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>

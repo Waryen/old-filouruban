@@ -5,18 +5,27 @@
 @endsection
 
 @section('body')
-    <div id="legals">
-        <div class="legal-card" id="legal-mentions">
-            <h2 class="main-title">Mentions légales</h2>
-            <p class="legal-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum facere unde voluptatem consequatur velit ipsam dolorem consequuntur dicta tempore placeat deleniti voluptatibus vel a quisquam repellendus reiciendis illo, nobis praesentium!</p>
+    <div class="legals">
+        <div class="legal-card">
+            <h2 class="legal-title">Mentions légales</h2>
+            <div class="legal-content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem asperiores dignissimos, soluta velit aut voluptate, nihil reprehenderit quasi animi quia provident at molestiae fuga reiciendis alias iure ducimus nam. Debitis!</p>
+                <p>Ratione doloremque modi autem accusamus delectus inventore numquam voluptatibus praesentium perferendis aliquid, aut repellendus quasi, deserunt neque incidunt aspernatur dolores ullam. Molestias eaque adipisci libero a natus, necessitatibus dolorum temporibus.</p>
+            </div>
         </div>
-        <div class="legal-card" id="legal-confi">
-            <h2 class="main-title">Politique de confidentialité</h2>
-            <p class="legal-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima commodi vel sequi fuga cumque quam aliquam eum, veniam at quos, repudiandae saepe debitis praesentium obcaecati assumenda error consequuntur aspernatur iusto.</p>
+        <div class="legal-card">
+            <h2 class="legal-title">Politique de confidentialité</h2>
+            <div class="legal-content">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum necessitatibus, deserunt nam at adipisci aperiam aliquid id, quae error facere nisi architecto hic omnis? Animi voluptates ipsum at qui repellat.</p>
+                <p>Temporibus doloribus, esse explicabo, maiores sint quaerat quam delectus optio sed dignissimos asperiores quisquam voluptatibus accusamus? Perspiciatis quis perferendis ex consequuntur vitae dolore ut, sed molestiae soluta id omnis expedita.</p>
+            </div>
         </div>
-        <div class="legal-card" id="legal-cookies">
-            <h2 class="main-title">Gestion des cookies</h2>
-            <p class="legal-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita cum, consectetur recusandae, eos voluptatibus similique a voluptate officia dignissimos provident assumenda delectus ducimus dolorem nihil at repudiandae quo perferendis consequuntur!</p>
+        <div class="legal-card">
+            <h2 class="legal-title">Gestion des cookies</h2>
+            <div class="legal-content">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident earum dolores possimus doloremque quas distinctio praesentium laudantium? Modi sint alias a soluta deleniti? Explicabo quos dignissimos assumenda maiores eos fugiat.</p>
+                <p>In inventore voluptates aut voluptatem illum ducimus natus ratione soluta nostrum esse, quos deserunt obcaecati. Delectus neque natus blanditiis velit sequi recusandae, repellendus laboriosam repudiandae hic fugit pariatur architecto dignissimos.</p>
+            </div>
         </div>
     </div>
 @endsection
