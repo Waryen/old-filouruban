@@ -436,6 +436,34 @@ th {
   letter-spacing: 0.1em;
 }
 
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.about .about-title {
+  font-family: "Lato", sans-serif;
+  font-size: 2em;
+  color: #e29578;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.about .about-content {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+}
+.about .about-content p {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1em;
+  color: #000000;
+  margin-bottom: 10px;
+}
+.about .about-content p:last-child {
+  margin-bottom: 0;
+}
+
 .home {
   display: flex;
   flex-direction: column;
