@@ -52,7 +52,7 @@ class Contact extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="form-contact-wrapper">
                 <form onSubmit={this.handleSubmit} className="form-contact">
                     <div className="form-firstname">
                         <label htmlFor="form-firstname">Votre prénom</label>
@@ -71,8 +71,11 @@ class Contact extends React.Component {
                         <textarea type="text" name="content" id="form-content" maxLength="1000" value={this.state.content} onChange={this.handleChange} required />
                     </div>
                     <div className='form-btn'>
-                        <button onClick={this.handleCancel}>Annuler</button>
-                        <button type="submit">Envoyer</button>
+                        <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
+                        <button className="btn-submit" type="submit">Envoyer</button>
+                    </div>
+                    <div className="form-info">
+                        <p>Tous les champs sont obligatoires</p>
                     </div>
                 </form>
             </div>

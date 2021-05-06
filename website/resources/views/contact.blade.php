@@ -5,6 +5,8 @@
 @endsection
 
 @section('body')
-    <h2 class="main-title">Contacter Filouruban</h2>
-    <div id="react-contact"></div>
+    <div class="contact">
+        <h2 class="contact-title">Contacter Filouruban</h2>
+        <div id="react-contact"></div>
+    </div>
 @endsection
