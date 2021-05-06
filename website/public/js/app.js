@@ -2439,13 +2439,16 @@ var Category = /*#__PURE__*/function (_React$Component) {
               href: "".concat(_this3.state.url, "/").concat(el.id),
               onClick: _this3.saveId(el.id),
               className: "art-img",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-                src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-                alt: "Image de l'article ".concat(el.name)
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("figure", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                  src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+                  alt: "Image de l'article ".concat(el.name)
+                })
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
               href: "".concat(_this3.state.url, "/").concat(el.id),
               onClick: _this3.saveId(el.id),
+              className: "link-to-art",
               children: "Voir l'article"
             })]
           }, el.id));

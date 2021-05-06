@@ -464,6 +464,79 @@ th {
   margin-bottom: 0;
 }
 
+.category-articles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.category-articles .cat-arts-title {
+  font-family: "Lato", sans-serif;
+  font-size: 2em;
+  color: #e29578;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.category-articles .cat-arts-desc {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  margin-bottom: 20px;
+}
+.category-articles #react-category div ul {
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.category-articles #react-category div ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  background: #edf6f9;
+  border-radius: 10px;
+  padding: 20px;
+}
+.category-articles #react-category div ul li h3 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.category-articles #react-category div ul li figure {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.category-articles #react-category div ul li figure img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+.category-articles #react-category div ul li figure img:hover, .category-articles #react-category div ul li figure img:focus {
+  transform: scale(1.1);
+}
+.category-articles #react-category div ul li .link-to-art {
+  margin-top: 10px;
+  background: #006d77;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #edf6f9;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.category-articles #react-category div ul li .link-to-art:hover, .category-articles #react-category div ul li .link-to-art:focus {
+  background: #009caa;
+}
+
 .categories {
   display: flex;
   flex-direction: column;

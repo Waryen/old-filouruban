@@ -67,8 +67,12 @@ class Category extends React.Component {
                 articlesList.push(
                     <li key={el.id}>
                         <h3>{el.name}</h3>
-                        <a href={`${this.state.url}/${el.id}`} onClick={this.saveId(el.id)} className="art-img"><img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} /></a>
-                        <a href={`${this.state.url}/${el.id}`} onClick={this.saveId(el.id)}>Voir l'article</a>
+                        <a href={`${this.state.url}/${el.id}`} onClick={this.saveId(el.id)} className="art-img">
+                            <figure>
+                                <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} />
+                            </figure>
+                        </a>
+                        <a href={`${this.state.url}/${el.id}`} onClick={this.saveId(el.id)} className="link-to-art">Voir l'article</a>
                     </li>
                 )
             }
