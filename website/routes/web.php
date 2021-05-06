@@ -29,15 +29,15 @@ Route::get('/', function() {
 })->name('accueil');
 
 Route::get('articles', function() {
-    return view('articles');
-})->name('articles');
+    return view('categories');
+})->name('categories');
 
 Route::get('articles/{category}', function(Category $category) {
-    return view('category', ['category' => $category]);
-})->name('category');
+    return view('cat-arts', ['category' => $category]);
+})->name('cat-arts');
 
 Route::get('articles/{category}/{article}', function(Category $category, Article $article) {
-    return view('article-one', ['article' => $article]);
+    return view('article', ['article' => $article]);
 })->name('article');
 
 Route::get('about', function() {
