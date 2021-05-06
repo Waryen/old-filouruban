@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 01, 2021 at 04:34 PM
+-- Generation Time: May 06, 2021 at 06:47 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -38,8 +38,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `firstname`, `lastname`, `email`, `password`, `su`, `created_at`, `updated_at`, `api_token`, `remember_token`) VALUES
-(1, 'Jean', 'Admin', 'admin@filouruban.be', '$2y$10$cbP4Xf/dVGE8UEF3OfunIeffcR804amAzbw0OWJDL2ENXNtd5u2oe', 1, '2021-03-31 14:49:06', '2021-03-31 14:49:06', 'UJKhBNU2kN5qsdopJKVcm4ZFCurkRRWX7uPFlgehdGd0H8alzdoy6yVf2DUh9sPiYrHztFSUx6oijfWhXw0G4nk40RtKUBrDPOmk', NULL),
-(6, 'Jonathan', 'Gomand', 'jonathan@mail.com', '$2y$10$B/67T7ASVbzMykFoTIHs1ujZF9CqHbOA3AW557TA9z3obKfAY3wpm', 1, '2021-04-01 14:32:48', '2021-04-01 14:32:48', '2HKNSNGd7xcx9iGeiivzZy9ijS4APjdkLWGBKvJgixIoZc6aXDt1t2r5NHzU3X3yEHdnW8Flk78hDC3oOkIGfGMoYnK1snYIrCRn', NULL),
+(1, 'Jean', 'Admin', 'admin@mail.be', '$2y$10$cbP4Xf/dVGE8UEF3OfunIeffcR804amAzbw0OWJDL2ENXNtd5u2oe', 1, '2021-03-31 14:49:06', '2021-03-31 14:49:06', 'UJKhBNU2kN5qsdopJKVcm4ZFCurkRRWX7uPFlgehdGd0H8alzdoy6yVf2DUh9sPiYrHztFSUx6oijfWhXw0G4nk40RtKUBrDPOmk', NULL),
+(6, 'Jonathan', 'Gomand', 'jonathan@mail.com', '$2y$10$B/67T7ASVbzMykFoTIHs1ujZF9CqHbOA3AW557TA9z3obKfAY3wpm', 1, '2021-04-01 14:32:48', '2021-04-01 14:32:48', '2HKNSNGd7xcx9iGeiivzZy9ijS4APjdkLWGBKvJgixIoZc6aXDt1t2r5NHzU3X3yEHdnW8Flk78hDC3oOkIGfGMoYnK1snYIrCRn', 'AieLkAZCGmEpSXveWJ6MCmlDnyHXOa2mHHb0c5BDoPPVQXgg1BGh7G6yIFeM'),
 (7, 'Sophie', 'Gomand', 'sophie@mail.com', '$2y$10$ieuEjpWeA1FsSVq3am8ZUeDBJHdr7xZWQ80xoOTrqppyETcMngE6y', 1, '2021-04-01 14:33:07', '2021-04-01 14:33:07', 'SsntZrIvgf2pBKrBwCbtMfzLY1cFTC1QEpylaNBKQbDL80gYmkKWDqsNFqE0ZA77PVYG6FeTD2C6LqzASZ6V6cjAn00S3FZMZbrJ', NULL);
 
 -- --------------------------------------------------------
@@ -55,24 +55,21 @@ CREATE TABLE `articles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `categories_id` bigint(20) UNSIGNED NOT NULL,
-  `admins_id` bigint(20) UNSIGNED NOT NULL
+  `admins_id` bigint(20) UNSIGNED NOT NULL,
+  `image_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `name`, `description`, `created_at`, `updated_at`, `categories_id`, `admins_id`) VALUES
-(1, 'quia', 'Fugiat qui corrupti eligendi consequatur iste. Nemo beatae reiciendis iusto tenetur. Deserunt voluptatibus vel consequatur sunt porro perspiciatis.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 5, 1),
-(2, 'id', 'Modi quis occaecati eos animi tempore illum. Mollitia impedit ut et. Aut placeat autem quo.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 4, 1),
-(3, 'repudiandae', 'Nostrum ut nesciunt recusandae enim beatae blanditiis temporibus. Perspiciatis nostrum repellat beatae voluptatem mollitia. Sed omnis nihil eveniet perferendis iste voluptatibus.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 3, 1),
-(4, 'laborum', 'Iusto doloribus molestias pariatur ratione debitis. Et quia impedit nesciunt possimus et consequatur odit. Et itaque cumque enim ut vel.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 7, 1),
-(5, 'iure', 'Harum qui non quasi. Dolor veritatis quis rerum incidunt. Facilis et nostrum quo corrupti.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 6, 1),
-(6, 'et', 'Laborum provident eius sequi at quos et aliquam. Harum doloremque quia optio ut dolor beatae. Earum quod amet et in laudantium mollitia fuga.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 6, 1),
-(7, 'nisi', 'Maxime ut aut totam iste inventore. Recusandae doloribus nesciunt velit nisi quia et quo qui. Odit dolore voluptatem nobis cum culpa reiciendis.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 9, 1),
-(8, 'laborum', 'Excepturi necessitatibus quia in sint id ab dolor. Veniam velit delectus in consequatur excepturi maiores sed dignissimos. Consequatur eos consequuntur corrupti perspiciatis ab.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 8, 1),
-(9, 'laborum', 'Nesciunt et autem ex. Excepturi eum quo harum. Necessitatibus voluptas architecto blanditiis qui soluta.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 2, 1),
-(10, 'nobis', 'Reprehenderit quisquam aliquid adipisci rem. Esse doloribus nihil accusantium autem quae exercitationem. A officiis aliquid ut optio qui quo aut.', '2021-03-31 12:53:11', '2021-03-31 12:53:11', 1, 1);
+INSERT INTO `articles` (`id`, `name`, `description`, `created_at`, `updated_at`, `categories_id`, `admins_id`, `image_id`) VALUES
+(23, 'Article 6', 'lorem ipsum', '2021-04-29 15:28:24', '2021-04-29 15:28:24', 13, 6, 'JDbfMIZdVv'),
+(24, 'Article 7', 'lorem ipsum', '2021-04-29 15:31:27', '2021-04-29 15:31:27', 14, 6, 'bliDFfnysE'),
+(25, 'Article 8', 'lorem ipsum', '2021-04-29 15:32:36', '2021-04-29 15:32:36', 13, 6, 'KwqCY8NScQ'),
+(26, 'Article 9', 'lorem ipsum', '2021-04-29 15:35:17', '2021-04-29 15:35:17', 13, 6, '2BMiLdqIki'),
+(27, 'Article 10', 'lorem ipsum', '2021-04-29 15:39:52', '2021-04-29 15:39:52', 14, 6, 'lgMnDtsC3D'),
+(32, 'Article 11', 'lorem ipsum', '2021-04-29 16:08:30', '2021-04-29 16:08:30', 13, 6, 'gYfaNSdRgL');
 
 -- --------------------------------------------------------
 
@@ -85,24 +82,18 @@ CREATE TABLE `categories` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `image_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'neque', 'Quod harum qui perferendis debitis.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(2, 'repellendus', 'A excepturi nulla.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(3, 'aliquam', 'Repellendus vel magnam est nihil.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(4, 'facilis', 'Culpa quas consequatur.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(5, 'doloremque', 'Quo sit quam non.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(6, 'in', 'Quia ex est.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(7, 'assumenda', 'Aut iure.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(8, 'asperiores', 'Omnis consequuntur dolorum asperiores.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(9, 'et', 'Et delectus.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(10, 'eos', 'Reprehenderit sed.', '2021-03-31 12:53:11', '2021-03-31 12:53:11');
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`, `image_id`) VALUES
+(13, 'cat 1', 'lorem ipsum dolor', '2021-04-18 18:39:55', '2021-04-18 18:39:55', 'efLAYnJsE3'),
+(14, 'cat 2', 'lorem ipsum', '2021-04-18 18:47:41', '2021-04-18 18:47:41', 'fhsAD10dqR'),
+(15, 'cat 3', 'lorem ipsum', '2021-05-04 13:12:19', '2021-05-04 13:12:19', 'wK31V6X7Mj');
 
 -- --------------------------------------------------------
 
@@ -126,16 +117,12 @@ CREATE TABLE `commentaries` (
 --
 
 INSERT INTO `commentaries` (`id`, `firstname`, `lastname`, `content`, `date`, `articles_id`, `created_at`, `updated_at`) VALUES
-(1, 'Damien', 'Sanford', 'Error aperiam neque hic ut ut tempora aliquid. Possimus facere perferendis ad et ut. Id aspernatur nihil mollitia fugit beatae quo.', '1972-12-18', 1, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(2, 'Roscoe', 'Leffler', 'Rerum et quam voluptatibus commodi esse. Ea explicabo vitae ad. Voluptatum perferendis est quaerat perferendis reiciendis.', '1979-07-28', 8, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(3, 'Raul', 'Wyman', 'Ea vero consequatur ea at et. Rerum cum nulla iusto nihil. Itaque deserunt quo illum laudantium doloribus iste eius.', '1981-05-03', 10, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(4, 'Faye', 'Pfannerstill', 'Impedit praesentium consectetur voluptatem eius magni velit. Maxime aliquid ab consectetur eos eaque enim. Repellat perferendis ratione molestiae distinctio odit asperiores.', '2013-10-29', 5, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(5, 'Michele', 'Green', 'Quia commodi et ut quia quis quis exercitationem. Est sit optio ut tempora totam soluta molestiae. Quo fugiat in voluptatibus sit.', '2012-02-28', 1, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(6, 'Erich', 'Ullrich', 'Velit dolorum deserunt fuga nobis illum. Doloremque mollitia ipsam assumenda. Dolor totam ratione adipisci accusantium voluptates suscipit non omnis.', '2014-11-23', 7, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(7, 'Lyric', 'Torphy', 'Inventore quia adipisci est nihil omnis. Voluptatem illum saepe quis voluptatem dolores fugit quia. Commodi ex quas laudantium aut dolores aspernatur quod.', '2004-06-03', 10, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(8, 'Mariah', 'Muller', 'Ullam eligendi saepe ullam suscipit qui eum. Neque aut est nulla consequuntur harum. Distinctio repellat et voluptatem omnis hic.', '2019-06-24', 5, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(9, 'Lindsay', 'Kshlerin', 'Ex alias tempore ut consectetur voluptates qui et itaque. Sit dolores laborum quos et amet. Et beatae similique quia dolorum similique esse.', '1984-09-06', 7, '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(10, 'Hallie', 'Hills', 'Sunt quod sunt quibusdam placeat. Voluptas facilis nobis facilis deserunt. Repellendus quaerat ratione explicabo neque.', '1977-12-18', 9, '2021-03-31 12:53:11', '2021-03-31 12:53:11');
+(1, 'Jean', 'Test', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 23, '2021-05-04 13:42:38', '2021-05-04 13:42:38'),
+(2, 'Johnny', 'Monnay', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 32, '2021-05-04 13:43:05', '2021-05-04 13:43:05'),
+(3, 'Gontran', 'Santé', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 26, '2021-05-04 13:43:26', '2021-05-04 13:43:26'),
+(4, 'Donatien', 'De Montazac', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 27, '2021-05-04 13:43:45', '2021-05-04 13:43:45'),
+(5, 'Marius', 'Rotarez', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 24, '2021-05-04 13:44:03', '2021-05-04 13:44:03'),
+(6, 'Johnny', 'Monnay', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-06', 26, '2021-05-06 16:20:31', '2021-05-06 16:20:31');
 
 -- --------------------------------------------------------
 
@@ -245,7 +232,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (142, '2021_03_27_202342_create_contact_table', 1),
 (143, '2021_03_27_202531_create_subscribers_table', 1),
 (144, '2021_03_27_202641_create_commentaries_table', 1),
-(145, '2021_03_29_133208_update_admins_table_api_token', 1);
+(145, '2021_03_29_133208_update_admins_table_api_token', 1),
+(146, '2021_04_08_161322_update_articles_table_image_id', 2),
+(147, '2021_04_17_142349_update_categories_table_image_id', 3);
 
 -- --------------------------------------------------------
 
@@ -286,7 +275,8 @@ INSERT INTO `subscribers` (`id`, `email`, `created_at`, `updated_at`) VALUES
 (7, 'declan53@example.net', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
 (8, 'blake65@example.com', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
 (9, 'dherzog@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(10, 'buster25@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11');
+(10, 'buster25@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
+(38, 'john@mail.com', '2021-04-01 17:58:18', '2021-04-01 17:58:18');
 
 -- --------------------------------------------------------
 
@@ -396,19 +386,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `commentaries`
 --
 ALTER TABLE `commentaries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -432,13 +422,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `users`
