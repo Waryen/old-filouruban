@@ -2042,6 +2042,7 @@ var Article = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       article: {}
     };
+    _this.zoomImg = _this.zoomImg.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
 
@@ -2051,6 +2052,9 @@ var Article = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      var zoomWrapper = document.querySelector('.zoom-wrapper');
+      zoomWrapper.style.display = 'none';
+      zoomWrapper.setAttribute('aria-hidden', 'true');
       var artId = JSON.parse(sessionStorage.getItem('artId'));
 
       if (artId == undefined) {
@@ -2070,10 +2074,39 @@ var Article = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
+    } // Gestion du zoom de l'image
+
+  }, {
+    key: "zoomImg",
+    value: function zoomImg() {
+      var wrapper = document.querySelector('.zoom-wrapper');
+      var main = document.querySelector('main');
+      wrapper.style.display = 'flex';
+      wrapper.setAttribute('aria-hidden', 'false');
+      main.setAttribute('aria-hidden', 'true');
+      wrapper.addEventListener('click', function () {
+        main.setAttribute('aria-hidden', 'false');
+        wrapper.setAttribute('aria-hidden', 'true');
+        wrapper.style.display = 'none';
+      });
+      window.addEventListener('keydown', function (e) {
+        if (e.key == 'Escape' && wrapper.style.display == 'flex') {
+          main.setAttribute('aria-hidden', 'false');
+          wrapper.setAttribute('aria-hidden', 'true');
+          wrapper.style.display = 'none';
+        }
+      });
+      window.addEventListener('keydown', function (e) {
+        if (e.key == 'Tab' && wrapper.style.display == 'flex') {
+          e.preventDefault();
+        }
+      });
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var name = this.state.article.name;
       var desc = this.state.article.description;
       var image = this.state.article.image_id;
@@ -2087,7 +2120,11 @@ var Article = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
               src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
-              alt: "Photo de l'article: ".concat(name)
+              alt: "Photo de l'article: ".concat(name),
+              className: "article-img",
+              onClick: function onClick() {
+                _this3.zoomImg();
+              }
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             className: "article-desc",
@@ -2097,6 +2134,17 @@ var Article = /*#__PURE__*/function (_React$Component) {
           url: this.props.url,
           api: this.props.api,
           artId: this.state.article.id
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "zoom-wrapper",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            children: "Cliquer pour d\xE9zoomer"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+              src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
+              alt: "Photo de l'article: ".concat(name),
+              className: "article-img"
+            })
+          })]
         })]
       });
     }

@@ -8,10 +8,15 @@ class Article extends React.Component {
         this.state = {
             article: {},
         }
+
+        this.zoomImg = this.zoomImg.bind(this)
     }
 
     // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
     componentDidMount() {
+        const zoomWrapper = document.querySelector('.zoom-wrapper')
+        zoomWrapper.style.display = 'none'
+        zoomWrapper.setAttribute('aria-hidden', 'true')
         let artId = JSON.parse(sessionStorage.getItem('artId'))
         
         if(artId == undefined) {
@@ -33,6 +38,35 @@ class Article extends React.Component {
             })
     }
 
+    // Gestion du zoom de l'image
+    zoomImg() {
+        const wrapper = document.querySelector('.zoom-wrapper')
+        const main = document.querySelector('main')
+        wrapper.style.display = 'flex'
+        wrapper.setAttribute('aria-hidden', 'false')
+        main.setAttribute('aria-hidden', 'true')
+
+        wrapper.addEventListener('click', () => {
+            main.setAttribute('aria-hidden', 'false')
+            wrapper.setAttribute('aria-hidden', 'true')
+            wrapper.style.display = 'none'
+        })
+
+        window.addEventListener('keydown', (e) => {
+            if(e.key == 'Escape' && wrapper.style.display == 'flex') {
+                main.setAttribute('aria-hidden', 'false')
+                wrapper.setAttribute('aria-hidden', 'true')
+                wrapper.style.display = 'none'
+            }
+        })
+
+        window.addEventListener('keydown', (e) => {
+            if(e.key == 'Tab' && wrapper.style.display == 'flex') {
+                e.preventDefault()
+            }
+        })
+    }
+
     render() {
         const name = this.state.article.name
         const desc = this.state.article.description
@@ -43,11 +77,17 @@ class Article extends React.Component {
                 <div className="article-card">
                     <h2 className="article-title">{name}</h2>
                     <figure>
-                        <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} />
+                        <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" onClick={() => {this.zoomImg()}} />
                     </figure>
                     <p className="article-desc">{desc}</p>
                 </div>
                 <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
+                <div className="zoom-wrapper">
+                    <p>Cliquer pour dézoomer</p>
+                    <figure>
+                        <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" />
+                    </figure>
+                </div>
             </div>
         )
     }
