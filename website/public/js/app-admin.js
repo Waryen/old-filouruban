@@ -4620,6 +4620,17 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getInfos();
+    }
+  }, {
+    key: "countInfos",
+    value: function countInfos(el) {
+      var count = 0;
+
+      for (var i = 0; i < el.length; i++) {
+        count++;
+      }
+
+      return count;
     } // Récupère toutes les données
 
   }, {
@@ -4657,10 +4668,6 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
       function getSubscribers() {
         return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/subscriber?api_token=").concat(api));
       }
-      /*
-      *
-      */
-
 
       Promise.all([getAdmins(), getArticles(), getCategories(), getCommentaries(), getContacts(), getMessages(), getSubscribers()]).then(function (results) {
         var admins = results[0];
@@ -4693,42 +4700,13 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
       var messages = this.state.messages;
       var contacts = this.state.contacts;
       var subscribers = this.state.subscribers;
-      var adminsNum = 0;
-      var articlesNum = 0;
-      var categoriesNum = 0;
-      var commentariesNum = 0;
-      var messagesNum = 0;
-      var contactsNum = 0;
-      var subscribersNum = 0;
-
-      for (var i = 0; i < admins.length; i++) {
-        adminsNum++;
-      }
-
-      for (var _i = 0; _i < articles.length; _i++) {
-        articlesNum++;
-      }
-
-      for (var _i2 = 0; _i2 < categories.length; _i2++) {
-        categoriesNum++;
-      }
-
-      for (var _i3 = 0; _i3 < commentaries.length; _i3++) {
-        commentariesNum++;
-      }
-
-      for (var _i4 = 0; _i4 < messages.length; _i4++) {
-        messagesNum++;
-      }
-
-      for (var _i5 = 0; _i5 < contacts.length; _i5++) {
-        contactsNum++;
-      }
-
-      for (var _i6 = 0; _i6 < subscribers.length; _i6++) {
-        subscribersNum++;
-      }
-
+      var adminsNum = this.countInfos(admins);
+      var articlesNum = this.countInfos(articles);
+      var categoriesNum = this.countInfos(categories);
+      var commentariesNum = this.countInfos(commentaries);
+      var messagesNum = this.countInfos(messages);
+      var contactsNum = this.countInfos(contacts);
+      var subscribersNum = this.countInfos(subscribers);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "admin-dashboard",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {

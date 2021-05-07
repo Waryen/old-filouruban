@@ -21,6 +21,15 @@ class Dashboard extends React.Component {
         this.getInfos()
     }
 
+    countInfos(el) {
+        let count = 0
+        for(let i = 0; i < el.length; i++) {
+            count ++
+        }
+
+        return count
+    }
+
     // Récupère toutes les données
     getInfos() {
         const url = this.props.url
@@ -53,10 +62,6 @@ class Dashboard extends React.Component {
         function getSubscribers() {
             return axios.get(`${url}/api/subscriber?api_token=${api}`)
         }
-
-        /*
-        *
-        */
 
         Promise.all([
             getAdmins(),
@@ -98,41 +103,13 @@ class Dashboard extends React.Component {
         const contacts = this.state.contacts
         const subscribers = this.state.subscribers
 
-        let adminsNum = 0
-        let articlesNum = 0
-        let categoriesNum = 0
-        let commentariesNum = 0
-        let messagesNum = 0
-        let contactsNum = 0
-        let subscribersNum = 0
-
-        for(let i = 0; i < admins.length; i++) {
-            adminsNum ++
-        }
-
-        for(let i = 0; i < articles.length; i++) {
-            articlesNum ++
-        }
-
-        for(let i = 0; i < categories.length; i++) {
-            categoriesNum ++
-        }
-
-        for(let i = 0; i < commentaries.length; i++) {
-            commentariesNum ++
-        }
-
-        for(let i = 0; i < messages.length; i++) {
-            messagesNum ++
-        }
-
-        for(let i = 0; i < contacts.length; i++) {
-            contactsNum ++
-        }
-
-        for(let i = 0; i < subscribers.length; i++) {
-            subscribersNum ++
-        }
+        let adminsNum = this.countInfos(admins)
+        let articlesNum = this.countInfos(articles)
+        let categoriesNum = this.countInfos(categories)
+        let commentariesNum = this.countInfos(commentaries)
+        let messagesNum = this.countInfos(messages)
+        let contactsNum = this.countInfos(contacts)
+        let subscribersNum = this.countInfos(subscribers)
 
         return(
             <div className="admin-dashboard">
