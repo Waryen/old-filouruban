@@ -13,24 +13,79 @@ class Dashboard extends React.Component {
             contacts: [],
             subscribers: [],
         }
+
+        this.getInfos = this.getInfos.bind(this)
+    }
+
+    componentDidMount() {
+        this.getInfos()
     }
 
     // Récupère toutes les données
-    componentDidMount() {
-        axios.get(`${this.props.url}/api/admin?api_token=${this.props.api}`)
-            .then(response => this.setState({ admins: response.data }))
-        axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
-            .then(response => this.setState({ articles: response.data }))
-        axios.get(`${this.props.url}/api/category?api_token=${this.props.api}`)
-            .then(response => this.setState({ categories: response.data }))
-        axios.get(`${this.props.url}/api/commentary?api_token=${this.props.api}`)
-            .then(response => this.setState({ commentaries: response.data }))
-        axios.get(`${this.props.url}/api/message?api_token=${this.props.api}`)
-            .then(response => this.setState({ messages: response.data }))
-        axios.get(`${this.props.url}/api/contact?api_token=${this.props.api}`)
-            .then(response => this.setState({ contacts: response.data }))
-        axios.get(`${this.props.url}/api/subscriber?api_token=${this.props.api}`)
-            .then(response => this.setState({ subscribers: response.data }))
+    getInfos() {
+        const url = this.props.url
+        const api = this.props.api
+
+        function getAdmins() {
+            return axios.get(`${url}/api/admin?api_token=${api}`)
+        }
+
+        function getArticles() {
+            return axios.get(`${url}/api/article?api_token=${api}`)
+        }
+
+        function getCategories() {
+            return axios.get(`${url}/api/category?api_token=${api}`)
+        }
+
+        function getCommentaries() {
+            return axios.get(`${url}/api/commentary?api_token=${api}`)
+        }
+
+        function getMessages() {
+            return axios.get(`${url}/api/message?api_token=${api}`)
+        }
+
+        function getContacts() {
+            return axios.get(`${url}/api/contact?api_token=${api}`)
+        }
+
+        function getSubscribers() {
+            return axios.get(`${url}/api/subscriber?api_token=${api}`)
+        }
+
+        /*
+        *
+        */
+
+        Promise.all([
+            getAdmins(),
+            getArticles(),
+            getCategories(),
+            getCommentaries(),
+            getContacts(),
+            getMessages(),
+            getSubscribers()
+        ])
+        .then(results => {
+            const admins = results[0]
+            const articles = results[1]
+            const categories = results[2]
+            const commentaries = results[3]
+            const contacts = results[4]
+            const messages = results[5]
+            const subscribers = results[6]
+
+            this.setState({
+                admins: admins.data,
+                articles: articles.data,
+                categories: categories.data,
+                commentaries: commentaries.data,
+                contacts: contacts.data,
+                messages: messages.data,
+                subscribers: subscribers.data
+            })
+        })
     }
 
     render() {

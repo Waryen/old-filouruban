@@ -4612,48 +4612,73 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
       contacts: [],
       subscribers: []
     };
+    _this.getInfos = _this.getInfos.bind(_assertThisInitialized(_this));
     return _this;
-  } // Récupère toutes les données
-
+  }
 
   _createClass(Dashboard, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.getInfos();
+    } // Récupère toutes les données
+
+  }, {
+    key: "getInfos",
+    value: function getInfos() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          admins: response.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          articles: response.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          categories: response.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          commentaries: response.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          messages: response.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          contacts: response.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          subscribers: response.data
+      var url = this.props.url;
+      var api = this.props.api;
+
+      function getAdmins() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/admin?api_token=").concat(api));
+      }
+
+      function getArticles() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/article?api_token=").concat(api));
+      }
+
+      function getCategories() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/category?api_token=").concat(api));
+      }
+
+      function getCommentaries() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/commentary?api_token=").concat(api));
+      }
+
+      function getMessages() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/message?api_token=").concat(api));
+      }
+
+      function getContacts() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/contact?api_token=").concat(api));
+      }
+
+      function getSubscribers() {
+        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/subscriber?api_token=").concat(api));
+      }
+      /*
+      *
+      */
+
+
+      Promise.all([getAdmins(), getArticles(), getCategories(), getCommentaries(), getContacts(), getMessages(), getSubscribers()]).then(function (results) {
+        var admins = results[0];
+        var articles = results[1];
+        var categories = results[2];
+        var commentaries = results[3];
+        var contacts = results[4];
+        var messages = results[5];
+        var subscribers = results[6];
+
+        _this2.setState({
+          admins: admins.data,
+          articles: articles.data,
+          categories: categories.data,
+          commentaries: commentaries.data,
+          contacts: contacts.data,
+          messages: messages.data,
+          subscribers: subscribers.data
         });
       });
     }
