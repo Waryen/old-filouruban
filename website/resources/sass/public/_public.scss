@@ -17,6 +17,38 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
+    .home-alert {
+        margin: 0 auto;
+        margin-bottom: 20px;
+        max-width: 600px;
+        background: $silver;
+        padding: 20px;
+
+        &:hover {
+            border: 1px solid $black;
+        }
+
+        p {
+            font-family: $roboto;
+            font-size: 0.8em;
+            color: $black;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: $roboto;
+            font-size: 1.1em;
+            font-style: italic;
+            color: $teal;
+            transition: all .15s;
+
+            &:hover, &:focus {
+                color: lighten($teal, 10%);
+            }
+        }
+    }
 }
 
 main {

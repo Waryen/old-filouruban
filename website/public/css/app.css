@@ -887,12 +887,15 @@ th {
   background: #edf6f9;
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 }
 .home #react-home-articles .home-articles a {
   text-decoration: none;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .home #react-home-articles .home-articles a:hover img, .home #react-home-articles .home-articles a:focus img {
   transform: scale(1.1);
@@ -1201,6 +1204,33 @@ th {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+#wrapper .home-alert {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  max-width: 600px;
+  background: #edf6f9;
+  padding: 20px;
+}
+#wrapper .home-alert:hover {
+  border: 1px solid #000000;
+}
+#wrapper .home-alert p {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8em;
+  color: #000000;
+  text-align: center;
+}
+#wrapper .home-alert a {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  font-style: italic;
+  color: #006d77;
+  transition: all 0.15s;
+}
+#wrapper .home-alert a:hover, #wrapper .home-alert a:focus {
+  color: #009caa;
 }
 
 main {
