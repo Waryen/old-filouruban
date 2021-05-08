@@ -21,15 +21,17 @@ class Search extends React.Component {
         e.preventDefault()
         const value = this.state.search
         if(value.length) {
-            localStorage.setItem('search', value)
+            sessionStorage.setItem('search', value)
             this.setState({ search: '' })
         }
+
+        window.location.href = `${this.props.url}/search`
     }
 
     render() {
         return(
             <form method="post" onSubmit={this.handleSubmit}>
-                <input type="text" name="search" placeholder="Rechercher un article" value={this.state.search} id="search-input" className="form-search" onChange={this.handleChange} />
+                <input type="text" name="search" placeholder="Rechercher un article" value={this.state.search} id="search-input" className="form-search" onChange={this.handleChange} required />
                 <button type="submit"><i className="fas fa-search"></i></button>
             </form>
         )

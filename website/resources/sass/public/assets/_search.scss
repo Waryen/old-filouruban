@@ -1,0 +1,93 @@
+.search {
+    display: flex;
+    flex-direction: column;
+
+    #react-search-result .search-result {
+        margin: 0 auto;
+        max-width: fit-content;
+        background: $light-peach;
+        border-radius: 10px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+            font-family: $lato;
+            font-size: 1.5em;
+            color: $peach;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            font-family: $lato;
+            font-size: 1em;
+            color: $black;
+            text-align: center;
+        }
+    
+        ul {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+    
+            @media screen and ($responsive) {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+            }
+        }
+    
+        li {
+            margin: 10px;
+            background: $silver;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+    
+        a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    
+            &:hover img, &:focus img {
+                transform: scale(1.1);
+            }
+    
+            &:hover h3, &:focus h3 {
+                background: lighten($teal, 10%);
+            }
+        }
+    
+        h3 {
+            background: $teal;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-family: $lato;
+            font-size: 1.2em;
+            color: $silver;
+            margin-top: 10px;
+            transition: all .15s;
+        }
+    
+        figure {
+            overflow: hidden;
+            border-radius: 10px;
+    
+            img {
+                max-width: 250px;
+                height: auto;
+                border-radius: 10px;
+                transition: all .15s;
+            }
+        }
+    }
+}

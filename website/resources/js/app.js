@@ -12,6 +12,7 @@ import CategoriesList from './components/public/cat-list'
 import Category from './components/public/category'
 import Carousel from './components/public/carousel'
 import HomeArticles from './components/public/home-articles'
+import SearchResult from './components/public/search-result'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -82,5 +83,12 @@ if(document.getElementById('react-home-articles')) {
     ReactDOM.render(
         <HomeArticles url={url} api={api} />,
         document.getElementById('react-home-articles')
+    )
+}
+
+if(document.getElementById('react-search-result')) {
+    ReactDOM.render(
+        <SearchResult url={url} api={api} />,
+        document.getElementById('react-search-result')
     )
 }

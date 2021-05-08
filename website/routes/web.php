@@ -28,6 +28,10 @@ Route::get('/', function() {
     return view('accueil');
 })->name('accueil');
 
+Route::get('search', function() {
+    return view('search');
+})->name('search');
+
 Route::get('articles', function() {
     return view('categories');
 })->name('categories');

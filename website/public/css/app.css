@@ -142,6 +142,7 @@ th {
   border: 1px solid #006d77;
   border-radius: 5px;
   height: 2em;
+  padding: 5px;
 }
 .footer .footer-newsletter .newsletter-form div:nth-child(2) button {
   font-family: "Lato", sans-serif;
@@ -372,6 +373,7 @@ th {
   width: 200px;
   border: 1px solid #006d77;
   border-radius: 5px;
+  padding: 5px;
 }
 @media screen and (max-width: 768px) {
   .header .header-search {
@@ -1198,6 +1200,92 @@ th {
 }
 .legals .legal-card .legal-content p:not(:last-child) {
   margin-bottom: 10px;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+}
+.search #react-search-result .search-result {
+  margin: 0 auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  background: #ffddd2;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.search #react-search-result .search-result h2 {
+  font-family: "Lato", sans-serif;
+  font-size: 1.5em;
+  color: #e29578;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.search #react-search-result .search-result .error {
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+  color: #000000;
+  text-align: center;
+}
+.search #react-search-result .search-result ul {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 768px) {
+  .search #react-search-result .search-result ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+}
+.search #react-search-result .search-result li {
+  margin: 10px;
+  background: #edf6f9;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+.search #react-search-result .search-result a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.search #react-search-result .search-result a:hover img, .search #react-search-result .search-result a:focus img {
+  transform: scale(1.1);
+}
+.search #react-search-result .search-result a:hover h3, .search #react-search-result .search-result a:focus h3 {
+  background: #009caa;
+}
+.search #react-search-result .search-result h3 {
+  background: #006d77;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #edf6f9;
+  margin-top: 10px;
+  transition: all 0.15s;
+}
+.search #react-search-result .search-result figure {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.search #react-search-result .search-result figure img {
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  transition: all 0.15s;
 }
 
 #wrapper {
