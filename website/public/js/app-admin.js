@@ -3050,7 +3050,7 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
               type: "text",
               name: "description",
-              maxLength: "255",
+              maxLength: "1000",
               value: this.state.description,
               onChange: this.handleChange,
               required: true
@@ -3436,7 +3436,7 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
                 type: "text",
                 name: "description",
                 id: "article-desc",
-                maxLength: "255",
+                maxLength: "1000",
                 value: this.state.description,
                 onChange: this.handleChange,
                 required: true
@@ -3741,7 +3741,7 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
               type: "text",
               name: "catDesc",
               id: "cat-desc",
-              maxLength: "255",
+              maxLength: "1000",
               value: this.state.catDesc,
               onChange: this.handleChange,
               required: true
@@ -4123,7 +4123,7 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
                 type: "text",
                 name: "newCatDesc",
                 id: "cat-desc",
-                maxLength: "255",
+                maxLength: "1000",
                 value: this.state.newCatDesc,
                 onChange: this.handleChange,
                 required: true

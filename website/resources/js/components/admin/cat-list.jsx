@@ -216,7 +216,7 @@ class CategoryList extends React.Component {
                         </div>
                         <div className="category-desc">
                             <label htmlFor="cat-desc">Description: </label>
-                            <textarea type="text" name="newCatDesc" id="cat-desc" maxLength="255" value={this.state.newCatDesc} onChange={this.handleChange} required />
+                            <textarea type="text" name="newCatDesc" id="cat-desc" maxLength="1000" value={this.state.newCatDesc} onChange={this.handleChange} required />
                         </div>
                         <div className="category-img">
                             <label htmlFor="category-img">Image (taille maximale autoirsée 500 Ko): </label>

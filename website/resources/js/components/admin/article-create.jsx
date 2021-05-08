@@ -144,7 +144,7 @@ class ArticleCreate extends React.Component {
                     </div>
                     <div className="article-desc">
                         <label htmlFor="description">Description: </label>
-                        <textarea type="text" name='description' maxLength="255" value={this.state.description} onChange={this.handleChange} required />
+                        <textarea type="text" name='description' maxLength="1000" value={this.state.description} onChange={this.handleChange} required />
                     </div>
                     <div className="article-img">
                         <label htmlFor="image">Sélectionner une image (taille maximale autorisée: 500 Ko): </label>

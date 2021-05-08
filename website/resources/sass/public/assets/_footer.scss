@@ -1,7 +1,7 @@
 .footer {
     background-color: $light-teal;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto);
 
     .footer-nav {
@@ -48,8 +48,8 @@
 
                 label {
                     font-family: $lato;
-                    font-size: 1.5em;
-                    font-weight: 700;
+                    font-size: 1.2em;
+                    font-weight: 400;
                     margin-bottom: 5px;
 
                     @media screen and ($responsive) {

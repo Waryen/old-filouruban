@@ -115,7 +115,7 @@ class CategoryCreate extends React.Component {
                     </div>
                     <div className="category-desc">
                         <label htmlFor="cat-desc">Description: </label>
-                        <textarea type="text" name="catDesc" id="cat-desc" maxLength="255" value={this.state.catDesc} onChange={this.handleChange} required />
+                        <textarea type="text" name="catDesc" id="cat-desc" maxLength="1000" value={this.state.catDesc} onChange={this.handleChange} required />
                     </div>
                     <div className="category-img">
                         <label htmlFor="image">Sélectionner une image (taille maximale autoirsée: 500 Ko): </label>

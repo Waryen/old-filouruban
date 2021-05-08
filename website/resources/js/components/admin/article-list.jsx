@@ -219,7 +219,7 @@ class ArticleList extends React.Component {
                         </div>
                         <div className="article-desc">
                             <label htmlFor="article-desc">Description: </label>
-                            <textarea type="text" name="description" id="article-desc" maxLength="255" value={this.state.description} onChange={this.handleChange} required />
+                            <textarea type="text" name="description" id="article-desc" maxLength="1000" value={this.state.description} onChange={this.handleChange} required />
                         </div>
                         <div className="article-img">
                             <label htmlFor="article-img">Image (taille maximale autoirsée 500 Ko): </label>
