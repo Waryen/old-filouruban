@@ -27,7 +27,7 @@
         padding: 20px;
 
         &:hover {
-            border: 1px solid $black;
+            box-shadow: 0 0 5px $black;
         }
 
         p {
@@ -35,6 +35,12 @@
             font-size: 0.8em;
             color: $black;
             text-align: center;
+
+            &:last-child {
+                font-size: 0.7em;
+                margin-top: 10px;
+                font-style: italic;
+            }
         }
 
         a {

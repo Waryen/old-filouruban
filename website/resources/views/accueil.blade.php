@@ -8,6 +8,7 @@
     <div class="home-alert">
         <p>Filouruban est en phase de développement, finalisation prévue pour le 29 mai 2021.</p>
         <p>Vous avez une suggestion ? Vous avez trouvé un bug ? <a href="contact">Dite-le nous !</a></p>
+        <p>Toutes les données collectées pendant la phase de développement seront supprimées au plus tard pour le 29 mai 2021. <a href="legal">Plus d'infos sur la manière dont vos données sont utilisées</a></p>
     </div>
     <div class="home">
         <!--<div id="react-carousel"></div>-->

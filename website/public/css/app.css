@@ -1301,13 +1301,18 @@ th {
   padding: 20px;
 }
 #wrapper .home-alert:hover {
-  border: 1px solid #000000;
+  box-shadow: 0 0 5px #000000;
 }
 #wrapper .home-alert p {
   font-family: "Roboto", sans-serif;
   font-size: 0.8em;
   color: #000000;
   text-align: center;
+}
+#wrapper .home-alert p:last-child {
+  font-size: 0.7em;
+  margin-top: 10px;
+  font-style: italic;
 }
 #wrapper .home-alert a {
   text-decoration: none;
