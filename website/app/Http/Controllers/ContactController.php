@@ -36,7 +36,7 @@ class ContactController extends Controller
             'content' => $request->content
         ];
 
-        Mail::to('test@test.com')->send(new ContactMail($data));
+        Mail::to('sophie@filouruban.be')->send(new ContactMail($data));
         
     }
 
