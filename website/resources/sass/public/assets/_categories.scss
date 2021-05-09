@@ -13,8 +13,8 @@
     }
 
     #react-categories div ul {
-        background: $light-peach;
-        border-radius: 10px;
+        //background: $light-peach;
+        //border-radius: 10px;
         padding: 20px;
         display: flex;
         justify-content: space-around;
@@ -23,6 +23,7 @@
         margin: 0 auto;
 
         li {
+            max-width: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;

@@ -184,7 +184,6 @@ class ArticleList extends React.Component {
             list.push(
                 <li key={el.id} id={`article-${el.id}`}>
                     <h4>{el.name}</h4>
-                    <p className="article-desc">{el.description}</p>
                     <p className="article-cat">{catName}</p>
                     <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article: ${el.name}`} />
                     <div className="article-btns">

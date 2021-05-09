@@ -41,7 +41,6 @@ class CategoriesList extends React.Component {
             list.push(
                 <li key={el.id}>
                     <h3>{el.name}</h3>
-                    <p>{el.description}</p>
                     <a href={`articles/${el.id}`} className="cat-img" onClick={this.saveId(el.id)}>
                         <figure>
                             <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} />

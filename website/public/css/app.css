@@ -484,14 +484,13 @@ th {
   margin-bottom: 10px;
 }
 .category-articles .cat-arts-desc {
+  max-width: 800px;
   font-family: "Roboto", sans-serif;
   font-size: 1em;
   color: #000000;
   margin-bottom: 20px;
 }
 .category-articles #react-category div ul {
-  background: #ffddd2;
-  border-radius: 10px;
   padding: 20px;
   display: flex;
   justify-content: space-around;
@@ -500,6 +499,7 @@ th {
   margin: 0 auto;
 }
 .category-articles #react-category div ul li {
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -557,8 +557,6 @@ th {
   margin-bottom: 20px;
 }
 .categories #react-categories div ul {
-  background: #ffddd2;
-  border-radius: 10px;
   padding: 20px;
   display: flex;
   justify-content: space-around;
@@ -567,6 +565,7 @@ th {
   margin: 0 auto;
 }
 .categories #react-categories div ul li {
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -829,6 +828,7 @@ th {
   font-weight: 600;
   color: #e29578;
   margin-bottom: 20px;
+  text-align: center;
 }
 .home .home-about .about-content {
   background: #ffddd2;
@@ -865,8 +865,6 @@ th {
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
-  background: #ffddd2;
-  border-radius: 10px;
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -885,6 +883,7 @@ th {
   }
 }
 .home #react-home-articles .home-articles li {
+  max-width: 300px;
   margin: 10px;
   background: #edf6f9;
   padding: 10px;
@@ -932,10 +931,11 @@ th {
   align-items: center;
 }
 #react-article .article .article-card {
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffddd2;
+  background: #edf6f9;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 30px;
@@ -958,7 +958,7 @@ th {
   border-radius: 10px;
 }
 #react-article .article .article-card figure img:hover {
-  cursor: pointer;
+  cursor: zoom-in;
 }
 #react-article .article .article-card .article-desc {
   font-family: "Roboto", sans-serif;
@@ -971,8 +971,6 @@ th {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ffddd2;
-  border-radius: 10px;
   padding: 20px;
 }
 #react-article .article .com-card .com-list {
@@ -1025,6 +1023,9 @@ th {
 #react-article .article .com-card .com-create {
   display: flex;
   flex-direction: column;
+  background: #ffddd2;
+  padding: 20px;
+  border-radius: 10px;
 }
 #react-article .article .com-card .com-create h3 {
   font-family: "Lato", sans-serif;
@@ -1152,6 +1153,9 @@ th {
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
 }
+#react-article .article .zoom-wrapper:hover {
+  cursor: zoom-out;
+}
 #react-article .article .zoom-wrapper p {
   font-family: "Lato", sans-serif;
   font-size: 1.2em;
@@ -1160,14 +1164,16 @@ th {
   text-align: center;
 }
 #react-article .article .zoom-wrapper img {
-  max-width: 1000px;
+  max-width: 800px;
   height: auto;
-  margin: 0 10px;
 }
 @media screen and (max-width: 768px) {
   #react-article .article .zoom-wrapper img {
-    max-width: 300px;
+    max-width: 350px;
   }
+}
+#react-article .article .zoom-wrapper img:hover {
+  cursor: zoom-out;
 }
 
 .legals {

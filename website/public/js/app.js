@@ -2052,6 +2052,7 @@ var Article = /*#__PURE__*/function (_React$Component) {
       article: {}
     };
     _this.zoomImg = _this.zoomImg.bind(_assertThisInitialized(_this));
+    _this.divide = _this.divide.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
 
@@ -2110,6 +2111,21 @@ var Article = /*#__PURE__*/function (_React$Component) {
           e.preventDefault();
         }
       });
+    } // Ajoute des sauts de ligne dans la description de l'article
+
+  }, {
+    key: "divide",
+    value: function divide(txt) {
+      txt = txt.split('\n');
+      var array = [];
+
+      for (var i = 0; i < txt.length; i++) {
+        array.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: txt[i]
+        }, i));
+      }
+
+      return array;
     }
   }, {
     key: "render",
@@ -2117,7 +2133,7 @@ var Article = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var name = this.state.article.name;
-      var desc = this.state.article.description;
+      var desc = this.divide(String(this.state.article.description));
       var image = this.state.article.image_id;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "article",
@@ -2135,7 +2151,7 @@ var Article = /*#__PURE__*/function (_React$Component) {
                 _this3.zoomImg();
               }
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "article-desc",
             children: desc
           })]
@@ -2338,8 +2354,6 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
             children: el.name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-            children: el.description
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
             href: "articles/".concat(el.id),
             className: "cat-img",

@@ -10,6 +10,7 @@ class Article extends React.Component {
         }
 
         this.zoomImg = this.zoomImg.bind(this)
+        this.divide = this.divide.bind(this)
     }
 
     // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
@@ -67,9 +68,23 @@ class Article extends React.Component {
         })
     }
 
+    // Ajoute des sauts de ligne dans la description de l'article
+    divide(txt) {
+        txt = txt.split('\n')
+        let array = []
+
+        for(let i = 0; i < txt.length; i++) {
+            array.push(
+                <p key={i}>{txt[i]}</p>
+            )
+        }
+
+        return array
+    }
+
     render() {
         const name = this.state.article.name
-        const desc = this.state.article.description
+        const desc = this.divide(String(this.state.article.description))
         const image = this.state.article.image_id
 
         return(
@@ -79,7 +94,9 @@ class Article extends React.Component {
                     <figure>
                         <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" onClick={() => {this.zoomImg()}} />
                     </figure>
-                    <p className="article-desc">{desc}</p>
+                    <div className="article-desc">
+                        {desc}
+                    </div>
                 </div>
                 <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
                 <div className="zoom-wrapper">

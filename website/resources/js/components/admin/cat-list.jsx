@@ -179,7 +179,6 @@ class CategoryList extends React.Component {
                 list.push(
                     <li key={el.id}>
                         <h4>{el.name}</h4>
-                        <p className="category-desc">{el.description}</p>
                         <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} width="200px" height="200px" />
                         <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
                     </li>
@@ -188,7 +187,6 @@ class CategoryList extends React.Component {
                 list.push(
                     <li key={el.id}>
                         <h4>{el.name}</h4>
-                        <p className="category-desc">{el.description}</p>
                         <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} width="200px" height="200px" />
                         <div>
                             <button value={el.id} onClick={this.modifyCategory} >Modifier</button>
