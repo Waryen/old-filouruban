@@ -10,6 +10,7 @@ class CommentaryList extends React.Component {
             articles: [],
         }
 
+        this.setId = this.setId.bind(this)
         this.deleteCommentary = this.deleteCommentary.bind(this)
     }
 
@@ -23,6 +24,11 @@ class CommentaryList extends React.Component {
             .then(res => {
                 this.setState({ articles: res.data })
             })
+    }
+
+    setId(catId, artId) {
+        sessionStorage.setItem('catId', catId)
+        sessionStorage.setItem('artId', artId)
     }
 
     // Supprime un commentaire
@@ -41,10 +47,12 @@ class CommentaryList extends React.Component {
         // Rendu de la liste des commentaires
         commentaries.forEach(el => {
             let articleName
+            let articleCat
             let articleId
             for(let i = 0; i < articles.length; i++) {
                 if(el.articles_id === articles[i].id) {
                     articleName = articles[i].name
+                    articleCat  = articles[i].categories_id
                     articleId = articles[i].id
                 }
             }
@@ -53,7 +61,7 @@ class CommentaryList extends React.Component {
                     <h4>{el.firstname} {el.lastname}</h4>
                     <p className="com-content"><span>Contenu du commentaire:</span><br></br>{el.content}</p>
                     <p className="com-date"><span>Date du commentaire:</span> {el.date}</p>
-                    <p className="com-art"><span>Article concerné:</span> <Link to={`article#article-${articleId}`}>{articleName}</Link></p>
+                    <p className="com-art"><span>Article concerné:</span> <a href={`/articles/${articleCat}/${articleId}`} onClick={() => {this.setId(articleCat, articleId)}}>{articleName}</a></p>
                     <button value={el.id} onClick={this.deleteCommentary} >Supprimer</button>
                 </li>
             )

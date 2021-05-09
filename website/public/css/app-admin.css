@@ -1533,6 +1533,60 @@ th {
   background: #d9744e;
 }
 
+.admin-subscriber {
+  display: flex;
+  margin: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-subscriber h2 {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.admin-subscriber ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffddd2;
+  padding: 20px;
+  border-radius: 10px;
+}
+.admin-subscriber ul li {
+  margin: 10px;
+  background: #edf6f9;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin-subscriber ul li p {
+  font-family: "Roboto", sans-serif;
+  color: #000000;
+  font-size: 1em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.admin-subscriber ul li .delete {
+  align-self: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.1em;
+  background: #e29578;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.admin-subscriber ul li .delete:hover, .admin-subscriber ul li .delete:focus {
+  cursor: pointer;
+  background: #d9744e;
+}
+
 #wrapper {
   display: flex;
   flex-direction: column;
