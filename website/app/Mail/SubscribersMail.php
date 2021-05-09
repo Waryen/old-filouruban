@@ -30,6 +30,6 @@ class SubscribersMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.subscribers');
+        return $this->subject('Un nouvel article a été ajouté sur filouruban.be !')->markdown('mails.subscribers');
     }
 }

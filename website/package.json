@@ -25,6 +25,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "@hcaptcha/react-hcaptcha": "^0.3.6",
         "minireset.css": "^0.0.7",
         "moment": "^2.29.1",
         "react-router-dom": "^5.2.0"

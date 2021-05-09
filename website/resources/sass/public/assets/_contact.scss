@@ -15,7 +15,6 @@
         background: $light-peach;
         border-radius: 10px;
         padding: 20px;
-        max-width: 600px;
 
         .form-contact {
             display: grid;
@@ -31,7 +30,7 @@
                 justify-content: center;
 
                 &.form-firstname {
-                    grid-column: 1;
+                    grid-column: 1 / 2;
                     grid-row: 1;
 
                     @media screen and ($responsive) {
@@ -41,7 +40,7 @@
                 }
 
                 &.form-lastname {
-                    grid-column: 2;
+                    grid-column: 2 / 4;
                     grid-row: 1;
 
                     @media screen and ($responsive) {
@@ -52,8 +51,8 @@
                 }
 
                 &.form-email {
-                    grid-column: 3;
-                    grid-row: 1;
+                    grid-column: 1 / 4;
+                    grid-row: 2;
 
                     @media screen and ($responsive) {
                         grid-column: 1 / 4;
@@ -64,7 +63,7 @@
 
                 &.form-content {
                     grid-column: 1 / 4;
-                    grid-row: 2;
+                    grid-row: 3;
 
                     @media screen and ($responsive) {
                         grid-row: 4;
@@ -72,21 +71,30 @@
                     }
                 }
 
-                &.form-btn {
+                &.h-captcha {
                     grid-column: 1 / 4;
-                    grid-row: 3;
-                    justify-self: center;
-                    display: inline-block;
-                    margin-top: 20px;
+                    grid-row: 4;
 
                     @media screen and ($responsive) {
                         grid-row: 5;
                     }
                 }
 
+                &.form-btn {
+                    grid-column: 1 / 4;
+                    grid-row: 5;
+                    justify-self: center;
+                    display: inline-block;
+                    margin-top: 20px;
+
+                    @media screen and ($responsive) {
+                        grid-row: 6;
+                    }
+                }
+
                 &.form-info {
                     grid-column: 1 / 4;
-                    grid-row: 4;
+                    grid-row: 6;
                     justify-self: center;
                     margin-top: 20px;
                     font-family: $roboto;
@@ -95,7 +103,7 @@
                     color: $black;
 
                     @media screen and ($responsive) {
-                        grid-row: 6;
+                        grid-row: 7;
                     }
                 }
             }

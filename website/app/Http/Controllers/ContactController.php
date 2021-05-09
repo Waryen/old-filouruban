@@ -27,17 +27,37 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        Contact::create($request->all());
-        
+        $token = $request->captcha;
+
         $data = [
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'content' => $request->content
+            'content' => $request->content,
         ];
 
-        Mail::to('sophie@filouruban.be')->send(new ContactMail($data));
-        
+        $hcaptcha = array(
+            'secret' => "0x1b2E78d844DBE0217E97e14baF1C851DD3C310e6",
+            'response' => $token
+        );
+
+        // Vérifie le captcha
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($hcaptcha));
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($verify);
+        $resultData = json_decode($result);
+
+        if($resultData->success) {
+            Contact::create($request->all());
+            Mail::to('sophie@filouruban.be')->queue(new ContactMail($data));
+            return true;
+        } 
+        else {
+            return false;
+        }
     }
 
     /**

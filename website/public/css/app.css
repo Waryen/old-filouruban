@@ -117,24 +117,24 @@ th {
   flex-direction: column;
   align-items: center;
 }
-.footer .footer-newsletter .newsletter-form div:first-child {
+.footer .footer-newsletter .newsletter-form .newsletter-email {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
-.footer .footer-newsletter .newsletter-form div:first-child label {
+.footer .footer-newsletter .newsletter-form .newsletter-email label {
   font-family: "Lato", sans-serif;
   font-size: 1.2em;
   font-weight: 400;
   margin-bottom: 5px;
 }
 @media screen and (max-width: 768px) {
-  .footer .footer-newsletter .newsletter-form div:first-child label {
+  .footer .footer-newsletter .newsletter-form .newsletter-email label {
     font-size: 1.2em;
     text-align: center;
   }
 }
-.footer .footer-newsletter .newsletter-form div:first-child input {
+.footer .footer-newsletter .newsletter-form .newsletter-email input {
   font-family: "Roboto", sans-serif;
   font-size: 1em;
   font-weight: 400;
@@ -144,7 +144,7 @@ th {
   height: 2em;
   padding: 5px;
 }
-.footer .footer-newsletter .newsletter-form div:nth-child(2) button {
+.footer .footer-newsletter .newsletter-form .newsletter-btn button {
   font-family: "Lato", sans-serif;
   font-size: 1.2em;
   font-weight: 400;
@@ -156,7 +156,7 @@ th {
   background-color: #edf6f9;
   transition: background-color 0.15s, color 0.15s;
 }
-.footer .footer-newsletter .newsletter-form div:nth-child(2) button:hover, .footer .footer-newsletter .newsletter-form div:nth-child(2) button:focus {
+.footer .footer-newsletter .newsletter-form .newsletter-btn button:hover, .footer .footer-newsletter .newsletter-form .newsletter-btn button:focus {
   background-color: #006d77;
   color: #edf6f9;
 }
@@ -632,7 +632,6 @@ th {
   background: #ffddd2;
   border-radius: 10px;
   padding: 20px;
-  max-width: 600px;
 }
 .contact #react-contact .form-contact-wrapper .form-contact {
   display: grid;
@@ -649,7 +648,7 @@ th {
   justify-content: center;
 }
 .contact #react-contact .form-contact-wrapper .form-contact div.form-firstname {
-  grid-column: 1;
+  grid-column: 1/2;
   grid-row: 1;
 }
 @media screen and (max-width: 768px) {
@@ -659,7 +658,7 @@ th {
   }
 }
 .contact #react-contact .form-contact-wrapper .form-contact div.form-lastname {
-  grid-column: 2;
+  grid-column: 2/4;
   grid-row: 1;
 }
 @media screen and (max-width: 768px) {
@@ -670,8 +669,8 @@ th {
   }
 }
 .contact #react-contact .form-contact-wrapper .form-contact div.form-email {
-  grid-column: 3;
-  grid-row: 1;
+  grid-column: 1/4;
+  grid-row: 2;
 }
 @media screen and (max-width: 768px) {
   .contact #react-contact .form-contact-wrapper .form-contact div.form-email {
@@ -682,7 +681,7 @@ th {
 }
 .contact #react-contact .form-contact-wrapper .form-contact div.form-content {
   grid-column: 1/4;
-  grid-row: 2;
+  grid-row: 3;
 }
 @media screen and (max-width: 768px) {
   .contact #react-contact .form-contact-wrapper .form-contact div.form-content {
@@ -690,21 +689,30 @@ th {
     justify-self: center;
   }
 }
+.contact #react-contact .form-contact-wrapper .form-contact div.h-captcha {
+  grid-column: 1/4;
+  grid-row: 4;
+}
+@media screen and (max-width: 768px) {
+  .contact #react-contact .form-contact-wrapper .form-contact div.h-captcha {
+    grid-row: 5;
+  }
+}
 .contact #react-contact .form-contact-wrapper .form-contact div.form-btn {
   grid-column: 1/4;
-  grid-row: 3;
+  grid-row: 5;
   justify-self: center;
   display: inline-block;
   margin-top: 20px;
 }
 @media screen and (max-width: 768px) {
   .contact #react-contact .form-contact-wrapper .form-contact div.form-btn {
-    grid-row: 5;
+    grid-row: 6;
   }
 }
 .contact #react-contact .form-contact-wrapper .form-contact div.form-info {
   grid-column: 1/4;
-  grid-row: 4;
+  grid-row: 6;
   justify-self: center;
   margin-top: 20px;
   font-family: "Roboto", sans-serif;
@@ -714,7 +722,7 @@ th {
 }
 @media screen and (max-width: 768px) {
   .contact #react-contact .form-contact-wrapper .form-contact div.form-info {
-    grid-row: 6;
+    grid-row: 7;
   }
 }
 .contact #react-contact .form-contact-wrapper .form-contact label {
@@ -1070,16 +1078,25 @@ th {
     grid-row: 3;
   }
 }
-#react-article .article .com-card .com-create form .com-btn {
+#react-article .article .com-card .com-create form .h-captcha {
   grid-column: 1/3;
   grid-row: 3;
+}
+@media screen and (max-width: 768px) {
+  #react-article .article .com-card .com-create form .h-captcha {
+    grid-row: 4;
+  }
+}
+#react-article .article .com-card .com-create form .com-btn {
+  grid-column: 1/3;
+  grid-row: 4;
   justify-self: center;
   display: inline-block;
   margin-top: 20px;
 }
 @media screen and (max-width: 768px) {
   #react-article .article .com-card .com-create form .com-btn {
-    grid-row: 4;
+    grid-row: 5;
   }
 }
 #react-article .article .com-card .com-create form div {

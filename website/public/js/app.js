@@ -1,6 +1,353 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@hcaptcha/react-hcaptcha/dist/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@hcaptcha/react-hcaptcha/dist/index.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _require = __webpack_require__(/*! ./utils.js */ "./node_modules/@hcaptcha/react-hcaptcha/dist/utils.js"),
+    generateQuery = _require.generateQuery; // Create script to init hCaptcha
+
+
+var onLoadListeners = [];
+var apiScriptRequested = false; // Generate hCaptcha API Script
+
+var mountCaptchaScript = function mountCaptchaScript() {
+  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  apiScriptRequested = true; // Create global onload callback
+
+  window.hcaptchaOnLoad = function () {
+    // Iterate over onload listeners, call each listener
+    onLoadListeners = onLoadListeners.filter(function (listener) {
+      listener();
+      return false;
+    });
+  };
+
+  var domain = params.apihost || "https://hcaptcha.com";
+  delete params.apihost;
+  var script = document.createElement("script");
+  script.src = "".concat(domain, "/1/api.js?render=explicit&onload=hcaptchaOnLoad");
+  script.async = true;
+  var query = generateQuery(params);
+  script.src += query !== "" ? "&".concat(query) : "";
+  document.head.appendChild(script);
+};
+
+var HCaptcha = /*#__PURE__*/function (_React$Component) {
+  _inherits(HCaptcha, _React$Component);
+
+  var _super = _createSuper(HCaptcha);
+
+  function HCaptcha(props) {
+    var _this;
+
+    _classCallCheck(this, HCaptcha);
+
+    _this = _super.call(this, props); // API Methods
+
+    _this.renderCaptcha = _this.renderCaptcha.bind(_assertThisInitialized(_this));
+    _this.resetCaptcha = _this.resetCaptcha.bind(_assertThisInitialized(_this));
+    _this.removeCaptcha = _this.removeCaptcha.bind(_assertThisInitialized(_this)); // Event Handlers
+
+    _this.handleOnLoad = _this.handleOnLoad.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleExpire = _this.handleExpire.bind(_assertThisInitialized(_this));
+    _this.handleError = _this.handleError.bind(_assertThisInitialized(_this));
+    var isApiReady = typeof hcaptcha !== 'undefined';
+    _this.ref = React.createRef();
+    _this.state = {
+      isApiReady: isApiReady,
+      isRemoved: false,
+      elementId: props.id,
+      captchaId: ''
+    };
+    return _this;
+  }
+
+  _createClass(HCaptcha, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      //Once captcha is mounted intialize hCaptcha - hCaptcha
+      var _this$props = this.props,
+          apihost = _this$props.apihost,
+          assethost = _this$props.assethost,
+          endpoint = _this$props.endpoint,
+          host = _this$props.host,
+          imghost = _this$props.imghost,
+          hl = _this$props.languageOverride,
+          reCaptchaCompat = _this$props.reCaptchaCompat,
+          reportapi = _this$props.reportapi,
+          sentry = _this$props.sentry;
+      var isApiReady = this.state.isApiReady;
+
+      if (!isApiReady) {
+        //Check if hCaptcha has already been loaded, if not create script tag and wait to render captcha
+        if (!apiScriptRequested) {
+          // Only create the script tag once, use a global variable to track
+          mountCaptchaScript({
+            apihost: apihost,
+            assethost: assethost,
+            endpoint: endpoint,
+            hl: hl,
+            host: host,
+            imghost: imghost,
+            recaptchacompat: reCaptchaCompat === false ? "off" : null,
+            reportapi: reportapi,
+            sentry: sentry
+          });
+        } // Add onload callback to global onload listeners
+
+
+        onLoadListeners.push(this.handleOnLoad);
+      } else {
+        this.renderCaptcha();
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      var _this$state = this.state,
+          isApiReady = _this$state.isApiReady,
+          isRemoved = _this$state.isRemoved,
+          captchaId = _this$state.captchaId;
+      if (!isApiReady || isRemoved) return; // Reset any stored variables / timers when unmounting
+
+      hcaptcha.reset(captchaId);
+      hcaptcha.remove(captchaId);
+    }
+  }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      // Prevent component re-rendering when these internal state variables are updated
+      if (this.state.isApiReady !== nextState.isApiReady || this.state.isRemoved !== nextState.isRemoved) {
+        return false;
+      }
+
+      return true;
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
+      // Prop Keys that could change
+      var keys = ['sitekey', 'size', 'theme', 'tabindex', 'languageOverride', 'endpoint']; // See if any props changed during component update
+
+      var match = keys.every(function (key) {
+        return prevProps[key] === _this2.props[key];
+      }); // If they have changed, remove current captcha and render a new one
+
+      if (!match) {
+        this.removeCaptcha(function () {
+          _this2.renderCaptcha();
+        });
+      }
+    }
+  }, {
+    key: "renderCaptcha",
+    value: function renderCaptcha() {
+      var isApiReady = this.state.isApiReady;
+      if (!isApiReady) return; //Render hCaptcha widget and provide necessary callbacks - hCaptcha
+
+      var captchaId = hcaptcha.render(this.ref.current, _objectSpread(_objectSpread({}, this.props), {}, {
+        "error-callback": this.handleError,
+        "expired-callback": this.handleExpire,
+        "callback": this.handleSubmit
+      }));
+      this.setState({
+        isRemoved: false,
+        captchaId: captchaId
+      });
+    }
+  }, {
+    key: "resetCaptcha",
+    value: function resetCaptcha() {
+      var _this$state2 = this.state,
+          isApiReady = _this$state2.isApiReady,
+          isRemoved = _this$state2.isRemoved,
+          captchaId = _this$state2.captchaId;
+      if (!isApiReady || isRemoved) return; // Reset captcha state, removes stored token and unticks checkbox
+
+      hcaptcha.reset(captchaId);
+    }
+  }, {
+    key: "removeCaptcha",
+    value: function removeCaptcha(callback) {
+      var _this$state3 = this.state,
+          isApiReady = _this$state3.isApiReady,
+          isRemoved = _this$state3.isRemoved,
+          captchaId = _this$state3.captchaId;
+      if (!isApiReady || isRemoved) return;
+      this.setState({
+        isRemoved: true
+      }, function () {
+        hcaptcha.remove(captchaId);
+        callback && callback();
+      });
+    }
+  }, {
+    key: "handleOnLoad",
+    value: function handleOnLoad() {
+      var _this3 = this;
+
+      this.setState({
+        isApiReady: true
+      }, function () {
+        // trigger onLoad if it exists
+        var onLoad = _this3.props.onLoad;
+        if (onLoad) onLoad(); // render captcha
+
+        _this3.renderCaptcha();
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      var onVerify = this.props.onVerify;
+      var _this$state4 = this.state,
+          isRemoved = _this$state4.isRemoved,
+          captchaId = _this$state4.captchaId;
+      if (typeof hcaptcha === 'undefined' || isRemoved) return;
+      var token = hcaptcha.getResponse(captchaId); //Get response token from hCaptcha widget
+
+      var ekey = hcaptcha.getRespKey(captchaId); //Get current challenge session id from hCaptcha widget
+
+      onVerify(token, ekey); //Dispatch event to verify user response
+    }
+  }, {
+    key: "handleExpire",
+    value: function handleExpire() {
+      var onExpire = this.props.onExpire;
+      var _this$state5 = this.state,
+          isApiReady = _this$state5.isApiReady,
+          isRemoved = _this$state5.isRemoved,
+          captchaId = _this$state5.captchaId;
+      if (!isApiReady || isRemoved) return;
+      hcaptcha.reset(captchaId); // If hCaptcha runs into error, reset captcha - hCaptcha
+
+      if (onExpire) onExpire();
+    }
+  }, {
+    key: "handleError",
+    value: function handleError(event) {
+      var onError = this.props.onError;
+      var _this$state6 = this.state,
+          isApiReady = _this$state6.isApiReady,
+          isRemoved = _this$state6.isRemoved,
+          captchaId = _this$state6.captchaId;
+      if (!isApiReady || isRemoved) return;
+      hcaptcha.reset(captchaId); // If hCaptcha runs into error, reset captcha - hCaptcha
+
+      if (onError) onError(event);
+    }
+  }, {
+    key: "execute",
+    value: function execute() {
+      var _this$state7 = this.state,
+          isApiReady = _this$state7.isApiReady,
+          isRemoved = _this$state7.isRemoved,
+          captchaId = _this$state7.captchaId;
+      if (!isApiReady || isRemoved) return;
+      hcaptcha.execute(captchaId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var elementId = this.state.elementId;
+      return /*#__PURE__*/React.createElement("div", {
+        ref: this.ref,
+        id: elementId
+      });
+    }
+  }]);
+
+  return HCaptcha;
+}(React.Component);
+
+module.exports = HCaptcha;
+
+/***/ }),
+
+/***/ "./node_modules/@hcaptcha/react-hcaptcha/dist/utils.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@hcaptcha/react-hcaptcha/dist/utils.js ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function generateQuery(params) {
+  return Object.entries(params).filter(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        key = _ref2[0],
+        value = _ref2[1];
+
+    return value || value === false;
+  }).map(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        key = _ref4[0],
+        value = _ref4[1];
+
+    return "".concat(encodeURIComponent(key), "=").concat(encodeURIComponent(value));
+  }).join("&");
+}
+
+;
+module.exports = {
+  generateQuery: generateQuery
+};
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2559,7 +2906,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @hcaptcha/react-hcaptcha */ "./node_modules/@hcaptcha/react-hcaptcha/dist/index.js");
+/* harmony import */ var _hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2590,6 +2939,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Commentary = /*#__PURE__*/function (_React$Component) {
   _inherits(Commentary, _React$Component);
 
@@ -2601,17 +2951,21 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Commentary);
 
     _this = _super.call(this, props);
+    _this.child = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     _this.state = {
       commentaries: [],
       firstname: '',
       lastname: '',
       content: '',
-      date: _this.now()
+      date: _this.now(),
+      captcha: ''
     };
     _this.now = _this.now.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.hanldeCancel = _this.hanldeCancel.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleVerificationSuccess = _this.handleVerificationSuccess.bind(_assertThisInitialized(_this));
+    _this.resetCaptcha = _this.resetCaptcha.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupération des commentaires
 
@@ -2628,6 +2982,18 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
+    }
+  }, {
+    key: "handleVerificationSuccess",
+    value: function handleVerificationSuccess(token, ekey) {
+      this.setState({
+        captcha: token
+      });
+    }
+  }, {
+    key: "resetCaptcha",
+    value: function resetCaptcha() {
+      this.child.current.resetCaptcha();
     } // Renvoi la date actuelle
 
   }, {
@@ -2654,8 +3020,10 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
         firstname: '',
         lastname: '',
         content: '',
-        date: this.now()
+        date: this.now(),
+        captcha: ''
       });
+      this.resetCaptcha();
     } // Gère l'envoi du formulaire
 
   }, {
@@ -2669,21 +3037,27 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
         lastname: this.state.lastname,
         content: this.state.content,
         date: this.state.date,
-        articles_id: this.props.artId
+        articles_id: this.props.artId,
+        captcha: this.state.captcha
       };
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api), data).then(function (response) {
-        if (response.status == 200) {
-          _this3.hanldeCancel(e);
 
-          _this3.componentDidMount();
-        } else {
-          alert("Impossible d'envoyer votre commentaire pour le moment.");
-        }
-      });
+      if (this.state.captcha) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api), data).then(function (response) {
+          if (response.status == 200 && response.data == true) {
+            _this3.hanldeCancel(e);
+
+            _this3.componentDidMount();
+          } else {
+            alert("Impossible d'envoyer votre commentaire pour le moment.");
+          }
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       // Rendu des commentaires de l'article
       var commentaires = this.state.commentaries;
       var artId = this.props.artId;
@@ -2695,45 +3069,45 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
       if (comList.length) {
         renderList = [];
         comList.forEach(function (el) {
-          renderList.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
+          renderList.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h4", {
               children: [el.firstname, " ", el.lastname]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
               className: "com-content",
               children: el.content
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
               className: "com-date",
               children: ["Envoy\xE9 le: ", el.date]
             })]
           }, el.id));
         });
       } else {
-        renderList = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        renderList = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           children: "Il n'y pas encore de commentaires"
         });
       }
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "com-card",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "com-list",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
             children: "Avis des internautes"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
             children: renderList
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "com-create",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
             children: "Donner votre avis"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
             onSubmit: this.handleSubmit,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "com-firstname",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 htmlFor: "com-firstname",
                 children: "Votre pr\xE9nom: "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                 type: "text",
                 name: "firstname",
                 id: "com-firstname",
@@ -2741,12 +3115,12 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
                 onChange: this.handleChange,
                 required: true
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "com-lastname",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 htmlFor: "com-lastname",
                 children: "Votre nom: "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                 type: "text",
                 name: "lastname",
                 id: "com-lastname",
@@ -2754,12 +3128,12 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
                 onChange: this.handleChange,
                 required: true
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "com-content",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                 htmlFor: "com-content",
                 children: "Votre commentaire: "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("textarea", {
                 type: "text",
                 name: "content",
                 maxLength: "300",
@@ -2768,13 +3142,22 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
                 onChange: this.handleChange,
                 required: true
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "h-captcha",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((_hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_3___default()), {
+                ref: this.child,
+                sitekey: "25830f50-7442-4826-9111-3517e9f53d2c",
+                onVerify: function onVerify(token, ekey) {
+                  return _this4.handleVerificationSuccess(token, ekey);
+                }
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "com-btn",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 className: "btn-cancel",
                 onClick: this.hanldeCancel,
                 children: "Annuler"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 className: "btn-submit",
                 type: "submit",
                 children: "Envoyer"
@@ -2807,7 +3190,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @hcaptcha/react-hcaptcha */ "./node_modules/@hcaptcha/react-hcaptcha/dist/index.js");
+/* harmony import */ var _hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2837,6 +3222,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Contact = /*#__PURE__*/function (_React$Component) {
   _inherits(Contact, _React$Component);
 
@@ -2848,20 +3234,36 @@ var Contact = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Contact);
 
     _this = _super.call(this, props);
+    _this.child = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     _this.state = {
       firstname: '',
       lastname: '',
       email: '',
-      content: ''
+      content: '',
+      captcha: ''
     };
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleVerificationSuccess = _this.handleVerificationSuccess.bind(_assertThisInitialized(_this));
+    _this.resetCaptcha = _this.resetCaptcha.bind(_assertThisInitialized(_this));
     return _this;
-  } // Gère les changements du formulaire
-
+  }
 
   _createClass(Contact, [{
+    key: "handleVerificationSuccess",
+    value: function handleVerificationSuccess(token, ekey) {
+      this.setState({
+        captcha: token
+      });
+    }
+  }, {
+    key: "resetCaptcha",
+    value: function resetCaptcha() {
+      this.child.current.resetCaptcha();
+    } // Gère les changements du formulaire
+
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
       e.preventDefault();
@@ -2878,37 +3280,51 @@ var Contact = /*#__PURE__*/function (_React$Component) {
         firstname: '',
         lastname: '',
         email: '',
-        content: ''
+        content: '',
+        captcha: ''
       });
+      this.resetCaptcha();
     } // Envoi le forumulaire
 
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var data = {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        email: this.state.email,
-        content: this.state.content
-      };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api), data);
-      this.handleCancel(e);
+
+      if (this.state.captcha) {
+        var data = {
+          firstname: this.state.firstname,
+          lastname: this.state.lastname,
+          email: this.state.email,
+          content: this.state.content,
+          captcha: this.state.captcha
+        };
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api), data).then(function (response) {
+          if (response.data == false) {
+            alert("Votre captcha n'a pas été validé !");
+          }
+        });
+        this.handleCancel(e);
+      } else {
+        alert('Veuillez valider le captcha !');
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      var _this2 = this;
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "form-contact-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
           onSubmit: this.handleSubmit,
           className: "form-contact",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "form-firstname",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
               htmlFor: "form-firstname",
               children: "Votre pr\xE9nom"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "text",
               name: "firstname",
               id: "form-firstname",
@@ -2916,12 +3332,12 @@ var Contact = /*#__PURE__*/function (_React$Component) {
               onChange: this.handleChange,
               required: true
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "form-lastname",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
               htmlFor: "form-lastname",
               children: "Votre nom"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "text",
               name: "lastname",
               id: "form-lastname",
@@ -2929,12 +3345,12 @@ var Contact = /*#__PURE__*/function (_React$Component) {
               onChange: this.handleChange,
               required: true
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "form-email",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
               htmlFor: "form-email",
               children: "Votre adresse email"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
               type: "email",
               name: "email",
               id: "form-email",
@@ -2942,12 +3358,12 @@ var Contact = /*#__PURE__*/function (_React$Component) {
               onChange: this.handleChange,
               required: true
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "form-content",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
               htmlFor: "form-content",
               children: "Votre message"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("textarea", {
               type: "text",
               name: "content",
               id: "form-content",
@@ -2956,20 +3372,29 @@ var Contact = /*#__PURE__*/function (_React$Component) {
               onChange: this.handleChange,
               required: true
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "h-captcha",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)((_hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2___default()), {
+              ref: this.child,
+              sitekey: "25830f50-7442-4826-9111-3517e9f53d2c",
+              onVerify: function onVerify(token, ekey) {
+                return _this2.handleVerificationSuccess(token, ekey);
+              }
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "form-btn",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn-cancel",
               onClick: this.handleCancel,
               children: "Annuler"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
               className: "btn-submit",
               type: "submit",
               children: "Envoyer"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "form-info",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
               children: "Tous les champs sont obligatoires"
             })
           })]
@@ -3159,7 +3584,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @hcaptcha/react-hcaptcha */ "./node_modules/@hcaptcha/react-hcaptcha/dist/index.js");
+/* harmony import */ var _hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -3199,6 +3626,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Newsletter = /*#__PURE__*/function (_React$Component) {
   _inherits(Newsletter, _React$Component);
 
@@ -3210,12 +3638,16 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Newsletter);
 
     _this = _super.call(this, props);
+    _this.child = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     _this.state = {
       listSubscribers: [],
-      newSubscriber: ''
+      newSubscriber: '',
+      captcha: ''
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleVerificationSuccess = _this.handleVerificationSuccess.bind(_assertThisInitialized(_this));
+    _this.resetCaptcha = _this.resetCaptcha.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3236,6 +3668,18 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
+    }
+  }, {
+    key: "handleVerificationSuccess",
+    value: function handleVerificationSuccess(token, ekey) {
+      this.setState({
+        captcha: token
+      });
+    }
+  }, {
+    key: "resetCaptcha",
+    value: function resetCaptcha() {
+      this.child.current.resetCaptcha();
     }
   }, {
     key: "handleChange",
@@ -3263,9 +3707,10 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
       } // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
 
 
-      if (check === true) {
+      if (check === true && this.state.captcha) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), {
-          email: newSub
+          email: newSub,
+          captcha: this.state.captcha
         }).then(function (res) {
           if (res.data === 'ok') {
             alert('Vous avez été inscrit(e) à la newsletter !');
@@ -3273,6 +3718,8 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
             _this3.setState({
               listSubscribers: [].concat(_toConsumableArray(_this3.state.listSubscribers), [newSub])
             });
+          } else {
+            alert("Votre captcha n'a pas été validée !");
           }
         });
       } else {
@@ -3280,21 +3727,26 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
       }
 
       this.setState({
-        newSubscriber: ''
+        newSubscriber: '',
+        captcha: ''
       });
+      this.resetCaptcha();
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+      var _this4 = this;
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
         method: "post",
         className: "newsletter-form",
         onSubmit: this.handleSubmit,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "newsletter-email",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             htmlFor: "newsletter-email",
             children: "S'abonner \xE0 notre newsletter"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
             type: "email",
             name: "email",
             value: this.state.newSubscriber,
@@ -3302,8 +3754,18 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
             required: true,
             onChange: this.handleChange
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "h-captcha",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)((_hcaptcha_react_hcaptcha__WEBPACK_IMPORTED_MODULE_2___default()), {
+            ref: this.child,
+            sitekey: "25830f50-7442-4826-9111-3517e9f53d2c",
+            onVerify: function onVerify(token, ekey) {
+              return _this4.handleVerificationSuccess(token, ekey);
+            }
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "newsletter-btn",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
             type: "submit",
             children: "S'abonner"
           })

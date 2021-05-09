@@ -1,19 +1,32 @@
 import axios from 'axios'
 import React from 'react'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 class Contact extends React.Component {
     constructor(props) {
         super(props)
+        this.child = React.createRef()
         this.state = {
             firstname: '',
             lastname: '',
             email: '',
             content: '',
+            captcha: '',
         }
 
         this.handleCancel = this.handleCancel.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleVerificationSuccess = this.handleVerificationSuccess.bind(this)
+        this.resetCaptcha = this.resetCaptcha.bind(this)
+    }
+
+    handleVerificationSuccess(token, ekey) {
+        this.setState({ captcha: token })
+    }
+
+    resetCaptcha() {
+        this.child.current.resetCaptcha()
     }
 
     // Gère les changements du formulaire
@@ -32,22 +45,35 @@ class Contact extends React.Component {
             lastname: '',
             email: '',
             content: '',
+            captcha: '',
         })
+
+        this.resetCaptcha()
     }
 
     // Envoi le forumulaire
     handleSubmit(e) {
         e.preventDefault()
-        const data = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            content: this.state.content,
+        if(this.state.captcha) {
+            const data = {
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
+                email: this.state.email,
+                content: this.state.content,
+                captcha: this.state.captcha
+            }
+            axios
+                .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
+                .then(response => {
+                    if(response.data == false) {
+                        alert("Votre captcha n'a pas été validé !")
+                    }
+                })
+    
+            this.handleCancel(e)
+        } else {
+            alert('Veuillez valider le captcha !')
         }
-        axios
-            .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
-
-        this.handleCancel(e)
     }
 
     render() {
@@ -69,6 +95,13 @@ class Contact extends React.Component {
                     <div className="form-content">
                         <label htmlFor="form-content">Votre message</label>
                         <textarea type="text" name="content" id="form-content" maxLength="1000" value={this.state.content} onChange={this.handleChange} required />
+                    </div>
+                    <div className="h-captcha">
+                        <HCaptcha
+                            ref={this.child}
+                            sitekey="25830f50-7442-4826-9111-3517e9f53d2c"
+                            onVerify={(token, ekey) => this.handleVerificationSuccess(token, ekey)}
+                        />
                     </div>
                     <div className='form-btn'>
                         <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>

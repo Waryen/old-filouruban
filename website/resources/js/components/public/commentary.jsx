@@ -1,22 +1,27 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 class Commentary extends React.Component {
     constructor(props) {
         super(props)
+        this.child = React.createRef()
         this.state = {
             commentaries: [],
             firstname: '',
             lastname: '',
             content: '',
             date: this.now(),
+            captcha: '',
         }
 
         this.now = this.now.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.hanldeCancel = this.hanldeCancel.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleVerificationSuccess = this.handleVerificationSuccess.bind(this)
+        this.resetCaptcha = this.resetCaptcha.bind(this)
     }
 
     // Récupération des commentaires
@@ -28,6 +33,14 @@ class Commentary extends React.Component {
                     this.setState({ commentaries: response.data })
                 }
             })
+    }
+
+    handleVerificationSuccess(token, ekey) {
+        this.setState({ captcha: token })
+    }
+
+    resetCaptcha() {
+        this.child.current.resetCaptcha()
     }
 
     // Renvoi la date actuelle
@@ -52,7 +65,10 @@ class Commentary extends React.Component {
             lastname: '',
             content: '',
             date: this.now(),
+            captcha: '',
         })
+
+        this.resetCaptcha()
     }
 
     // Gère l'envoi du formulaire
@@ -64,18 +80,21 @@ class Commentary extends React.Component {
             content: this.state.content,
             date: this.state.date,
             articles_id: this.props.artId,
+            captcha: this.state.captcha
         }
 
-        axios
+        if(this.state.captcha) {
+            axios
             .post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
             .then(response => {
-                if(response.status == 200) {
+                if(response.status == 200 && response.data == true) {
                     this.hanldeCancel(e)
                     this.componentDidMount()
                 } else {
                     alert("Impossible d'envoyer votre commentaire pour le moment.")
                 }
             })
+        }
     }
 
     render() {
@@ -122,6 +141,13 @@ class Commentary extends React.Component {
                         <div className="com-content">
                             <label htmlFor="com-content">Votre commentaire: </label>
                             <textarea type="text" name="content" maxLength="300" id="com-content" value={this.state.content} onChange={this.handleChange} required />
+                        </div>
+                        <div className="h-captcha">
+                            <HCaptcha
+                                ref={this.child}
+                                sitekey="25830f50-7442-4826-9111-3517e9f53d2c"
+                                onVerify={(token, ekey) => this.handleVerificationSuccess(token, ekey)}
+                            />
                         </div>
                         <div className="com-btn">
                             <button className="btn-cancel" onClick={this.hanldeCancel}>Annuler</button>

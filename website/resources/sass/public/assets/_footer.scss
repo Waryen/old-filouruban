@@ -41,7 +41,7 @@
             flex-direction: column;
             align-items: center;
 
-            div:first-child {
+            .newsletter-email {
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 10px;
@@ -70,7 +70,7 @@
                 }
             }
 
-            div:nth-child(2) button {
+            .newsletter-btn button {
                 font-family: $lato;
                 font-size: 1.2em;
                 font-weight: 400;
