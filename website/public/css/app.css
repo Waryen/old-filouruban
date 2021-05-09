@@ -1331,6 +1331,23 @@ th {
 #wrapper .home-alert a:hover, #wrapper .home-alert a:focus {
   color: #009caa;
 }
+#wrapper .ariane {
+  align-self: flex-start;
+  margin-bottom: 40px;
+}
+#wrapper .ariane a {
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-size: 0.8em;
+  color: #006d77;
+  transition: all 0.15s;
+}
+#wrapper .ariane a:hover, #wrapper .ariane a:focus {
+  color: #009caa;
+}
+#wrapper .ariane #ariane-active {
+  color: #009caa;
+}
 
 main {
   flex: 1;

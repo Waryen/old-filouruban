@@ -56,6 +56,27 @@
             }
         }
     }
+
+    .ariane {
+        align-self: flex-start;
+        margin-bottom: 40px;
+
+        a {
+            text-decoration: none;
+            font-family: $lato;
+            font-size: 0.8em;
+            color: $teal;
+            transition: all .15s;
+
+            &:hover, &:focus {
+                color: lighten($teal, 10%);
+            }
+        }
+
+        #ariane-active {
+            color: lighten($teal, 10%);
+        }
+    }
 }
 
 main {

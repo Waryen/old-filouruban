@@ -41,7 +41,7 @@ Route::get('articles/{category}', function(Category $category) {
 })->name('cat-arts');
 
 Route::get('articles/{category}/{article}', function(Category $category, Article $article) {
-    return view('article', ['article' => $article]);
+    return view('article', ['article' => $article, 'category' => $category]);
 })->name('article');
 
 Route::get('about', function() {
