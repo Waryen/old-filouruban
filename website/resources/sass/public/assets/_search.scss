@@ -13,6 +13,12 @@
         align-items: center;
         justify-content: center;
 
+        .loading-text {
+            font-family: $lato;
+            color: $peach;
+            font-size: 1.5em;
+        }
+
         h2 {
             font-family: $lato;
             font-size: 1.5em;
