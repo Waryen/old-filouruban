@@ -538,6 +538,7 @@ th {
   color: #edf6f9;
   text-decoration: none;
   transition: all 0.15s;
+  text-align: center;
 }
 .category-articles #react-category div ul li .link-to-art:hover, .category-articles #react-category div ul li .link-to-art:focus {
   background: #009caa;
@@ -611,6 +612,7 @@ th {
   color: #edf6f9;
   text-decoration: none;
   transition: all 0.15s;
+  text-align: center;
 }
 .categories #react-categories div ul li .link-to-cat:hover, .categories #react-categories div ul li .link-to-cat:focus {
   background: #009caa;
@@ -926,6 +928,7 @@ th {
   color: #edf6f9;
   margin-top: 10px;
   transition: all 0.15s;
+  text-align: center;
 }
 .home #react-home-articles .home-articles figure {
   overflow: hidden;
@@ -1309,6 +1312,7 @@ th {
   color: #edf6f9;
   margin-top: 10px;
   transition: all 0.15s;
+  text-align: center;
 }
 .search #react-search-result .search-result figure {
   overflow: hidden;

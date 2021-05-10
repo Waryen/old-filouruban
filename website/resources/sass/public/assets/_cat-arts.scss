@@ -74,6 +74,7 @@
                 color: $silver;
                 text-decoration: none;
                 transition: all .15s;
+                text-align: center;
 
                 &:hover, &:focus {
                     background: lighten($teal, 10%);
