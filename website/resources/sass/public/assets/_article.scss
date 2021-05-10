@@ -3,6 +3,12 @@
     flex-direction: column;
     align-items: center;
 
+    .loading-text {
+        font-family: $lato;
+        color: $peach;
+        font-size: 1.5em;
+    }
+
     .article-card {
         max-width: 800px;
         display: flex;

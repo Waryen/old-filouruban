@@ -2396,10 +2396,12 @@ var Article = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      article: {}
+      article: {},
+      isLoading: true
     };
     _this.zoomImg = _this.zoomImg.bind(_assertThisInitialized(_this));
     _this.divide = _this.divide.bind(_assertThisInitialized(_this));
+    _this.loaded = _this.loaded.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
 
@@ -2475,6 +2477,13 @@ var Article = /*#__PURE__*/function (_React$Component) {
       return array;
     }
   }, {
+    key: "loaded",
+    value: function loaded() {
+      this.setState({
+        isLoading: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -2482,43 +2491,67 @@ var Article = /*#__PURE__*/function (_React$Component) {
       var name = this.state.article.name;
       var desc = this.divide(String(this.state.article.description));
       var image = this.state.article.image_id;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "article",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "article-card",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "article-title",
-            children: name
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-              src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
-              alt: "Photo de l'article: ".concat(name),
-              className: "article-img",
-              onClick: function onClick() {
-                _this3.zoomImg();
-              }
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "article-desc",
-            children: desc
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_commentary__WEBPACK_IMPORTED_MODULE_2__.default, {
-          url: this.props.url,
-          api: this.props.api,
-          artId: this.state.article.id
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "zoom-wrapper",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            children: "Cliquer pour d\xE9zoomer"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-              src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
-              alt: "Photo de l'article: ".concat(name),
-              className: "article-img"
-            })
-          })]
-        })]
+
+      var img = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
+        alt: "Photo de l'article: ".concat(name),
+        className: "article-img",
+        onLoad: function onLoad() {
+          _this3.loaded();
+        }
       });
+
+      if (this.state.isLoading) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "article",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "loading-text",
+            children: "Chargement..."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: img
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "zoom-wrapper"
+          })]
+        });
+      } else {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "article",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "article-card",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+              className: "article-title",
+              children: name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
+                alt: "Photo de l'article: ".concat(name),
+                className: "article-img",
+                onClick: function onClick() {
+                  _this3.zoomImg();
+                }
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "article-desc",
+              children: desc
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_commentary__WEBPACK_IMPORTED_MODULE_2__.default, {
+            url: this.props.url,
+            api: this.props.api,
+            artId: this.state.article.id
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "zoom-wrapper",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              children: "Cliquer pour d\xE9zoomer"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("figure", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                src: "".concat(this.props.url, "/media/images/articles/article-").concat(image, ".jpg"),
+                alt: "Photo de l'article: ".concat(name),
+                className: "article-img"
+              })
+            })]
+          })]
+        });
+      }
     }
   }]);
 
@@ -2658,9 +2691,11 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      categories: []
+      categories: [],
+      isLoading: true
     };
     _this.saveId = _this.saveId.bind(_assertThisInitialized(_this));
+    _this.loaded = _this.loaded.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupère la liste des catégories
 
@@ -2690,6 +2725,13 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "loaded",
+    value: function loaded() {
+      this.setState({
+        isLoading: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -2708,7 +2750,10 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("figure", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                 src: "".concat(_this3.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
-                alt: "Image de la cat\xE9gorie: ".concat(el.name)
+                alt: "Image de la cat\xE9gorie: ".concat(el.name),
+                onLoad: function onLoad() {
+                  _this3.loaded();
+                }
               })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
@@ -2719,11 +2764,26 @@ var CategoriesList = /*#__PURE__*/function (_React$Component) {
           })]
         }, el.id));
       });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-          children: list
-        })
-      });
+
+      if (this.state.isLoading) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "loading-text",
+            children: "Chargement..."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            style: {
+              display: 'none'
+            },
+            children: list
+          })]
+        });
+      } else {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            children: list
+          })
+        });
+      }
     }
   }]);
 
@@ -2792,9 +2852,11 @@ var Category = /*#__PURE__*/function (_React$Component) {
       articles: [],
       categoryName: '',
       categoryDesc: '',
-      url: window.location.href
+      url: window.location.href,
+      isLoading: true
     };
     _this.saveId = _this.saveId.bind(_assertThisInitialized(_this));
+    _this.loaded = _this.loaded.bind(_assertThisInitialized(_this));
     return _this;
   } // Récupère l'Id de la catégorie et la liste des articles
 
@@ -2843,6 +2905,13 @@ var Category = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "loaded",
+    value: function loaded() {
+      this.setState({
+        isLoading: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -2863,7 +2932,10 @@ var Category = /*#__PURE__*/function (_React$Component) {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("figure", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                   src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-                  alt: "Image de l'article ".concat(el.name)
+                  alt: "Image de l'article ".concat(el.name),
+                  onLoad: function onLoad() {
+                    _this3.loaded();
+                  }
                 })
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
@@ -2875,11 +2947,26 @@ var Category = /*#__PURE__*/function (_React$Component) {
           }, el.id));
         }
       });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-          children: articlesList
-        })
-      });
+
+      if (this.state.isLoading) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "loading-text",
+            children: "Chargement..."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            style: {
+              display: 'none'
+            },
+            children: articlesList
+          })]
+        });
+      } else {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            children: articlesList
+          })
+        });
+      }
     }
   }]);
 

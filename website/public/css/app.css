@@ -490,6 +490,11 @@ th {
   color: #000000;
   margin-bottom: 20px;
 }
+.category-articles .loading-text {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1.5em;
+}
 .category-articles #react-category div ul {
   padding: 20px;
   display: flex;
@@ -556,6 +561,11 @@ th {
   font-weight: 600;
   text-align: center;
   margin-bottom: 20px;
+}
+.categories .loading-text {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1.5em;
 }
 .categories #react-categories div ul {
   padding: 20px;
@@ -946,6 +956,11 @@ th {
   flex-direction: column;
   align-items: center;
 }
+#react-article .article .loading-text {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1.5em;
+}
 #react-article .article .article-card {
   max-width: 800px;
   display: flex;
@@ -1242,8 +1257,6 @@ th {
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
-  background: #ffddd2;
-  border-radius: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;

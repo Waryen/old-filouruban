@@ -9,10 +9,12 @@ class Category extends React.Component {
             articles: [],
             categoryName: '',
             categoryDesc: '',
-            url: window.location.href
+            url: window.location.href,
+            isLoading: true,
         }
 
         this.saveId = this.saveId.bind(this)
+        this.loaded = this.loaded.bind(this)
     }
 
     // Récupère l'Id de la catégorie et la liste des articles
@@ -56,6 +58,10 @@ class Category extends React.Component {
         }
     }
 
+    loaded() {
+        this.setState({ isLoading: false })
+    }
+
     render() {
         // Rendu de la liste des articles de la catégorie spécifique
         const articles = this.state.articles
@@ -69,7 +75,7 @@ class Category extends React.Component {
                         <h3>{el.name}</h3>
                         <a href={`${this.state.url}/${el.id}`} onClick={this.saveId(el.id)} className="art-img">
                             <figure>
-                                <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} />
+                                <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} onLoad={() => {this.loaded()}}  />
                             </figure>
                         </a>
                         <a href={`${this.state.url}/${el.id}`} onClick={this.saveId(el.id)} className="link-to-art">Voir l'article</a>
@@ -78,13 +84,24 @@ class Category extends React.Component {
             }
         })
 
-        return(
-            <div>
-                <ul>
-                    {articlesList}
-                </ul>
-            </div>
-        )
+        if(this.state.isLoading) {
+            return(
+                <div>
+                    <p className="loading-text">Chargement...</p>
+                    <ul style={{display: 'none'}}>
+                        {articlesList}
+                    </ul>
+                </div>
+            )
+        } else {
+            return(
+                <div>
+                    <ul>
+                        {articlesList}
+                    </ul>
+                </div>
+            )
+        }
     }
 }
 

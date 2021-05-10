@@ -6,9 +6,11 @@ class CategoriesList extends React.Component {
         super(props)
         this.state = {
             categories: [],
+            isLoading: true,
         }
 
         this.saveId = this.saveId.bind(this)
+        this.loaded = this.loaded.bind(this)
     }
 
     // Récupère la liste des catégories
@@ -33,6 +35,10 @@ class CategoriesList extends React.Component {
         }
     }
 
+    loaded() {
+        this.setState({ isLoading: false })
+    }
+
     render() {
         // Rendu des catégories
         const categories = this.state.categories
@@ -43,7 +49,7 @@ class CategoriesList extends React.Component {
                     <h3>{el.name}</h3>
                     <a href={`articles/${el.id}`} className="cat-img" onClick={this.saveId(el.id)}>
                         <figure>
-                            <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} />
+                            <img src={`${this.props.url}/media/images/categories/category-${el.image_id}.jpg`} alt={`Image de la catégorie: ${el.name}`} onLoad={() => {this.loaded()}} />
                         </figure>
                     </a>
                     <a href={`articles/${el.id}`} className="link-to-cat" onClick={this.saveId(el.id)}>Voir les articles</a>
@@ -51,13 +57,24 @@ class CategoriesList extends React.Component {
             )
         })
 
-        return(
-            <div>
-                <ul>
-                    {list}
-                </ul>
-            </div>
-        )
+        if(this.state.isLoading) {
+            return(
+                <div>
+                    <p className="loading-text">Chargement...</p>
+                    <ul style={{display: 'none'}}>
+                        {list}
+                    </ul>
+                </div>
+            )
+        } else {
+            return(
+                <div>
+                    <ul>
+                        {list}
+                    </ul>
+                </div>
+            )
+        }
     }
 }
 

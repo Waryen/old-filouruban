@@ -7,10 +7,12 @@ class Article extends React.Component {
         super(props)
         this.state = {
             article: {},
+            isLoading: true,
         }
 
         this.zoomImg = this.zoomImg.bind(this)
         this.divide = this.divide.bind(this)
+        this.loaded = this.loaded.bind(this)
     }
 
     // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
@@ -82,31 +84,48 @@ class Article extends React.Component {
         return array
     }
 
+    loaded() {
+        this.setState({ isLoading: false })
+    }
+
     render() {
         const name = this.state.article.name
         const desc = this.divide(String(this.state.article.description))
         const image = this.state.article.image_id
+        const img = <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" onLoad={() => {this.loaded()}} />
 
-        return(
-            <div className="article">
-                <div className="article-card">
-                    <h2 className="article-title">{name}</h2>
-                    <figure>
-                        <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" onClick={() => {this.zoomImg()}} />
-                    </figure>
-                    <div className="article-desc">
-                        {desc}
+        if(this.state.isLoading) {
+            return(
+                <div className="article">
+                    <p className="loading-text">Chargement...</p>
+                    <div>
+                        {img}
+                    </div>
+                    <div className="zoom-wrapper"></div>
+                </div>
+            )
+        } else {
+            return(
+                <div className="article">
+                    <div className="article-card">
+                        <h2 className="article-title">{name}</h2>
+                        <figure>
+                            <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" onClick={() => {this.zoomImg()}} />
+                        </figure>
+                        <div className="article-desc">
+                            {desc}
+                        </div>
+                    </div>
+                    <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
+                    <div className="zoom-wrapper">
+                        <p>Cliquer pour dézoomer</p>
+                        <figure>
+                            <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" />
+                        </figure>
                     </div>
                 </div>
-                <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
-                <div className="zoom-wrapper">
-                    <p>Cliquer pour dézoomer</p>
-                    <figure>
-                        <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" />
-                    </figure>
-                </div>
-            </div>
-        )
+            )
+        }
     }
 }
 
