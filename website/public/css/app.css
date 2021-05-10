@@ -877,6 +877,11 @@ th {
   display: flex;
   justify-content: center;
 }
+.home #react-home-articles .home-articles .loading-text {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1.5em;
+}
 .home #react-home-articles .home-articles ul {
   display: flex;
   justify-content: space-evenly;

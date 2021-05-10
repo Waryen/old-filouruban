@@ -61,6 +61,12 @@
         display: flex;
         justify-content: center;
 
+        .loading-text {
+            font-family: $lato;
+            color: $peach;
+            font-size: 1.5em;
+        }
+
         ul {
             display: flex;
             justify-content: space-evenly;

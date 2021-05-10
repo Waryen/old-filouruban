@@ -3466,12 +3466,14 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       articles: [],
       artId: '',
-      catId: ''
+      catId: '',
+      isLoading: true
     };
     _this.getArticles = _this.getArticles.bind(_assertThisInitialized(_this));
     _this.getRandomInt = _this.getRandomInt.bind(_assertThisInitialized(_this));
     _this.randomArticles = _this.randomArticles.bind(_assertThisInitialized(_this));
     _this.setId = _this.setId.bind(_assertThisInitialized(_this));
+    _this.loaded = _this.loaded.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3530,6 +3532,13 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
       sessionStorage.setItem('catId', catId);
     }
   }, {
+    key: "loaded",
+    value: function loaded() {
+      this.setState({
+        isLoading: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -3546,7 +3555,10 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("figure", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                 src: "".concat(_this3.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
-                alt: "Photo de l'article: ".concat(el.name)
+                alt: "Photo de l'article: ".concat(el.name),
+                onLoad: function onLoad() {
+                  _this3.loaded();
+                }
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
               children: el.name
@@ -3554,12 +3566,28 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
           })
         }, el.id));
       });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "home-articles",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-          children: list
-        })
-      });
+
+      if (this.state.isLoading) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "home-articles",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "loading-text",
+            children: "Chargement..."
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            style: {
+              display: 'none'
+            },
+            children: list
+          })]
+        });
+      } else {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "home-articles",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+            children: list
+          })
+        });
+      }
     }
   }]);
 

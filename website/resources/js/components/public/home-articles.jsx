@@ -8,12 +8,14 @@ class HomeArticles extends React.Component {
             articles: [],
             artId: '',
             catId: '',
+            isLoading: true,
         }
 
         this.getArticles = this.getArticles.bind(this)
         this.getRandomInt = this.getRandomInt.bind(this)
         this.randomArticles = this.randomArticles.bind(this)
         this.setId = this.setId.bind(this)
+        this.loaded = this.loaded.bind(this)
     }
 
     componentDidMount() {
@@ -60,6 +62,10 @@ class HomeArticles extends React.Component {
         sessionStorage.setItem('catId', catId)
     }
 
+    loaded() {
+        this.setState({ isLoading: false})
+    }
+
     render() {
         const articles = this.state.articles
         let list = []
@@ -68,7 +74,7 @@ class HomeArticles extends React.Component {
                 <li key={el.id}>
                     <a href={`articles/${el.categories_id}/${el.id}`} onClick={() => {this.setId(el.id, el.categories_id)}}>
                         <figure>
-                            <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`}/>
+                            <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} onLoad={() => {this.loaded()}}/>
                         </figure>
                         <h3>{el.name}</h3>
                     </a>
@@ -76,13 +82,24 @@ class HomeArticles extends React.Component {
             )
         })
 
-        return(
-            <div className="home-articles">
-                <ul>
-                    {list}
-                </ul>
-            </div>
-        )
+        if(this.state.isLoading) {
+            return(
+                <div className="home-articles">
+                    <p className="loading-text">Chargement...</p>
+                    <ul style={{display: 'none'}}>
+                        {list}
+                    </ul>
+                </div>
+            )
+        } else {
+            return(
+                <div className="home-articles">
+                    <ul>
+                        {list}
+                    </ul>
+                </div>
+            )
+        }
     }
 }
 
