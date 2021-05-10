@@ -17,9 +17,7 @@ class Article extends React.Component {
 
     // Récupèr l'id de l'article dans la session storage ainsi que celui-ci dans la DB
     componentDidMount() {
-        const zoomWrapper = document.querySelector('.zoom-wrapper')
-        zoomWrapper.style.display = 'none'
-        zoomWrapper.setAttribute('aria-hidden', 'true')
+        this.hideWrapper()
         let artId = JSON.parse(sessionStorage.getItem('artId'))
         
         if(artId == undefined) {
@@ -39,6 +37,12 @@ class Article extends React.Component {
                     this.setState({ article: response.data })
                 }
             })
+    }
+
+    hideWrapper() {
+        const zoomWrapper = document.querySelector('.zoom-wrapper')
+        zoomWrapper.style.display = 'none'
+        zoomWrapper.setAttribute('aria-hidden', 'true')
     }
 
     // Gestion du zoom de l'image
@@ -98,7 +102,7 @@ class Article extends React.Component {
             return(
                 <div className="article">
                     <p className="loading-text">Chargement...</p>
-                    <div>
+                    <div style={{display: 'none'}}>
                         {img}
                     </div>
                     <div className="zoom-wrapper"></div>

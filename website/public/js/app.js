@@ -2411,9 +2411,7 @@ var Article = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var zoomWrapper = document.querySelector('.zoom-wrapper');
-      zoomWrapper.style.display = 'none';
-      zoomWrapper.setAttribute('aria-hidden', 'true');
+      this.hideWrapper();
       var artId = JSON.parse(sessionStorage.getItem('artId'));
 
       if (artId == undefined) {
@@ -2433,6 +2431,13 @@ var Article = /*#__PURE__*/function (_React$Component) {
           });
         }
       });
+    }
+  }, {
+    key: "hideWrapper",
+    value: function hideWrapper() {
+      var zoomWrapper = document.querySelector('.zoom-wrapper');
+      zoomWrapper.style.display = 'none';
+      zoomWrapper.setAttribute('aria-hidden', 'true');
     } // Gestion du zoom de l'image
 
   }, {
@@ -2508,6 +2513,9 @@ var Article = /*#__PURE__*/function (_React$Component) {
             className: "loading-text",
             children: "Chargement..."
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            style: {
+              display: 'none'
+            },
             children: img
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "zoom-wrapper"
