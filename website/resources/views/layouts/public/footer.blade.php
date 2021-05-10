@@ -12,7 +12,7 @@
     </nav>
     <div class="footer-newsletter" id="react-newsletter"></div>
     <div class="copyrights">
-        <p>Copyrights © 2021 | filouruban.be</p>
+        <p>© 2021 Filouruban. Tous droits réservés.</p>
     </div>
     <div class="social-media">
         <p>Suivez-nous</p>
