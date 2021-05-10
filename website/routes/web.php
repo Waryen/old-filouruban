@@ -19,10 +19,6 @@ use App\Mail\ContactMail;
 |
 */
 
-Route::get('email', function() {
-    return new ContactMail();
-});
-
 // Public
 Route::get('/', function() {
     return view('accueil');

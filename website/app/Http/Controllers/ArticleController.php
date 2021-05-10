@@ -28,24 +28,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $id = Article::create($input)->id;
-
-        $subs = Subscriber::all();
-
-        $data = [
-            'name' => $request->name,
-            'imageSlug' => $request->image_id,
-            'categoryId' => $request->categories_id,
-            'articleId' => $id
-        ];
-
-        if(!empty($subs)) {
-            foreach ($subs as $val) {
-                //Mail::to($val->email)->send(new SubscribersMail($data));
-                //sleep(1); // Envoi 1 mail par seconde sinon erreur pour la phase de dev
-            }
-        }
+        Article::create($request->all());
     }
 
     /**
