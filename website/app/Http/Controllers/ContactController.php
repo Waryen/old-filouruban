@@ -52,7 +52,7 @@ class ContactController extends Controller
 
         if($resultData->success) {
             Contact::create($request->all());
-            //Mail::to('sophie@filouruban.be')->queue(new ContactMail($data));
+            //Mail::to('sophie@filouruban.be')->send(new ContactMail($data));
             return true;
         } 
         else {

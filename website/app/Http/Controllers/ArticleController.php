@@ -42,7 +42,7 @@ class ArticleController extends Controller
 
         if(!empty($subs)) {
             foreach ($subs as $val) {
-                //Mail::to($val->email)->queue(new SubscribersMail($data));
+                //Mail::to($val->email)->send(new SubscribersMail($data));
                 //sleep(1); // Envoi 1 mail par seconde sinon erreur pour la phase de dev
             }
         }

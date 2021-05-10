@@ -14,6 +14,7 @@ class Commentary extends React.Component {
             content: '',
             date: this.now(),
             captcha: '',
+            submited: false,
         }
 
         this.now = this.now.bind(this)
@@ -83,18 +84,22 @@ class Commentary extends React.Component {
             captcha: this.state.captcha
         }
 
-        if(this.state.captcha) {
-            axios
-            .post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
-            .then(response => {
-                if(response.status == 200 && response.data == true) {
-                    this.hanldeCancel(e)
-                    this.componentDidMount()
-                } else {
-                    alert("Impossible d'envoyer votre commentaire pour le moment.")
-                }
-            })
+        if(this.state.submited == false) {
+            if(this.state.captcha) {
+                axios
+                .post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
+                .then(response => {
+                    if(response.status == 200 && response.data == 1) {
+                        this.componentDidMount()
+                        this.setState({ submited: true })
+                    } else {
+                        alert("Impossible d'envoyer votre commentaire pour le moment.")
+                    }
+                })
+            }
         }
+
+        this.hanldeCancel(e)
     }
 
     render() {

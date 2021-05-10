@@ -2958,7 +2958,8 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
       lastname: '',
       content: '',
       date: _this.now(),
-      captcha: ''
+      captcha: '',
+      submited: false
     };
     _this.now = _this.now.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -3041,17 +3042,23 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
         captcha: this.state.captcha
       };
 
-      if (this.state.captcha) {
-        axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api), data).then(function (response) {
-          if (response.status == 200 && response.data == true) {
-            _this3.hanldeCancel(e);
+      if (this.state.submited == false) {
+        if (this.state.captcha) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api), data).then(function (response) {
+            if (response.status == 200 && response.data == 1) {
+              _this3.componentDidMount();
 
-            _this3.componentDidMount();
-          } else {
-            alert("Impossible d'envoyer votre commentaire pour le moment.");
-          }
-        });
+              _this3.setState({
+                submited: true
+              });
+            } else {
+              alert("Impossible d'envoyer votre commentaire pour le moment.");
+            }
+          });
+        }
       }
+
+      this.hanldeCancel(e);
     }
   }, {
     key: "render",
@@ -3240,7 +3247,8 @@ var Contact = /*#__PURE__*/function (_React$Component) {
       lastname: '',
       email: '',
       content: '',
-      captcha: ''
+      captcha: '',
+      submited: false
     };
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -3289,30 +3297,41 @@ var Contact = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
 
-      if (this.state.captcha) {
-        var data = {
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          email: this.state.email,
-          content: this.state.content,
-          captcha: this.state.captcha
-        };
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api), data).then(function (response) {
-          if (response.data == false) {
-            alert("Votre captcha n'a pas été validé !");
-          }
-        });
-        this.handleCancel(e);
-      } else {
-        alert('Veuillez valider le captcha !');
+      if (this.state.submited == false) {
+        if (this.state.captcha) {
+          var data = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            email: this.state.email,
+            content: this.state.content,
+            captcha: this.state.captcha
+          };
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api), data).then(function (response) {
+            if (response.data == 0) {
+              alert("Votre captcha n'a pas été validé !");
+            } else if (response.data == 1) {
+              alert("Votre message a été envoyé !");
+
+              _this2.setState({
+                submited: true
+              });
+            }
+          });
+        } else {
+          alert('Veuillez valider le captcha !');
+        }
       }
+
+      this.handleCancel(e);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "form-contact-wrapper",
@@ -3378,7 +3397,7 @@ var Contact = /*#__PURE__*/function (_React$Component) {
               ref: this.child,
               sitekey: "25830f50-7442-4826-9111-3517e9f53d2c",
               onVerify: function onVerify(token, ekey) {
-                return _this2.handleVerificationSuccess(token, ekey);
+                return _this3.handleVerificationSuccess(token, ekey);
               }
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -3670,7 +3689,8 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       listSubscribers: [],
       newSubscriber: '',
-      captcha: ''
+      captcha: '',
+      submited: false
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -3735,23 +3755,26 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
       } // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
 
 
-      if (check === true && this.state.captcha) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), {
-          email: newSub,
-          captcha: this.state.captcha
-        }).then(function (res) {
-          if (res.data === 'ok') {
-            alert('Vous avez été inscrit(e) à la newsletter !');
+      if (this.state.submited == false) {
+        if (check === true && this.state.captcha) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), {
+            email: newSub,
+            captcha: this.state.captcha
+          }).then(function (res) {
+            if (res.data === 1) {
+              alert('Vous avez été inscrit(e) à la newsletter !');
 
-            _this3.setState({
-              listSubscribers: [].concat(_toConsumableArray(_this3.state.listSubscribers), [newSub])
-            });
-          } else {
-            alert("Votre captcha n'a pas été validée !");
-          }
-        });
-      } else {
-        alert('Vous êtes déja inscrit(e) à la newsletter !');
+              _this3.setState({
+                listSubscribers: [].concat(_toConsumableArray(_this3.state.listSubscribers), [newSub]),
+                submited: true
+              });
+            } else if (res.data == 0) {
+              alert("Votre captcha n'a pas été validée !");
+            }
+          });
+        } else {
+          alert('Vous êtes déja inscrit(e) à la newsletter !');
+        }
       }
 
       this.setState({

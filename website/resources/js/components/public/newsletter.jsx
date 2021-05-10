@@ -10,6 +10,7 @@ class Newsletter extends React.Component {
             listSubscribers: [],
             newSubscriber: '',
             captcha: '',
+            submited: false,
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -59,20 +60,25 @@ class Newsletter extends React.Component {
         }
 
         // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
-        if(check === true && this.state.captcha) {
-            axios.post(`${this.props.url}/api/subscriber?api_token=${this.props.api}`, {
-                email: newSub,
-                captcha: this.state.captcha
-            }).then(res => {
-                if(res.data === 'ok') {
-                    alert('Vous avez été inscrit(e) à la newsletter !')
-                    this.setState({ listSubscribers: [...this.state.listSubscribers, newSub] })
-                } else {
-                    alert("Votre captcha n'a pas été validée !")
-                }
-            })
-        } else {
-            alert('Vous êtes déja inscrit(e) à la newsletter !')
+        if(this.state.submited == false) {
+            if(check === true && this.state.captcha) {
+                axios.post(`${this.props.url}/api/subscriber?api_token=${this.props.api}`, {
+                    email: newSub,
+                    captcha: this.state.captcha
+                }).then(res => {
+                    if(res.data === 1) {
+                        alert('Vous avez été inscrit(e) à la newsletter !')
+                        this.setState({
+                            listSubscribers: [...this.state.listSubscribers, newSub],
+                            submited: true
+                        })
+                    } else if(res.data == 0) {
+                        alert("Votre captcha n'a pas été validée !")
+                    }
+                })
+            } else {
+                alert('Vous êtes déja inscrit(e) à la newsletter !')
+            }
         }
 
         this.setState({

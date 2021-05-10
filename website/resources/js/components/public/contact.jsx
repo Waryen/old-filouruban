@@ -12,6 +12,7 @@ class Contact extends React.Component {
             email: '',
             content: '',
             captcha: '',
+            submited: false,
         }
 
         this.handleCancel = this.handleCancel.bind(this)
@@ -54,26 +55,32 @@ class Contact extends React.Component {
     // Envoi le forumulaire
     handleSubmit(e) {
         e.preventDefault()
-        if(this.state.captcha) {
-            const data = {
-                firstname: this.state.firstname,
-                lastname: this.state.lastname,
-                email: this.state.email,
-                content: this.state.content,
-                captcha: this.state.captcha
+
+        if(this.state.submited == false) {
+            if(this.state.captcha) {
+                const data = {
+                    firstname: this.state.firstname,
+                    lastname: this.state.lastname,
+                    email: this.state.email,
+                    content: this.state.content,
+                    captcha: this.state.captcha
+                }
+                axios
+                    .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
+                    .then(response => {
+                        if(response.data == 0) {
+                            alert("Votre captcha n'a pas été validé !")
+                        } else if(response.data == 1) {
+                            alert("Votre message a été envoyé !")
+                            this.setState({ submited: true })
+                        }
+                    })
+            } else {
+                alert('Veuillez valider le captcha !')
             }
-            axios
-                .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
-                .then(response => {
-                    if(response.data == false) {
-                        alert("Votre captcha n'a pas été validé !")
-                    }
-                })
-    
-            this.handleCancel(e)
-        } else {
-            alert('Veuillez valider le captcha !')
         }
+
+        this.handleCancel(e)
     }
 
     render() {

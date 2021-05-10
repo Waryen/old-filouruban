@@ -43,7 +43,7 @@ class SubscriberController extends Controller
 
         if($resultData->success) {
             Subscriber::create($request->all());
-            return 'ok';
+            return true;
         } 
         else {
             return false;
