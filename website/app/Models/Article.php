@@ -17,6 +17,7 @@ class Article extends Model
         'categories_id',
         'admins_id',
         'image_id',
+        'slug',
     ];
 
     /*

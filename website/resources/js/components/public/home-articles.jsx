@@ -57,9 +57,10 @@ class HomeArticles extends React.Component {
     }
 
     // Sauvegarde l'id de l'article et de la catégorie dans le sessionStorage
-    setId(artId, catId) {
+    setId(artId, catId, artSlug) {
         sessionStorage.setItem('artId', artId)
         sessionStorage.setItem('catId', catId)
+        sessionStorage.setItem('artSlug', artSlug)
     }
 
     loaded() {
@@ -72,7 +73,7 @@ class HomeArticles extends React.Component {
         articles.forEach(el => {
             list.push(
                 <li key={el.id}>
-                    <a href={`articles/${el.categories_id}/${el.id}`} onClick={() => {this.setId(el.id, el.categories_id)}}>
+                    <a href={`articles/${el.categories_id}/${el.id}`} onClick={() => {this.setId(el.id, el.categories_id, el.slug)}}>
                         <figure>
                             <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} onLoad={() => {this.loaded()}}/>
                         </figure>

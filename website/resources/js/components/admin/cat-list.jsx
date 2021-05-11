@@ -125,9 +125,19 @@ class CategoryList extends React.Component {
             axios.post('uploadCategoryImage', fd, config)
         }
 
+        // Crée un slug
+        const slug = this.state.newCatName.replace(/\s+/g, '-').toLocaleLowerCase()
+
         axios.patch(`${this.props.url}/api/category/${this.state.catId}?api_token=${this.props.api}`, {
             name: this.state.newCatName,
             description: this.state.newCatDesc,
+            slug: slug,
+        }).then(response => {
+            if(response.status == 200) {
+                alert('Catégorie modifiée !')
+            } else {
+                alert("Impossible de modifier cette catégorie pour le moment")
+            }
         })
 
         this.componentDidMount()

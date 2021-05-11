@@ -100,17 +100,28 @@ class ArticleCreate extends React.Component {
         const fd = new FormData()
         fd.append('image', this.state.image)
         const config = { headers: { 'content-type': 'multipart/form-data' } }
+
+        // Crée un slug
+        const slug = this.state.name.replace(/\s+/g, '-').toLocaleLowerCase()
+
         const data = {
             name: this.state.name,
             description: this.state.description,
             categories_id: this.state.category,
             admins_id: this.state.admin,
             image_id: this.state.imageName,
+            slug: slug,
         }
 
         axios
             .post(`${this.props.url}/api/article?api_token=${this.props.api}`, data)
-            .then(response => console.log(response))
+            .then(response => {
+                if(response.status == 200) {
+                    alert('Article créé !')
+                } else {
+                    alert("Erreur lors de l'envoi du formulaire")
+                }
+            })
 
         axios
             .post('uploadArticleImage', fd, config)

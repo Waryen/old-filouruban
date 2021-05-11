@@ -3641,9 +3641,10 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
 
   }, {
     key: "setId",
-    value: function setId(artId, catId) {
+    value: function setId(artId, catId, artSlug) {
       sessionStorage.setItem('artId', artId);
       sessionStorage.setItem('catId', catId);
+      sessionStorage.setItem('artSlug', artSlug);
     }
   }, {
     key: "loaded",
@@ -3664,7 +3665,7 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
             href: "articles/".concat(el.categories_id, "/").concat(el.id),
             onClick: function onClick() {
-              _this3.setId(el.id, el.categories_id);
+              _this3.setId(el.id, el.categories_id, el.slug);
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("figure", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {

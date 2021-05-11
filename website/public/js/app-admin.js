@@ -3371,16 +3371,23 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
         headers: {
           'content-type': 'multipart/form-data'
         }
-      };
+      }; // Crée un slug
+
+      var slug = this.state.name.replace(/\s+/g, '-').toLocaleLowerCase();
       var data = {
         name: this.state.name,
         description: this.state.description,
         categories_id: this.state.category,
         admins_id: this.state.admin,
-        image_id: this.state.imageName
+        image_id: this.state.imageName,
+        slug: slug
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api), data).then(function (response) {
-        return console.log(response);
+        if (response.status == 200) {
+          alert('Article créé !');
+        } else {
+          alert("Erreur lors de l'envoi du formulaire");
+        }
       });
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
       this.handleCancel(e);
@@ -3690,12 +3697,21 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
           }
         };
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
-      }
+      } // Crée un slug
 
+
+      var slug = this.state.name.replace(/\s+/g, '-').toLocaleLowerCase();
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/article/").concat(this.state.id, "?api_token=").concat(this.props.api), {
         name: this.state.name,
         description: this.state.description,
-        categories_id: this.state.categories_id
+        categories_id: this.state.categories_id,
+        slug: slug
+      }).then(function (response) {
+        if (response.status == 200) {
+          alert('Article modifié !');
+        } else {
+          alert("Impossible de modifier l'article pour le moment");
+        }
       });
       this.componentDidMount();
       document.querySelector('.article-list').style.display = 'block';
@@ -4068,11 +4084,20 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
         headers: {
           'content-type': 'multipart/form-data'
         }
-      };
+      }; // Crée un slug
+
+      var slug = this.state.catName.replace(/\s+/g, '-').toLocaleLowerCase();
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api), {
         name: name,
         description: description,
-        image_id: this.state.imageName
+        image_id: this.state.imageName,
+        slug: slug
+      }).then(function (response) {
+        if (response.status == 200) {
+          alert('Catégorie crée !');
+        } else {
+          alert("Impossible de créer une catégorie pour le moment");
+        }
       });
       axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
       this.handleCancel(e);
@@ -4364,11 +4389,20 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
           }
         };
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
-      }
+      } // Crée un slug
 
+
+      var slug = this.state.newCatName.replace(/\s+/g, '-').toLocaleLowerCase();
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/category/").concat(this.state.catId, "?api_token=").concat(this.props.api), {
         name: this.state.newCatName,
-        description: this.state.newCatDesc
+        description: this.state.newCatDesc,
+        slug: slug
+      }).then(function (response) {
+        if (response.status == 200) {
+          alert('Catégorie modifiée !');
+        } else {
+          alert("Impossible de modifier cette catégorie pour le moment");
+        }
       });
       this.componentDidMount();
       document.querySelector('.category-list').style.display = 'block';

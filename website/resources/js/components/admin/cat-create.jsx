@@ -87,10 +87,20 @@ class CategoryCreate extends React.Component {
         fd.append('image', this.state.image)
         const config = { headers: { 'content-type': 'multipart/form-data' } }
 
+        // Crée un slug
+        const slug = this.state.catName.replace(/\s+/g, '-').toLocaleLowerCase()
+
         axios.post(`${this.props.url}/api/category?api_token=${this.props.api}`, {
             name: name,
             description: description,
             image_id: this.state.imageName,
+            slug: slug,
+        }).then(response => {
+            if(response.status == 200) {
+                alert('Catégorie crée !')
+            } else {
+                alert("Impossible de créer une catégorie pour le moment")
+            }
         })
 
         axios.post('uploadCategoryImage', fd, config)

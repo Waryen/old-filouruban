@@ -130,10 +130,20 @@ class ArticleList extends React.Component {
             axios.post('uploadArticleImage', fd, config)
         }
 
+        // Crée un slug
+        const slug = this.state.name.replace(/\s+/g, '-').toLocaleLowerCase()
+
         axios.patch(`${this.props.url}/api/article/${this.state.id}?api_token=${this.props.api}`, {
             name: this.state.name,
             description: this.state.description,
             categories_id: this.state.categories_id,
+            slug: slug,
+        }).then(response => {
+            if(response.status == 200) {
+                alert('Article modifié !')
+            } else {
+                alert("Impossible de modifier l'article pour le moment")
+            }
         })
 
         this.componentDidMount()
