@@ -5,9 +5,7 @@
             <li><a href="/articles">Articles</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/about">A propos</a></li>
-            <li><a href="/legal/#mentions-legales">Mentions légales</a></li>
-            <li><a href="/legal/#politique-de-confidentialite">Politique de confidentialité</a></li>
-            <li><a href="/legal/#gestion-des-cookies">Gestion des cookies</a></li>
+            <li><a href="/legal">Mentions légales</a></li>
         </ul>
     </nav>
     <div class="footer-newsletter" id="react-newsletter"></div>
