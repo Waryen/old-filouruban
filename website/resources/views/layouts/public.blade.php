@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="robots" content="noindex"> <!-- Empêche l'indexation par les moteurs de recherche -->
+    <meta name="author" content="Sophie Gomand">
+    <meta name="copyright" content="Filouruban">
+    <meta name="description" content="Filouruban est une marque de produits artisanales fabriqués en Belgique et 100% éco-responsable !">
+    <meta name="keywords" content="filouruban, artisanat, couture, belgique, wavre, bio, éco-responsable">
+    <meta name="robots" content="noindex,nofollow"> <!-- Empêche l'indexation par les moteurs de recherche -->
     <meta name="token" id="token" content="{{ csrf_token() }}">
     <meta name="url" id="url" content="{{ env('APP_URL') }}">
     <!-- FAVICON -->
@@ -20,7 +24,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <!-- SCRIPT -->
     <!--<script src="https://hcaptcha.com/1/api.js" async defer></script>-->
-    <script src="{{ asset('js/app.js') }}" async></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     @yield('title')
 </head>
 <body>

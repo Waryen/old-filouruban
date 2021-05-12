@@ -2611,6 +2611,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Carousel = /*#__PURE__*/function (_React$Component) {
   _inherits(Carousel, _React$Component);
 
@@ -2622,19 +2623,126 @@ var Carousel = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Carousel);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      articles: []
+    };
+    _this.getArticles = _this.getArticles.bind(_assertThisInitialized(_this));
+    _this.randomArticles = _this.randomArticles.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Carousel, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getArticles();
+    } // Récupère la liste des articles
+
+  }, {
+    key: "getArticles",
+    value: function getArticles() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            articles: _this2.randomArticles(response.data)
+          });
+        }
+      });
+    }
+  }, {
+    key: "getRandomInt",
+    value: function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    } // Récupère 3 articles aléatoirement
+
+  }, {
+    key: "randomArticles",
+    value: function randomArticles(els) {
+      var max = els.length;
+      var articles = [];
+      var first = this.getRandomInt(max);
+      var second = this.getRandomInt(max);
+      var third = this.getRandomInt(max);
+
+      if (first == second || first == third || second == third) {
+        while (first == second || first == third || second == third) {
+          first = this.getRandomInt(max);
+          second = this.getRandomInt(max);
+          third = this.getRandomInt(max);
+        }
+      }
+
+      articles.push(els[first]);
+      articles.push(els[second]);
+      articles.push(els[third]);
+      return articles;
+    }
+  }, {
+    key: "carrousel",
+    value: function carrousel() {
+      var slides = document.getElementsByClassName('slide');
+      var one = slides[0];
+      var two = slides[1];
+      var three = slides[2];
+      one.style.display = 'block';
+      two.style.display = 'none';
+      three.style.display = 'none';
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "carousel",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-          children: "Hello World !"
-        })
-      });
+      var _this3 = this;
+
+      var articles = this.state.articles;
+
+      if (articles.length) {
+        var one = articles[0];
+        var two = articles[1];
+        var three = articles[2];
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "home-carousel",
+          onLoad: function onLoad() {
+            _this3.carrousel();
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "slide one",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "".concat(this.props.url, "/media/images/articles/article-").concat(one.image_id, ".jpg"),
+              alt: "",
+              style: {
+                width: "250px"
+              }
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "slide two",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "".concat(this.props.url, "/media/images/articles/article-").concat(two.image_id, ".jpg"),
+              alt: "",
+              style: {
+                width: "250px"
+              }
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "slide three",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "".concat(this.props.url, "/media/images/articles/article-").concat(three.image_id, ".jpg"),
+              alt: "",
+              style: {
+                width: "250px"
+              }
+            })
+          })]
+        });
+      } else {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "carousel",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "loading-text",
+            children: "Chargement..."
+          })
+        });
+      }
     }
   }]);
 

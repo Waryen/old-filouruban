@@ -874,6 +874,11 @@ th {
 .home .home-about .about-content a:hover, .home .home-about .about-content a:focus {
   background: #009caa;
 }
+.home #react-carousel .home-carousel {
+  margin: 0 auto;
+  max-width: 800px;
+  max-height: 200px;
+}
 .home #react-home-articles .home-articles {
   margin: 0 auto;
   max-width: -webkit-fit-content;

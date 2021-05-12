@@ -11,7 +11,7 @@
         <p>Toutes les données collectées pendant la phase de développement seront supprimées au plus tard pour le 29 mai 2021. <a href="legal">Plus d'infos sur la manière dont vos données sont utilisées</a></p>
     </div>
     <div class="home">
-        <!--<div id="react-carousel"></div>-->
+        <div id="react-carousel"></div>
         <div class="home-about">
             <h2 class="about-title">A propos de Filouruban</h2>
             <div class="about-content">

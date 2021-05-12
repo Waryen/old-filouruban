@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 06, 2021 at 06:47 PM
+-- Generation Time: May 12, 2021 at 06:49 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `firstname`, `lastname`, `email`, `password`, `su`, `created_at`, `updated_at`, `api_token`, `remember_token`) VALUES
 (1, 'Jean', 'Admin', 'admin@mail.be', '$2y$10$cbP4Xf/dVGE8UEF3OfunIeffcR804amAzbw0OWJDL2ENXNtd5u2oe', 1, '2021-03-31 14:49:06', '2021-03-31 14:49:06', 'UJKhBNU2kN5qsdopJKVcm4ZFCurkRRWX7uPFlgehdGd0H8alzdoy6yVf2DUh9sPiYrHztFSUx6oijfWhXw0G4nk40RtKUBrDPOmk', NULL),
-(6, 'Jonathan', 'Gomand', 'jonathan@mail.com', '$2y$10$B/67T7ASVbzMykFoTIHs1ujZF9CqHbOA3AW557TA9z3obKfAY3wpm', 1, '2021-04-01 14:32:48', '2021-04-01 14:32:48', '2HKNSNGd7xcx9iGeiivzZy9ijS4APjdkLWGBKvJgixIoZc6aXDt1t2r5NHzU3X3yEHdnW8Flk78hDC3oOkIGfGMoYnK1snYIrCRn', 'AieLkAZCGmEpSXveWJ6MCmlDnyHXOa2mHHb0c5BDoPPVQXgg1BGh7G6yIFeM'),
+(6, 'Jonathan', 'Gomand', 'jonathan@mail.com', '$2y$10$B/67T7ASVbzMykFoTIHs1ujZF9CqHbOA3AW557TA9z3obKfAY3wpm', 1, '2021-04-01 14:32:48', '2021-04-01 14:32:48', '2HKNSNGd7xcx9iGeiivzZy9ijS4APjdkLWGBKvJgixIoZc6aXDt1t2r5NHzU3X3yEHdnW8Flk78hDC3oOkIGfGMoYnK1snYIrCRn', 'PkPwpjHz6v0t7mzR66VgxFdfSB9y0iDQVpmpeo6awEIUDSaWYH8tkaSmZe3j'),
 (7, 'Sophie', 'Gomand', 'sophie@mail.com', '$2y$10$ieuEjpWeA1FsSVq3am8ZUeDBJHdr7xZWQ80xoOTrqppyETcMngE6y', 1, '2021-04-01 14:33:07', '2021-04-01 14:33:07', 'SsntZrIvgf2pBKrBwCbtMfzLY1cFTC1QEpylaNBKQbDL80gYmkKWDqsNFqE0ZA77PVYG6FeTD2C6LqzASZ6V6cjAn00S3FZMZbrJ', NULL);
 
 -- --------------------------------------------------------
@@ -51,25 +51,28 @@ INSERT INTO `admins` (`id`, `firstname`, `lastname`, `email`, `password`, `su`, 
 CREATE TABLE `articles` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `categories_id` bigint(20) UNSIGNED NOT NULL,
   `admins_id` bigint(20) UNSIGNED NOT NULL,
-  `image_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `image_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `name`, `description`, `created_at`, `updated_at`, `categories_id`, `admins_id`, `image_id`) VALUES
-(23, 'Article 6', 'lorem ipsum', '2021-04-29 15:28:24', '2021-04-29 15:28:24', 13, 6, 'JDbfMIZdVv'),
-(24, 'Article 7', 'lorem ipsum', '2021-04-29 15:31:27', '2021-04-29 15:31:27', 14, 6, 'bliDFfnysE'),
-(25, 'Article 8', 'lorem ipsum', '2021-04-29 15:32:36', '2021-04-29 15:32:36', 13, 6, 'KwqCY8NScQ'),
-(26, 'Article 9', 'lorem ipsum', '2021-04-29 15:35:17', '2021-04-29 15:35:17', 13, 6, '2BMiLdqIki'),
-(27, 'Article 10', 'lorem ipsum', '2021-04-29 15:39:52', '2021-04-29 15:39:52', 14, 6, 'lgMnDtsC3D'),
-(32, 'Article 11', 'lorem ipsum', '2021-04-29 16:08:30', '2021-04-29 16:08:30', 13, 6, 'gYfaNSdRgL');
+INSERT INTO `articles` (`id`, `name`, `description`, `created_at`, `updated_at`, `categories_id`, `admins_id`, `image_id`, `slug`) VALUES
+(23, 'Article 6', 'lorem ipsum lorem ipsum lorem ipsum.\nlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.\nlorem ipsum lorem ipsum.', '2021-04-29 15:28:24', '2021-05-11 11:47:44', 13, 6, 'JDbfMIZdVv', ''),
+(24, 'Article 7', 'lorem ipsum', '2021-04-29 15:31:27', '2021-04-29 15:31:27', 14, 6, 'bliDFfnysE', ''),
+(25, 'Coussins rouges', 'Bonjour.\nCeci est un joli article.\nExiste-t-il en bleu également ?\nBien à vous.', '2021-04-29 15:32:36', '2021-05-09 11:57:40', 13, 6, 'KwqCY8NScQ', ''),
+(26, 'Article 9', 'lorem ipsum', '2021-04-29 15:35:17', '2021-04-29 15:35:17', 13, 6, '2BMiLdqIki', ''),
+(27, 'Article 10', 'lorem ipsum', '2021-04-29 15:39:52', '2021-04-29 15:39:52', 14, 6, 'lgMnDtsC3D', ''),
+(32, 'Article 11', 'lorem ipsum', '2021-04-29 16:08:30', '2021-04-29 16:08:30', 13, 6, 'gYfaNSdRgL', ''),
+(36, 'test mail', 'lorem ipsum lorem ipsum lorem ipsum \nlorem ipsum lorem ipsum lorem ipsum lorem ipsum \nlorem ipsum lorem ipsum lorem ipsum', '2021-05-09 16:18:36', '2021-05-09 16:18:36', 13, 6, 'bjOnwfRlOP', ''),
+(38, 'Panier vraiment très joli', 'lorem ipsum. lorem ipsum. lorem ipsum. \nlorem ipsum. lorem ipsum. lorem ipsum. \nlorem ipsum. lorem ipsum. lorem ipsum. lorem ipsum. \nlorem ipsum. lorem ipsum.', '2021-05-11 12:23:00', '2021-05-11 12:25:35', 14, 6, '9uUoz8xqFH', 'panier-vraiment-très-joli');
 
 -- --------------------------------------------------------
 
@@ -80,20 +83,21 @@ INSERT INTO `articles` (`id`, `name`, `description`, `created_at`, `updated_at`,
 CREATE TABLE `categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `image_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `image_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`, `image_id`) VALUES
-(13, 'cat 1', 'lorem ipsum dolor', '2021-04-18 18:39:55', '2021-04-18 18:39:55', 'efLAYnJsE3'),
-(14, 'cat 2', 'lorem ipsum', '2021-04-18 18:47:41', '2021-04-18 18:47:41', 'fhsAD10dqR'),
-(15, 'cat 3', 'lorem ipsum', '2021-05-04 13:12:19', '2021-05-04 13:12:19', 'wK31V6X7Mj');
+INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`, `image_id`, `slug`) VALUES
+(13, 'Assortiment de coussins', 'Voici des coussins de différentes couleurs.\nVous en trouverez des bleus, des beiges et j\'en passe.\nN\'hésitez pas à tous les regarder.', '2021-04-18 18:39:55', '2021-05-09 12:40:05', 'efLAYnJsE3', ''),
+(14, 'Lingettes très douces', 'lorem ipsum', '2021-04-18 18:47:41', '2021-05-11 12:29:19', 'fhsAD10dqR', 'lingettes-très-douces'),
+(16, 'Jolies paniers', 'lorem ipsum. lorem ipsum. lorem ipsum. \nlorem ipsum. lorem ipsum. lorem ipsum. lorem ipsum. \nlorem ipsum. lorem ipsum. lorem ipsum.', '2021-05-11 12:29:55', '2021-05-11 12:29:55', 'ATpxkKAasn', 'jolies-paniers');
 
 -- --------------------------------------------------------
 
@@ -122,7 +126,10 @@ INSERT INTO `commentaries` (`id`, `firstname`, `lastname`, `content`, `date`, `a
 (3, 'Gontran', 'Santé', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 26, '2021-05-04 13:43:26', '2021-05-04 13:43:26'),
 (4, 'Donatien', 'De Montazac', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 27, '2021-05-04 13:43:45', '2021-05-04 13:43:45'),
 (5, 'Marius', 'Rotarez', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-04', 24, '2021-05-04 13:44:03', '2021-05-04 13:44:03'),
-(6, 'Johnny', 'Monnay', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-06', 26, '2021-05-06 16:20:31', '2021-05-06 16:20:31');
+(6, 'Johnny', 'Monnay', 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum', '2021-05-06', 26, '2021-05-06 16:20:31', '2021-05-06 16:20:31'),
+(7, 'jean', 'test', 'hello', '2021-05-09', 25, '2021-05-09 18:40:00', '2021-05-09 18:40:00'),
+(8, 'Jean', 'Test', 'Hello !', '2021-05-09', 25, '2021-05-09 18:48:46', '2021-05-09 18:48:46'),
+(9, 'jean', 'test', 'nice !', '2021-05-10', 36, '2021-05-10 12:49:39', '2021-05-10 12:49:39');
 
 -- --------------------------------------------------------
 
@@ -154,7 +161,9 @@ INSERT INTO `contact` (`id`, `firstname`, `lastname`, `email`, `content`, `creat
 (7, 'Sheila', 'Eichmann', 'chyna.olson@example.com', 'Possimus excepturi animi laudantium sint nulla. Ducimus hic ipsum cupiditate dicta ut molestiae sit. Fugit quis veritatis dolor voluptatem qui. Animi modi asperiores est sint vel.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
 (8, 'Barney', 'Jacobi', 'pauline92@example.org', 'Fugit magni omnis voluptas commodi laborum perspiciatis. Qui ipsam sint in cum soluta sunt et. Aut veritatis et eum delectus dolor facilis. Voluptatum quia est cumque aspernatur quisquam. Et molestiae alias error minima et ut. Perspiciatis totam necessitatibus illum sit.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
 (9, 'Osborne', 'Heaney', 'block.caleigh@example.com', 'Aut ea reiciendis itaque consequuntur accusantium. Quae non consequatur pariatur optio et. Delectus culpa cum sed rerum quia quia non. Reprehenderit mollitia necessitatibus velit iste sint asperiores voluptas tempore. Velit excepturi et reprehenderit est et. Maiores eveniet minima rem nostrum dicta ullam repellat labore.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(10, 'Jefferey', 'Rogahn', 'amely.gleason@example.com', 'Molestiae possimus accusantium quas quisquam accusamus ut. Sequi eaque id quod aut. Voluptas necessitatibus ut est consequuntur est. Accusamus consectetur ut consequuntur debitis.', '2021-03-31 12:53:11', '2021-03-31 12:53:11');
+(10, 'Jefferey', 'Rogahn', 'amely.gleason@example.com', 'Molestiae possimus accusantium quas quisquam accusamus ut. Sequi eaque id quod aut. Voluptas necessitatibus ut est consequuntur est. Accusamus consectetur ut consequuntur debitis.', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
+(37, 'Jean', 'Kevin', 'kk@mail.com', 'Hello !', '2021-05-10 14:17:28', '2021-05-10 14:17:28'),
+(38, 'Jean', 'Eude', 'eude@mail.fr', 'Salam mon frère !', '2021-05-10 14:18:43', '2021-05-10 14:18:43');
 
 -- --------------------------------------------------------
 
@@ -164,7 +173,7 @@ INSERT INTO `contact` (`id`, `firstname`, `lastname`, `email`, `content`, `creat
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -234,7 +243,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (144, '2021_03_27_202641_create_commentaries_table', 1),
 (145, '2021_03_29_133208_update_admins_table_api_token', 1),
 (146, '2021_04_08_161322_update_articles_table_image_id', 2),
-(147, '2021_04_17_142349_update_categories_table_image_id', 3);
+(147, '2021_04_17_142349_update_categories_table_image_id', 3),
+(148, '2021_05_08_182016_update_articles_table_desc', 4),
+(149, '2021_05_08_182152_update_categories_table_desc', 4),
+(150, '2021_05_11_141500_update_articles_table_slug', 5),
+(151, '2021_05_11_141559_update_categories_table_slug', 5);
 
 -- --------------------------------------------------------
 
@@ -266,17 +279,18 @@ CREATE TABLE `subscribers` (
 --
 
 INSERT INTO `subscribers` (`id`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'eboehm@example.net', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(2, 'wisozk.cyrus@example.net', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(3, 'danny.dicki@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(4, 'baumbach.thad@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(5, 'oleffler@example.com', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(6, 'lcronin@example.net', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(7, 'declan53@example.net', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(8, 'blake65@example.com', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(9, 'dherzog@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(10, 'buster25@example.org', '2021-03-31 12:53:11', '2021-03-31 12:53:11'),
-(38, 'john@mail.com', '2021-04-01 17:58:18', '2021-04-01 17:58:18');
+(39, 'onienow@example.com', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(40, 'ebert.marlee@example.net', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(41, 'qrussel@example.com', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(42, 'powlowski.dale@example.org', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(43, 'dwolf@example.org', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(44, 'gaylord.westley@example.com', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(45, 'demarco89@example.net', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(46, 'arnoldo69@example.org', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(47, 'kayley77@example.org', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(48, 'drake.monahan@example.net', '2021-05-09 16:17:58', '2021-05-09 16:17:58'),
+(52, 'john@mail.be', '2021-05-10 12:37:06', '2021-05-10 12:37:06'),
+(53, 'test@mail.be', '2021-05-10 12:39:19', '2021-05-10 12:39:19');
 
 -- --------------------------------------------------------
 
@@ -386,25 +400,25 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `commentaries`
 --
 ALTER TABLE `commentaries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -422,13 +436,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `users`
