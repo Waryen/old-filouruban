@@ -21,9 +21,11 @@ class ContactList extends React.Component {
 
     deleteContact(e) {
         e.preventDefault()
-        const id = e.target.value
-        axios.delete(`${this.props.url}/api/contact/${id}?api_token=${this.props.api}`)
-        this.componentDidMount()
+        if(confirm('Voulez-vous vraiment supprimer ce contact ? Cette action est irréversible')) {
+            const id = e.target.value
+            axios.delete(`${this.props.url}/api/contact/${id}?api_token=${this.props.api}`)
+            this.componentDidMount()
+        }
     }
 
     render() {

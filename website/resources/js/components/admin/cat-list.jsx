@@ -149,22 +149,24 @@ class CategoryList extends React.Component {
     // Supprime une catégorie
     deleteCategory(e) {
         e.preventDefault()
-        const id = e.target.value
-        const categories = this.state.categories
-        let name
-        
-        categories.forEach(el => {
-            if(el.id == id) {
-                name = el.image_id
-            }
-        })
-
-        const fd = new FormData()
-        fd.append('name', name)
-
-        axios.post('deleteCategoryImage', fd)
-        axios.delete(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
-        this.componentDidMount()
+        if(confirm('Voulez-vous vraiment supprimer cette catégorie ? Cette action est irréversible')) {
+            const id = e.target.value
+            const categories = this.state.categories
+            let name
+            
+            categories.forEach(el => {
+                if(el.id == id) {
+                    name = el.image_id
+                }
+            })
+    
+            const fd = new FormData()
+            fd.append('name', name)
+    
+            axios.post('deleteCategoryImage', fd)
+            axios.delete(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
+            this.componentDidMount()
+        }
     }
 
     render() {

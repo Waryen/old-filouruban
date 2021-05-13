@@ -154,22 +154,25 @@ class ArticleList extends React.Component {
 
     // Supprime un article
     deleteArticle(e) {
-        const articles = this.state.articles
-        const id = e.target.value
-        let name
-        
-        articles.forEach(el => {
-            if(el.id == id) {
-                name = el.image_id
-            }
-        })
-
-        const fd = new FormData()
-        fd.append('name', name)
-
-        axios.post('deleteArticleImage', fd)
-        axios.delete(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
-        this.componentDidMount()
+        if(confirm('Voulez-vous vraiment supprimer cet article ? Cette action est irréversible')) {
+            const articles = this.state.articles
+            const id = e.target.value
+            let name
+            
+            articles.forEach(el => {
+                if(el.id == id) {
+                    name = el.image_id
+                }
+            })
+    
+            const fd = new FormData()
+            fd.append('name', name)
+    
+            axios.post('deleteArticleImage', fd)
+            axios.delete(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
+            this.componentDidMount()
+            alert('Article supprimé !')
+        }
     }
 
     render() {

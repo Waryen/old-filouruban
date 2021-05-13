@@ -94,9 +94,11 @@ class MessageList extends React.Component {
     // Supprime le message
     deleteMessage(e) {
         e.preventDefault()
-        const id = e.target.value
-        axios.delete(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`)
-        this.componentDidMount()
+        if(confirm('Voulez-vous vraiment supprimer ce message ? Cette action est irréversible')) {
+            const id = e.target.value
+            axios.delete(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`)
+            this.componentDidMount()
+        }
     }
 
     render() {

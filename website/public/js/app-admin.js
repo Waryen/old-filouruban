@@ -2693,9 +2693,11 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteAdmin",
     value: function deleteAdmin(e) {
-      var id = e.target.value;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api));
-      this.componentDidMount();
+      if (confirm('Voulez-vous vraiment supprimer cet administrateur ? Cett action est irréversible')) {
+        var id = e.target.value;
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api));
+        this.componentDidMount();
+      }
     }
   }, {
     key: "render",
@@ -3721,19 +3723,22 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteArticle",
     value: function deleteArticle(e) {
-      var articles = this.state.articles;
-      var id = e.target.value;
-      var name;
-      articles.forEach(function (el) {
-        if (el.id == id) {
-          name = el.image_id;
-        }
-      });
-      var fd = new FormData();
-      fd.append('name', name);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteArticleImage', fd);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api));
-      this.componentDidMount();
+      if (confirm('Voulez-vous vraiment supprimer cet article ? Cette action est irréversible')) {
+        var articles = this.state.articles;
+        var id = e.target.value;
+        var name;
+        articles.forEach(function (el) {
+          if (el.id == id) {
+            name = el.image_id;
+          }
+        });
+        var fd = new FormData();
+        fd.append('name', name);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteArticleImage', fd);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api));
+        this.componentDidMount();
+        alert('Article supprimé !');
+      }
     }
   }, {
     key: "render",
@@ -4413,19 +4418,22 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
     key: "deleteCategory",
     value: function deleteCategory(e) {
       e.preventDefault();
-      var id = e.target.value;
-      var categories = this.state.categories;
-      var name;
-      categories.forEach(function (el) {
-        if (el.id == id) {
-          name = el.image_id;
-        }
-      });
-      var fd = new FormData();
-      fd.append('name', name);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteCategoryImage', fd);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api));
-      this.componentDidMount();
+
+      if (confirm('Voulez-vous vraiment supprimer cette catégorie ? Cette action est irréversible')) {
+        var id = e.target.value;
+        var categories = this.state.categories;
+        var name;
+        categories.forEach(function (el) {
+          if (el.id == id) {
+            name = el.image_id;
+          }
+        });
+        var fd = new FormData();
+        fd.append('name', name);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteCategoryImage', fd);
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api));
+        this.componentDidMount();
+      }
     }
   }, {
     key: "render",
@@ -4703,9 +4711,12 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
     key: "deleteCommentary",
     value: function deleteCommentary(e) {
       e.preventDefault();
-      var id = e.target.value;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/commentary/").concat(id, "?api_token=").concat(this.props.api));
-      this.componentDidMount();
+
+      if (confirm('Voulez-vous vraiment supprimer ce commentaire ? Cette action est irréversible')) {
+        var id = e.target.value;
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/commentary/").concat(id, "?api_token=").concat(this.props.api));
+        this.componentDidMount();
+      }
     }
   }, {
     key: "render",
@@ -4886,9 +4897,12 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
     key: "deleteContact",
     value: function deleteContact(e) {
       e.preventDefault();
-      var id = e.target.value;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/contact/").concat(id, "?api_token=").concat(this.props.api));
-      this.componentDidMount();
+
+      if (confirm('Voulez-vous vraiment supprimer ce contact ? Cette action est irréversible')) {
+        var id = e.target.value;
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/contact/").concat(id, "?api_token=").concat(this.props.api));
+        this.componentDidMount();
+      }
     }
   }, {
     key: "render",
@@ -5543,9 +5557,12 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     key: "deleteMessage",
     value: function deleteMessage(e) {
       e.preventDefault();
-      var id = e.target.value;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api));
-      this.componentDidMount();
+
+      if (confirm('Voulez-vous vraiment supprimer ce message ? Cette action est irréversible')) {
+        var id = e.target.value;
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api));
+        this.componentDidMount();
+      }
     }
   }, {
     key: "render",
@@ -5862,11 +5879,13 @@ var Subscriber = /*#__PURE__*/function (_React$Component) {
     value: function deleteSub(id) {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default().delete("".concat(this.props.url, "/api/subscriber/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
-        if (response.status == 200) {
-          _this3.componentDidMount();
-        }
-      });
+      if (confirm('Voulez-vous vraiment supprimer cet(te) abonné(e) ? Cette action est irréversible')) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default().delete("".concat(this.props.url, "/api/subscriber/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            _this3.componentDidMount();
+          }
+        });
+      }
     }
   }, {
     key: "render",

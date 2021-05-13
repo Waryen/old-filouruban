@@ -34,9 +34,11 @@ class CommentaryList extends React.Component {
     // Supprime un commentaire
     deleteCommentary(e) {
         e.preventDefault()
-        const id = e.target.value
-        axios.delete(`${this.props.url}/api/commentary/${id}?api_token=${this.props.api}`)
-        this.componentDidMount()
+        if(confirm('Voulez-vous vraiment supprimer ce commentaire ? Cette action est irréversible')) {
+            const id = e.target.value
+            axios.delete(`${this.props.url}/api/commentary/${id}?api_token=${this.props.api}`)
+            this.componentDidMount()
+        }
     }
 
     render() {

@@ -22,13 +22,14 @@ export default class Subscriber extends React.Component {
     }
 
     deleteSub(id) {
-        axios
-            .delete(`${this.props.url}/api/subscriber/${id}?api_token=${this.props.api}`)
+        if(confirm('Voulez-vous vraiment supprimer cet(te) abonné(e) ? Cette action est irréversible')) {
+            axios.delete(`${this.props.url}/api/subscriber/${id}?api_token=${this.props.api}`)
             .then(response => {
                 if(response.status == 200) {
                     this.componentDidMount()
                 }
             })
+        }
     }
 
     render() {
