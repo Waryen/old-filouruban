@@ -26,6 +26,7 @@ class SubscriberController extends Controller
     public function store(Request $request)
     {
         $token = $request->captcha;
+        $sub = $request->email;
 
         $hcaptcha = array(
             'secret' => "0x1b2E78d844DBE0217E97e14baF1C851DD3C310e6",
@@ -41,9 +42,24 @@ class SubscriberController extends Controller
         $result = curl_exec($verify);
         $resultData = json_decode($result);
 
+        // Vérifie si le nouveau subscriber n'est pas déjà abonné
         if($resultData->success) {
-            Subscriber::create($request->all());
-            return true;
+            $subs = Subscriber::all();
+            $check = true;
+
+            foreach($subs as $el) {
+                if($el->email == $sub) {
+                    $check = false;
+                    break;
+                }
+            }
+
+            if($check == true) {
+                Subscriber::create($request->all());
+                return true;
+            } elseif($check == false) {
+                return 2;
+            }
         } 
         else {
             return false;

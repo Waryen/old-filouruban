@@ -3840,18 +3840,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3891,7 +3879,6 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.child = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     _this.state = {
-      listSubscribers: [],
       newSubscriber: '',
       captcha: '',
       submited: false
@@ -3904,24 +3891,6 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Newsletter, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      // Récupère la liste des subscribers
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api)).then(function (res) {
-        var list = res.data.map(function (el) {
-          return el.email;
-        });
-
-        if (list) {
-          _this2.setState({
-            listSubscribers: list
-          });
-        }
-      });
-    }
-  }, {
     key: "handleVerificationSuccess",
     value: function handleVerificationSuccess(token, ekey) {
       this.setState({
@@ -3944,40 +3913,31 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this3 = this;
+      var _this2 = this;
 
-      e.preventDefault();
-      var list = this.state.listSubscribers;
-      var newSub = this.state.newSubscriber;
-      var check = true; // Vérifie si le nouveau subscriber existe déjà dans la DB
-
-      for (var i = 0; i < list.length; i++) {
-        if (list[i] === newSub) {
-          check = false;
-          break;
-        }
-      } // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
-
+      e.preventDefault(); // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
 
       if (this.state.submited == false) {
-        if (check === true && this.state.captcha) {
-          axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), {
-            email: newSub,
+        if (this.state.captcha) {
+          var data = {
+            email: this.state.newSubscriber,
             captcha: this.state.captcha
-          }).then(function (res) {
-            if (res.data === 1) {
-              alert('Vous avez été inscrit(e) à la newsletter !');
+          };
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), data).then(function (response) {
+            if (response.status == 200) {
+              if (response.data == 1) {
+                alert('Vous avez été inscrit(e) à la newsletter !');
 
-              _this3.setState({
-                listSubscribers: [].concat(_toConsumableArray(_this3.state.listSubscribers), [newSub]),
-                submited: true
-              });
-            } else if (res.data == 0) {
-              alert("Votre captcha n'a pas été validée !");
+                _this2.setState({
+                  submited: true
+                });
+              } else if (response.data == 0) {
+                alert("Votre captcha n'a pas été validée !");
+              } else if (response.data == 2) {
+                alert('Vous êtes déja inscrit(e) à la newsletter !');
+              }
             }
           });
-        } else {
-          alert('Vous êtes déja inscrit(e) à la newsletter !');
         }
       }
 
@@ -3990,7 +3950,7 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
         method: "post",
@@ -4015,7 +3975,7 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
             ref: this.child,
             sitekey: "25830f50-7442-4826-9111-3517e9f53d2c",
             onVerify: function onVerify(token, ekey) {
-              return _this4.handleVerificationSuccess(token, ekey);
+              return _this3.handleVerificationSuccess(token, ekey);
             }
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {

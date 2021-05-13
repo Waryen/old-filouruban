@@ -7,7 +7,6 @@ class Newsletter extends React.Component {
         super(props)
         this.child = React.createRef()
         this.state = {
-            listSubscribers: [],
             newSubscriber: '',
             captcha: '',
             submited: false,
@@ -17,17 +16,6 @@ class Newsletter extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleVerificationSuccess = this.handleVerificationSuccess.bind(this)
         this.resetCaptcha = this.resetCaptcha.bind(this)
-    }
-
-    componentDidMount() {
-        // Récupère la liste des subscribers
-        axios.get(`${this.props.url}/api/subscriber?api_token=${this.props.api}`)
-            .then(res => {
-                const list = res.data.map(el => el.email)
-                if(list) {
-                    this.setState({ listSubscribers: list })
-                }
-            })
     }
 
     handleVerificationSuccess(token, ekey) {
@@ -47,37 +35,27 @@ class Newsletter extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
 
-        const list = this.state.listSubscribers
-        const newSub = this.state.newSubscriber
-        let check = true
-
-        // Vérifie si le nouveau subscriber existe déjà dans la DB
-        for(let i = 0; i < list.length; i++) {
-            if(list[i] === newSub) {
-                check = false
-                break
-            }
-        }
-
         // Enregistre le nouveau subscriber si il n'existe pas encore dans la DB
         if(this.state.submited == false) {
-            if(check === true && this.state.captcha) {
-                axios.post(`${this.props.url}/api/subscriber?api_token=${this.props.api}`, {
-                    email: newSub,
+            if(this.state.captcha) {
+                const data = {
+                    email: this.state.newSubscriber,
                     captcha: this.state.captcha
-                }).then(res => {
-                    if(res.data === 1) {
-                        alert('Vous avez été inscrit(e) à la newsletter !')
-                        this.setState({
-                            listSubscribers: [...this.state.listSubscribers, newSub],
-                            submited: true
-                        })
-                    } else if(res.data == 0) {
-                        alert("Votre captcha n'a pas été validée !")
+                }
+
+                axios.post(`${this.props.url}/api/subscriber?api_token=${this.props.api}`, data)
+                .then(response => {
+                    if(response.status == 200) {
+                        if(response.data == 1) {
+                            alert('Vous avez été inscrit(e) à la newsletter !')
+                            this.setState({ submited: true })
+                        } else if(response.data == 0) {
+                            alert("Votre captcha n'a pas été validée !")
+                        } else if(response.data == 2) {
+                            alert('Vous êtes déja inscrit(e) à la newsletter !')
+                        }
                     }
                 })
-            } else {
-                alert('Vous êtes déja inscrit(e) à la newsletter !')
             }
         }
 
