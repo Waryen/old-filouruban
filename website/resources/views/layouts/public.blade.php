@@ -25,12 +25,12 @@
     <!-- SCRIPT -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XN6MM2Z6NP"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VYVFR1KNC"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-XN6MM2Z6NP');
+        gtag('config', 'G-5VYVFR1KNC');
     </script>
     @yield('title')
 </head>
