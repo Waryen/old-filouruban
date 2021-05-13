@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Subscriber;
+use App\Models\Commentary;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SubscribersMail;
 
 class ArticleController extends Controller
 {
@@ -62,6 +60,16 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $coms = Commentary::all();
+        $ref = $article->id;
+
+        // Supprime les commentaires liés à cet article
+        foreach($coms as $el) {
+            if($el->articles_id == $ref) {
+                $el->delete();
+            }
+        }
+
         $article->delete();
     }
 }
