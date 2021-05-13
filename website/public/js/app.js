@@ -2198,6 +2198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_public_cat_list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/public/cat-list */ "./resources/js/components/public/cat-list.jsx");
 /* harmony import */ var _components_public_category__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/public/category */ "./resources/js/components/public/category.jsx");
 /* harmony import */ var _components_public_carousel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/public/carousel */ "./resources/js/components/public/carousel.jsx");
+/* harmony import */ var _components_public_carousel__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_public_carousel__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_public_home_articles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/public/home-articles */ "./resources/js/components/public/home-articles.jsx");
 /* harmony import */ var _components_public_search_result__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/public/search-result */ "./resources/js/components/public/search-result.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -2274,7 +2275,7 @@ if (document.getElementById('react-article')) {
 }
 
 if (document.getElementById('react-carousel')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_public_carousel__WEBPACK_IMPORTED_MODULE_8__.default, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)((_components_public_carousel__WEBPACK_IMPORTED_MODULE_8___default()), {
     url: url,
     api: api
   }), document.getElementById('react-carousel'));
@@ -2574,182 +2575,9 @@ var Article = /*#__PURE__*/function (_React$Component) {
 /*!*****************************************************!*\
   !*** ./resources/js/components/public/carousel.jsx ***!
   \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+/***/ (() => {
 
 
-
-
-
-
-var Carousel = /*#__PURE__*/function (_React$Component) {
-  _inherits(Carousel, _React$Component);
-
-  var _super = _createSuper(Carousel);
-
-  function Carousel(props) {
-    var _this;
-
-    _classCallCheck(this, Carousel);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      articles: []
-    };
-    _this.getArticles = _this.getArticles.bind(_assertThisInitialized(_this));
-    _this.randomArticles = _this.randomArticles.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Carousel, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.getArticles();
-    } // Récupère la liste des articles
-
-  }, {
-    key: "getArticles",
-    value: function getArticles() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
-        if (response.status == 200) {
-          _this2.setState({
-            articles: _this2.randomArticles(response.data)
-          });
-        }
-      });
-    }
-  }, {
-    key: "getRandomInt",
-    value: function getRandomInt(max) {
-      return Math.floor(Math.random() * max);
-    } // Récupère 3 articles aléatoirement
-
-  }, {
-    key: "randomArticles",
-    value: function randomArticles(els) {
-      var max = els.length;
-      var articles = [];
-      var first = this.getRandomInt(max);
-      var second = this.getRandomInt(max);
-      var third = this.getRandomInt(max);
-
-      if (first == second || first == third || second == third) {
-        while (first == second || first == third || second == third) {
-          first = this.getRandomInt(max);
-          second = this.getRandomInt(max);
-          third = this.getRandomInt(max);
-        }
-      }
-
-      articles.push(els[first]);
-      articles.push(els[second]);
-      articles.push(els[third]);
-      return articles;
-    }
-  }, {
-    key: "carrousel",
-    value: function carrousel() {
-      var slides = document.getElementsByClassName('slide');
-      var one = slides[0];
-      var two = slides[1];
-      var three = slides[2];
-      one.style.display = 'block';
-      two.style.display = 'none';
-      three.style.display = 'none';
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var articles = this.state.articles;
-
-      if (articles.length) {
-        var one = articles[0];
-        var two = articles[1];
-        var three = articles[2];
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "home-carousel",
-          onLoad: function onLoad() {
-            _this3.carrousel();
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "slide one",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(this.props.url, "/media/images/articles/article-").concat(one.image_id, ".jpg"),
-              alt: "",
-              style: {
-                width: "250px"
-              }
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "slide two",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(this.props.url, "/media/images/articles/article-").concat(two.image_id, ".jpg"),
-              alt: "",
-              style: {
-                width: "250px"
-              }
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "slide three",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(this.props.url, "/media/images/articles/article-").concat(three.image_id, ".jpg"),
-              alt: "",
-              style: {
-                width: "250px"
-              }
-            })
-          })]
-        });
-      } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "carousel",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-            className: "loading-text",
-            children: "Chargement..."
-          })
-        });
-      }
-    }
-  }]);
-
-  return Carousel;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Carousel);
 
 /***/ }),
 
