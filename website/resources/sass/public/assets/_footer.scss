@@ -167,6 +167,20 @@
             font-size: 0.9em;
             color: $black;
             text-align: right;
+
+            @media screen and ($responsive) {
+                text-align: center;
+            }
+
+            a {
+                text-decoration: none;
+                color: $silver;
+                transition: all .15s;
+
+                &:hover, &:focus {
+                    color: $teal;
+                }
+            }
         }
 
         @media screen and ($responsive) {

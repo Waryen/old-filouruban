@@ -235,6 +235,19 @@ th {
   text-align: right;
 }
 @media screen and (max-width: 768px) {
+  .footer .developer-credits p {
+    text-align: center;
+  }
+}
+.footer .developer-credits p a {
+  text-decoration: none;
+  color: #edf6f9;
+  transition: all 0.15s;
+}
+.footer .developer-credits p a:hover, .footer .developer-credits p a:focus {
+  color: #006d77;
+}
+@media screen and (max-width: 768px) {
   .footer .developer-credits {
     grid-column: 1/3;
     grid-row: 3;

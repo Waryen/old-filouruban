@@ -22,6 +22,7 @@
         </nav>
     </div>
     <div class="developer-credits">
-        <p>Made with love by Jonathan Gomand</p>
+        <p>Site créé par Jonathan Gomand</p>
+        <p>Hébergé sur <a href="https://www.ovh.com/fr/" target="_blank">OVHcloud</a></p>
     </div>
 </footer>
