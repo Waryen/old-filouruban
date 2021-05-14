@@ -9,14 +9,14 @@ class MessageList extends React.Component {
             admins: [],
             newTitle: '',
             newContent: '',
-            newStartDate: '',
-            newEndDate: '',
+            newActive: false,
             messageId: undefined,
         }
 
         this.deleteMessage = this.deleteMessage.bind(this)
         this.modifyMessage = this.modifyMessage.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleCheckBox = this.handleCheckBox.bind(this)
         this.handleModify = this.handleModify.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
     }
@@ -27,9 +27,9 @@ class MessageList extends React.Component {
         document.querySelector('.message-list').style.display = 'block'
 
         axios.get(`${this.props.url}/api/message?api_token=${this.props.api}`)
-            .then(res => this.setState({ messages: res.data }))
+        .then(res => this.setState({ messages: res.data }))
         axios.get(`${this.props.url}/api/admin?api_token=${this.props.api}`)
-            .then(res => this.setState({ admins: res.data }))
+        .then(res => this.setState({ admins: res.data }))
     }
 
     // Récupère les données du formulaire de modification
@@ -40,15 +40,14 @@ class MessageList extends React.Component {
         const id = e.target.value
 
         axios.get(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`)
-            .then(res => {
-                this.setState({
-                    newTitle: res.data.title,
-                    newContent: res.data.content,
-                    newStartDate: res.data.start_date,
-                    newEndDate: res.data.end_date,
-                    messageId: id,
-                })
+        .then(res => {
+            this.setState({
+                newTitle: res.data.title,
+                newContent: res.data.content,
+                newActive: res.data.active,
+                messageId: id,
             })
+        })
     }
 
     // Gère les changements du formulaire de modification
@@ -59,14 +58,22 @@ class MessageList extends React.Component {
         this.setState({ [name]: value })
     }
 
+    handleCheckBox() {
+        const checkBox = document.querySelector('#active-modify')
+        if(checkBox.checked === true) {
+            this.setState({ newActive: 1 })
+        } else {
+            this.setState({ newActive: 0 })
+        }
+    }
+
     // Annule les changements du formulaire de modification
     handleCancel(e) {
         e.preventDefault()
         this.setState({
             newTitle: '',
             newContent: '',
-            newStartDate: '',
-            newEndDate: '',
+            newActive: false,
             messageId: undefined,
         })
 
@@ -81,8 +88,7 @@ class MessageList extends React.Component {
         axios.patch(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`, {
             title: this.state.newTitle,
             content: this.state.newContent,
-            start_date: this.state.newStartDate,
-            end_date: this.state.newEndDate,
+            active: this.state.newActive
         })
         this.handleCancel(e)
         this.componentDidMount()
@@ -124,10 +130,7 @@ class MessageList extends React.Component {
                     <li key={el.id}>
                         <h4 className="title">{el.title}</h4>
                         <p className="content">{el.content}</p>
-                        <div className="date">
-                            <p>Date de début: {el.start_date}</p>
-                            <p>Date de fin: {el.end_date}</p>
-                        </div>
+                        <p className="active">Message affiché: <span>{el.active}</span></p>
                         <p className="admin">Créé par: {adminName}</p>
                         <div className="btns">
                             <button className="modify" value={el.id} onClick={this.modifyMessage}>Modifer</button>
@@ -140,10 +143,7 @@ class MessageList extends React.Component {
                     <li key={el.id}>
                         <h4 className="title">{el.title}</h4>
                         <p className="content">{el.content}</p>
-                        <div className="date">
-                            <p>Date de début: {el.start_date}</p>
-                            <p>Date de fin: {el.end_date}</p>
-                        </div>
+                        <p className="active">Message affiché: <span>{el.active}</span></p>
                         <p className="admin">Créé par: {adminName}</p>
                         <div className="btns">
                             <button className="modify" value={el.id} onClick={this.modifyMessage}>Modifer</button>
@@ -156,15 +156,22 @@ class MessageList extends React.Component {
                     <li key={el.id}>
                         <h4 className="title">{el.title}</h4>
                         <p className="content">{el.content}</p>
-                        <div className="date">
-                            <p>Date de début: {el.start_date}</p>
-                            <p>Date de fin: {el.end_date}</p>
-                        </div>
+                        <p className="active">Message affiché: <span>{el.active}</span></p>
                         <p className="admin">Créé par: {adminName}</p>
                     </li>
                 )
             }
         })
+
+        // Coche ou décoche le bouton "afficher message" dans le formulaire de modification
+        if(document.querySelector('.message-modify')) {
+            let check = document.querySelector('#active-modify')
+            if(this.state.newActive == 1) {
+                check.checked = true
+            } else {
+                check.checked = false
+            }
+        }
 
         return(
             <div>
@@ -185,13 +192,9 @@ class MessageList extends React.Component {
                             <label htmlFor="content">Contenu: </label>
                             <textarea type="text" name="newContent" id="content" maxLength="1000" value={this.state.newContent} onChange={this.handleChange} />
                         </div>
-                        <div className="msg-start-date">
-                            <label htmlFor="newStartDate">Date de début: </label>
-                            <input type="date" name="newStartDate" id="newStartDate" value={this.state.newStartDate} onChange={this.handleChange} />
-                        </div>
-                        <div className="msg-end-date">
-                            <label htmlFor="newEndDate">Date de fin: </label>
-                            <input type="date" name="newEndDate" id="newEndDate" value={this.state.newEndDate} onChange={this.handleChange} />
+                        <div className="msg-active">
+                            <label htmlFor="active-modify">Afficher le message: </label>
+                            <input type="checkbox" name="newActive" id="active-modify" value={this.state.newActive} onChange={this.handleCheckBox} />
                         </div>
                         <div className="msg-btns">
                             <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>

@@ -70,16 +70,6 @@
             }
         }
 
-        .msg-start-date input, .msg-end-date input {
-            margin-top: 5px;
-            font-family: $roboto;
-            font-size: 0.9em;
-            color: $black;
-            border: 1px solid $peach;
-            border-radius: 5px;
-            padding: 5px;
-        }
-
         .msg-btns {
             margin-top: 30px;
 
@@ -181,11 +171,17 @@
                 margin-bottom: 10px;
             }
 
-            .date {
+            .active {
                 font-family: $roboto;
                 color: $black;
                 font-size: 0.9em;
                 margin-bottom: 10px;
+
+                span {
+                    color: $teal;
+                    font-size: 1.1em;
+                    font-weight: 600;
+                }
             }
 
             .admin {

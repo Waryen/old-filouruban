@@ -10,6 +10,7 @@
         <p>(Cliquer sur ce message pour le faire disparaître)</p>
     </div>
     <div class="home">
+        <div id="react-message"></div>
         <!--<div id="react-carousel"></div>-->
         <div class="home-about">
             <h2 class="about-title">A propos de Filouruban</h2>

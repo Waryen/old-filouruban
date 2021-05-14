@@ -7,12 +7,12 @@ class MessageCreate extends React.Component {
         this.state = {
             title: '',
             content: '',
-            startDate: '',
-            endDate: '',
+            active: 0,
             adminId: undefined,
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleCheckBox = this.handleCheckBox.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -23,17 +23,6 @@ class MessageCreate extends React.Component {
         this.setState({ adminId: auth.id })
     }
 
-    // Vide le state au démontage du composant
-    componentWillUnmount() {
-        this.setState({
-            title: '',
-            content: '',
-            startDate: '',
-            endDate: '',
-            adminId: undefined,
-        })
-    }
-
     // Gère les changements du formulaire
     handleChange(e) {
         e.preventDefault()
@@ -42,14 +31,22 @@ class MessageCreate extends React.Component {
         this.setState({ [name]: value })
     }
 
+    handleCheckBox() {
+        const checkBox = document.querySelector('#active-create')
+        if(checkBox.checked === true) {
+            this.setState({ active: 1 })
+        } else {
+            this.setState({ active: 0 })
+        }
+    }
+
     // Annule les changements du formulaire
     handleCancel(e) {
         e.preventDefault()
         this.setState({
             title: '',
             content: '',
-            startDate: '',
-            endDate: '',
+            active: 0,
         })
     }
 
@@ -59,8 +56,7 @@ class MessageCreate extends React.Component {
         axios.post(`${this.props.url}/api/message?api_token=${this.props.api}`, {
             title: this.state.title,
             content: this.state.content,
-            start_date: this.state.startDate,
-            end_date: this.state.endDate,
+            active: this.state.active,
             admins_id: this.state.adminId,
         })
         this.handleCancel(e)
@@ -79,13 +75,9 @@ class MessageCreate extends React.Component {
                         <label htmlFor="content">Contenu: </label>
                         <textarea type="text" name="content" id="content" maxLength="1000" value={this.state.content} onChange={this.handleChange} />
                     </div>
-                    <div className="msg-start-date">
-                        <label htmlFor="startDate">Date de début: </label>
-                        <input type="date" name="startDate" id="startDate" value={this.state.startDate} onChange={this.handleChange} />
-                    </div>
-                    <div className="msg-end-date">
-                        <label htmlFor="endDate">Date de fin: </label>
-                        <input type="date" name="endDate" id="endDate" value={this.state.endDate} onChange={this.handleChange} />
+                    <div className="msg-active">
+                        <label htmlFor="active-create">Afficher le message</label>
+                        <input type="checkbox" name="active" id="active-create" value={this.state.active} onChange={this.handleCheckBox} />
                     </div>
                     <div className="msg-btns">
                         <button className="btn-cancel" onClick={this.handleCancel} >Annuler</button>

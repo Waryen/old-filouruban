@@ -5257,11 +5257,11 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       title: '',
       content: '',
-      startDate: '',
-      endDate: '',
+      active: 0,
       adminId: undefined
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleCheckBox = _this.handleCheckBox.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -5275,18 +5275,6 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
       this.setState({
         adminId: auth.id
       });
-    } // Vide le state au démontage du composant
-
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.setState({
-        title: '',
-        content: '',
-        startDate: '',
-        endDate: '',
-        adminId: undefined
-      });
     } // Gère les changements du formulaire
 
   }, {
@@ -5296,6 +5284,21 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
       var name = e.target.name;
       var value = e.target.value;
       this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleCheckBox",
+    value: function handleCheckBox() {
+      var checkBox = document.querySelector('#active-create');
+
+      if (checkBox.checked === true) {
+        this.setState({
+          active: 1
+        });
+      } else {
+        this.setState({
+          active: 0
+        });
+      }
     } // Annule les changements du formulaire
 
   }, {
@@ -5305,8 +5308,7 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
       this.setState({
         title: '',
         content: '',
-        startDate: '',
-        endDate: ''
+        active: 0
       });
     } // Envoi le formulaire
 
@@ -5317,8 +5319,7 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api), {
         title: this.state.title,
         content: this.state.content,
-        start_date: this.state.startDate,
-        end_date: this.state.endDate,
+        active: this.state.active,
         admins_id: this.state.adminId
       });
       this.handleCancel(e);
@@ -5359,28 +5360,16 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
               onChange: this.handleChange
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: "msg-start-date",
+            className: "msg-active",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-              htmlFor: "startDate",
-              children: "Date de d\xE9but: "
+              htmlFor: "active-create",
+              children: "Afficher le message"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-              type: "date",
-              name: "startDate",
-              id: "startDate",
-              value: this.state.startDate,
-              onChange: this.handleChange
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: "msg-end-date",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-              htmlFor: "endDate",
-              children: "Date de fin: "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-              type: "date",
-              name: "endDate",
-              id: "endDate",
-              value: this.state.endDate,
-              onChange: this.handleChange
+              type: "checkbox",
+              name: "active",
+              id: "active-create",
+              value: this.state.active,
+              onChange: this.handleCheckBox
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "msg-btns",
@@ -5466,13 +5455,13 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       admins: [],
       newTitle: '',
       newContent: '',
-      newStartDate: '',
-      newEndDate: '',
+      newActive: false,
       messageId: undefined
     };
     _this.deleteMessage = _this.deleteMessage.bind(_assertThisInitialized(_this));
     _this.modifyMessage = _this.modifyMessage.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleCheckBox = _this.handleCheckBox.bind(_assertThisInitialized(_this));
     _this.handleModify = _this.handleModify.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     return _this;
@@ -5511,8 +5500,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         _this3.setState({
           newTitle: res.data.title,
           newContent: res.data.content,
-          newStartDate: res.data.start_date,
-          newEndDate: res.data.end_date,
+          newActive: res.data.active,
           messageId: id
         });
       });
@@ -5525,6 +5513,21 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       var name = e.target.name;
       var value = e.target.value;
       this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleCheckBox",
+    value: function handleCheckBox() {
+      var checkBox = document.querySelector('#active-modify');
+
+      if (checkBox.checked === true) {
+        this.setState({
+          newActive: 1
+        });
+      } else {
+        this.setState({
+          newActive: 0
+        });
+      }
     } // Annule les changements du formulaire de modification
 
   }, {
@@ -5534,8 +5537,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       this.setState({
         newTitle: '',
         newContent: '',
-        newStartDate: '',
-        newEndDate: '',
+        newActive: false,
         messageId: undefined
       });
       document.querySelector('.message-modify').style.display = 'none';
@@ -5550,8 +5552,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api), {
         title: this.state.newTitle,
         content: this.state.newContent,
-        start_date: this.state.newStartDate,
-        end_date: this.state.newEndDate
+        active: this.state.newActive
       });
       this.handleCancel(e);
       this.componentDidMount();
@@ -5599,12 +5600,10 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               className: "content",
               children: el.content
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "date",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                children: ["Date de d\xE9but: ", el.start_date]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                children: ["Date de fin: ", el.end_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "active",
+              children: ["Message affich\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: el.active
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "admin",
@@ -5632,12 +5631,10 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               className: "content",
               children: el.content
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "date",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                children: ["Date de d\xE9but: ", el.start_date]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                children: ["Date de fin: ", el.end_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "active",
+              children: ["Message affich\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: el.active
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "admin",
@@ -5665,12 +5662,10 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
               className: "content",
               children: el.content
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "date",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                children: ["Date de d\xE9but: ", el.start_date]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                children: ["Date de fin: ", el.end_date]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "active",
+              children: ["Message affich\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                children: el.active
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "admin",
@@ -5678,7 +5673,18 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             })]
           }, el.id));
         }
-      });
+      }); // Coche ou décoche le bouton "afficher message" dans le formulaire de modification
+
+      if (document.querySelector('.message-modify')) {
+        var check = document.querySelector('#active-modify');
+
+        if (this.state.newActive == 1) {
+          check.checked = true;
+        } else {
+          check.checked = false;
+        }
+      }
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "message-list",
@@ -5720,28 +5726,16 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
                 onChange: this.handleChange
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "msg-start-date",
+              className: "msg-active",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-                htmlFor: "newStartDate",
-                children: "Date de d\xE9but: "
+                htmlFor: "active-modify",
+                children: "Afficher le message: "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "date",
-                name: "newStartDate",
-                id: "newStartDate",
-                value: this.state.newStartDate,
-                onChange: this.handleChange
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "msg-end-date",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-                htmlFor: "newEndDate",
-                children: "Date de fin: "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                type: "date",
-                name: "newEndDate",
-                id: "newEndDate",
-                value: this.state.newEndDate,
-                onChange: this.handleChange
+                type: "checkbox",
+                name: "newActive",
+                id: "active-modify",
+                value: this.state.newActive,
+                onChange: this.handleCheckBox
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "msg-btns",

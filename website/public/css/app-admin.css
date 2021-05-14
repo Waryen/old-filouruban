@@ -1243,15 +1243,6 @@ th {
     height: 300px;
   }
 }
-.admin-message .message-create form .msg-start-date input, .admin-message .message-create form .msg-end-date input {
-  margin-top: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9em;
-  color: #000000;
-  border: 1px solid #e29578;
-  border-radius: 5px;
-  padding: 5px;
-}
 .admin-message .message-create form .msg-btns {
   margin-top: 30px;
 }
@@ -1341,15 +1332,6 @@ th {
     height: 300px;
   }
 }
-.admin-message .message-modify form .msg-start-date input, .admin-message .message-modify form .msg-end-date input {
-  margin-top: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9em;
-  color: #000000;
-  border: 1px solid #e29578;
-  border-radius: 5px;
-  padding: 5px;
-}
 .admin-message .message-modify form .msg-btns {
   margin-top: 30px;
 }
@@ -1414,11 +1396,16 @@ th {
   font-size: 1em;
   margin-bottom: 10px;
 }
-.admin-message .message-list li .date {
+.admin-message .message-list li .active {
   font-family: "Roboto", sans-serif;
   color: #000000;
   font-size: 0.9em;
   margin-bottom: 10px;
+}
+.admin-message .message-list li .active span {
+  color: #006d77;
+  font-size: 1.1em;
+  font-weight: 600;
 }
 .admin-message .message-list li .admin {
   font-family: "Roboto", sans-serif;
