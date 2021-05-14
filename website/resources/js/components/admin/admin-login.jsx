@@ -103,6 +103,9 @@ class AdminLogin extends React.Component {
                             onVerify={(token, ekey) => this.handleVerificationSuccess(token, ekey)}
                         />
                     </div>
+                    <div className="forgot-password">
+                        <a href="/forgot-password">Mot de passe oublié ?</a>
+                    </div>
                     <div>
                         <button type="submit">Connexion</button>
                     </div>
