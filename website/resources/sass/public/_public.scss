@@ -35,10 +35,10 @@
             font-size: 0.8em;
             color: $black;
             text-align: center;
+            margin-bottom: 10px;
 
             &:last-child {
-                font-size: 0.7em;
-                margin-top: 10px;
+                margin-bottom: 0;
                 font-style: italic;
             }
         }

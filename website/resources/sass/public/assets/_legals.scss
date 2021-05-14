@@ -1,35 +1,83 @@
 .legals {
+    margin: 0 auto;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: $roboto;
+
+    h1 {
+        font-family: $lato;
+        color: $peach;
+        text-align: center;
+        font-size: 2em;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .disclaimer {
+        font-size: 1em;
+        text-align: center;
+        margin-bottom: 20px;
+        font-style: italic;
+        padding: 20px;
+        background: $silver;
+
+        span {
+            font-size: 0.8em;
+        }
+
+        &:hover {
+            box-shadow: 0 0 5px $black;
+        }
+    }
 
     .legal-card {
-        display: flex;
-        flex-direction: column;
-        background: $light-peach;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px auto;
-        max-width: 800px;
+        margin-bottom: 20px;
 
-        .legal-title {
-            align-self: center;
-            font-family: $lato;
-            font-size: 1.5em;
-            color: $peach;
-            font-weight: 600;
+        h3 {
             text-align: center;
+            font-size: 1.5em;
             margin-bottom: 20px;
         }
 
-        .legal-content {
-            font-family: $roboto;
-            font-size: 1em;
-            color: $black;
+        h4 {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
 
-            p:not(:last-child) {
-                margin-bottom: 10px;
+        h5 {
+            text-align: left;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+
+        h6 {
+            text-align: left;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+
+        p {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: $peach;
+            transition: all .15s;
+
+            &:hover, &:focus {
+                color: lighten($peach, 10%);
             }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 }

@@ -23,6 +23,6 @@
     </div>
     <div class="developer-credits">
         <p>Site créé par Jonathan Gomand</p>
-        <p>Hébergé sur <a href="https://www.ovh.com/fr/" target="_blank">OVHcloud</a></p>
+        <p>Hébergé par <a href="https://www.ovh.com/fr/" target="_blank">OVHcloud</a></p>
     </div>
 </footer>

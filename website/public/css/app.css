@@ -1224,35 +1224,74 @@ th {
 }
 
 .legals {
+  margin: 0 auto;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Roboto", sans-serif;
 }
-.legals .legal-card {
-  display: flex;
-  flex-direction: column;
-  background: #ffddd2;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 10px auto;
-  max-width: 800px;
-}
-.legals .legal-card .legal-title {
-  align-self: center;
+.legals h1 {
   font-family: "Lato", sans-serif;
-  font-size: 1.5em;
   color: #e29578;
+  text-align: center;
+  font-size: 2em;
   font-weight: 600;
+  margin-bottom: 30px;
+}
+.legals .disclaimer {
+  font-size: 1em;
   text-align: center;
   margin-bottom: 20px;
+  font-style: italic;
+  padding: 20px;
+  background: #edf6f9;
 }
-.legals .legal-card .legal-content {
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  color: #000000;
+.legals .disclaimer span {
+  font-size: 0.8em;
 }
-.legals .legal-card .legal-content p:not(:last-child) {
+.legals .disclaimer:hover {
+  box-shadow: 0 0 5px #000000;
+}
+.legals .legal-card {
+  margin-bottom: 20px;
+}
+.legals .legal-card h3 {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+.legals .legal-card h4 {
+  text-align: center;
+  font-size: 1.3em;
   margin-bottom: 10px;
+}
+.legals .legal-card h5 {
+  text-align: left;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.legals .legal-card h6 {
+  text-align: left;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.legals .legal-card p {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+.legals .legal-card a {
+  text-decoration: none;
+  color: #e29578;
+  transition: all 0.15s;
+}
+.legals .legal-card a:hover, .legals .legal-card a:focus {
+  color: #ebb6a2;
+}
+.legals .legal-card:last-child {
+  margin-bottom: 0;
 }
 
 .search {
@@ -1365,10 +1404,10 @@ th {
   font-size: 0.8em;
   color: #000000;
   text-align: center;
+  margin-bottom: 10px;
 }
 #wrapper .home-alert p:last-child {
-  font-size: 0.7em;
-  margin-top: 10px;
+  margin-bottom: 0;
   font-style: italic;
 }
 #wrapper .home-alert a {
