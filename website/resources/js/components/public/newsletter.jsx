@@ -46,7 +46,7 @@ class Newsletter extends React.Component {
                 axios.post(`${this.props.url}/api/subscriber?api_token=${this.props.api}`, data)
                 .then(response => {
                     if(response.status == 200) {
-                        if(response.data == 1) {
+                        if(response.data.id) {
                             alert('Vous avez été inscrit(e) à la newsletter !')
                             this.setState({ submited: true })
                         } else if(response.data == 0) {

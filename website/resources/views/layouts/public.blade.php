@@ -32,7 +32,7 @@
         gtag('js', new Date());
         gtag('config', 'G-5VYVFR1KNC');
     </script>
-    <script src="js/tarteaucitron/tarteaucitron.js"></script>
+    <script src="/js/tarteaucitron/tarteaucitron.js"></script>
     <script>
         tarteaucitron.init({
             "privacyUrl": "", /* Privacy policy url */

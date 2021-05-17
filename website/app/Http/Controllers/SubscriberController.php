@@ -55,8 +55,38 @@ class SubscriberController extends Controller
             }
 
             if($check == true) {
-                Subscriber::create($request->all());
-                return true;
+
+                // Envoi le nouvel abonné à Sendinblue
+                $curl = curl_init();
+
+                curl_setopt_array($curl, [
+                CURLOPT_URL => "https://api.sendinblue.com/v3/contacts",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "{\"listIds\":[3],\"updateEnabled\":false,\"email\":\"$sub\"}",
+                CURLOPT_HTTPHEADER => [
+                    "Accept: application/json",
+                    "Content-Type: application/json",
+                    "api-key: ".env('SENDINBLUE_API_KEY')
+                ],
+                ]);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+
+                curl_close($curl);
+
+                if ($err) {
+                    echo "cURL Error #:" . $err;
+                } else {
+                    echo $response;
+                    Subscriber::create($request->all());
+                }
+
             } elseif($check == false) {
                 return 2;
             }

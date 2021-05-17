@@ -3891,7 +3891,7 @@ var Newsletter = /*#__PURE__*/function (_React$Component) {
           };
           axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api), data).then(function (response) {
             if (response.status == 200) {
-              if (response.data == 1) {
+              if (response.data.id) {
                 alert('Vous avez été inscrit(e) à la newsletter !');
 
                 _this2.setState({

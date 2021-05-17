@@ -18,6 +18,16 @@
                 <button type="submit">Envoyer</button>
             </div>
         </form>
-        <p>Vous recevrez un lien pour réinitialiser votre mot de passe dans votre boîte mail</p>
+        <p>Vous recevrez un lien pour réinitialiser votre mot de passe dans votre boîte de réception</p>
     </div>
+    @if ($status ?? '')
+        @php
+            var_dump($status);
+        @endphp
+    @endif
+    @if ($email ?? '')
+        @php
+            var_dump($email);
+        @endphp
+    @endif
 @endsection
