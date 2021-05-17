@@ -126,11 +126,17 @@ class MessageList extends React.Component {
             }
 
             if(el.admins_id === adminId && adminSu === 0) {
+                let msgShow
+                if(el.active == 1) {
+                    msgShow = 'Oui'
+                } else {
+                    msgShow = 'Non'
+                }
                 list.push(
                     <li key={el.id}>
                         <h4 className="title">{el.title}</h4>
                         <p className="content">{el.content}</p>
-                        <p className="active">Message affiché: <span>{el.active}</span></p>
+                        <p className="active">Message affiché: <span>{msgShow}</span></p>
                         <p className="admin">Créé par: {adminName}</p>
                         <div className="btns">
                             <button className="modify" value={el.id} onClick={this.modifyMessage}>Modifer</button>
@@ -139,11 +145,17 @@ class MessageList extends React.Component {
                     </li>
                 )
             } else if(adminSu === 1) {
+                let msgShow
+                if(el.active == 1) {
+                    msgShow = 'Oui'
+                } else {
+                    msgShow = 'Non'
+                }
                 list.push(
                     <li key={el.id}>
                         <h4 className="title">{el.title}</h4>
                         <p className="content">{el.content}</p>
-                        <p className="active">Message affiché: <span>{el.active}</span></p>
+                        <p className="active">Message affiché: <span>{msgShow}</span></p>
                         <p className="admin">Créé par: {adminName}</p>
                         <div className="btns">
                             <button className="modify" value={el.id} onClick={this.modifyMessage}>Modifer</button>
@@ -152,11 +164,17 @@ class MessageList extends React.Component {
                     </li>
                 )
             } else {
+                let msgShow
+                if(el.active == 1) {
+                    msgShow = 'Oui'
+                } else {
+                    msgShow = 'Non'
+                }
                 list.push(
                     <li key={el.id}>
                         <h4 className="title">{el.title}</h4>
                         <p className="content">{el.content}</p>
-                        <p className="active">Message affiché: <span>{el.active}</span></p>
+                        <p className="active">Message affiché: <span>{msgShow}</span></p>
                         <p className="admin">Créé par: {adminName}</p>
                     </li>
                 )

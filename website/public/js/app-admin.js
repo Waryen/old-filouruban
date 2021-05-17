@@ -5591,6 +5591,14 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         }
 
         if (el.admins_id === adminId && adminSu === 0) {
+          var msgShow;
+
+          if (el.active == 1) {
+            msgShow = 'Oui';
+          } else {
+            msgShow = 'Non';
+          }
+
           list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
               className: "title",
@@ -5601,7 +5609,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "active",
               children: ["Message affich\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                children: el.active
+                children: msgShow
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "admin",
@@ -5622,6 +5630,14 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             })]
           }, el.id));
         } else if (adminSu === 1) {
+          var _msgShow;
+
+          if (el.active == 1) {
+            _msgShow = 'Oui';
+          } else {
+            _msgShow = 'Non';
+          }
+
           list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
               className: "title",
@@ -5632,7 +5648,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "active",
               children: ["Message affich\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                children: el.active
+                children: _msgShow
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "admin",
@@ -5653,6 +5669,14 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             })]
           }, el.id));
         } else {
+          var _msgShow2;
+
+          if (el.active == 1) {
+            _msgShow2 = 'Oui';
+          } else {
+            _msgShow2 = 'Non';
+          }
+
           list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
               className: "title",
@@ -5663,7 +5687,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "active",
               children: ["Message affich\xE9: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                children: el.active
+                children: _msgShow2
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
               className: "admin",
