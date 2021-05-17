@@ -8,12 +8,12 @@
             <li><a href="/legal">Mentions légales</a></li>
         </ul>
     </nav>
-    <div class="footer-newsletter" id="react-newsletter"></div>
+    <!--<div class="footer-newsletter" id="react-newsletter"></div>-->
     <div class="copyrights">
         <p>© 2021 Filouruban. Tous droits réservés.</p>
     </div>
     <div class="social-media">
-        <p>Suivez-nous</p>
+        <p>Suivez-nous sur les réseaux sociaux</p>
         <nav>
             <ul>
                 <li><a href="#"><i class="fab fa-facebook"></i></a></li>
