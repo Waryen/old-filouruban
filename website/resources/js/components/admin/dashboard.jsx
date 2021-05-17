@@ -11,7 +11,6 @@ class Dashboard extends React.Component {
             commentaries: [],
             messages: [],
             contacts: [],
-            subscribers: [],
         }
 
         this.getInfos = this.getInfos.bind(this)
@@ -59,10 +58,6 @@ class Dashboard extends React.Component {
             return axios.get(`${url}/api/contact?api_token=${api}`)
         }
 
-        function getSubscribers() {
-            return axios.get(`${url}/api/subscriber?api_token=${api}`)
-        }
-
         Promise.all([
             getAdmins(),
             getArticles(),
@@ -70,7 +65,6 @@ class Dashboard extends React.Component {
             getCommentaries(),
             getContacts(),
             getMessages(),
-            getSubscribers()
         ])
         .then(results => {
             const admins = results[0]
@@ -79,7 +73,6 @@ class Dashboard extends React.Component {
             const commentaries = results[3]
             const contacts = results[4]
             const messages = results[5]
-            const subscribers = results[6]
 
             this.setState({
                 admins: admins.data,
@@ -88,7 +81,6 @@ class Dashboard extends React.Component {
                 commentaries: commentaries.data,
                 contacts: contacts.data,
                 messages: messages.data,
-                subscribers: subscribers.data
             })
         })
     }
@@ -101,7 +93,6 @@ class Dashboard extends React.Component {
         const commentaries = this.state.commentaries
         const messages = this.state.messages
         const contacts = this.state.contacts
-        const subscribers = this.state.subscribers
 
         let adminsNum = this.countInfos(admins)
         let articlesNum = this.countInfos(articles)
@@ -109,7 +100,6 @@ class Dashboard extends React.Component {
         let commentariesNum = this.countInfos(commentaries)
         let messagesNum = this.countInfos(messages)
         let contactsNum = this.countInfos(contacts)
-        let subscribersNum = this.countInfos(subscribers)
 
         return(
             <div className="admin-dashboard">
@@ -120,7 +110,6 @@ class Dashboard extends React.Component {
                 <p className="dash-com">Nombre de commentaires <br/> <span>{commentariesNum}</span></p>
                 <p className="dash-mes">Nombre de messages <br/> <span>{messagesNum}</span></p>
                 <p className="dash-con">Nombre de contacts <br/> <span>{contactsNum}</span></p>
-                <p className="dash-sub">Nombre d'abonnés à la newsletter <br/> <span>{subscribersNum}</span></p>
             </div>
         )
     }

@@ -3155,11 +3155,6 @@ function Navigation() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
           children: "Contact"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-        to: "/subscriber",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-          children: "Abonn\xE9s"
-        })
       })]
     })
   });
@@ -4909,6 +4904,21 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/contact/").concat(id, "?api_token=").concat(this.props.api));
         this.componentDidMount();
       }
+    } // Ajoute des sauts de ligne dans le contenu du message
+
+  }, {
+    key: "divide",
+    value: function divide(txt) {
+      txt = txt.split('\n');
+      var array = [];
+
+      for (var i = 0; i < txt.length; i++) {
+        array.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: txt[i]
+        }, i));
+      }
+
+      return array;
     }
   }, {
     key: "render",
@@ -4919,6 +4929,8 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
       var messages = this.state.contacts;
       var list = [];
       messages.forEach(function (el) {
+        var desc = _this3.divide(String(el.content));
+
         list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h4", {
             className: "name",
@@ -4929,9 +4941,9 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
               href: "mailto:".concat(el.email),
               children: el.email
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "content",
-            children: el.content
+            children: desc
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
             className: "delete",
             value: el.id,
@@ -5049,8 +5061,7 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
       categories: [],
       commentaries: [],
       messages: [],
-      contacts: [],
-      subscribers: []
+      contacts: []
     };
     _this.getInfos = _this.getInfos.bind(_assertThisInitialized(_this));
     return _this;
@@ -5105,18 +5116,13 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
         return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/contact?api_token=").concat(api));
       }
 
-      function getSubscribers() {
-        return axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(url, "/api/subscriber?api_token=").concat(api));
-      }
-
-      Promise.all([getAdmins(), getArticles(), getCategories(), getCommentaries(), getContacts(), getMessages(), getSubscribers()]).then(function (results) {
+      Promise.all([getAdmins(), getArticles(), getCategories(), getCommentaries(), getContacts(), getMessages()]).then(function (results) {
         var admins = results[0];
         var articles = results[1];
         var categories = results[2];
         var commentaries = results[3];
         var contacts = results[4];
         var messages = results[5];
-        var subscribers = results[6];
 
         _this2.setState({
           admins: admins.data,
@@ -5124,8 +5130,7 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
           categories: categories.data,
           commentaries: commentaries.data,
           contacts: contacts.data,
-          messages: messages.data,
-          subscribers: subscribers.data
+          messages: messages.data
         });
       });
     }
@@ -5139,14 +5144,12 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
       var commentaries = this.state.commentaries;
       var messages = this.state.messages;
       var contacts = this.state.contacts;
-      var subscribers = this.state.subscribers;
       var adminsNum = this.countInfos(admins);
       var articlesNum = this.countInfos(articles);
       var categoriesNum = this.countInfos(categories);
       var commentariesNum = this.countInfos(commentaries);
       var messagesNum = this.countInfos(messages);
       var contactsNum = this.countInfos(contacts);
-      var subscribersNum = this.countInfos(subscribers);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "admin-dashboard",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
@@ -5181,11 +5184,6 @@ var Dashboard = /*#__PURE__*/function (_React$Component) {
           className: "dash-con",
           children: ["Nombre de contacts ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             children: contactsNum
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-          className: "dash-sub",
-          children: ["Nombre d'abonn\xE9s \xE0 la newsletter ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-            children: subscribersNum
           })]
         })]
       });
@@ -5798,131 +5796,6 @@ function Message(props) {
     })]
   });
 }
-
-/***/ }),
-
-/***/ "./resources/js/components/admin/subscriber.jsx":
-/*!******************************************************!*\
-  !*** ./resources/js/components/admin/subscriber.jsx ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Subscriber)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-var Subscriber = /*#__PURE__*/function (_React$Component) {
-  _inherits(Subscriber, _React$Component);
-
-  var _super = _createSuper(Subscriber);
-
-  function Subscriber(props) {
-    var _this;
-
-    _classCallCheck(this, Subscriber);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      subs: []
-    };
-    _this.deleteSub = _this.deleteSub.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(Subscriber, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/subscriber?api_token=").concat(this.props.api)).then(function (response) {
-        if (response.status == 200) {
-          _this2.setState({
-            subs: response.data
-          });
-        }
-      });
-    }
-  }, {
-    key: "deleteSub",
-    value: function deleteSub(id) {
-      var _this3 = this;
-
-      if (confirm('Voulez-vous vraiment supprimer cet(te) abonné(e) ? Cette action est irréversible')) {
-        axios__WEBPACK_IMPORTED_MODULE_1___default().delete("".concat(this.props.url, "/api/subscriber/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
-          if (response.status == 200) {
-            _this3.componentDidMount();
-          }
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this4 = this;
-
-      var subs = this.state.subs;
-      var list = [];
-      subs.forEach(function (el) {
-        list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-            children: el.email
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            className: "delete",
-            onClick: function onClick() {
-              _this4.deleteSub(el.id);
-            },
-            children: "Supprimer"
-          })]
-        }, el.id));
-      });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "admin-subscriber",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-          className: "sub-title",
-          children: "Liste des abonn\xE9s"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-          children: list
-        })]
-      });
-    }
-  }]);
-
-  return Subscriber;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-
 
 /***/ }),
 
@@ -74760,8 +74633,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_admin_admin_navigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/admin/admin-navigation */ "./resources/js/components/admin/admin-navigation.jsx");
 /* harmony import */ var _components_admin_dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/admin/dashboard */ "./resources/js/components/admin/dashboard.jsx");
 /* harmony import */ var _components_admin_admin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/admin/admin */ "./resources/js/components/admin/admin.jsx");
@@ -74772,14 +74645,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_contact__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/admin/contact */ "./resources/js/components/admin/contact.jsx");
 /* harmony import */ var _components_admin_admin_login__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/admin/admin-login */ "./resources/js/components/admin/admin-login.jsx");
 /* harmony import */ var _components_admin_admin_logout__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/admin/admin-logout */ "./resources/js/components/admin/admin-logout.jsx");
-/* harmony import */ var _components_admin_subscriber_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/admin/subscriber.jsx */ "./resources/js/components/admin/subscriber.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
  // Importation des composants
-
 
 
 
@@ -74809,80 +74680,71 @@ if (document.querySelector('#auth')) {
 }
 
 function App() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
     className: "react-app",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.HashRouter, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_admin_navigation__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.HashRouter, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_admin_navigation__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_dashboard__WEBPACK_IMPORTED_MODULE_3__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_dashboard__WEBPACK_IMPORTED_MODULE_3__.default, {
             url: url,
             api: api
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/admin",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_admin__WEBPACK_IMPORTED_MODULE_4__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_admin__WEBPACK_IMPORTED_MODULE_4__.default, {
             url: url,
             api: api,
             auth: auth
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/article",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_article__WEBPACK_IMPORTED_MODULE_5__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_article__WEBPACK_IMPORTED_MODULE_5__.default, {
             url: url,
             api: api,
             auth: auth
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/categorie",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_categorie__WEBPACK_IMPORTED_MODULE_6__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_categorie__WEBPACK_IMPORTED_MODULE_6__.default, {
             url: url,
             api: api
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/commentaire",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_commentaire__WEBPACK_IMPORTED_MODULE_7__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_commentaire__WEBPACK_IMPORTED_MODULE_7__.default, {
             url: url,
             api: api
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/message",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_message__WEBPACK_IMPORTED_MODULE_8__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_message__WEBPACK_IMPORTED_MODULE_8__.default, {
             url: url,
             api: api,
             auth: auth
           });
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.Route, {
         path: "/contact",
         exact: true,
         render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_contact__WEBPACK_IMPORTED_MODULE_9__.default, {
-            url: url,
-            api: api
-          });
-        }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
-        path: "/subscriber",
-        exact: true,
-        render: function render(props) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_subscriber_jsx__WEBPACK_IMPORTED_MODULE_12__.default, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_contact__WEBPACK_IMPORTED_MODULE_9__.default, {
             url: url,
             api: api
           });
@@ -74893,17 +74755,17 @@ function App() {
 } // Rendu des composants
 
 if (document.getElementById('react-admin')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(App, {}), document.getElementById('react-admin'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(App, {}), document.getElementById('react-admin'));
 }
 
 if (document.getElementById('react-login')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_admin_login__WEBPACK_IMPORTED_MODULE_10__.default, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_admin_login__WEBPACK_IMPORTED_MODULE_10__.default, {
     url: url
   }), document.getElementById('react-login'));
 }
 
 if (document.getElementById('react-logout')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_admin_admin_logout__WEBPACK_IMPORTED_MODULE_11__.default, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_admin_admin_logout__WEBPACK_IMPORTED_MODULE_11__.default, {
     auth: auth
   }), document.getElementById('react-logout'));
 }

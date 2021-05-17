@@ -14,7 +14,6 @@ import Message from './components/admin/message'
 import Contact from './components/admin/contact'
 import AdminLogin from './components/admin/admin-login'
 import AdminLogout from './components/admin/admin-logout'
-import Subscriber from './components/admin/subscriber.jsx'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -45,7 +44,6 @@ export default function App() {
                 <Route path="/commentaire" exact render={props => <Commentaire url={url} api={api} />} />
                 <Route path="/message" exact render={props => <Message url={url} api={api} auth={auth} />} />
                 <Route path="/contact" exact render={props => <Contact url={url} api={api} />} />
-                <Route path="/subscriber" exact render={props => <Subscriber url={url} api={api} />} />
             </Router>
         </div>
     )
