@@ -5,7 +5,6 @@ class ArticleList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            articles: [],
             categories: [],
             id: undefined,
             name: '',
@@ -28,11 +27,8 @@ class ArticleList extends React.Component {
     // Récupère la liste des articles et des catégories
     componentDidMount() {
         document.querySelector('.article-modify').style.display = 'none'
-
-        axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
-            .then(response => this.setState({articles: response.data}))
         axios.get(`${this.props.url}/api/category?api_token=${this.props.api}`)
-            .then(response => this.setState({categories: response.data}))
+        .then(response => this.setState({categories: response.data}))
     }
 
     // Récupère les données d'un article pour le formulaire de modification
@@ -122,14 +118,6 @@ class ArticleList extends React.Component {
     handleModify(e) {
         e.preventDefault()
 
-        if(this.state.image) {
-            const fd = new FormData()
-            fd.append('image', this.state.image)
-            const config = { headers: { 'content-type': 'multipart/form-data' } }
-
-            axios.post('uploadArticleImage', fd, config)
-        }
-
         // Crée un slug
         const slug = this.state.name.replace(/\s+/g, '-').toLocaleLowerCase()
 
@@ -140,13 +128,18 @@ class ArticleList extends React.Component {
             slug: slug,
         }).then(response => {
             if(response.status == 200) {
+                if(this.state.image) {
+                    const fd = new FormData()
+                    fd.append('image', this.state.image)
+                    const config = { headers: { 'content-type': 'multipart/form-data' } }
+                    axios.post('uploadArticleImage', fd, config)
+                }
+                this.props.update()
                 alert('Article modifié !')
             } else {
-                alert("Impossible de modifier l'article pour le moment")
+                alert("Erreur réseau")
             }
         })
-
-        this.componentDidMount()
 
         document.querySelector('.article-list').style.display = 'block'
         document.querySelector('.article-modify').style.display = 'none'
@@ -155,7 +148,7 @@ class ArticleList extends React.Component {
     // Supprime un article
     deleteArticle(e) {
         if(confirm('Voulez-vous vraiment supprimer cet article ? Cette action est irréversible')) {
-            const articles = this.state.articles
+            const articles = this.props.articles
             const id = e.target.value
             let name
             
@@ -168,10 +161,16 @@ class ArticleList extends React.Component {
             const fd = new FormData()
             fd.append('name', name)
     
-            axios.post('deleteArticleImage', fd)
             axios.delete(`${this.props.url}/api/article/${id}?api_token=${this.props.api}`)
-            this.componentDidMount()
-            alert('Article supprimé !')
+            .then(response => {
+                if(response.status == 200) {
+                    axios.post('deleteArticleImage', fd)
+                    this.props.update()
+                    alert('Article supprimé !')
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
         }
     }
 
@@ -185,7 +184,7 @@ class ArticleList extends React.Component {
         }
 
         // Rendu des éléments de la liste des articles
-        this.state.articles.forEach(el => {
+        this.props.articles.forEach(el => {
             const catList = this.state.categories
             let catName
             for(let i = 0; i < catList.length; i++) {

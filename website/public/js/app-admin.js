@@ -2436,16 +2436,25 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api), {
+      var data = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         email: this.state.email,
         password: this.state.password,
         su: this.state.su,
         api_token: this.state.api
-      }).then(function (Response) {
-        return console.log(Response);
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api), data).then(function (response) {
+        if (response.status == 200) {
+          _this2.props.update();
+
+          alert('Administrateur créé !');
+        } else {
+          alert('Erreur réseau');
+        }
       });
       this.setState({
         firstname: '',
@@ -2670,33 +2679,27 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, AdminList);
 
     _this = _super.call(this, props);
-    _this.state = {
-      list: []
-    };
+    _this.state = {};
     _this.deleteAdmin = _this.deleteAdmin.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(AdminList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api)).then(function (res) {
-        if (res.data) {
-          _this2.setState({
-            list: res.data
-          });
-        }
-      });
-    }
-  }, {
     key: "deleteAdmin",
     value: function deleteAdmin(e) {
-      if (confirm('Voulez-vous vraiment supprimer cet administrateur ? Cett action est irréversible')) {
+      var _this2 = this;
+
+      if (confirm('Voulez-vous vraiment supprimer cet administrateur ? Cette action est irréversible')) {
         var id = e.target.value;
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api));
-        this.componentDidMount();
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            _this2.props.update();
+
+            alert('Administrateur supprimé !');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
       }
     }
   }, {
@@ -2705,76 +2708,47 @@ var AdminList = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var list = [];
+      var admins = this.props.admins;
       var parsedAuth = JSON.parse(this.props.auth);
       var authSu = parsedAuth.su;
       var authId = parsedAuth.id;
-      this.state.list.forEach(function (el) {
+      admins.forEach(function (el) {
         if (el.id !== authId && el.su !== 1 && authSu === 1) {
-          if (el.su == 0) {
-            list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                className: "admin-name",
-                children: [el.firstname, " ", el.lastname]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-email",
-                children: el.email
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-su",
-                children: "Administrateur"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                className: "admin-delete",
-                value: el.id,
-                onClick: _this3.deleteAdmin,
-                children: "Supprimer"
-              })]
-            }, el.id));
-          } else {
-            list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                className: "admin-name",
-                children: [el.firstname, " ", el.lastname]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-email",
-                children: el.email
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-su",
-                children: "Super Administrateur"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                className: "admin-delete",
-                value: el.id,
-                onClick: _this3.deleteAdmin,
-                children: "Supprimer"
-              })]
-            }, el.id));
-          }
+          var adminStatus;
+          el.su == 0 ? adminStatus = 'Administrateur' : adminStatus = 'Super Administrateur';
+          list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "admin-name",
+              children: [el.firstname, " ", el.lastname]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "admin-email",
+              children: el.email
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "admin-su",
+              children: adminStatus
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "admin-delete",
+              value: el.id,
+              onClick: _this3.deleteAdmin,
+              children: "Supprimer"
+            })]
+          }, el.id));
         } else {
-          if (el.su == 0) {
-            list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                className: "admin-name",
-                children: [el.firstname, " ", el.lastname]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-email",
-                children: el.email
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-su",
-                children: "Administrateur"
-              })]
-            }, el.id));
-          } else {
-            list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                className: "admin-name",
-                children: [el.firstname, " ", el.lastname]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-email",
-                children: el.email
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                className: "admin-su",
-                children: "Super Administrateur"
-              })]
-            }, el.id));
-          }
+          var _adminStatus;
+
+          el.su == 0 ? _adminStatus = 'Administrateur' : _adminStatus = 'Super Administrateur';
+          list.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+              className: "admin-name",
+              children: [el.firstname, " ", el.lastname]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "admin-email",
+              children: el.email
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              className: "admin-su",
+              children: _adminStatus
+            })]
+          }, el.id));
         }
       });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -3175,31 +3149,110 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Admin)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _admin_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-create */ "./resources/js/components/admin/admin-create.jsx");
-/* harmony import */ var _admin_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-list */ "./resources/js/components/admin/admin-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _admin_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-create */ "./resources/js/components/admin/admin-create.jsx");
+/* harmony import */ var _admin_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin-list */ "./resources/js/components/admin/admin-list.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
-function Admin(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "admin-admins",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-      children: "Administrateurs"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_admin_create__WEBPACK_IMPORTED_MODULE_1__.default, {
-      url: props.url,
-      api: props.api,
-      auth: props.auth
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_admin_list__WEBPACK_IMPORTED_MODULE_2__.default, {
-      url: props.url,
-      api: props.api,
-      auth: props.auth
-    })]
-  });
-}
+
+
+
+var Admin = /*#__PURE__*/function (_React$Component) {
+  _inherits(Admin, _React$Component);
+
+  var _super = _createSuper(Admin);
+
+  function Admin(props) {
+    var _this;
+
+    _classCallCheck(this, Admin);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      admins: []
+    };
+    _this.getAdmins = _this.getAdmins.bind(_assertThisInitialized(_this));
+    _this.updateData = _this.updateData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Admin, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getAdmins();
+    }
+  }, {
+    key: "getAdmins",
+    value: function getAdmins() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            admins: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData() {
+      this.getAdmins();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "admin-admins",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          children: "Administrateurs"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_admin_create__WEBPACK_IMPORTED_MODULE_2__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          update: this.updateData
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_admin_list__WEBPACK_IMPORTED_MODULE_3__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          update: this.updateData,
+          admins: this.state.admins
+        })]
+      });
+    }
+  }]);
+
+  return Admin;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
 
 /***/ }),
 
@@ -3367,6 +3420,8 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this4 = this;
+
       e.preventDefault();
       var fd = new FormData();
       fd.append('image', this.state.image);
@@ -3387,12 +3442,15 @@ var ArticleCreate = /*#__PURE__*/function (_React$Component) {
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api), data).then(function (response) {
         if (response.status == 200) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
+
+          _this4.props.update();
+
           alert('Article créé !');
         } else {
-          alert("Erreur lors de l'envoi du formulaire");
+          alert("Erreur réseau");
         }
       });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
       this.handleCancel(e);
     }
   }, {
@@ -3555,7 +3613,6 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      articles: [],
       categories: [],
       id: undefined,
       name: '',
@@ -3582,11 +3639,6 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       document.querySelector('.article-modify').style.display = 'none';
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
-        return _this2.setState({
-          articles: response.data
-        });
-      });
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (response) {
         return _this2.setState({
           categories: response.data
@@ -3689,19 +3741,9 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleModify",
     value: function handleModify(e) {
-      e.preventDefault();
+      var _this5 = this;
 
-      if (this.state.image) {
-        var fd = new FormData();
-        fd.append('image', this.state.image);
-        var config = {
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
-        };
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
-      } // Crée un slug
-
+      e.preventDefault(); // Crée un slug
 
       var slug = this.state.name.replace(/\s+/g, '-').toLocaleLowerCase();
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/article/").concat(this.state.id, "?api_token=").concat(this.props.api), {
@@ -3711,12 +3753,24 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
         slug: slug
       }).then(function (response) {
         if (response.status == 200) {
+          if (_this5.state.image) {
+            var fd = new FormData();
+            fd.append('image', _this5.state.image);
+            var config = {
+              headers: {
+                'content-type': 'multipart/form-data'
+              }
+            };
+            axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadArticleImage', fd, config);
+          }
+
+          _this5.props.update();
+
           alert('Article modifié !');
         } else {
-          alert("Impossible de modifier l'article pour le moment");
+          alert("Erreur réseau");
         }
       });
-      this.componentDidMount();
       document.querySelector('.article-list').style.display = 'block';
       document.querySelector('.article-modify').style.display = 'none';
     } // Supprime un article
@@ -3724,8 +3778,10 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteArticle",
     value: function deleteArticle(e) {
+      var _this6 = this;
+
       if (confirm('Voulez-vous vraiment supprimer cet article ? Cette action est irréversible')) {
-        var articles = this.state.articles;
+        var articles = this.props.articles;
         var id = e.target.value;
         var name;
         articles.forEach(function (el) {
@@ -3735,16 +3791,23 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
         });
         var fd = new FormData();
         fd.append('name', name);
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteArticleImage', fd);
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api));
-        this.componentDidMount();
-        alert('Article supprimé !');
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/article/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteArticleImage', fd);
+
+            _this6.props.update();
+
+            alert('Article supprimé !');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this7 = this;
 
       var list = [];
       var cat = [];
@@ -3761,8 +3824,8 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
       } // Rendu des éléments de la liste des articles
 
 
-      this.state.articles.forEach(function (el) {
-        var catList = _this5.state.categories;
+      this.props.articles.forEach(function (el) {
+        var catList = _this7.state.categories;
         var catName;
 
         for (var i = 0; i < catList.length; i++) {
@@ -3779,17 +3842,17 @@ var ArticleList = /*#__PURE__*/function (_React$Component) {
             className: "article-cat",
             children: catName
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-            src: "".concat(_this5.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
+            src: "".concat(_this7.props.url, "/media/images/articles/article-").concat(el.image_id, ".jpg"),
             alt: "Image de l'article: ".concat(el.name)
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "article-btns",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               value: el.id,
-              onClick: _this5.modifyArticle,
+              onClick: _this7.modifyArticle,
               children: "Modifier"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               value: el.id,
-              onClick: _this5.deleteArticle,
+              onClick: _this7.deleteArticle,
               children: "Supprimer"
             })]
           })]
@@ -3907,30 +3970,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Article)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _article_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./article-create */ "./resources/js/components/admin/article-create.jsx");
-/* harmony import */ var _article_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./article-list */ "./resources/js/components/admin/article-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _article_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./article-create */ "./resources/js/components/admin/article-create.jsx");
+/* harmony import */ var _article_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./article-list */ "./resources/js/components/admin/article-list.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
-function Article(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "admin-articles",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-      children: "Articles"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_article_create__WEBPACK_IMPORTED_MODULE_1__.default, {
-      url: props.url,
-      api: props.api,
-      auth: props.auth
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_article_list__WEBPACK_IMPORTED_MODULE_2__.default, {
-      url: props.url,
-      api: props.api
-    })]
-  });
-}
+
+
+
+var Article = /*#__PURE__*/function (_React$Component) {
+  _inherits(Article, _React$Component);
+
+  var _super = _createSuper(Article);
+
+  function Article(props) {
+    var _this;
+
+    _classCallCheck(this, Article);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      articles: []
+    };
+    _this.getArticles = _this.getArticles.bind(_assertThisInitialized(_this));
+    _this.updateData = _this.updateData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Article, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getArticles();
+    }
+  }, {
+    key: "getArticles",
+    value: function getArticles() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            articles: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData() {
+      this.getArticles();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "admin-articles",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          children: "Articles"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_article_create__WEBPACK_IMPORTED_MODULE_2__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          update: this.updateData
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_article_list__WEBPACK_IMPORTED_MODULE_3__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          articles: this.state.articles,
+          update: this.updateData
+        })]
+      });
+    }
+  }]);
+
+  return Article;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
 
 /***/ }),
 
@@ -4081,6 +4223,8 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var name = this.state.catName;
       var description = this.state.catDesc;
@@ -4100,12 +4244,15 @@ var CategoryCreate = /*#__PURE__*/function (_React$Component) {
         slug: slug
       }).then(function (response) {
         if (response.status == 200) {
+          axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
+
+          _this3.props.update();
+
           alert('Catégorie crée !');
         } else {
-          alert("Impossible de créer une catégorie pour le moment");
+          alert("Erreur réseau");
         }
       });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
       this.handleCancel(e);
     }
   }, {
@@ -4263,7 +4410,6 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      categories: [],
       articles: [],
       catId: undefined,
       newCatName: '',
@@ -4287,13 +4433,6 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       document.querySelector('.category-modify').style.display = 'none';
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (res) {
-        if (res.status == 200) {
-          _this2.setState({
-            categories: res.data
-          });
-        }
-      });
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (res) {
         if (res.status == 200) {
           var list = res.data;
@@ -4384,19 +4523,9 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleModify",
     value: function handleModify(e) {
-      e.preventDefault();
+      var _this5 = this;
 
-      if (this.state.image) {
-        var fd = new FormData();
-        fd.append('image', this.state.image);
-        var config = {
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
-        };
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
-      } // Crée un slug
-
+      e.preventDefault(); // Crée un slug
 
       var slug = this.state.newCatName.replace(/\s+/g, '-').toLocaleLowerCase();
       axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/category/").concat(this.state.catId, "?api_token=").concat(this.props.api), {
@@ -4405,12 +4534,24 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
         slug: slug
       }).then(function (response) {
         if (response.status == 200) {
+          if (_this5.state.image) {
+            var fd = new FormData();
+            fd.append('image', _this5.state.image);
+            var config = {
+              headers: {
+                'content-type': 'multipart/form-data'
+              }
+            };
+            axios__WEBPACK_IMPORTED_MODULE_0___default().post('uploadCategoryImage', fd, config);
+          }
+
+          _this5.props.update();
+
           alert('Catégorie modifiée !');
         } else {
-          alert("Impossible de modifier cette catégorie pour le moment");
+          alert("Erreur réseau");
         }
       });
-      this.componentDidMount();
       document.querySelector('.category-list').style.display = 'block';
       document.querySelector('.category-modify').style.display = 'none';
     } // Supprime une catégorie
@@ -4418,11 +4559,13 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteCategory",
     value: function deleteCategory(e) {
+      var _this6 = this;
+
       e.preventDefault();
 
       if (confirm('Voulez-vous vraiment supprimer cette catégorie ? Cette action est irréversible')) {
         var id = e.target.value;
-        var categories = this.state.categories;
+        var categories = this.props.categories;
         var name;
         categories.forEach(function (el) {
           if (el.id == id) {
@@ -4431,19 +4574,27 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
         });
         var fd = new FormData();
         fd.append('name', name);
-        axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteCategoryImage', fd);
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api));
-        this.componentDidMount();
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/category/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            axios__WEBPACK_IMPORTED_MODULE_0___default().post('deleteCategoryImage', fd);
+
+            _this6.props.update();
+
+            alert('Catégorie supprimée !');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this7 = this;
 
       var list = [];
       var articles = this.state.articles;
-      var categories = this.state.categories;
+      var categories = this.props.categories;
       var imgPrev;
 
       if (this.state.imagePreview) {
@@ -4471,13 +4622,13 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
               children: el.name
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(_this5.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
+              src: "".concat(_this7.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
               alt: "Image de la cat\xE9gorie: ".concat(el.name),
               width: "200px",
               height: "200px"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               value: el.id,
-              onClick: _this5.modifyCategory,
+              onClick: _this7.modifyCategory,
               children: "Modifier"
             })]
           }, el.id));
@@ -4486,18 +4637,18 @@ var CategoryList = /*#__PURE__*/function (_React$Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
               children: el.name
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "".concat(_this5.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
+              src: "".concat(_this7.props.url, "/media/images/categories/category-").concat(el.image_id, ".jpg"),
               alt: "Image de la cat\xE9gorie: ".concat(el.name),
               width: "200px",
               height: "200px"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 value: el.id,
-                onClick: _this5.modifyCategory,
+                onClick: _this7.modifyCategory,
                 children: "Modifier"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 value: el.id,
-                onClick: _this5.deleteCategory,
+                onClick: _this7.deleteCategory,
                 children: "Supprimer"
               })]
             })]
@@ -4594,30 +4745,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Categorie)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _cat_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cat-create */ "./resources/js/components/admin/cat-create.jsx");
-/* harmony import */ var _cat_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cat-list */ "./resources/js/components/admin/cat-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _cat_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cat-create */ "./resources/js/components/admin/cat-create.jsx");
+/* harmony import */ var _cat_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cat-list */ "./resources/js/components/admin/cat-list.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
-function Categorie(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "admin-category",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-      children: "Cat\xE9gories"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_cat_create__WEBPACK_IMPORTED_MODULE_1__.default, {
-      url: props.url,
-      api: props.api,
-      auth: props.auth
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_cat_list__WEBPACK_IMPORTED_MODULE_2__.default, {
-      url: props.url,
-      api: props.api
-    })]
-  });
-}
+
+
+
+var Categorie = /*#__PURE__*/function (_React$Component) {
+  _inherits(Categorie, _React$Component);
+
+  var _super = _createSuper(Categorie);
+
+  function Categorie(props) {
+    var _this;
+
+    _classCallCheck(this, Categorie);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      categories: []
+    };
+    _this.getCategories = _this.getCategories.bind(_assertThisInitialized(_this));
+    _this.updateData = _this.updateData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Categorie, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getCategories();
+    }
+  }, {
+    key: "getCategories",
+    value: function getCategories() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/category?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            categories: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData() {
+      this.getCategories();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "admin-category",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          children: "Cat\xE9gories"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_cat_create__WEBPACK_IMPORTED_MODULE_2__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          update: this.updateData
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_cat_list__WEBPACK_IMPORTED_MODULE_3__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          categories: this.state.categories,
+          update: this.updateData
+        })]
+      });
+    }
+  }]);
+
+  return Categorie;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
 
 /***/ }),
 

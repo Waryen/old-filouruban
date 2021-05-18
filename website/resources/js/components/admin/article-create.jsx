@@ -113,18 +113,16 @@ class ArticleCreate extends React.Component {
             slug: slug,
         }
 
-        axios
-            .post(`${this.props.url}/api/article?api_token=${this.props.api}`, data)
-            .then(response => {
-                if(response.status == 200) {
-                    alert('Article créé !')
-                } else {
-                    alert("Erreur lors de l'envoi du formulaire")
-                }
-            })
-
-        axios
-            .post('uploadArticleImage', fd, config)
+        axios.post(`${this.props.url}/api/article?api_token=${this.props.api}`, data)
+        .then(response => {
+            if(response.status == 200) {
+                axios.post('uploadArticleImage', fd, config)
+                this.props.update()
+                alert('Article créé !')
+            } else {
+                alert("Erreur réseau")
+            }
+        })
 
         this.handleCancel(e)
     }

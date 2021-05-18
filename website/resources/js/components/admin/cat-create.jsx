@@ -97,13 +97,13 @@ class CategoryCreate extends React.Component {
             slug: slug,
         }).then(response => {
             if(response.status == 200) {
+                axios.post('uploadCategoryImage', fd, config)
+                this.props.update()
                 alert('Catégorie crée !')
             } else {
-                alert("Impossible de créer une catégorie pour le moment")
+                alert("Erreur réseau")
             }
         })
-
-        axios.post('uploadCategoryImage', fd, config)
 
         this.handleCancel(e)
     }

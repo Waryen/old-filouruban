@@ -48,15 +48,24 @@ class AdminCreate extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-
-        axios.post(`${this.props.url}/api/admin?api_token=${this.props.api}`, {
+        const data = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             email: this.state.email,
             password: this.state.password,
             su: this.state.su,
             api_token: this.state.api,
-        }).then(Response => console.log(Response))
+        }
+
+        axios.post(`${this.props.url}/api/admin?api_token=${this.props.api}`, data)
+        .then(response => {
+            if(response.status == 200) {
+                this.props.update()
+                alert('Administrateur créé !')
+            } else {
+                alert('Erreur réseau')
+            }
+        })
 
         this.setState({
             firstname: '',

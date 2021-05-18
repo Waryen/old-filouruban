@@ -5,7 +5,6 @@ class CategoryList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            categories: [],
             articles: [],
             catId: undefined,
             newCatName: '',
@@ -25,25 +24,16 @@ class CategoryList extends React.Component {
     // Récupère la liste des catégories et des articles
     componentDidMount() {
         document.querySelector('.category-modify').style.display = 'none'
-
-        axios
-            .get(`${this.props.url}/api/category?api_token=${this.props.api}`)
-            .then(res => {
-                if(res.status == 200) {
-                    this.setState({ categories: res.data })
-                }
-            })
         
-        axios
-            .get(`${this.props.url}/api/article?api_token=${this.props.api}`)
-            .then(res => {
-                if(res.status == 200) {
-                    const list = res.data
-                    list.forEach(el => {
-                        this.setState({ articles: [...this.state.articles, el.categories_id] })
-                    })
-                }
-            })
+        axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
+        .then(res => {
+            if(res.status == 200) {
+                const list = res.data
+                list.forEach(el => {
+                    this.setState({ articles: [...this.state.articles, el.categories_id] })
+                })
+            }
+        })
     }
 
     // Récupère les données d'une catégorie pour le formulaire de modification
@@ -54,18 +44,17 @@ class CategoryList extends React.Component {
         document.querySelector('.category-list').style.display = 'none'
         document.querySelector('.category-modify').style.display = 'block'
 
-        axios
-            .get(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
-            .then(res => {
-                if(res.status == 200) {
-                    this.setState({
-                        catId: id,
-                        newCatName: res.data.name,
-                        newCatDesc: res.data.description,
-                        imagePreview: `${this.props.url}/media/images/categories/category-${res.data.image_id}.jpg`,
-                    })
-                }
-            })
+        axios.get(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
+        .then(res => {
+            if(res.status == 200) {
+                this.setState({
+                    catId: id,
+                    newCatName: res.data.name,
+                    newCatDesc: res.data.description,
+                    imagePreview: `${this.props.url}/media/images/categories/category-${res.data.image_id}.jpg`,
+                })
+            }
+        })
     }
 
     // Annule les modifications du formulaire
@@ -117,14 +106,6 @@ class CategoryList extends React.Component {
     handleModify(e) {
         e.preventDefault()
 
-        if(this.state.image) {
-            const fd = new FormData()
-            fd.append('image', this.state.image)
-            const config = { headers: { 'content-type': 'multipart/form-data' } }
-
-            axios.post('uploadCategoryImage', fd, config)
-        }
-
         // Crée un slug
         const slug = this.state.newCatName.replace(/\s+/g, '-').toLocaleLowerCase()
 
@@ -134,13 +115,18 @@ class CategoryList extends React.Component {
             slug: slug,
         }).then(response => {
             if(response.status == 200) {
+                if(this.state.image) {
+                    const fd = new FormData()
+                    fd.append('image', this.state.image)
+                    const config = { headers: { 'content-type': 'multipart/form-data' } }
+                    axios.post('uploadCategoryImage', fd, config)
+                }
+                this.props.update()
                 alert('Catégorie modifiée !')
             } else {
-                alert("Impossible de modifier cette catégorie pour le moment")
+                alert("Erreur réseau")
             }
         })
-
-        this.componentDidMount()
 
         document.querySelector('.category-list').style.display = 'block'
         document.querySelector('.category-modify').style.display = 'none'
@@ -151,7 +137,7 @@ class CategoryList extends React.Component {
         e.preventDefault()
         if(confirm('Voulez-vous vraiment supprimer cette catégorie ? Cette action est irréversible')) {
             const id = e.target.value
-            const categories = this.state.categories
+            const categories = this.props.categories
             let name
             
             categories.forEach(el => {
@@ -163,16 +149,23 @@ class CategoryList extends React.Component {
             const fd = new FormData()
             fd.append('name', name)
     
-            axios.post('deleteCategoryImage', fd)
             axios.delete(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
-            this.componentDidMount()
+            .then(response => {
+                if(response.status == 200) {
+                    axios.post('deleteCategoryImage', fd)
+                    this.props.update()
+                    alert('Catégorie supprimée !')
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
         }
     }
 
     render() {
         const list = []
         const articles = this.state.articles
-        const categories = this.state.categories
+        const categories = this.props.categories
         let imgPrev
 
         if(this.state.imagePreview) {
