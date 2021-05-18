@@ -53,11 +53,20 @@ class MessageCreate extends React.Component {
     // Envoi le formulaire
     handleSubmit(e) {
         e.preventDefault()
-        axios.post(`${this.props.url}/api/message?api_token=${this.props.api}`, {
+        const data = {
             title: this.state.title,
             content: this.state.content,
             active: this.state.active,
             admins_id: this.state.adminId,
+        }
+        axios.post(`${this.props.url}/api/message?api_token=${this.props.api}`, data)
+        .then(response => {
+            if(response.status == 200) {
+                this.props.update()
+                alert('Message créé !')
+            } else {
+                alert('Erreur réseau')
+            }
         })
         this.handleCancel(e)
     }

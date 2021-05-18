@@ -4,19 +4,8 @@ import React from 'react'
 class ContactList extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            contacts: [],
-        }
 
         this.deleteContact = this.deleteContact.bind(this)
-    }
-
-    // Récupère la liste des contacts
-    componentDidMount() {
-        axios.get(`${this.props.url}/api/contact?api_token=${this.props.api}`)
-            .then(res => {
-                this.setState({ contacts: res.data })
-            })
     }
 
     deleteContact(e) {
@@ -24,7 +13,14 @@ class ContactList extends React.Component {
         if(confirm('Voulez-vous vraiment supprimer ce contact ? Cette action est irréversible')) {
             const id = e.target.value
             axios.delete(`${this.props.url}/api/contact/${id}?api_token=${this.props.api}`)
-            this.componentDidMount()
+            .then(response => {
+                if(response.status == 200) {
+                    this.props.update()
+                    alert('Contact supprimé !')
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
         }
     }
 
@@ -44,7 +40,7 @@ class ContactList extends React.Component {
 
     render() {
         // Rendu de la liste des contacts
-        const messages = this.state.contacts
+        const messages = this.props.contacts
         const list = []
 
         messages.forEach(el => {

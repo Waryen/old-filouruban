@@ -5,8 +5,6 @@ class MessageList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            messages: [],
-            admins: [],
             newTitle: '',
             newContent: '',
             newActive: false,
@@ -21,15 +19,9 @@ class MessageList extends React.Component {
         this.handleCancel = this.handleCancel.bind(this)
     }
 
-    // Récupère la liste des messages et des admins
     componentDidMount() {
         document.querySelector('.message-modify').style.display = 'none'
         document.querySelector('.message-list').style.display = 'block'
-
-        axios.get(`${this.props.url}/api/message?api_token=${this.props.api}`)
-        .then(res => this.setState({ messages: res.data }))
-        axios.get(`${this.props.url}/api/admin?api_token=${this.props.api}`)
-        .then(res => this.setState({ admins: res.data }))
     }
 
     // Récupère les données du formulaire de modification
@@ -85,16 +77,22 @@ class MessageList extends React.Component {
     handleModify(e) {
         e.preventDefault()
         const id = this.state.messageId
-        axios.patch(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`, {
+        const data = {
             title: this.state.newTitle,
             content: this.state.newContent,
             active: this.state.newActive
+        }
+        axios.patch(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`, data)
+        .then(response => {
+            if(response.status == 200) {
+                this.props.update()
+                alert('Message modifié !')
+            } else {
+                alert('Erreur réseau')
+            }
         })
         this.handleCancel(e)
         this.componentDidMount()
-
-        document.querySelector('.message-modify').style.display = 'none'
-        document.querySelector('.message-list').style.display = 'block'
     }
 
     // Supprime le message
@@ -103,14 +101,22 @@ class MessageList extends React.Component {
         if(confirm('Voulez-vous vraiment supprimer ce message ? Cette action est irréversible')) {
             const id = e.target.value
             axios.delete(`${this.props.url}/api/message/${id}?api_token=${this.props.api}`)
+            .then(response => {
+                if(response.status == 200) {
+                    this.props.update()
+                    alert('Message supprimé !')
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
             this.componentDidMount()
         }
     }
 
     render() {
         // Rendu de la liste des messages
-        const messages = this.state.messages
-        const admins = this.state.admins
+        const messages = this.props.messages
+        const admins = this.props.admins
         const auth = JSON.parse(this.props.auth)
         const adminId = auth.id
         const adminSu = auth.su

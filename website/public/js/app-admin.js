@@ -4893,7 +4893,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var CommentaryList = /*#__PURE__*/function (_React$Component) {
   _inherits(CommentaryList, _React$Component);
 
@@ -4912,26 +4911,9 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
     _this.setId = _this.setId.bind(_assertThisInitialized(_this));
     _this.deleteCommentary = _this.deleteCommentary.bind(_assertThisInitialized(_this));
     return _this;
-  } // Récupération de la liste des commentaires et des articles
-
+  }
 
   _createClass(CommentaryList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api)).then(function (res) {
-        _this2.setState({
-          commentaries: res.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (res) {
-        _this2.setState({
-          articles: res.data
-        });
-      });
-    }
-  }, {
     key: "setId",
     value: function setId(catId, artId) {
       sessionStorage.setItem('catId', catId);
@@ -4941,12 +4923,21 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteCommentary",
     value: function deleteCommentary(e) {
+      var _this2 = this;
+
       e.preventDefault();
 
       if (confirm('Voulez-vous vraiment supprimer ce commentaire ? Cette action est irréversible')) {
         var id = e.target.value;
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/commentary/").concat(id, "?api_token=").concat(this.props.api));
-        this.componentDidMount();
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/commentary/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            _this2.props.update();
+
+            alert('Commentaire supprimé !');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
       }
     }
   }, {
@@ -4955,8 +4946,8 @@ var CommentaryList = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var list = [];
-      var commentaries = this.state.commentaries;
-      var articles = this.state.articles; // Rendu de la liste des commentaires
+      var commentaries = this.props.commentaries;
+      var articles = this.props.articles; // Rendu de la liste des commentaires
 
       commentaries.forEach(function (el) {
         var articleName;
@@ -5031,24 +5022,120 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Commentaire)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _commentaire_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./commentaire-list */ "./resources/js/components/admin/commentaire-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _commentaire_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./commentaire-list */ "./resources/js/components/admin/commentaire-list.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
-function Commentaire(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "admin-commentary",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-      children: "Commentaires"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_commentaire_list__WEBPACK_IMPORTED_MODULE_1__.default, {
-      url: props.url,
-      api: props.api
-    })]
-  });
-}
+
+
+
+var Commentaire = /*#__PURE__*/function (_React$Component) {
+  _inherits(Commentaire, _React$Component);
+
+  var _super = _createSuper(Commentaire);
+
+  function Commentaire(props) {
+    var _this;
+
+    _classCallCheck(this, Commentaire);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      commentaries: [],
+      articles: []
+    };
+    _this.getArticles = _this.getArticles.bind(_assertThisInitialized(_this));
+    _this.getCommentaries = _this.getCommentaries.bind(_assertThisInitialized(_this));
+    _this.updateData = _this.updateData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Commentaire, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getArticles();
+      this.getCommentaries();
+    }
+  }, {
+    key: "getCommentaries",
+    value: function getCommentaries() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/commentary?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            commentaries: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "getArticles",
+    value: function getArticles() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this3.setState({
+            articles: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData() {
+      this.getArticles();
+      this.getCommentaries();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "admin-commentary",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: "Commentaires"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_commentaire_list__WEBPACK_IMPORTED_MODULE_2__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          articles: this.state.articles,
+          commentaries: this.state.commentaries,
+          update: this.updateData
+        })]
+      });
+    }
+  }]);
+
+  return Commentaire;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
 
 /***/ }),
 
@@ -5105,34 +5192,28 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ContactList);
 
     _this = _super.call(this, props);
-    _this.state = {
-      contacts: []
-    };
     _this.deleteContact = _this.deleteContact.bind(_assertThisInitialized(_this));
     return _this;
-  } // Récupère la liste des contacts
-
+  }
 
   _createClass(ContactList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api)).then(function (res) {
-        _this2.setState({
-          contacts: res.data
-        });
-      });
-    }
-  }, {
     key: "deleteContact",
     value: function deleteContact(e) {
+      var _this2 = this;
+
       e.preventDefault();
 
       if (confirm('Voulez-vous vraiment supprimer ce contact ? Cette action est irréversible')) {
         var id = e.target.value;
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/contact/").concat(id, "?api_token=").concat(this.props.api));
-        this.componentDidMount();
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/contact/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            _this2.props.update();
+
+            alert('Contact supprimé !');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
       }
     } // Ajoute des sauts de ligne dans le contenu du message
 
@@ -5156,7 +5237,7 @@ var ContactList = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       // Rendu de la liste des contacts
-      var messages = this.state.contacts;
+      var messages = this.props.contacts;
       var list = [];
       messages.forEach(function (el) {
         var desc = _this3.divide(String(el.content));
@@ -5211,24 +5292,102 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Contact)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _contact_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contact-list */ "./resources/js/components/admin/contact-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _contact_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./contact-list */ "./resources/js/components/admin/contact-list.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
-function Contact(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "admin-contact",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-      children: "Contact"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_contact_list__WEBPACK_IMPORTED_MODULE_1__.default, {
-      url: props.url,
-      api: props.api
-    })]
-  });
-}
+
+
+
+var Contact = /*#__PURE__*/function (_React$Component) {
+  _inherits(Contact, _React$Component);
+
+  var _super = _createSuper(Contact);
+
+  function Contact(props) {
+    var _this;
+
+    _classCallCheck(this, Contact);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      contacts: []
+    };
+    _this.getContacts = _this.getContacts.bind(_assertThisInitialized(_this));
+    _this.updateData = _this.updateData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Contact, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getContacts();
+    }
+  }, {
+    key: "getContacts",
+    value: function getContacts() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/contact?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            contacts: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData() {
+      this.getContacts();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "admin-contact",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: "Contact"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_contact_list__WEBPACK_IMPORTED_MODULE_2__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          contacts: this.state.contacts,
+          update: this.updateData
+        })]
+      });
+    }
+  }]);
+
+  return Contact;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
 
 /***/ }),
 
@@ -5543,12 +5702,23 @@ var MessageCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api), {
+      var data = {
         title: this.state.title,
         content: this.state.content,
         active: this.state.active,
         admins_id: this.state.adminId
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api), data).then(function (response) {
+        if (response.status == 200) {
+          _this2.props.update();
+
+          alert('Message créé !');
+        } else {
+          alert('Erreur réseau');
+        }
       });
       this.handleCancel(e);
     }
@@ -5679,8 +5849,6 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      messages: [],
-      admins: [],
       newTitle: '',
       newContent: '',
       newActive: false,
@@ -5693,39 +5861,26 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     _this.handleModify = _this.handleModify.bind(_assertThisInitialized(_this));
     _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
     return _this;
-  } // Récupère la liste des messages et des admins
-
+  }
 
   _createClass(MessageList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       document.querySelector('.message-modify').style.display = 'none';
       document.querySelector('.message-list').style.display = 'block';
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api)).then(function (res) {
-        return _this2.setState({
-          messages: res.data
-        });
-      });
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api)).then(function (res) {
-        return _this2.setState({
-          admins: res.data
-        });
-      });
     } // Récupère les données du formulaire de modification
 
   }, {
     key: "modifyMessage",
     value: function modifyMessage(e) {
-      var _this3 = this;
+      var _this2 = this;
 
       e.preventDefault();
       document.querySelector('.message-modify').style.display = 'block';
       document.querySelector('.message-list').style.display = 'none';
       var id = e.target.value;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api)).then(function (res) {
-        _this3.setState({
+        _this2.setState({
           newTitle: res.data.title,
           newContent: res.data.content,
           newActive: res.data.active,
@@ -5775,38 +5930,57 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleModify",
     value: function handleModify(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var id = this.state.messageId;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api), {
+      var data = {
         title: this.state.newTitle,
         content: this.state.newContent,
         active: this.state.newActive
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api), data).then(function (response) {
+        if (response.status == 200) {
+          _this3.props.update();
+
+          alert('Message modifié !');
+        } else {
+          alert('Erreur réseau');
+        }
       });
       this.handleCancel(e);
       this.componentDidMount();
-      document.querySelector('.message-modify').style.display = 'none';
-      document.querySelector('.message-list').style.display = 'block';
     } // Supprime le message
 
   }, {
     key: "deleteMessage",
     value: function deleteMessage(e) {
+      var _this4 = this;
+
       e.preventDefault();
 
       if (confirm('Voulez-vous vraiment supprimer ce message ? Cette action est irréversible')) {
         var id = e.target.value;
-        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api));
+        axios__WEBPACK_IMPORTED_MODULE_0___default().delete("".concat(this.props.url, "/api/message/").concat(id, "?api_token=").concat(this.props.api)).then(function (response) {
+          if (response.status == 200) {
+            _this4.props.update();
+
+            alert('Message supprimé !');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
         this.componentDidMount();
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       // Rendu de la liste des messages
-      var messages = this.state.messages;
-      var admins = this.state.admins;
+      var messages = this.props.messages;
+      var admins = this.props.admins;
       var auth = JSON.parse(this.props.auth);
       var adminId = auth.id;
       var adminSu = auth.su;
@@ -5849,12 +6023,12 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 className: "modify",
                 value: el.id,
-                onClick: _this4.modifyMessage,
+                onClick: _this5.modifyMessage,
                 children: "Modifer"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 className: "delete",
                 value: el.id,
-                onClick: _this4.deleteMessage,
+                onClick: _this5.deleteMessage,
                 children: "Supprimer"
               })]
             })]
@@ -5888,12 +6062,12 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 className: "modify",
                 value: el.id,
-                onClick: _this4.modifyMessage,
+                onClick: _this5.modifyMessage,
                 children: "Modifer"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                 className: "delete",
                 value: el.id,
-                onClick: _this4.deleteMessage,
+                onClick: _this5.deleteMessage,
                 children: "Supprimer"
               })]
             })]
@@ -6025,31 +6199,128 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Message)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _message_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message-create */ "./resources/js/components/admin/message-create.jsx");
-/* harmony import */ var _message_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message-list */ "./resources/js/components/admin/message-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _message_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message-create */ "./resources/js/components/admin/message-create.jsx");
+/* harmony import */ var _message_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message-list */ "./resources/js/components/admin/message-list.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
-function Message(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "admin-message",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-      children: "Messages"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_message_create__WEBPACK_IMPORTED_MODULE_1__.default, {
-      url: props.url,
-      api: props.api,
-      auth: props.auth
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_message_list__WEBPACK_IMPORTED_MODULE_2__.default, {
-      url: props.url,
-      api: props.api,
-      auth: props.auth
-    })]
-  });
-}
+
+
+
+var Message = /*#__PURE__*/function (_React$Component) {
+  _inherits(Message, _React$Component);
+
+  var _super = _createSuper(Message);
+
+  function Message(props) {
+    var _this;
+
+    _classCallCheck(this, Message);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      messages: [],
+      admins: []
+    };
+    _this.getAdmins = _this.getAdmins.bind(_assertThisInitialized(_this));
+    _this.getMessage = _this.getMessage.bind(_assertThisInitialized(_this));
+    _this.updateData = _this.updateData.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Message, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getAdmins();
+      this.getMessage();
+    }
+  }, {
+    key: "getAdmins",
+    value: function getAdmins() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this2.setState({
+            admins: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "getMessage",
+    value: function getMessage() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(this.props.url, "/api/message?api_token=").concat(this.props.api)).then(function (response) {
+        if (response.status == 200) {
+          _this3.setState({
+            messages: response.data
+          });
+        }
+      });
+    }
+  }, {
+    key: "updateData",
+    value: function updateData() {
+      this.getAdmins();
+      this.getMessage();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "admin-message",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          children: "Messages"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_message_create__WEBPACK_IMPORTED_MODULE_2__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          update: this.updateData
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_message_list__WEBPACK_IMPORTED_MODULE_3__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          messages: this.state.messages,
+          admins: this.state.admins,
+          update: this.updateData
+        })]
+      });
+    }
+  }]);
+
+  return Message;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
 
 /***/ }),
 

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React from 'react'
-import {Link} from 'react-router-dom'
 
 class CommentaryList extends React.Component {
     constructor(props) {
@@ -14,18 +13,6 @@ class CommentaryList extends React.Component {
         this.deleteCommentary = this.deleteCommentary.bind(this)
     }
 
-    // Récupération de la liste des commentaires et des articles
-    componentDidMount() {
-        axios.get(`${this.props.url}/api/commentary?api_token=${this.props.api}`)
-            .then(res => {
-                this.setState({ commentaries: res.data })
-            })
-            axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
-            .then(res => {
-                this.setState({ articles: res.data })
-            })
-    }
-
     setId(catId, artId) {
         sessionStorage.setItem('catId', catId)
         sessionStorage.setItem('artId', artId)
@@ -37,14 +24,21 @@ class CommentaryList extends React.Component {
         if(confirm('Voulez-vous vraiment supprimer ce commentaire ? Cette action est irréversible')) {
             const id = e.target.value
             axios.delete(`${this.props.url}/api/commentary/${id}?api_token=${this.props.api}`)
-            this.componentDidMount()
+            .then(response => {
+                if(response.status == 200) {
+                    this.props.update()
+                    alert('Commentaire supprimé !')
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
         }
     }
 
     render() {
         const list = []
-        const commentaries = this.state.commentaries
-        const articles = this.state.articles
+        const commentaries = this.props.commentaries
+        const articles = this.props.articles
 
         // Rendu de la liste des commentaires
         commentaries.forEach(el => {
