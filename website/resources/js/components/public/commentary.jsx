@@ -92,8 +92,9 @@ class Commentary extends React.Component {
                     if(response.status == 200 && response.data == 1) {
                         this.componentDidMount()
                         this.setState({ submited: true })
+                        alert('Votre commentaire a été envoyé !')
                     } else {
-                        alert("Impossible d'envoyer votre commentaire pour le moment.")
+                        alert("Erreur réseau")
                     }
                 })
             }
@@ -121,19 +122,19 @@ class Commentary extends React.Component {
                 )
             })
         } else {
-            renderList = <p>Il n'y pas encore de commentaires</p>
+            renderList = <p className="empty">Il n'y pas encore de commentaires, soyez-le premier !</p>
         }
 
         return(
             <div className="com-card">
                 <div className="com-list">
-                    <h3>Avis des internautes</h3>
+                    <h3>Commentaires des internautes</h3>
                     <ul>
                         {renderList}
                     </ul>
                 </div>
                 <div className="com-create">
-                    <h3>Donner votre avis</h3>
+                    <h3>Donner votre commentaires</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="com-firstname">
                             <label htmlFor="com-firstname">Votre prénom: </label>

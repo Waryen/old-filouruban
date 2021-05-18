@@ -1045,6 +1045,11 @@ th {
   align-items: center;
   padding: 20px;
 }
+#react-article .article .com-card .empty {
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+  color: #e29578;
+}
 #react-article .article .com-card .com-list {
   display: flex;
   flex-direction: column;

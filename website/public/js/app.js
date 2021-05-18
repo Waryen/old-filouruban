@@ -3091,8 +3091,10 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
               _this3.setState({
                 submited: true
               });
+
+              alert('Votre commentaire a été envoyé !');
             } else {
-              alert("Impossible d'envoyer votre commentaire pour le moment.");
+              alert("Erreur réseau");
             }
           });
         }
@@ -3130,7 +3132,8 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
         });
       } else {
         renderList = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-          children: "Il n'y pas encore de commentaires"
+          className: "empty",
+          children: "Il n'y pas encore de commentaires, soyez-le premier !"
         });
       }
 
@@ -3139,14 +3142,14 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "com-list",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
-            children: "Avis des internautes"
+            children: "Commentaires des internautes"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("ul", {
             children: renderList
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "com-create",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
-            children: "Donner votre avis"
+            children: "Donner votre commentaires"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("form", {
             onSubmit: this.handleSubmit,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
