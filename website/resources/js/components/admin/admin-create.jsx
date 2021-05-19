@@ -59,9 +59,11 @@ class AdminCreate extends React.Component {
 
         axios.post(`${this.props.url}/api/admin?api_token=${this.props.api}`, data)
         .then(response => {
-            if(response.status == 200) {
+            if(response.status == 200 && response.data == 'ok') {
                 this.props.update()
                 alert('Administrateur créé !')
+            } else if(response.status == 200 && response.data == 'nok') {
+                alert('Erreur réseau')
             } else {
                 alert('Erreur réseau')
             }

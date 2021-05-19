@@ -28,7 +28,21 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        Admin::create($request->all());
+        $password = Hash::make($request->password);
+        $data = [
+            'api_token' => $request->api_token,
+            'email' => $request->email,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'password' => $password,
+            'su' => $request->su,
+        ];
+        
+        if(Admin::create($data)) {
+            return 'ok';
+        } else {
+            return 'nok';
+        }
     }
 
     /**

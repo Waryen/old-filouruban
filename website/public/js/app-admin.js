@@ -2448,10 +2448,12 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
         api_token: this.state.api
       };
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api), data).then(function (response) {
-        if (response.status == 200) {
+        if (response.status == 200 && response.data == 'ok') {
           _this2.props.update();
 
           alert('Administrateur créé !');
+        } else if (response.status == 200 && response.data == 'nok') {
+          alert('Erreur réseau');
         } else {
           alert('Erreur réseau');
         }

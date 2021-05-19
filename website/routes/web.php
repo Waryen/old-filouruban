@@ -57,11 +57,17 @@ Route::get('legal', function() {
     return view('legal');
 })->name('legal');
 
+
+
+
 // Images
 Route::post('uploadArticleImage', [ImageController::class, 'uploadArticle']);
 Route::post('uploadCategoryImage', [ImageController::class, 'uploadCategory']);
 Route::post('deleteArticleImage', [ImageController::class, 'deleteArticle']);
 Route::post('deleteCategoryImage', [ImageController::class, 'deleteCategory']);
+
+
+
 
 // Admin
 Route::get('admin', function() {
@@ -75,9 +81,15 @@ Route::get('login', function() {
     return view('login');
 })->name('login');
 
+
+
+
 // Administration
 Route::post('login-check', [LoginController::class, 'authenticate']);
 Route::post('logout', [LogoutController::class, 'logout']);
+
+
+
 
 // Password reset
 Route::get('/forgot-password', function () {
@@ -109,14 +121,14 @@ Route::post('/reset-password', function (Request $request) {
 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
-        function ($admin, $password) use ($request) {
-            $admin->forceFill([
+        function ($user, $password) use ($request) {
+            $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
 
-            $admin->save();
+            $user->save();
 
-            event(new PasswordReset($admin));
+            event(new PasswordReset($user));
         }
     );
 

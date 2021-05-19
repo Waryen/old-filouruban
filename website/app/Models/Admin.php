@@ -32,18 +32,6 @@ class Admin extends Authenticatable
     ];
 
     /*
-    *   Crypte les mots de passe
-    */
-
-    public function setPasswordAttribute($password) {
-        if(trim($password) === '') {
-            return;
-        }
-
-        $this->attributes['password'] = Hash::make($password);
-    }
-
-    /*
     *   Relations avec les tables Articles et Messages
     */
 
