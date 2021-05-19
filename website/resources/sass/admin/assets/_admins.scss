@@ -113,6 +113,15 @@
                 width: 300px;
             }
 
+            #pwd-check {
+                justify-content: center;
+                font-family: $roboto;
+                font-size: 0.9em;
+                color: $peach;
+                font-style: italic;
+                text-align: center;
+            }
+
             div {
                 display: flex;
                 justify-content: space-between;

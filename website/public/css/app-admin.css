@@ -447,6 +447,14 @@ th {
     width: 300px;
   }
 }
+.admin-admins .admins-create form #pwd-check {
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #e29578;
+  font-style: italic;
+  text-align: center;
+}
 .admin-admins .admins-create form div {
   display: flex;
   justify-content: space-between;

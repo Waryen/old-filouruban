@@ -83,6 +83,23 @@ class AdminCreate extends React.Component {
         }
     }
 
+    // Vérification du mot de passe
+    pwdCheck() {
+        let pwd = document.querySelector('#password')
+        let pwdConf = document.querySelector('#password-confirmation')
+        let btn = document.querySelector('#btn-submit')
+        let check = document.querySelector('#pwd-check')
+        check.style.display = 'none'
+
+        if(pwd.value != pwdConf.value) {
+            check.style.display = 'block'
+            btn.disabled = true
+        } else {
+            check.style.display = 'none'
+            btn.disabled = false
+        }
+    }
+
     render() {
         let form
         let auth = JSON.parse(this.props.auth)
@@ -103,12 +120,19 @@ class AdminCreate extends React.Component {
                 </div>
                 <div>
                     <label htmlFor="password">Mot de passe: </label>
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+                    <input type="password" name="password" id="password" value={this.state.password} onKeyUp={this.pwdCheck} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="password-confirmation">Confirmez le mot de passe</label>
+                    <input type="password" name="password-confirmation" id="password-confirmation" onKeyUp={this.pwdCheck} required />
                 </div>
                 <input type="hidden" name="api" value={this.state.api} />
                 <input type="hidden" name="su" value="0" />
+                <div id="pwd-check">
+                    <p >Les mots de passes ne sont pas identiques !</p>
+                </div>
                 <div>
-                    <button type="submit">Créer</button>
+                    <button type="submit" id="btn-submit">Créer</button>
                 </div>
             </form>
         } else if (auth.su == 1) {
@@ -127,7 +151,11 @@ class AdminCreate extends React.Component {
                 </div>
                 <div>
                     <label htmlFor="password">Mot de passe: </label>
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
+                    <input type="password" name="password" id="password" value={this.state.password} onKeyUp={this.pwdCheck} onChange={this.handleChange} required />
+                </div>
+                <div>
+                    <label htmlFor="password-confirmation">Confirmez le mot de passe</label>
+                    <input type="password" name="password-confirmation" id="password-confirmation" onKeyUp={this.pwdCheck} required />
                 </div>
                 <div>
                     <label htmlFor="admin-create-su">Super Administrateur: </label>
@@ -135,7 +163,10 @@ class AdminCreate extends React.Component {
                 </div>
                 <input type="hidden" name="api" value={this.state.api} />
                 <div>
-                    <button type="submit">Créer</button>
+                    <p id="pwd-check">Les mots de passes ne sont pas identiques !</p>
+                </div>
+                <div>
+                    <button type="submit" id="btn-submit">Créer</button>
                 </div>
             </form>
         }

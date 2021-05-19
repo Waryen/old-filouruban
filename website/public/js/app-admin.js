@@ -2470,6 +2470,24 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
       if (document.querySelector('#admin-create-su')) {
         document.querySelector('#admin-create-su').checked = false;
       }
+    } // Vérification du mot de passe
+
+  }, {
+    key: "pwdCheck",
+    value: function pwdCheck() {
+      var pwd = document.querySelector('#password');
+      var pwdConf = document.querySelector('#password-confirmation');
+      var btn = document.querySelector('#btn-submit');
+      var check = document.querySelector('#pwd-check');
+      check.style.display = 'none';
+
+      if (pwd.value != pwdConf.value) {
+        check.style.display = 'block';
+        btn.disabled = true;
+      } else {
+        check.style.display = 'none';
+        btn.disabled = false;
+      }
     }
   }, {
     key: "render",
@@ -2521,8 +2539,21 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "password",
               name: "password",
+              id: "password",
               value: this.state.password,
+              onKeyUp: this.pwdCheck,
               onChange: this.handleChange,
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "password-confirmation",
+              children: "Confirmez le mot de passe"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "password",
+              name: "password-confirmation",
+              id: "password-confirmation",
+              onKeyUp: this.pwdCheck,
               required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
@@ -2534,8 +2565,14 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             name: "su",
             value: "0"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            id: "pwd-check",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: "Les mots de passes ne sont pas identiques !"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               type: "submit",
+              id: "btn-submit",
               children: "Cr\xE9er"
             })
           })]
@@ -2584,8 +2621,21 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "password",
               name: "password",
+              id: "password",
               value: this.state.password,
+              onKeyUp: this.pwdCheck,
               onChange: this.handleChange,
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "password-confirmation",
+              children: "Confirmez le mot de passe"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "password",
+              name: "password-confirmation",
+              id: "password-confirmation",
+              onKeyUp: this.pwdCheck,
               required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -2604,8 +2654,14 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             name: "api",
             value: this.state.api
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              id: "pwd-check",
+              children: "Les mots de passes ne sont pas identiques !"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               type: "submit",
+              id: "btn-submit",
               children: "Cr\xE9er"
             })
           })]
