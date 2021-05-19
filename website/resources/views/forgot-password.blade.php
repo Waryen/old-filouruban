@@ -7,7 +7,6 @@
 @section('body')
     <div class="password-reset">
         <h1>Réinitialiser mon mot de passe</h1>
-        <p><a href="/">Revenir vers le site</a></p>
         <form action="/forgot-password" method="post">
             @csrf
             <div class="email">
@@ -18,16 +17,6 @@
                 <button type="submit">Envoyer</button>
             </div>
         </form>
-        <p>Vous recevrez un lien pour réinitialiser votre mot de passe dans votre boîte de réception</p>
+        <p class="email-infos">Vous recevrez un lien pour réinitialiser votre mot de passe dans votre boîte de réception.</p>
     </div>
-    @if ($status ?? '')
-        @php
-            var_dump($status);
-        @endphp
-    @endif
-    @if ($email ?? '')
-        @php
-            var_dump($email);
-        @endphp
-    @endif
 @endsection

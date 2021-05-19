@@ -24,6 +24,18 @@
         justify-content: center;
         align-items: center;
 
+        .forgot-password a {
+            text-decoration: none;
+            font-family: $roboto;
+            color: teal;
+            font-size: 0.9em;
+            transition: all .15s;
+
+            &:hover, &:focus {
+                color: lighten($teal, 10%);
+            }
+        }
+
         div:not(:last-child) {
             margin-bottom: 10px;
         }

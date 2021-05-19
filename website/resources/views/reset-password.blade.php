@@ -7,7 +7,6 @@
 @section('body')
     <div class="password-reset">
         <h1>Réinitialiser mon mot de passe</h1>
-        <p><a href="/">Revenir vers le site</a></p>
         <form action="/reset-password" method="post">
             @csrf
             <div class="email">
