@@ -2654,8 +2654,8 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             name: "api",
             value: this.state.api
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            id: "pwd-check",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-              id: "pwd-check",
               children: "Les mots de passes ne sont pas identiques !"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {

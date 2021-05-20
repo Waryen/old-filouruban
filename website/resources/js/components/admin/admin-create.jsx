@@ -162,8 +162,8 @@ class AdminCreate extends React.Component {
                     <input type="checkbox" name="su" id="admin-create-su" value={this.state.su} onClick={this.handleCheckBox} />
                 </div>
                 <input type="hidden" name="api" value={this.state.api} />
-                <div>
-                    <p id="pwd-check">Les mots de passes ne sont pas identiques !</p>
+                <div id="pwd-check">
+                    <p>Les mots de passes ne sont pas identiques !</p>
                 </div>
                 <div>
                     <button type="submit" id="btn-submit">Créer</button>
