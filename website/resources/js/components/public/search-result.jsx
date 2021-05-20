@@ -65,22 +65,33 @@ export default class SearchResult extends React.Component {
                 )
             })
         } else {
-            list = <p className="error">Il n'existe aucun article portant ce nom:<br></br>{search}</p>
+            list = <p className="error">Aucun résultat n'a été trouvé pour: {search}</p>
         }
 
         if(this.state.isLoading) {
-            return(
-                <div className="search-result">
-                    <p className="loading-text">Chargement...</p>
-                    <ul style={{display: 'none'}}>
-                        {list}
-                    </ul>
-                </div>
-            )
+            if(filtre.length == 0) {
+                return(
+                    <div className="search-result">
+                        <h2>Résultats de votre recherche pour: {search}</h2>
+                        <ul>
+                            {list}
+                        </ul>
+                    </div>
+                )
+            } else {
+                return(
+                    <div className="search-result">
+                        <p className="loading-text">Chargement...</p>
+                        <ul style={{display: 'none'}}>
+                            {list}
+                        </ul>
+                    </div>
+                )
+            }
         } else {
             return(
                 <div className="search-result">
-                    <h2>Résultats de votre recherche</h2>
+                    <h2>Résultats de votre recherche pour: {search}</h2>
                     <ul>
                         {list}
                     </ul>
