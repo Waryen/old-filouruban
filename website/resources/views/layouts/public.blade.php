@@ -8,7 +8,6 @@
     <meta name="copyright" content="Filouruban">
     <meta name="description" content="Filouruban est une marque de produits artisanales fabriqués en Belgique et 100% éco-responsable !">
     <meta name="keywords" content="filouruban, artisanat, couture, belgique, wavre, bio, éco-responsable">
-    <meta name="robots" content="noindex,nofollow"> <!-- Empêche l'indexation par les moteurs de recherche -->
     <meta name="token" id="token" content="{{ csrf_token() }}">
     <meta name="url" id="url" content="{{ env('APP_URL') }}">
     <!-- FAVICON -->
@@ -85,6 +84,24 @@
     @yield('body')
     </main>
     @include('layouts.public.footer')
+    <a href="javascript:" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 </div>
+<!-- Back to top -->
+<script>
+    let arrow = document.querySelector('.back-to-top')
+    arrow.style.display = 'none'
+
+    window.addEventListener('scroll', function() {
+        if(window.scrollY >= 100) {
+            arrow.style.display = 'flex'
+        } else {
+            arrow.style.display = 'none'
+        }
+    })
+
+    arrow.addEventListener('click', function() {
+        window.scrollTo(0, 0)
+    })
+</script>
 </body>
 </html>

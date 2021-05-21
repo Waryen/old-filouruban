@@ -51,3 +51,33 @@ main {
         }
     }
 }
+
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: $teal;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: $silver;
+    transition: all .15s;
+
+    &:hover, &:focus {
+        background: darken($teal, 10%);
+
+        i {
+            transform: translateY(-10px);
+        }
+    }
+
+    i {
+        font-size: 1.5em;
+        transition: all .15s;
+    }
+}

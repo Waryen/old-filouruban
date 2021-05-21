@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="robots" content="noindex"> <!-- Empêche l'indexation par les moteurs de recherche -->
     <meta name="token" id="token" content="{{ csrf_token() }}">
     <meta name="url" id="url" content="{{ env('APP_URL') }}">
     <meta name="auth" id="auth" content="{{ Auth::user() }}">
@@ -30,6 +29,24 @@
     @yield('body')
     </main>
     @include('layouts.admin.footer')
+    <a href="javascript:" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 </div>
+<!-- Back to top -->
+<script>
+    let arrow = document.querySelector('.back-to-top')
+    arrow.style.display = 'none'
+
+    window.addEventListener('scroll', function() {
+        if(window.scrollY >= 100) {
+            arrow.style.display = 'flex'
+        } else {
+            arrow.style.display = 'none'
+        }
+    })
+
+    arrow.addEventListener('click', function() {
+        window.scrollTo(0, 0)
+    })
+</script>
 </body>
 </html>

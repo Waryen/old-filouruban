@@ -134,7 +134,7 @@ class Commentary extends React.Component {
                     </ul>
                 </div>
                 <div className="com-create">
-                    <h3>Donner votre commentaires</h3>
+                    <h3>Donner votre commentaire</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="com-firstname">
                             <label htmlFor="com-firstname">Votre prénom: </label>
