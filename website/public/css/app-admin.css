@@ -435,59 +435,57 @@ th {
   cursor: pointer;
   background: #d9744e;
 }
-.admin-admins .admins-create {
+.admin-admins .admins-create, .admin-admins .admins-modify {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 }
-.admin-admins .admins-create h3 {
+.admin-admins .admins-create h3, .admin-admins .admins-modify h3 {
   font-family: "Lato", sans-serif;
   color: black;
   font-size: 1.3em;
   margin-bottom: 10px;
 }
-.admin-admins .admins-create form {
+.admin-admins .admins-create form, .admin-admins .admins-modify form {
   background: #ffddd2;
   border-radius: 10px;
   padding: 20px;
-  width: 400px;
+  width: 500px;
 }
 @media screen and (max-width: 768px) {
-  .admin-admins .admins-create form {
+  .admin-admins .admins-create form, .admin-admins .admins-modify form {
     width: 300px;
   }
 }
-.admin-admins .admins-create form #pwd-check {
-  justify-content: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.9em;
-  color: #e29578;
-  font-style: italic;
-  text-align: center;
-}
-.admin-admins .admins-create form div {
+.admin-admins .admins-create form div, .admin-admins .admins-modify form div {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 @media screen and (max-width: 768px) {
-  .admin-admins .admins-create form div {
+  .admin-admins .admins-create form div, .admin-admins .admins-modify form div {
     flex-direction: column;
   }
 }
-.admin-admins .admins-create form div:last-child {
+.admin-admins .admins-create form div:last-child, .admin-admins .admins-modify form div:last-child {
   justify-content: center;
   margin-top: 20px;
 }
-.admin-admins .admins-create form div:not(:last-child) {
+.admin-admins .admins-create form div:not(:last-child), .admin-admins .admins-modify form div:not(:last-child) {
   margin-bottom: 10px;
 }
-.admin-admins .admins-create form label {
+.admin-admins .admins-create form label, .admin-admins .admins-modify form label {
   font-family: "Roboto", sans-serif;
   font-size: 1.1em;
   color: #000000;
 }
-.admin-admins .admins-create form input {
+@media screen and (max-width: 768px) {
+  .admin-admins .admins-create form label, .admin-admins .admins-modify form label {
+    text-align: center;
+  }
+}
+.admin-admins .admins-create form input, .admin-admins .admins-modify form input {
   font-family: "Roboto", sans-serif;
   font-size: 0.9em;
   color: #000000;
@@ -496,11 +494,7 @@ th {
   padding: 5px;
   width: 200px;
 }
-.admin-admins .admins-create form input#admin-create-su {
-  margin: 0 auto;
-  width: auto;
-}
-.admin-admins .admins-create form button {
+.admin-admins .admins-create form button, .admin-admins .admins-modify form button {
   font-family: "Roboto", sans-serif;
   font-size: 1.1em;
   background: #e29578;
@@ -508,9 +502,25 @@ th {
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  transition: all 0.15s;
+  transition: background 0.15s;
+  margin-right: 10px;
 }
-.admin-admins .admins-create form button:hover, .admin-admins .admins-create form button:focus {
+@media screen and (max-width: 768px) {
+  .admin-admins .admins-create form button, .admin-admins .admins-modify form button {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+.admin-admins .admins-create form button:last-child, .admin-admins .admins-modify form button:last-child {
+  margin-right: 0;
+  margin-left: 10px;
+}
+@media screen and (max-width: 768px) {
+  .admin-admins .admins-create form button:last-child, .admin-admins .admins-modify form button:last-child {
+    margin: 0;
+  }
+}
+.admin-admins .admins-create form button:hover, .admin-admins .admins-create form button:focus, .admin-admins .admins-modify form button:hover, .admin-admins .admins-modify form button:focus {
   cursor: pointer;
   background: #d9744e;
 }

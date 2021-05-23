@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import AdminCreate from './admin-create'
 import AdminList from './admin-list'
+import AdminModify from './admin-modify'
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -36,6 +37,7 @@ export default class Admin extends React.Component {
             <div className="admin-admins">
                 <h2>Administrateurs</h2>
                 <AdminCreate url={this.props.url} api={this.props.api} auth={this.props.auth} update={this.updateData} />
+                <AdminModify url={this.props.url} api={this.props.api} auth={this.props.auth} update={this.updateData} />
                 <AdminList url={this.props.url} api={this.props.api} auth={this.props.auth} update={this.updateData} admins={this.state.admins} />
             </div>
         )

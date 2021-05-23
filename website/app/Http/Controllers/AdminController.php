@@ -65,7 +65,19 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-        $admin->update($request->all());
+        $password = Hash::make($request->password);
+        $data = [
+            'email' => $request->email,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'password' => $password,
+        ];
+
+        if($admin->update($data)) {
+            return 'ok';
+        } else {
+            return 'nok';
+        }
     }
 
     /**

@@ -91,10 +91,11 @@
         }
     }
 
-    .admins-create {
+    .admins-create, .admins-modify {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 30px;
 
         h3 {
             font-family: $lato;
@@ -107,19 +108,10 @@
             background: $light-peach;
             border-radius: 10px;
             padding: 20px;
-            width: 400px;
+            width: 500px;
 
             @media screen and ($responsive) {
                 width: 300px;
-            }
-
-            #pwd-check {
-                justify-content: center;
-                font-family: $roboto;
-                font-size: 0.9em;
-                color: $peach;
-                font-style: italic;
-                text-align: center;
             }
 
             div {
@@ -145,6 +137,10 @@
                 font-family: $roboto;
                 font-size: 1.1em;
                 color: $black;
+                
+                @media screen and ($responsive) {
+                    text-align: center;
+                }
             }
 
             input {
@@ -155,11 +151,6 @@
                 border-radius: 5px;
                 padding: 5px;
                 width: 200px;
-
-                &#admin-create-su {
-                    margin: 0 auto;
-                    width: auto;
-                }
             }
 
             button {
@@ -170,7 +161,22 @@
                 border: none;
                 border-radius: 5px;
                 padding: 5px 10px;
-                transition: all .15s;
+                transition: background .15s;
+                margin-right: 10px;
+
+                @media screen and ($responsive) {
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                    margin-left: 10px;
+
+                    @media screen and ($responsive) {
+                        margin: 0;
+                    }
+                }
 
                 &:hover, &:focus {
                     cursor: pointer;

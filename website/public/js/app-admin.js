@@ -2387,6 +2387,7 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
       lastname: '',
       email: '',
       password: '',
+      passwordConf: '',
       su: 0,
       api: _this.generateRandomString(100)
     };
@@ -2447,46 +2448,38 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
         su: this.state.su,
         api_token: this.state.api
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api), data).then(function (response) {
-        if (response.status == 200 && response.data == 'ok') {
-          _this2.props.update();
 
-          alert('Administrateur créé !');
-        } else if (response.status == 200 && response.data == 'nok') {
-          alert('Erreur réseau');
-        } else {
-          alert('Erreur réseau');
-        }
-      });
-      this.setState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        su: 0,
-        api: this.generateRandomString(100)
-      });
-
-      if (document.querySelector('#admin-create-su')) {
-        document.querySelector('#admin-create-su').checked = false;
-      }
-    } // Vérification du mot de passe
-
-  }, {
-    key: "pwdCheck",
-    value: function pwdCheck() {
-      var pwd = document.querySelector('#password');
-      var pwdConf = document.querySelector('#password-confirmation');
-      var btn = document.querySelector('#btn-submit');
-      var check = document.querySelector('#pwd-check');
-      check.style.display = 'none';
-
-      if (pwd.value != pwdConf.value) {
-        check.style.display = 'block';
-        btn.disabled = true;
+      if (data.password !== this.state.passwordConf) {
+        alert('Vos mots de passes ne sont pas identiques');
+        this.setState({
+          password: '',
+          passwordConf: ''
+        });
       } else {
-        check.style.display = 'none';
-        btn.disabled = false;
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post("".concat(this.props.url, "/api/admin?api_token=").concat(this.props.api), data).then(function (response) {
+          if (response.status == 200 && response.data == 'ok') {
+            _this2.props.update();
+
+            alert('Administrateur créé !');
+          } else if (response.status == 200 && response.data == 'nok') {
+            alert('Erreur réseau');
+          } else {
+            alert('Erreur réseau');
+          }
+        });
+        this.setState({
+          firstname: '',
+          lastname: '',
+          email: '',
+          password: '',
+          passwordConf: '',
+          su: 0,
+          api: this.generateRandomString(100)
+        });
+
+        if (document.querySelector('#admin-create-su')) {
+          document.querySelector('#admin-create-su').checked = false;
+        }
       }
     }
   }, {
@@ -2551,9 +2544,10 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
               children: "Confirmez le mot de passe"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "password",
-              name: "password-confirmation",
+              name: "passwordConf",
               id: "password-confirmation",
-              onKeyUp: this.pwdCheck,
+              value: this.state.passwordConf,
+              onChange: this.handleChange,
               required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
@@ -2564,11 +2558,6 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             type: "hidden",
             name: "su",
             value: "0"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            id: "pwd-check",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-              children: "Les mots de passes ne sont pas identiques !"
-            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               type: "submit",
@@ -2633,9 +2622,10 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
               children: "Confirmez le mot de passe"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
               type: "password",
-              name: "password-confirmation",
+              name: "passwordConf",
               id: "password-confirmation",
-              onKeyUp: this.pwdCheck,
+              value: this.state.passwordConf,
+              onChange: this.handleChange,
               required: true
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -2653,11 +2643,6 @@ var AdminCreate = /*#__PURE__*/function (_React$Component) {
             type: "hidden",
             name: "api",
             value: this.state.api
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            id: "pwd-check",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-              children: "Les mots de passes ne sont pas identiques !"
-            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               type: "submit",
@@ -3130,6 +3115,248 @@ var AdminLogout = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/admin-modify.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/admin/admin-modify.jsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AdminModify)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var AdminModify = /*#__PURE__*/function (_React$Component) {
+  _inherits(AdminModify, _React$Component);
+
+  var _super = _createSuper(AdminModify);
+
+  function AdminModify(props) {
+    var _this;
+
+    _classCallCheck(this, AdminModify);
+
+    _this = _super.call(this, props);
+    var json = JSON.parse(_this.props.auth);
+    _this.state = {
+      firstname: json.firstname,
+      lastname: json.lastname,
+      email: json.email,
+      password: '',
+      passwordConf: '',
+      send: false
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleCancel = _this.handleCancel.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(AdminModify, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      var name = e.target.name;
+      var value = e.target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleCancel",
+    value: function handleCancel(e) {
+      e.preventDefault();
+      var json = JSON.parse(this.props.auth);
+      this.setState({
+        firstname: json.firstname,
+        lastname: json.lastname,
+        email: json.email,
+        password: '',
+        passwordConf: ''
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var pwdConf = this.state.passwordConf;
+      var id = JSON.parse(this.props.auth);
+      id = id.id;
+      var data = {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        email: this.state.email,
+        password: this.state.password
+      };
+
+      if (this.state.send != true) {
+        if (confirm('Souhaitez-vous vraiment enregistrer vos modifications ?')) {
+          if (data.password !== pwdConf) {
+            alert('Vos mots de passes ne sont pas identiques !');
+            this.handleCancel(e);
+          } else if (data.password.length == 0) {
+            axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api), {
+              firstname: data.firstname,
+              lastname: data.lastname,
+              email: data.email
+            }).then(function (response) {
+              if (response.status == 200 && response.data == 'ok') {
+                alert('Votre profil a bien été modifié');
+
+                _this2.setState({
+                  send: true
+                });
+
+                _this2.props.update();
+              } else {
+                alert('Erreur réseau');
+              }
+            });
+          } else {
+            axios__WEBPACK_IMPORTED_MODULE_0___default().patch("".concat(this.props.url, "/api/admin/").concat(id, "?api_token=").concat(this.props.api), data).then(function (response) {
+              if (response.status == 200 && response.data == 'ok') {
+                alert('Votre profil a bien été modifié');
+
+                _this2.setState({
+                  send: true
+                });
+
+                _this2.props.update();
+              } else {
+                alert('Erreur réseau');
+              }
+            });
+          }
+        } else {
+          this.handleCancel(e);
+        }
+      } else {
+        alert('Veuillez recharger la page afin de pouvoir envoyer à nouveau vos modifications au serveur.');
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "admins-modify",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
+          children: "Modifier votre profil"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+          onSubmit: this.handleSubmit,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "admin-fn",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "admin-fn",
+              children: "Votre pr\xE9nom"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              name: "firstname",
+              id: "admin-fn",
+              value: this.state.firstname,
+              onChange: this.handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "admin-ln",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "admin-ln",
+              children: "Votre nom"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              name: "lastname",
+              id: "admin-ln",
+              value: this.state.lastname,
+              onChange: this.handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "admin-mail",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "admin-mail",
+              children: "Votre adresse e-mail"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "email",
+              name: "email",
+              id: "admin-mail",
+              value: this.state.email,
+              onChange: this.handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "admin-pwd",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "admin-pwd",
+              children: "Votre nouveau mot de passe"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "password",
+              name: "password",
+              id: "admin-pwd",
+              value: this.state.password,
+              onChange: this.handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "admin-pwd-conf",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              htmlFor: "admin-pwd-conf",
+              children: "Confirmez votre nouveau mot de passe"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "password",
+              name: "passwordConf",
+              id: "admin-pwd-conf",
+              value: this.state.passwordConf,
+              onChange: this.handleChange
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "btns",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              onClick: this.handleCancel,
+              children: "Annuler"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              type: "submit",
+              children: "Modifier"
+            })]
+          })]
+        })]
+      });
+    }
+  }]);
+
+  return AdminModify;
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/admin-navigation.jsx":
 /*!************************************************************!*\
   !*** ./resources/js/components/admin/admin-navigation.jsx ***!
@@ -3212,7 +3439,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _admin_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-create */ "./resources/js/components/admin/admin-create.jsx");
 /* harmony import */ var _admin_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./admin-list */ "./resources/js/components/admin/admin-list.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _admin_modify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./admin-modify */ "./resources/js/components/admin/admin-modify.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3234,6 +3462,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -3287,16 +3516,21 @@ var Admin = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "admin-admins",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
           children: "Administrateurs"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_admin_create__WEBPACK_IMPORTED_MODULE_2__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_admin_create__WEBPACK_IMPORTED_MODULE_2__.default, {
           url: this.props.url,
           api: this.props.api,
           auth: this.props.auth,
           update: this.updateData
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_admin_list__WEBPACK_IMPORTED_MODULE_3__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_admin_modify__WEBPACK_IMPORTED_MODULE_4__.default, {
+          url: this.props.url,
+          api: this.props.api,
+          auth: this.props.auth,
+          update: this.updateData
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_admin_list__WEBPACK_IMPORTED_MODULE_3__.default, {
           url: this.props.url,
           api: this.props.api,
           auth: this.props.auth,

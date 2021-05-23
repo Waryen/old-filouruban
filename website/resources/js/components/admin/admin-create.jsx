@@ -9,6 +9,7 @@ class AdminCreate extends React.Component {
             lastname: '',
             email: '',
             password: '',
+            passwordConf: '',
             su: 0,
             api: this.generateRandomString(100),
         }
@@ -57,46 +58,38 @@ class AdminCreate extends React.Component {
             api_token: this.state.api,
         }
 
-        axios.post(`${this.props.url}/api/admin?api_token=${this.props.api}`, data)
-        .then(response => {
-            if(response.status == 200 && response.data == 'ok') {
-                this.props.update()
-                alert('Administrateur créé !')
-            } else if(response.status == 200 && response.data == 'nok') {
-                alert('Erreur réseau')
-            } else {
-                alert('Erreur réseau')
-            }
-        })
-
-        this.setState({
-            firstname: '',
-            lastname: '',
-            email: '',
-            password: '',
-            su: 0,
-            api: this.generateRandomString(100),
-        })
-
-        if(document.querySelector('#admin-create-su')) {
-            document.querySelector('#admin-create-su').checked = false
-        }
-    }
-
-    // Vérification du mot de passe
-    pwdCheck() {
-        let pwd = document.querySelector('#password')
-        let pwdConf = document.querySelector('#password-confirmation')
-        let btn = document.querySelector('#btn-submit')
-        let check = document.querySelector('#pwd-check')
-        check.style.display = 'none'
-
-        if(pwd.value != pwdConf.value) {
-            check.style.display = 'block'
-            btn.disabled = true
+        if(data.password !== this.state.passwordConf) {
+            alert('Vos mots de passes ne sont pas identiques')
+            this.setState({
+                password: '',
+                passwordConf: ''
+            })
         } else {
-            check.style.display = 'none'
-            btn.disabled = false
+            axios.post(`${this.props.url}/api/admin?api_token=${this.props.api}`, data)
+            .then(response => {
+                if(response.status == 200 && response.data == 'ok') {
+                    this.props.update()
+                    alert('Administrateur créé !')
+                } else if(response.status == 200 && response.data == 'nok') {
+                    alert('Erreur réseau')
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
+    
+            this.setState({
+                firstname: '',
+                lastname: '',
+                email: '',
+                password: '',
+                passwordConf: '',
+                su: 0,
+                api: this.generateRandomString(100),
+            })
+    
+            if(document.querySelector('#admin-create-su')) {
+                document.querySelector('#admin-create-su').checked = false
+            }
         }
     }
 
@@ -124,13 +117,10 @@ class AdminCreate extends React.Component {
                 </div>
                 <div>
                     <label htmlFor="password-confirmation">Confirmez le mot de passe</label>
-                    <input type="password" name="password-confirmation" id="password-confirmation" onKeyUp={this.pwdCheck} required />
+                    <input type="password" name="passwordConf" id="password-confirmation" value={this.state.passwordConf} onChange={this.handleChange} required />
                 </div>
                 <input type="hidden" name="api" value={this.state.api} />
                 <input type="hidden" name="su" value="0" />
-                <div id="pwd-check">
-                    <p >Les mots de passes ne sont pas identiques !</p>
-                </div>
                 <div>
                     <button type="submit" id="btn-submit">Créer</button>
                 </div>
@@ -155,16 +145,13 @@ class AdminCreate extends React.Component {
                 </div>
                 <div>
                     <label htmlFor="password-confirmation">Confirmez le mot de passe</label>
-                    <input type="password" name="password-confirmation" id="password-confirmation" onKeyUp={this.pwdCheck} required />
+                    <input type="password" name="passwordConf" id="password-confirmation" value={this.state.passwordConf} onChange={this.handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="admin-create-su">Super Administrateur: </label>
                     <input type="checkbox" name="su" id="admin-create-su" value={this.state.su} onClick={this.handleCheckBox} />
                 </div>
                 <input type="hidden" name="api" value={this.state.api} />
-                <div id="pwd-check">
-                    <p>Les mots de passes ne sont pas identiques !</p>
-                </div>
                 <div>
                     <button type="submit" id="btn-submit">Créer</button>
                 </div>
