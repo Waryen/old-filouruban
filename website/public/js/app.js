@@ -3551,11 +3551,11 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(this.props.url, "/api/article?api_token=").concat(this.props.api)).then(function (response) {
-        response.status == 200 ? _this2.setState({
-          articles: _this2.randomArticles(response.data)
-        }) : _this2.setState({
-          articles: null
-        });
+        if (response.status == 200) {
+          _this2.setState({
+            articles: _this2.randomArticles(response.data)
+          });
+        }
       });
     }
   }, {
@@ -3569,21 +3569,35 @@ var HomeArticles = /*#__PURE__*/function (_React$Component) {
     value: function randomArticles(els) {
       var max = els.length;
       var articles = [];
-      var first = this.getRandomInt(max);
-      var second = this.getRandomInt(max);
-      var third = this.getRandomInt(max);
 
-      if (first == second || first == third || second == third) {
-        while (first == second || first == third || second == third) {
-          first = this.getRandomInt(max);
-          second = this.getRandomInt(max);
-          third = this.getRandomInt(max);
+      if (max == 1) {
+        articles.push(els[0]);
+      } else if (max == 2) {
+        els.forEach(function (el) {
+          articles.push(el);
+        });
+      } else if (max == 3) {
+        els.forEach(function (el) {
+          articles.push(el);
+        });
+      } else {
+        var first = this.getRandomInt(max);
+        var second = this.getRandomInt(max);
+        var third = this.getRandomInt(max);
+
+        if (first == second || first == third || second == third) {
+          while (first == second || first == third || second == third) {
+            first = this.getRandomInt(max);
+            second = this.getRandomInt(max);
+            third = this.getRandomInt(max);
+          }
         }
+
+        articles.push(els[first]);
+        articles.push(els[second]);
+        articles.push(els[third]);
       }
 
-      articles.push(els[first]);
-      articles.push(els[second]);
-      articles.push(els[third]);
       return articles;
     } // Sauvegarde l'id de l'article et de la catégorie dans le sessionStorage
 

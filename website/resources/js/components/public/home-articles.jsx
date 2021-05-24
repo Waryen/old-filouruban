@@ -24,9 +24,12 @@ class HomeArticles extends React.Component {
 
     // Récupère la liste des articles
     getArticles() {
-        axios
-            .get(`${this.props.url}/api/article?api_token=${this.props.api}`)
-            .then(response => { response.status == 200 ? this.setState({ articles: this.randomArticles(response.data) }) : this.setState({ articles: null }) })
+        axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
+        .then(response => {
+            if(response.status == 200) {
+                this.setState({ articles: this.randomArticles(response.data) })
+            }
+        })
     }
 
     getRandomInt(max) {
@@ -37,21 +40,34 @@ class HomeArticles extends React.Component {
     randomArticles(els) {
         const max = els.length
         let articles = []
-        let first = this.getRandomInt(max)
-        let second = this.getRandomInt(max)
-        let third = this.getRandomInt(max)
 
-        if(first == second || first == third || second == third) {
-            while(first == second || first == third || second == third) {
-                first = this.getRandomInt(max)
-                second = this.getRandomInt(max)
-                third = this.getRandomInt(max)
+        if(max == 1) {
+            articles.push(els[0])
+        } else if(max == 2) {
+            els.forEach(el => {
+                articles.push(el)
+            })
+        } else if(max == 3) {
+            els.forEach(el => {
+                articles.push(el)
+            })
+        } else {
+            let first = this.getRandomInt(max)
+            let second = this.getRandomInt(max)
+            let third = this.getRandomInt(max)
+    
+            if(first == second || first == third || second == third) {
+                while(first == second || first == third || second == third) {
+                    first = this.getRandomInt(max)
+                    second = this.getRandomInt(max)
+                    third = this.getRandomInt(max)
+                }
             }
+    
+            articles.push(els[first])
+            articles.push(els[second])
+            articles.push(els[third])
         }
-
-        articles.push(els[first])
-        articles.push(els[second])
-        articles.push(els[third])
 
         return articles
     }
