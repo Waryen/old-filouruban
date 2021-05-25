@@ -82,6 +82,63 @@
         }
     }
 
+    #react-home-last-article  {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    
+        .home-last-article {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .last-article-title {
+                font-family: $lato;
+                color: $peach;
+                font-size: 2em;
+                font-weight: 600;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            figure {
+                border-radius: 10px;
+                overflow: hidden;
+
+                img {
+                    max-width: 600px;
+                    height: auto;
+                    border-radius: 10px;
+                    transition: transform .15s;
+
+                    @media screen and ($responsive) {
+                        max-width: 300px;
+                    }
+
+                    &:hover, &:focus {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+
+            .link-to-art {
+                text-decoration: none;
+                margin-top: 10px;
+                background: $teal;
+                color: $silver;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-family: $lato;
+                font-size: 1.2em;
+                transition: background .15s;
+
+                &:hover, &:focus {
+                    background: lighten($teal, 10%);
+                }
+            }
+        }
+    }
+
     #react-home-articles .home-articles {
         margin: 0 auto;
         max-width: fit-content;

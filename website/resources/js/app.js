@@ -14,6 +14,7 @@ import Carousel from './components/public/carousel'
 import HomeArticles from './components/public/home-articles'
 import SearchResult from './components/public/search-result'
 import Message from './components/public/message'
+import HomeLastArticle from './components/public/home-last-article'
 
 // CONST
 const url = `${document.querySelector('#url').getAttribute('content')}`
@@ -98,5 +99,12 @@ if(document.getElementById('react-message')) {
     ReactDOM.render(
         <Message url={url} api={api} />,
         document.getElementById('react-message')
+    )
+}
+
+if(document.getElementById('react-home-last-article')) {
+    ReactDOM.render(
+        <HomeLastArticle url={url} api={api} />,
+        document.getElementById('react-home-last-article')
     )
 }

@@ -11,7 +11,7 @@
     </div>
     <div class="home">
         <div id="react-message"></div>
-        <!--<div id="react-carousel"></div>-->
+        <div id="react-home-last-article"></div>
         <div class="home-about">
             <h2 class="about-title">A propos de Filouruban</h2>
             <div class="about-content">
