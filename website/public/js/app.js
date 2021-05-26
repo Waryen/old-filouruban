@@ -3371,14 +3371,14 @@ var Contact = /*#__PURE__*/function (_React$Component) {
               _this2.setState({
                 submited: true
               });
+
+              _this2.handleCancel(e);
             }
           });
         } else {
           alert('Veuillez valider le captcha !');
         }
       }
-
-      this.handleCancel(e);
     }
   }, {
     key: "render",
@@ -4450,8 +4450,8 @@ var Search = /*#__PURE__*/function (_React$Component) {
 
 var open = document.querySelector('.open-menu');
 var close = document.querySelector('.close-menu');
-var nav = document.querySelector('.navigation');
-var navList = document.querySelector('.navigation-list');
+var nav = document.querySelector('.navigation-mobile');
+var navList = document.querySelector('.navigation-list-mobile');
 var focusableEl = nav.querySelectorAll('a[href]');
 var maxFocusableEl = focusableEl.length - 1; // Ouvre le menu de navigation
 

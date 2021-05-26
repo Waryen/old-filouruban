@@ -8,13 +8,53 @@
     grid-template-rows: auto;
 
     .header-menu {
+        grid-column: 1 / 4;
+        grid-row: 2;
+        justify-self: center;
+        display: block;
+        margin-top: 20px;
+        margin-bottom: 10px;
+
+        @media screen and ($responsive) {
+            display: none;
+        }
+
+        .navigation {
+            width: fit-content;
+
+            .navigation-list {
+                display: flex;
+                justify-content: space-around;
+
+                li:not(:last-child) {
+                    margin-right: 20px;
+                }
+
+                a {
+                    text-decoration: none;
+                    font-family: $lato;
+                    color: $silver;
+                    font-size: 1.5em;
+                    transition: color .15s;
+
+                    &:hover, &:focus {
+                        color: $teal;
+                    }
+                }
+            }
+        }
+    }
+
+    .header-menu-mobile {
         grid-column: 1;
         margin-top: 10px;
         margin-left: 10px;
+        display: none;
 
         @media screen and ($responsive) {
             align-self: center;
             grid-row: 1;
+            display: block;
         }
     }
 

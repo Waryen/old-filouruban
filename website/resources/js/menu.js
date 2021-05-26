@@ -1,7 +1,7 @@
 const open = document.querySelector('.open-menu')
 const close = document.querySelector('.close-menu')
-const nav = document.querySelector('.navigation')
-const navList = document.querySelector('.navigation-list')
+const nav = document.querySelector('.navigation-mobile')
+const navList = document.querySelector('.navigation-list-mobile')
 const focusableEl = nav.querySelectorAll('a[href]')
 const maxFocusableEl = focusableEl.length - 1
 

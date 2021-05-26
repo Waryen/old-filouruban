@@ -73,14 +73,13 @@ class Contact extends React.Component {
                         } else if(response.data == 1) {
                             alert("Votre message a été envoyé !")
                             this.setState({ submited: true })
+                            this.handleCancel(e)
                         }
                     })
             } else {
                 alert('Veuillez valider le captcha !')
             }
         }
-
-        this.handleCancel(e)
     }
 
     render() {

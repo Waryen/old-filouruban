@@ -8,7 +8,7 @@
     }
 }
 
-.navigation {
+.navigation-mobile {
     visibility: hidden;
     position: fixed;
     top: 0;
@@ -35,7 +35,7 @@
         }
     }
 
-    .navigation-list {
+    .navigation-list-mobile {
         margin-top: 30px;
         font-family: $lato;
         font-size: 2.5em;

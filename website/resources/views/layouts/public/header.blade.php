@@ -1,9 +1,19 @@
 <header class="header">
     <div class="header-menu">
-        <a href="#" class="open-menu"><i class="fa fa-bars"></i></a>
-        <nav class="navigation" aria-hidden="true">
-            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+        <nav class="navigation" aria-hidden="false">
             <ul class="navigation-list">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">A propos</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="header-menu-mobile">
+        <a href="#" class="open-menu"><i class="fa fa-bars"></i></a>
+        <nav class="navigation-mobile" aria-hidden="true">
+            <a href="#" class="close-menu"><i class="fa fa-times"></i></a>
+            <ul class="navigation-list-mobile">
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/articles">Articles</a></li>
                 <li><a href="/about">A propos</a></li>
