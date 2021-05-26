@@ -4448,12 +4448,22 @@ var Search = /*#__PURE__*/function (_React$Component) {
   \******************************/
 /***/ (() => {
 
+var desktopMenu = document.querySelector('.header-menu');
+var desktopNav = document.querySelector('.navigation');
 var open = document.querySelector('.open-menu');
 var close = document.querySelector('.close-menu');
 var nav = document.querySelector('.navigation-mobile');
 var navList = document.querySelector('.navigation-list-mobile');
 var focusableEl = nav.querySelectorAll('a[href]');
-var maxFocusableEl = focusableEl.length - 1; // Ouvre le menu de navigation
+var maxFocusableEl = focusableEl.length - 1; // Gère l'aria-hidden du menu desktop
+
+window.addEventListener('resize', function () {
+  if (window.innerWidth <= 768) {
+    desktopNav.setAttribute('aria-hidden', 'true');
+  } else {
+    desktopNav.setAttribute('aria-hidden', 'false');
+  }
+}); // Ouvre le menu de navigation
 
 open.addEventListener('click', function (e) {
   e.preventDefault();
