@@ -13,11 +13,11 @@
             <ul>
                 <li>
                     <h4>Facebook</h4>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="fb-link"><i class="fab fa-facebook"></i></a>
                 </li>
                 <li>
                     <h4>Instagram</h4>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="insta-link"><i class="fab fa-instagram"></i></a>
                 </li>
             </ul>
         </div>

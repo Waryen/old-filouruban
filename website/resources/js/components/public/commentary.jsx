@@ -86,8 +86,7 @@ class Commentary extends React.Component {
 
         if(this.state.submited == false) {
             if(this.state.captcha) {
-                axios
-                .post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
+                axios.post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
                 .then(response => {
                     if(response.status == 200 && response.data == 1) {
                         this.componentDidMount()
@@ -97,10 +96,11 @@ class Commentary extends React.Component {
                         alert("Erreur réseau")
                     }
                 })
+                this.hanldeCancel(e)
+            } else {
+                alert('Veuillez valider votre captcha !')
             }
         }
-
-        this.hanldeCancel(e)
     }
 
     render() {

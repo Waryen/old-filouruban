@@ -3106,10 +3106,11 @@ var Commentary = /*#__PURE__*/function (_React$Component) {
               alert("Erreur réseau");
             }
           });
+          this.hanldeCancel(e);
+        } else {
+          alert('Veuillez valider votre captcha !');
         }
       }
-
-      this.hanldeCancel(e);
     }
   }, {
     key: "render",

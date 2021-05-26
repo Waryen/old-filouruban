@@ -16,8 +16,8 @@
         <p>Suivez-nous sur les réseaux sociaux</p>
         <nav>
             <ul>
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" class="fb-link"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="#" class="insta-link"><i class="fab fa-instagram"></i></a></li>
             </ul>
         </nav>
     </div>
