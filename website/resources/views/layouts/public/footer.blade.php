@@ -16,8 +16,8 @@
         <p>Suivez-nous sur les réseaux sociaux</p>
         <nav>
             <ul>
-                <li><a href="#" class="fb-link"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#" class="insta-link"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/Fil-ou-Ruban-103144908649921" target="_blank" class="fb-link"><i class="fab fa-facebook"></i></a></li>
+                <!--<li><a href="#" class="insta-link"><i class="fab fa-instagram"></i></a></li>-->
             </ul>
         </nav>
     </div>

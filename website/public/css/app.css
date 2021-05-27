@@ -700,7 +700,18 @@ th {
   font-size: 2em;
   font-weight: 600;
   color: #e29578;
+  margin-bottom: 20px;
+}
+.contact .contact-infos {
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  color: #e29578;
   margin-bottom: 30px;
+}
+@media screen and (max-width: 768px) {
+  .contact .contact-infos {
+    text-align: center;
+  }
 }
 .contact #react-contact .form-contact-wrapper {
   background: #ffddd2;
@@ -806,6 +817,7 @@ th {
   margin-bottom: 5px;
 }
 .contact #react-contact .form-contact-wrapper .form-contact input {
+  width: 250px;
   border: 1px solid #006d77;
   border-radius: 5px;
   padding: 5px;
@@ -976,6 +988,11 @@ th {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.home #react-home-last-article .home-last-article .loading {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1.5em;
 }
 .home #react-home-last-article .home-last-article .last-article-title {
   font-family: "Lato", sans-serif;

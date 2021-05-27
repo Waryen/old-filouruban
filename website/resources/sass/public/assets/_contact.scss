@@ -8,7 +8,18 @@
         font-size: 2em;
         font-weight: 600;
         color: $peach;
+        margin-bottom: 20px;
+    }
+
+    .contact-infos {
+        font-family: $lato;
+        font-size: 1.2em;
+        color: $peach;
         margin-bottom: 30px;
+
+        @media screen and ($responsive) {
+            text-align: center;
+        }
     }
 
     #react-contact .form-contact-wrapper {
@@ -116,6 +127,7 @@
             }
 
             input {
+                width: 250px;
                 border: 1px solid $teal;
                 border-radius: 5px;
                 padding: 5px;
