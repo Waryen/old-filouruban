@@ -8,9 +8,9 @@
     <div class="about">
         <h2 class="about-title">A propos de Filouruban</h2>
         <div class="about-content">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ad nam eum, ipsum temporibus voluptatum dolorem similique, aliquid laudantium, soluta neque voluptatem velit! Id adipisci fugiat, dolore aspernatur iusto blanditiis!</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non numquam veritatis autem doloribus aliquam odit aut eius aperiam. Eaque quis vel ipsa! Odio ut iste quaerat, excepturi recusandae dolorum atque.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deserunt labore quia blanditiis excepturi placeat necessitatibus porro accusamus consequatur eaque ab, libero minus amet, ratione omnis tempora ipsa ea. Accusamus!</p>
+            <p>L’aventure a commencé en 2019. Pour la naissance de mon filleul, j’ai eu envie d’offrir un présent qui me ressemble. Ni une ni deux, j’achète du tissu, je sors ma machine à coudre du placard et je lui fais une couverture et un coussin dont il ne sait plus se passer à l’heure actuelle.</p>
+            <p>Puéricultrice de métier, je me découvre une véritable passion pour la couture. Autodidacte, je réalise des articles pour enfants et adultes. Sur ce blog, vous aurez un petit aperçu de mes projets qui tendent vers le zéro déchet et l’éco-responsabilité.</p>
+            <p>Pour toute question, n’hésitez pas à me <a href="/contact">contacter</a> et je me ferai un plaisir de vous répondre.</p>
         </div>
     </div>
 @endsection

@@ -68,6 +68,10 @@
                 grid-column: 1 / 3;
                 grid-row: 3;
             }
+
+            p:not(:last-child) {
+                margin-bottom: 10px;
+            }
         }
     }
 

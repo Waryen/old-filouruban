@@ -15,7 +15,7 @@
         <div class="home-about">
             <h2 class="about-title">A propos de Filouruban</h2>
             <div class="about-content">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae eligendi debitis quis, necessitatibus accusantium odit sed labore! Nam quam distinctio, facere dolores nostrum laudantium voluptatem nesciunt blanditiis, perferendis eum nobis.</p>
+                <p>Fil ou Ruban, c’est l’histoire d’une fille passionnée de couture. Ce blog met en avant mes créations 100 % uniques et faites mains.</p>
                 <a href="about">En savoir plus</a>
             </div>
         </div>

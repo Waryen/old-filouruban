@@ -31,10 +31,10 @@ class ArticleCreate extends React.Component {
         })
 
         axios.get(`${this.props.url}/api/category?api_token=${this.props.api}`)
-            .then(res => {
-                this.setState({ categories: res.data })
-                this.setState({ category: res.data[0].id })
-            })
+        .then(res => {
+            this.setState({ categories: res.data })
+            this.setState({ category: res.data[0].id })
+        })
     }
 
     // Génère une chaîne de caractères aléatoire pour le nom de l'image

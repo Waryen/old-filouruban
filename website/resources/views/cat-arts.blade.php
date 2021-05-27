@@ -19,19 +19,6 @@
     <div class="cat-arts-desc">
 
     </div>
-    <p id="desc-to-pick" style="display: none">{{$category->description}}</p>
     <div id="react-category"></div>
 </div>
-
-<script defer>
-    let temp = document.querySelector('#desc-to-pick').innerHTML
-    let div = document.querySelector('.cat-arts-desc')
-    txt = temp.split('\n')
-
-    for(let i = 0; i < txt.length; i++) {
-        let p = document.createElement('p')
-        p.innerHTML = txt[i]
-        div.appendChild(p)
-    }
-</script>
 @endsection
