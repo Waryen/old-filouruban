@@ -92,6 +92,12 @@
             flex-direction: column;
             align-items: center;
 
+            .loading {
+                font-family: $lato;
+                color: $peach;
+                font-size: 1.5em;
+            }
+
             .last-article-title {
                 font-family: $lato;
                 color: $peach;
