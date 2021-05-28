@@ -557,6 +557,12 @@ th {
   color: #e29578;
   font-size: 1.5em;
 }
+.category-articles .empty {
+  font-family: "Lato", sans-serif;
+  color: #e29578;
+  font-size: 1em;
+  text-align: center;
+}
 .category-articles #react-category div ul {
   padding: 20px;
   display: flex;
@@ -701,6 +707,7 @@ th {
   font-weight: 600;
   color: #e29578;
   margin-bottom: 20px;
+  text-align: center;
 }
 .contact .contact-infos {
   font-family: "Lato", sans-serif;

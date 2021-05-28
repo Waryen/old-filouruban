@@ -16,9 +16,6 @@
         </p>
     </div>
     <h2 class="cat-arts-title">{{$category->name}}</h2>
-    <div class="cat-arts-desc">
-
-    </div>
     <div id="react-category"></div>
 </div>
 @endsection

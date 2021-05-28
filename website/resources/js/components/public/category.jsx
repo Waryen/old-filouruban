@@ -22,20 +22,18 @@ class Category extends React.Component {
         const id = JSON.parse(sessionStorage.getItem('catId'))
         this.setState({ catId: id })
 
-        axios
-            .get(`${this.props.url}/api/article?api_token=${this.props.api}`)
-            .then(response => {
-                if(response.status == 200) {
-                    this.setState({ articles: response.data })
-                }
-            })
+        axios.get(`${this.props.url}/api/article?api_token=${this.props.api}`)
+        .then(response => {
+            if(response.status == 200) {
+                this.setState({ articles: response.data })
+            }
+        })
 
-        axios
-            .get(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
-            .then(response => this.setState({
-                categoryName: response.data.name ,
-                categoryDesc: response.data.description,
-            }))
+        axios.get(`${this.props.url}/api/category/${id}?api_token=${this.props.api}`)
+        .then(response => this.setState({
+            categoryName: response.data.name ,
+            categoryDesc: response.data.description,
+        }))
 
         /*if(sessionStorage.getItem('artId')) {
             sessionStorage.removeItem('artId')
@@ -83,6 +81,14 @@ class Category extends React.Component {
                 )
             }
         })
+
+        if(articlesList.length == 0) {
+            return(
+                <div>
+                    <p className="empty">Il n'y a pas encore d'articles dans cette catégorie.</p>
+                </div>
+            )
+        }
 
         if(this.state.isLoading) {
             return(

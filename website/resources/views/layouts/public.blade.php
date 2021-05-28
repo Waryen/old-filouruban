@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Sophie Gomand">
     <meta name="copyright" content="Filouruban">
-    <meta name="description" content="Filouruban est une marque de produits artisanales fabriqués en Belgique et 100% éco-responsable !">
-    <meta name="keywords" content="filouruban, artisanat, couture, belgique, wavre, bio, éco-responsable">
+    <meta name="description" content="Fil ou Ruban, c’est l’histoire d’une fille passionnée de couture. Ce blog met en avant mes créations 100 % uniques et faites mains.">
+    <meta name="keywords" content="filouruban, fil ou ruban, artisanat, couture, belgique, wavre, éco-responsable, blog, création, fait mains, bébé, maison, ménager">
     <meta name="token" id="token" content="{{ csrf_token() }}">
     <meta name="url" id="url" content="{{ env('APP_URL') }}">
     <!-- FAVICON -->

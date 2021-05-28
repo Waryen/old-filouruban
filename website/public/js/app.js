@@ -2910,6 +2910,15 @@ var Category = /*#__PURE__*/function (_React$Component) {
         }
       });
 
+      if (articlesList.length == 0) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "empty",
+            children: "Il n'y a pas encore d'articles dans cette cat\xE9gorie."
+          })
+        });
+      }
+
       if (this.state.isLoading) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
