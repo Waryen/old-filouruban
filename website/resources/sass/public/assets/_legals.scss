@@ -5,6 +5,9 @@
     flex-direction: column;
     align-items: center;
     font-family: $roboto;
+    background: $silver;
+    padding: 20px;
+    border-radius: 20px;
 
     h1 {
         font-family: $lato;
@@ -13,23 +16,6 @@
         font-size: 2em;
         font-weight: 600;
         margin-bottom: 30px;
-    }
-
-    .disclaimer {
-        font-size: 1em;
-        text-align: center;
-        margin-bottom: 20px;
-        font-style: italic;
-        padding: 20px;
-        background: $silver;
-
-        span {
-            font-size: 0.8em;
-        }
-
-        &:hover {
-            box-shadow: 0 0 5px $black;
-        }
     }
 
     .legal-card {

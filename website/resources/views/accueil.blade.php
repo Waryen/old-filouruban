@@ -5,10 +5,6 @@
 @endsection
 
 @section('body')
-    <div class="home-alert">
-        <p>Filouruban est en phase de développement, finalisation prévue pour le 29 mai 2021.</p>
-        <p>(Cliquer sur ce message pour le faire disparaître)</p>
-    </div>
     <div class="home">
         <div id="react-message"></div>
         <div id="react-home-last-article"></div>
@@ -21,16 +17,4 @@
         </div>
         <div id="react-home-articles"></div>
     </div>
-
-    <script>
-        const alertWrapper = document.querySelector('.home-alert')
-
-        window.onload = () => {
-            alertWrapper.style.display = 'block'
-        }
-
-        alertWrapper.addEventListener('click', () => {
-            alertWrapper.style.display = 'none'
-        })
-    </script>
 @endsection

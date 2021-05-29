@@ -7,11 +7,6 @@
 @section('body')
     <div class="legals">
         <h1>Mentions légales</h1>
-        <p class="disclaimer">
-            Les mentions légales sont encore en cours de développement et sont sujet à changer.
-            <br>
-            <span>(Cliquer sur ce message pour le faire disparaître)</span>
-        </p>
         <div class="legal-card">
             <h3><b>Définitions</b></h3>
             <p><b>Client : </b>tout professionnel ou personne physique capable au sens des articles 1123 et suivants du Code civil, ou personne morale, qui visite le Site objet des présentes conditions générales.</p>
@@ -93,10 +88,6 @@
             <p><a href="https://filouruban.be"> https://filouruban.be</a> s’engage à prendre toutes les précautions nécessaires afin de préserver la sécurité des Informations et notamment qu’elles ne soient pas communiquées à des personnes non autorisées. Cependant, si un incident impactant l’intégrité ou la confidentialité des Informations du Client est portée à la connaissance de <a href="https://filouruban.be"> https://filouruban.be </a>, celle-ci devra dans les meilleurs délais informer le Client et lui communiquer les mesures de corrections prises. Par ailleurs, <a href="https://filouruban.be"> https://filouruban.be</a> ne collecte aucune « données sensibles ».</p>
             <p>Les Données Personnelles de l’Utilisateur peuvent être traitées par des filiales de <a href="https://filouruban.be"> https://filouruban.be</a> et des sous-traitants (prestataires de services), exclusivement afin de réaliser les finalités de la présente politique.</p>
             <p>Dans la limite de leurs attributions respectives et pour les finalités rappelées ci-dessus, les principales personnes susceptibles d’avoir accès aux données des Utilisateurs de <a href="https://filouruban.be"> https://filouruban.be</a> sont principalement les agents de notre service client.</p>
-            <h5><b>7.5 Types de données collectées</b></h5>
-            <p>Concernant les utilisateurs d’un Site <a href="https://filouruban.be"> https://filouruban.be</a>,nous collectons les données suivantes qui sont indispensables au fonctionnement du service , et qui seront conservées pendant une période maximale de <span></span> mois après la fin de la relation contractuelle: <br><span> </span></p>
-            <p><a href="https://filouruban.be"> https://filouruban.be </a> collecte également des informations qui améliorent l'expérience utilisateur et offre des astuces contextualisées: <br><span>  </span></p>
-            <p> Ces données sont conservées pendant un maximum de <span></span> mois après la fin de la relation contractuelle.</p>
         </div>
         <div class="legal-card">
             <h4><b>8. Notification d’incident.</b></h4>
@@ -131,10 +122,4 @@
             <p>Tout litige en relation avec l’utilisation du site <a href="https://filouruban.be"> https://filouruban.be </a> est soumis au droit belge. En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de <span>Charleroi</span></p>
         </div>
     </div>
-    <script>
-        let disclaimer = document.querySelector('.disclaimer')
-        disclaimer.addEventListener('click', () => {
-            disclaimer.style.display = 'none'
-        })
-    </script>
 @endsection
