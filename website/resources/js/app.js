@@ -1,5 +1,6 @@
 require('./bootstrap');
 require('./menu')
+require('./konami-code')
 import React from 'react'
 import ReactDOM from 'react-dom'
 

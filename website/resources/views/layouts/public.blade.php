@@ -104,4 +104,8 @@
     })
 </script>
 </body>
+<!--
+    --- Made by Jonathan Gomand ---
+    --- try konami code ? ---
+-->
 </html>
