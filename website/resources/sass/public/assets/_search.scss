@@ -4,7 +4,7 @@
 
     #react-search-result .search-result {
         margin: 0 auto;
-        max-width: fit-content;
+        max-width: 1200px;
         //background: $light-peach;
         //border-radius: 10px;
         padding: 20px;
@@ -34,66 +34,80 @@
             color: $black;
             text-align: center;
         }
-    
+
         ul {
+            padding: 20px;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             flex-wrap: wrap;
+            max-width: 1200px;
     
-            @media screen and ($responsive) {
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                flex-wrap: nowrap;
-            }
-        }
-    
-        li {
-            margin: 10px;
-            background: $silver;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-        }
-    
-        a {
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-    
-            &:hover img, &:focus img {
-                transform: scale(1.1);
-            }
-    
-            &:hover h3, &:focus h3 {
-                background: lighten($teal, 10%);
-            }
-        }
-    
-        h3 {
-            background: $teal;
-            border-radius: 10px;
-            padding: 5px 10px;
-            font-family: $lato;
-            font-size: 1.2em;
-            color: $silver;
-            margin-top: 10px;
-            transition: all .15s;
-            text-align: center;
-        }
-    
-        figure {
-            overflow: hidden;
-            border-radius: 10px;
-    
-            img {
-                max-width: 250px;
-                height: auto;
+            li {
+                max-width: 300px;
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto;
+                margin: 10px;
+                background: $silver;
                 border-radius: 10px;
-                transition: all .15s;
+                padding: 20px;
+    
+                h3 {
+                    grid-column: 1;
+                    grid-row: 1;
+                    justify-self: center;
+                    align-self: flex-start;
+                    font-family: $lato;
+                    font-size: 1.5em;
+                    color: $black;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+    
+                .art-img {
+                    grid-column: 1;
+                    grid-row: 2;
+                    justify-self: center;
+                    align-self: center;
+
+                    figure {
+                        overflow: hidden;
+                        border-radius: 10px;
+        
+                        img {
+                            max-width: 250px;
+                            height: auto;
+                            border-radius: 10px;
+                            transition: all .15s;
+        
+                            &:hover, &:focus {
+                                transform: scale(1.1);
+                            }
+                        }
+                    }
+                }
+    
+                .link-to-art {
+                    grid-column: 1;
+                    grid-row: 3;
+                    justify-self: center;
+                    align-self: flex-end;
+                    width: 200px;
+                    margin-top: 10px;
+                    background: $teal;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    font-family: $lato;
+                    font-size: 1.2em;
+                    color: $silver;
+                    text-decoration: none;
+                    transition: all .15s;
+                    text-align: center;
+    
+                    &:hover, &:focus {
+                        background: lighten($teal, 10%);
+                    }
+                }
             }
         }
     }

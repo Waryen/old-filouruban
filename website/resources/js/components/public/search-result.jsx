@@ -55,12 +55,13 @@ export default class SearchResult extends React.Component {
             filtre.forEach(el => {
                 list.push(
                     <li key={el.id}>
-                        <a href={`articles/${el.categories_id}/${el.id}`} onClick={() => {this.setId(el.id, el.categories_id)}}>
+                        <h3>{el.name}</h3>
+                        <a href={`${this.state.url}/${el.id}`} onClick={this.setId(el.id, el.categories_id)} className="art-img">
                             <figure>
-                                <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Photo de l'article: ${el.name}`} onLoad={() => {this.loaded()}} />
+                                <img src={`${this.props.url}/media/images/articles/article-${el.image_id}.jpg`} alt={`Image de l'article ${el.name}`} onLoad={() => {this.loaded()}}  />
                             </figure>
-                            <h3>{el.name}</h3>
                         </a>
+                        <a href={`${this.state.url}/${el.id}`} onClick={this.setId(el.id, el.categories_id)} className="link-to-art">Voir l'article</a>
                     </li>
                 )
             })
