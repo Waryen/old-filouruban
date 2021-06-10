@@ -89,8 +89,7 @@ class MessageCreate extends React.Component {
                         <input type="checkbox" name="active" id="active-create" value={this.state.active} onChange={this.handleCheckBox} />
                     </div>
                     <div className="msg-btns">
-                        <button className="btn-cancel" onClick={this.handleCancel} >Annuler</button>
-                        <button className="btn-submit" type="submit">Envoyer</button>
+                        <button className="btn-submit" type="submit">Créer</button>
                     </div>
                 </form>
             </div>

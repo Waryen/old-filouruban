@@ -1,31 +1,20 @@
 import axios from 'axios'
 import React from 'react'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 class AdminLogin extends React.Component {
     constructor(props) {
         super(props)
-        this.child = React.createRef()
         this.state = {
             email: '',
             password: '',
             remember: false,
-            captcha: '',
+            trap: false,
         }
 
         this.handleChange = this.handleChange.bind(this)
+        this.handleHoneyPot = this.handleHoneyPot.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
-        this.handleVerificationSuccess = this.handleVerificationSuccess.bind(this)
-        this.resetCaptcha = this.resetCaptcha.bind(this)
-    }
-
-    handleVerificationSuccess(token, ekey) {
-        this.setState({ captcha: token })
-    }
-
-    resetCaptcha() {
-        this.child.current.resetCaptcha()
     }
 
     handleChange(e) {
@@ -33,9 +22,17 @@ class AdminLogin extends React.Component {
         const value = target.value
         const name = target.name
     
-        this.setState({
-          [name]: value
-        });
+        this.setState({ [name]: value });
+    }
+
+    // Gère le honeypot
+    handleHoneyPot() {
+        const trapBox = document.querySelector('.trap-input')
+        if(trapBox.checked == true) {
+            this.setState({ trap: true })
+        } else {
+            this.setState({ trap: false })
+        }
     }
 
     handleCheckbox() {
@@ -49,35 +46,30 @@ class AdminLogin extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
+        const data = {
+            email: this.state.email,
+            password: this.state.password,
+            remember: this.state.remember,
+            captcha: this.state.captcha,
+        }
 
-        if(this.state.captcha) {
-            const data = {
-                email: this.state.email,
-                password: this.state.password,
-                remember: this.state.remember,
-                captcha: this.state.captcha,
-            }
-    
+        if(this.state.trap == false) {
             axios.post('login-check', data)
-                .then(response => {
-                    if(response.data === 'error') {
-                        alert('Les identifiants que vous avez fournis sont incorrectes')
-                    } else if(response.data === 'ok') {
-                        window.location.replace(`${this.props.url}/admin`)
-                    } else if(response.data == 0) {
-                        alert("Votre captcha n'a pas été validé !")
-                    }
-                })
-        } else {
-            alert("Veuillez valider votre captcha !")
+            .then(response => {
+                if(response.status == 200 && response.data == 0) {
+                    alert('Les identifiants que vous avez fournis sont incorrectes')
+                } else if(response.status == 200 && response.data == 1) {
+                    window.location.replace(`${this.props.url}/admin`)
+                } else {
+                    alert('Erreur réseau')
+                }
+            })
         }
 
         this.setState({
             email: '',
             password: '',
-            captcha: '',
         })
-        this.resetCaptcha()
     }
 
     render() {
@@ -96,19 +88,13 @@ class AdminLogin extends React.Component {
                         <label htmlFor="remember">Se souvenir de moi: </label>
                         <input type="checkbox" name="remember" id="login-remember-checkbox" onClick={this.handleCheckbox} />
                     </div>
-                    <div className="h-captcha">
-                        <HCaptcha
-                            ref={this.child}
-                            sitekey="25830f50-7442-4826-9111-3517e9f53d2c"
-                            onVerify={(token, ekey) => this.handleVerificationSuccess(token, ekey)}
-                        />
-                    </div>
                     <div className="forgot-password">
                         <a href="/forgot-password">Mot de passe oublié ?</a>
                     </div>
                     <div>
                         <button type="submit">Connexion</button>
                     </div>
+                    <input type="checkbox" name="fax" onChange={this.handleHoneyPot} className="trap-input" tabIndex="-1" autoComplete="off" />
                 </form>
             </div>
         )

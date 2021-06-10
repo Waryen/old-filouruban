@@ -133,7 +133,6 @@ class CategoryCreate extends React.Component {
                         {imgPrev}
                     </div>
                     <div className="category-btns">
-                        <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
                         <button className="btn-submit" type="submit">Créer</button>
                     </div>
                 </form>

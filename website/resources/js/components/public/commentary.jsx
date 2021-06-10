@@ -1,47 +1,35 @@
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 class Commentary extends React.Component {
     constructor(props) {
         super(props)
-        this.child = React.createRef()
         this.state = {
             commentaries: [],
             firstname: '',
             lastname: '',
             content: '',
             date: this.now(),
-            captcha: '',
             submited: false,
+            trap: false,
         }
 
         this.now = this.now.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleHoneyPot = this.handleHoneyPot.bind(this)
         this.hanldeCancel = this.hanldeCancel.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleVerificationSuccess = this.handleVerificationSuccess.bind(this)
-        this.resetCaptcha = this.resetCaptcha.bind(this)
     }
 
     // Récupération des commentaires
     componentDidMount() {
-        axios
-            .get(`${this.props.url}/api/commentary?api_token=${this.props.api}`)
-            .then(response => {
-                if(response.status == 200) {
-                    this.setState({ commentaries: response.data })
-                }
-            })
-    }
-
-    handleVerificationSuccess(token, ekey) {
-        this.setState({ captcha: token })
-    }
-
-    resetCaptcha() {
-        this.child.current.resetCaptcha()
+        axios.get(`${this.props.url}/api/commentary?api_token=${this.props.api}`)
+        .then(response => {
+            if(response.status == 200) {
+                this.setState({ commentaries: response.data })
+            }
+        })
     }
 
     // Renvoi la date actuelle
@@ -58,18 +46,24 @@ class Commentary extends React.Component {
         this.setState({ [name]: value })
     }
 
+    // Gère le honeypot
+    handleHoneyPot() {
+        const trapBox = document.querySelector('.trap-input')
+        if(trapBox.checked == true) {
+            this.setState({ trap: true })
+        } else {
+            this.setState({ trap: false })
+        }
+    }
+
     // Gère l'annulation des changements du formulaire
-    hanldeCancel(e) {
-        e.persist()
+    hanldeCancel() {
         this.setState({
             firstname: '',
             lastname: '',
             content: '',
             date: this.now(),
-            captcha: '',
         })
-
-        this.resetCaptcha()
     }
 
     // Gère l'envoi du formulaire
@@ -81,25 +75,20 @@ class Commentary extends React.Component {
             content: this.state.content,
             date: this.state.date,
             articles_id: this.props.artId,
-            captcha: this.state.captcha
         }
 
-        if(this.state.submited == false) {
-            if(this.state.captcha) {
-                axios.post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
-                .then(response => {
-                    if(response.status == 200 && response.data == 1) {
-                        this.componentDidMount()
-                        this.setState({ submited: true })
-                        alert('Votre commentaire a été envoyé !')
-                    } else {
-                        alert("Erreur réseau")
-                    }
-                })
-                this.hanldeCancel(e)
-            } else {
-                alert('Veuillez valider votre captcha !')
-            }
+        if(this.state.trap == false && this.state.submited == false) {
+            axios.post(`${this.props.url}/api/commentary?api_token=${this.props.api}`, data)
+            .then(response => {
+                if(response.status == 200 && response.data == 1) {
+                    this.componentDidMount()
+                    this.setState({ submited: true })
+                    alert('Votre commentaire a été envoyé !')
+                } else {
+                    alert("Erreur réseau")
+                }
+            })
+            this.hanldeCancel()
         }
     }
 
@@ -134,31 +123,24 @@ class Commentary extends React.Component {
                     </ul>
                 </div>
                 <div className="com-create">
-                    <h3>Donner votre commentaire</h3>
+                    <h3>Déposez votre commentaire</h3>
                     <form onSubmit={this.handleSubmit}>
                         <div className="com-firstname">
-                            <label htmlFor="com-firstname">Votre prénom: </label>
+                            <label htmlFor="com-firstname">Votre prénom</label>
                             <input type="text" name="firstname" id="com-firstname" value={this.state.firstname} onChange={this.handleChange} required />
                         </div>
                         <div className="com-lastname">
-                            <label htmlFor="com-lastname">Votre nom: </label>
-                            <input type="text" name="lastname" id="com-lastname" value={this.state.lastname} onChange={this.handleChange} required />
+                            <label htmlFor="com-lastname">Votre nom</label>
+                            <input type="text" name="lastname" id="com-lastname" value={this.state.lastname} onChange={this.handleChange} />
                         </div>
                         <div className="com-content">
-                            <label htmlFor="com-content">Votre commentaire: </label>
+                            <label htmlFor="com-content">Votre commentaire</label>
                             <textarea type="text" name="content" maxLength="300" id="com-content" value={this.state.content} onChange={this.handleChange} required />
                         </div>
-                        <div className="h-captcha">
-                            <HCaptcha
-                                ref={this.child}
-                                sitekey="25830f50-7442-4826-9111-3517e9f53d2c"
-                                onVerify={(token, ekey) => this.handleVerificationSuccess(token, ekey)}
-                            />
-                        </div>
                         <div className="com-btn">
-                            <button className="btn-cancel" onClick={this.hanldeCancel}>Annuler</button>
                             <button className="btn-submit" type="submit">Envoyer</button>
                         </div>
+                        <input type="checkbox" name="fax" onChange={this.handleHoneyPot} className="trap-input" tabIndex="-1" autoComplete="off" />
                     </form>
                 </div>
             </div>

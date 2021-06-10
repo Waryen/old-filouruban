@@ -122,7 +122,7 @@ class Article extends React.Component {
                     </div>
                     <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
                     <div className="zoom-wrapper">
-                        <p>Cliquer pour dézoomer</p>
+                        <p>Cliquez pour dézoomer</p>
                         <figure>
                             <img src={`${this.props.url}/media/images/articles/article-${image}.jpg`} alt={`Photo de l'article: ${name}`} className="article-img" />
                         </figure>

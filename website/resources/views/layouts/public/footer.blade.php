@@ -6,6 +6,7 @@
             <li><a href="/contact">Contact</a></li>
             <li><a href="/about">A propos</a></li>
             <li><a href="/legal">Mentions légales</a></li>
+            <li><a href="/admin">Administration</a></li>
         </ul>
     </nav>
     <!--<div class="footer-newsletter" id="react-newsletter"></div>-->

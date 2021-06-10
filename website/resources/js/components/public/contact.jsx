@@ -1,33 +1,22 @@
 import axios from 'axios'
 import React from 'react'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
 
 class Contact extends React.Component {
     constructor(props) {
         super(props)
-        this.child = React.createRef()
         this.state = {
             firstname: '',
             lastname: '',
             email: '',
             content: '',
-            captcha: '',
             submited: false,
+            trap: false,
         }
 
         this.handleCancel = this.handleCancel.bind(this)
+        this.handleHoneyPot = this.handleHoneyPot.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleVerificationSuccess = this.handleVerificationSuccess.bind(this)
-        this.resetCaptcha = this.resetCaptcha.bind(this)
-    }
-
-    handleVerificationSuccess(token, ekey) {
-        this.setState({ captcha: token })
-    }
-
-    resetCaptcha() {
-        this.child.current.resetCaptcha()
     }
 
     // Gère les changements du formulaire
@@ -38,47 +27,48 @@ class Contact extends React.Component {
         this.setState({ [name]: value })
     }
 
+    // Gère le honeypot
+    handleHoneyPot() {
+        const trapBox = document.querySelector('.trap-input')
+        if(trapBox.checked == true) {
+            this.setState({ trap: true })
+        } else {
+            this.setState({ trap: false })
+        }
+    }
+
     // Annule les changements du formulaire
-    handleCancel(e) {
-        e.preventDefault()
+    handleCancel() {
         this.setState({
             firstname: '',
             lastname: '',
             email: '',
             content: '',
-            captcha: '',
         })
-
-        this.resetCaptcha()
     }
 
     // Envoi le forumulaire
     handleSubmit(e) {
         e.preventDefault()
+        const data = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            email: this.state.email,
+            content: this.state.content,
+        }
 
-        if(this.state.submited == false) {
-            if(this.state.captcha) {
-                const data = {
-                    firstname: this.state.firstname,
-                    lastname: this.state.lastname,
-                    email: this.state.email,
-                    content: this.state.content,
-                    captcha: this.state.captcha
+        if(this.state.submited == false && this.state.trap == false) {
+            axios.post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
+            .then(response => {
+                if(response.status == 200 && response.data == 1) {
+                    this.setState({ submited: true })
+                    alert("Votre message a été envoyé !")
+                } else {
+                    alert('Erreur réseau')
                 }
-                axios
-                    .post(`${this.props.url}/api/contact?api_token=${this.props.api}`, data)
-                    .then(response => {
-                        if(response.data == 0) {
-                            alert("Votre captcha n'a pas été validé !")
-                        } else if(response.data == 1) {
-                            alert("Votre message a été envoyé !")
-                            this.setState({ submited: true })
-                            this.handleCancel(e)
-                        }
-                    })
-            } else {
-                alert('Veuillez valider le captcha !')
-            }
+            })
+
+            this.handleCancel()
         }
     }
 
@@ -102,20 +92,13 @@ class Contact extends React.Component {
                         <label htmlFor="form-content">Votre message</label>
                         <textarea type="text" name="content" id="form-content" maxLength="1000" value={this.state.content} onChange={this.handleChange} required />
                     </div>
-                    <div className="h-captcha">
-                        <HCaptcha
-                            ref={this.child}
-                            sitekey="25830f50-7442-4826-9111-3517e9f53d2c"
-                            onVerify={(token, ekey) => this.handleVerificationSuccess(token, ekey)}
-                        />
-                    </div>
                     <div className='form-btn'>
-                        <button className="btn-cancel" onClick={this.handleCancel}>Annuler</button>
                         <button className="btn-submit" type="submit">Envoyer</button>
                     </div>
                     <div className="form-info">
                         <p>Tous les champs sont obligatoires</p>
                     </div>
+                    <input type="checkbox" name="fax" onChange={this.handleHoneyPot} className="trap-input" tabIndex="-1" autoComplete="off" />
                 </form>
             </div>
         )
