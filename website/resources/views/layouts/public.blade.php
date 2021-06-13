@@ -92,7 +92,7 @@
     arrow.style.display = 'none'
 
     window.addEventListener('scroll', function() {
-        if(window.scrollY >= 100) {
+        if(window.scrollY >= 200) {
             arrow.style.display = 'flex'
         } else {
             arrow.style.display = 'none'

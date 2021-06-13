@@ -8,11 +8,11 @@
     <div class="contact">
         <h2 class="contact-title">Contacter Filouruban</h2>
         <p class="contact-infos">
-            Vous avez une question à nous poser ? Un article vous intéresse ? N'hésitez pas à nous contacter !
+            Vous avez une question à nous poser ? Un article vous intéresse ? N'hésitez pas à me contacter !
         </p>
         <div id="react-contact"></div>
         <div class="social-media">
-            <h3 class="social-title">Vous pouvez également nous contacter via nos réseaux sociaux</h3>
+            <h3 class="social-title">Vous pouvez également me contacter via mes réseaux sociaux</h3>
             <ul>
                 <li>
                     <h4>Facebook</h4>

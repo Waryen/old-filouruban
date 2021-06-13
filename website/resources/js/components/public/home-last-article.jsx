@@ -51,7 +51,7 @@ export default class HomeLastArticle extends React.Component {
         } else {
             return(
                 <div className="home-last-article">
-                    <h2 className="last-article-title">Notre dernière création</h2>
+                    <h2 className="last-article-title">Ma dernière création</h2>
                     <figure>
                         <a href={`${this.props.url}/articles/${article.categories_id}/${article.id}`} onClick={() => {this.setId(article.categories_id, article.id)}}>
                             <img src={`${this.props.url}/media/images/articles/article-${article.image_id}.jpg`} alt={`Image de l'article: ${article.name}`} />

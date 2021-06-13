@@ -119,6 +119,9 @@ class Article extends React.Component {
                         <div className="article-desc">
                             {desc}
                         </div>
+						<div className="article-checkout">
+							<p>Cet article vous intéresse ? N'hésitez pas à me <a href="/contact">contacter</a> dans ce cas !</p>
+						</div>
                     </div>
                     <Commentary url={this.props.url} api={this.props.api} artId={this.state.article.id} />
                     <div className="zoom-wrapper">

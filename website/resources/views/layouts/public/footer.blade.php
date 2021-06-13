@@ -14,7 +14,7 @@
         <p>© 2021 Filouruban. Tous droits réservés.</p>
     </div>
     <div class="social-media">
-        <p>Suivez-nous sur les réseaux sociaux</p>
+        <p>Suivez-moi sur les réseaux sociaux</p>
         <nav>
             <ul>
                 <li><a href="https://www.facebook.com/Fil-ou-Ruban-103144908649921" target="_blank" class="fb-link"><i class="fab fa-facebook"></i></a></li>
